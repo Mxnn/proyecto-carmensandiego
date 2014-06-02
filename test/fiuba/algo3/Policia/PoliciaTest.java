@@ -14,7 +14,7 @@ public class PoliciaTest {
         unPolicia.setRango(detective);
         unaCiudad.setPistaSimbolosPatrios(unaPista);
 
-        Assert.assertArrayEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPIntermedio");
+        Assert.assertEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPIntermedio");
     }
     
     @Test
