@@ -9,12 +9,12 @@ public class PoliciaTest {
         Policia unPolicia = Policia("Carlos");
         Rango detective = Detective();
         Ciudad unaCiudad = Ciudad("Buenos Aires", Coordenada(1, 1));
-        Pista unaPista = Pista("AeroFacil", "AeroIntermedio", "AeroDificil");
+        Pista unaPista = Pista("SPFacil", "SPIntermedio", "SPDificil");
 
         unPolicia.setRango(detective);
-        unaCiudad.setPistaAeropuerto(unaPista);
+        unaCiudad.setPistaSimbolosPatrios(unaPista);
 
-        Assert.assertArrayEquals(unPolicia.entrarAeropuerto(), "AeroIntermedio");
+        Assert.assertArrayEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPIntermedio");
     }
     
     @Test
