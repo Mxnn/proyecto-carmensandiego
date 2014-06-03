@@ -20,8 +20,8 @@ public class PoliciaTest {
     @Test
     public void calcularTiempoDeViajeCalculaDependiendoDelRangoDelPolicia() {
         Policia unPolicia = new Policia("Juan");
-        Ciudad ciudadSalida = Ciudad("Buenos Aires", new Coordenada(-34.6158527, -58.4332985));
-        Ciudad ciudadDestino = Ciudad("Londres", new Coordenada(51.5286416,-0.1015987));
+        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(-34.6158527, -58.4332985));
+        Ciudad ciudadDestino = new Ciudad("Londres", new Coordenada(51.5286416,-0.1015987));
         Rango novato = new Novato();
         int tiempoDisponible;
 

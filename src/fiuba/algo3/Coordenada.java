@@ -3,17 +3,17 @@ package fiuba.algo3;
 import java.lang.Math;
 
 public class Coordenada {
-	private float x;
-	private float y;
+	private double x;
+	private double y;
 	
-	public void Coordenada(float x, float y) {
+	public Coordenada(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public float calcularDistancia(Coordenada otra) {
-		float distanciaXCuadrado = (float) Math.pow(otra.x - this.x, 2);
-		float distanciaYCuadrado = (float) Math.pow(otra.y - this.y, 2);
-		return (float) Math.sqrt(distanciaXCuadrado + distanciaYCuadrado);
+	public double calcularDistancia(Coordenada otra) {
+        double distanciaXCuadrado = Math.pow(otra.x - this.x, 2);
+        double distanciaYCuadrado = Math.pow(otra.y - this.y, 2);
+		return Math.sqrt(distanciaXCuadrado + distanciaYCuadrado);
 	}
 }
