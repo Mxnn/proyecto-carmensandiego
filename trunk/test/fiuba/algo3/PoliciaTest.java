@@ -8,17 +8,14 @@ public class PoliciaTest {
      public void getPistaDeberiaDevolverLaPistaAcordeAlRangoDelPolicia() {
         Policia unPolicia = new Policia("Carlos");
         Rango detective = new Detective();
-        Assert.assertNotSame(detective, null);
-        unPolicia.setRango(detective);
-        Assert.assertNotSame(unPolicia.getRango(), null);        
-        
+        unPolicia.setRango(detective);  
        
         Coordenada cord = new Coordenada(-34.6158527, -58.4332985);
+     
         Ciudad unaCiudad = new Ciudad("Buenos Aires", cord);
+        unPolicia.setCiudadActual (unaCiudad);
         Pista unaPista = new Pista("SPFacil", "SPIntermedio", "SPDificil");
-
         unaCiudad.setPistaSimbolosPatrios(unaPista);
-
         Assert.assertEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPIntermedio");
 
     }

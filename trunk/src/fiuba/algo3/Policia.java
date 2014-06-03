@@ -32,10 +32,8 @@ public class Policia {
     }
 
     public String solicitarPistaSimbolosPatrios() {
-    	Assert.assertEquals(this.rango,null);
-    	Assert.assertEquals(this.ciudadActual,null);   	
-    	
-    	return (this.ciudadActual).getPistaSimbolosPatrios(this.rango);
+
+    	return (this.ciudadActual).getPistaSimbolosPatrios(rango);
     }
 
     public void setCiudadActual(Ciudad unaCiudad) {
