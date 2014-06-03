@@ -5,7 +5,7 @@ public class Pista {
 	private String intermedio;
 	private String dificil;
 	
-	public void Pista(String facil, String intermedio, String dificil){
+	public Pista(String facil, String intermedio, String dificil){
 		this.facil = facil;
 		this.intermedio = intermedio;
 		this.dificil = dificil;
@@ -27,4 +27,8 @@ public class Pista {
 	public String getPista(Sargento rango) {
 		return this.dificil;
 	}
+
+    public String getPista(Rango rango) {
+        return this.facil;
+    }
 }

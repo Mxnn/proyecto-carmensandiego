@@ -27,7 +27,7 @@ public class Ciudad {
 	}
 	
 	// GETTERS:
-/*	public String getPistaEconomia(Rango rangoPolicia) {
+	public String getPistaEconomia(Rango rangoPolicia) {
 		return this.pistaEconomia.getPista(rangoPolicia);
 	}
 	
@@ -41,5 +41,5 @@ public class Ciudad {
 	
 	public Coordenada getCoordenadas() {
 		return this.coordenadas;
-	}*/
+	}
 }

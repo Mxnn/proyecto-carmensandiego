@@ -16,8 +16,16 @@ public class Policia {
         return this.tiempoDisponible;
     }
 
+    public Ciudad getCiudadActual() {
+        return this.ciudadActual;
+    }
+
     public void setRango(Rango unRango) {
         this.rango = unRango;
+    }
+
+    public void setCiudadActual(Ciudad unaCiudad) {
+        this.ciudadActual = unaCiudad;
     }
 
     public String solicitarPistaEconomia() {
@@ -32,13 +40,9 @@ public class Policia {
         return (this.ciudadActual).getPistaSimbolosPatrios(this.rango);
     }
 
-    public void setCiudadActual(Ciudad unaCiudad) {
-        this.ciudadActual = unaCiudad;
-    }
-
     public void viajar(Ciudad ciudadDestino) {
         Coordenada coordenadasCiudadActual;
-        int distanciaEnKM;
+        double distanciaEnKM;
         coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
         distanciaEnKM = coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
         this.tiempoDisponible -= (this.rango).calcularTiempoDeViaje(distanciaEnKM);
