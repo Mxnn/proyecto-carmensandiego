@@ -13,10 +13,7 @@ public class Policia {
         this.rango = new Novato();
     }
 
-    public int getTiempoDisponible() {
-        return this.tiempoDisponible;
-    }
-
+	//SETTERS:
     public void setRango(Rango unRango) {
         this.rango = unRango;
     }
@@ -24,7 +21,16 @@ public class Policia {
     public void setCiudadActual(Ciudad unaCiudad) {
         this.ciudadActual = unaCiudad;
     }
-
+	
+	//GETTERS:
+	    public int getTiempoDisponible() {
+        return this.tiempoDisponible;
+    }
+	
+	public Rango getRango(){
+    	return this.rango;
+    }
+	
     public void viajar(Ciudad ciudadDestino) {
         Coordenada coordenadasCiudadActual;
         int distanciaEnKM;
@@ -32,9 +38,5 @@ public class Policia {
         distanciaEnKM = (int) coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
         this.tiempoDisponible -= (this.rango).calcularTiempoDeViaje(distanciaEnKM);
         this.ciudadActual = ciudadDestino;
-    }
-    
-    public Rango getRango(){
-    	return this.rango;
     }
 }

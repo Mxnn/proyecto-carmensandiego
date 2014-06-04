@@ -39,6 +39,7 @@ public class PoliciaTest {
         unPolicia.setRango(detective);
         ciudadSalida.setEdificioSalida(aeropuerto);
         unPolicia.setCiudadActual(ciudadSalida);
+		
         Assert.assertEquals(unPolicia.getRango().consultarEdificio(aeropuerto), "MI");
     }
 }

@@ -17,11 +17,7 @@ public class Ciudad {
 	}
 
 	// SETTERS:
-	public Coordenada getCoordenadas() {
-		return this.coordenadas;
-	}
-
-    public void setEdificioBiblioteca(Edificio edificio) {
+	public void setEdificioBiblioteca(Edificio edificio) {
         this.edificioBiblioteca = edificio;
     }
 
@@ -32,4 +28,9 @@ public class Ciudad {
     public void setEdificioSalida(Edificio edificio) {
         this.edificioSalida = edificio;
     }
+	
+	//GETTERS:
+	public Coordenada getCoordenadas() {
+		return this.coordenadas;
+	}
 }
