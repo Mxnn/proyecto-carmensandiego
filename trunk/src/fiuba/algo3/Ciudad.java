@@ -27,17 +27,29 @@ public class Ciudad {
 	}
 	
 	// GETTERS:
-	public String getPistaEconomia(Rango rangoPolicia) {
+	/*public String getPistaEconomia(Rango rangoPolicia) {
 		return this.pistaEconomia.getPista(rangoPolicia);
 	}
-	
-	public String getPistaSimbolosPatrios(Rango rangoPolicia) {
-		return this.pistaSimbolosPatrios.getPista(rangoPolicia);
-	}
+
+    public String getPistaSimbolosPatrios(Rango rangoPolicia) {
+        return this.pistaSimbolosPatrios.getPista(rangoPolicia);
+    }
 	
 	public String getPistaGeografiaHistoria(Rango rangoPolicia) {
 		return this.pistaGeografiaHistoria.getPista(rangoPolicia);
-	}
+	}*/
+
+    public String getPistaEconomia(Rango rangoPolicia) {
+        return rangoPolicia.obtenerPista(this.pistaEconomia);
+    }
+
+    public String getPistaSimbolosPatrios(Rango rangoPolicia) {
+        return rangoPolicia.obtenerPista(this.pistaSimbolosPatrios);
+    }
+
+    public String getPistaGeografiaHistoria(Rango rangoPolicia) {
+        return rangoPolicia.obtenerPista(this.pistaGeografiaHistoria);
+    }
 	
 	public Coordenada getCoordenadas() {
 		return this.coordenadas;

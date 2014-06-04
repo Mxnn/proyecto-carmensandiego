@@ -30,7 +30,7 @@ public class Policia {
 
     public String solicitarPistaSimbolosPatrios() {
 
-    	return (this.ciudadActual).getPistaSimbolosPatrios(rango);
+    	return (this.ciudadActual).getPistaSimbolosPatrios(this.rango);
     }
 
     public void setCiudadActual(Ciudad unaCiudad) {
