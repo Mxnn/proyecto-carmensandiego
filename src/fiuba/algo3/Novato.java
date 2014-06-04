@@ -11,8 +11,8 @@ public class Novato implements Rango {
         return (int) (distancia/this.velocidad);
     }
 
-   public void setDificultadPista(Pista pista) {
-        pista.setDificultadFacil();
+    public String consultarEdificio(Edificio edificio) {
+        return edificio.getPistaFacil();
     }
 
 }

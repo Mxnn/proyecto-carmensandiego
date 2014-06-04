@@ -7,9 +7,10 @@ public class Policia {
     private Rango rango;
     private Ciudad ciudadActual;
 
-    public  Policia(String unNombre) {
+    public Policia(String unNombre) {
         this.nombre = unNombre;
         this.tiempoDisponible = 154; //Tiempo en horas
+        this.rango = new Novato();
     }
 
     public int getTiempoDisponible() {
@@ -18,19 +19,6 @@ public class Policia {
 
     public void setRango(Rango unRango) {
         this.rango = unRango;
-    }
-
-    public String solicitarPistaEconomia() {
-        return (this.ciudadActual).getPistaEconomia(this.rango);
-    }
-
-    public String solicitarPistaGeografiaHistoria() {
-        return (this.ciudadActual).getPistaGeografiaHistoria(this.rango);
-    }
-
-    public String solicitarPistaSimbolosPatrios() {
-
-    	return (this.ciudadActual).getPistaSimbolosPatrios(this.rango);
     }
 
     public void setCiudadActual(Ciudad unaCiudad) {
@@ -46,7 +34,7 @@ public class Policia {
         this.ciudadActual = ciudadDestino;
     }
     
-    public Rango getRango (){
+    public Rango getRango(){
     	return this.rango;
     }
 }

@@ -2,17 +2,16 @@ package fiuba.algo3;
 
 public class Sargento implements Rango{
 
-	private int velosidad;
+	private int velocidad;
 
 	public Sargento(){
-		velosidad=1500;
+        this.velocidad = 1500;
 	}
 	public int calcularTiempoDeViaje (double distancia){
-		return (int) (distancia/ velosidad);
-
+		return (int) (distancia/this.velocidad);
 	}
 
-    public void setDificultadPista(Pista pista) {
-        pista.setDificultadDificil();
+    public String consultarEdificio(Edificio edificio) {
+        return edificio.getPistaDificil();
     }
 }
