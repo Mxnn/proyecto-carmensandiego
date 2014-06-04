@@ -1,8 +1,5 @@
 package fiuba.algo3;
 
-import junit.framework.Assert;
-
-
 public class Policia {
 
     private String nombre;
