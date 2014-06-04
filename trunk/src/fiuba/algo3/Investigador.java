@@ -11,8 +11,8 @@ public class Investigador implements Rango {
         return (int) (distancia/this.velocidad);
     }
 
-   public void setDificultadPista(Pista pista) {
-        pista.setDificultadDificil();
+    public String consultarEdificio(Edificio edificio) {
+        return edificio.getPistaIntermedio();
     }
 
 }

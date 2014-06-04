@@ -2,9 +2,8 @@ package fiuba.algo3;
 
 public class Pista {
 	private String facil;
-	private String intermedio;
+    private String intermedio;
 	private String dificil;
-	private String pistaBuscada;
 
 	public Pista(String facil, String intermedio, String dificil){
 		this.facil = facil;
@@ -13,18 +12,15 @@ public class Pista {
 	}
 
 	// GETTERS:
-
-    public String obtenerPista(){
-        return pistaBuscada;
+    public String getFacil() {
+        return this.facil;
     }
 
-    public void setDificultadFacil() {
-        pistaBuscada=this.facil;
+    public String getIntermedio() {
+        return this.intermedio;
     }
-    public void setDificultadIntermedio() {
-        pistaBuscada=this.intermedio;
-    }
-    public void setDificultadDificil() {
-        pistaBuscada=this.dificil;
+
+    public String getDificil() {
+        return this.dificil;
     }
 }

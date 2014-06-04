@@ -5,31 +5,10 @@ import junit.framework.Assert;
 
 public class PoliciaTest {
     @Test
-    public void policiaDeRangoDetectiveObtienePistaNivelIntermedio() {
-        Policia unPolicia = new Policia("Carlos");
-        Rango detective = new Detective();
-        Ciudad unaCiudad = new Ciudad("Buenos Aires", new Coordenada(100.0, 100.0));
-        Pista unaPista = new Pista("SPFacil", "SPIntermedio", "SPDificil");
+    public void PoliciaIniciaConRangoDistintoDeNull() {
+        Policia unPolicia = new Policia("Juan");
 
-        unPolicia.setRango(detective);
-        unaCiudad.setPistaSimbolosPatrios(unaPista);
-        unPolicia.setCiudadActual(unaCiudad);
-
-        Assert.assertEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPIntermedio");
-    }
-
-    @Test
-    public void policiaDeRangoNovatoObtienePistaNivelFacil() {
-        Policia unPolicia = new Policia("Carlos");
-        Rango novato = new Novato();
-        Ciudad unaCiudad = new Ciudad("Buenos Aires", new Coordenada(100.0, 100.0));
-        Pista unaPista = new Pista("SPFacil", "SPIntermedio", "SPDificil");
-
-        unPolicia.setRango(novato);
-        unaCiudad.setPistaSimbolosPatrios(unaPista);
-        unPolicia.setCiudadActual(unaCiudad);
-
-        Assert.assertEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPFacil");
+        Assert.assertTrue(unPolicia.getRango() != null);
     }
 
     @Test
@@ -46,5 +25,20 @@ public class PoliciaTest {
         unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), (tiempoDisponible - 1));
+    }
+
+    @Test
+    public void policiaDeRangoDetectiveObtienePistaNivelIntermedio() {
+        Policia unPolicia = new Policia("Juan");
+        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(900.0, 900.0));
+        Rango detective = new Detective();
+        Pista unaPista = new Pista("MF", "MI", "MD");
+        Edificio aeropuerto = new Aeropuerto();
+
+        aeropuerto.setPista(unaPista);
+        unPolicia.setRango(detective);
+        ciudadSalida.setEdificioBiblioteca(aeropuerto);
+        unPolicia.setCiudadActual(ciudadSalida);
+        Assert.assertEquals(unPolicia.getRango().consultarEdificio(aeropuerto), "MI");
     }
 }

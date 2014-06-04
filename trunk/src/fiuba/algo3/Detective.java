@@ -11,8 +11,7 @@ public class Detective implements Rango {
         return (int) (distancia/this.velocidad);
     }
 
-   public void setDificultadPista(Pista pista) {
-        pista.setDificultadIntermedio();
+    public String consultarEdificio(Edificio edificio) {
+        return edificio.getPistaIntermedio();
     }
-
 }
