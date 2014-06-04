@@ -1,42 +1,36 @@
 package fiuba.algo3;
 
 import org.junit.Test;
-import org.junit.Assert;
+import junit.framework.Assert;
 
 public class PoliciaTest {
     @Test
-     public void getPistaDeberiaDevolverLaPistaAcordeAlRangoDelPolicia() {
+    public void getPistaDeberiaDevolverLaPistaAcordeAlRangoDelPolicia() {
         Policia unPolicia = new Policia("Carlos");
-        Rango detective = new Detective();
-        unPolicia.setRango(detective);  
-       
-        Coordenada cord = new Coordenada(-34.6158527, -58.4332985);
-     
-        Ciudad unaCiudad = new Ciudad("Buenos Aires", cord);
-        unPolicia.setCiudadActual (unaCiudad);
+        Rango novato = new Novato();
+        Ciudad unaCiudad = new Ciudad("Buenos Aires", new Coordenada(100.0, 100.0));
         Pista unaPista = new Pista("SPFacil", "SPIntermedio", "SPDificil");
-        unaCiudad.setPistaSimbolosPatrios(unaPista);
-        Assert.assertEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPIntermedio");
 
+        unPolicia.setRango(novato);
+        unaCiudad.setPistaSimbolosPatrios(unaPista);
+        unPolicia.setCiudadActual(unaCiudad);
+
+        Assert.assertEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPFacil");
     }
-    
+
     @Test
     public void calcularTiempoDeViajeCalculaDependiendoDelRangoDelPolicia() {
         Policia unPolicia = new Policia("Juan");
-        Coordenada cordDestino =new Coordenada(51.5286416,-0.1015987);
-        
-        Ciudad ciudadDestino = new Ciudad("Londres", cordDestino);
+        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(900.0, 900.0));
+        Ciudad ciudadDestino = new Ciudad("Londres", new Coordenada(900.0, 0.0));
         Rango novato = new Novato();
         int tiempoDisponible;
-        Coordenada cordEntrada =new Coordenada(-34.6158527, -58.4332985);
-        Ciudad ciudadEntrada = new Ciudad("Buenos Aires", cordEntrada);
+
         unPolicia.setRango(novato);
         tiempoDisponible = unPolicia.getTiempoDisponible();
-        unPolicia.setCiudadActual(ciudadEntrada);
+        unPolicia.setCiudadActual(ciudadSalida);
         unPolicia.viajar(ciudadDestino);
 
-        /*11140,453 distancia en KM entre Buenos Aires y Londres segun http://www.freemaptools.com/measure-distance.htm
-        y tarda 12 HS viajando a 900km/h */
-        Assert.assertEquals(unPolicia.getTiempoDisponible(), (tiempoDisponible - 12));
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), (tiempoDisponible - 1));
     }
 }
