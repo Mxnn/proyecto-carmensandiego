@@ -10,4 +10,8 @@ public class Investigador implements Rango {
     public int calcularTiempoDeViaje(double distancia) {
         return (int) (distancia/this.velocidad);
     }
+
+    public String obtenerPista(Pista pista) {
+        return pista.getDificil();
+    }
 }

@@ -5,7 +5,21 @@ import junit.framework.Assert;
 
 public class PoliciaTest {
     @Test
-    public void getPistaDeberiaDevolverLaPistaAcordeAlRangoDelPolicia() {
+    public void policiaDeRangoDetectiveObtienePistaNivelIntermedio() {
+        Policia unPolicia = new Policia("Carlos");
+        Rango detective = new Detective();
+        Ciudad unaCiudad = new Ciudad("Buenos Aires", new Coordenada(100.0, 100.0));
+        Pista unaPista = new Pista("SPFacil", "SPIntermedio", "SPDificil");
+
+        unPolicia.setRango(detective);
+        unaCiudad.setPistaSimbolosPatrios(unaPista);
+        unPolicia.setCiudadActual(unaCiudad);
+
+        Assert.assertEquals(unPolicia.solicitarPistaSimbolosPatrios(), "SPIntermedio");
+    }
+
+    @Test
+    public void policiaDeRangoNovatoObtienePistaNivelFacil() {
         Policia unPolicia = new Policia("Carlos");
         Rango novato = new Novato();
         Ciudad unaCiudad = new Ciudad("Buenos Aires", new Coordenada(100.0, 100.0));

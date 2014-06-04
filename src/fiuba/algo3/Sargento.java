@@ -12,4 +12,7 @@ public class Sargento implements Rango{
 		
 	}
 
+    public String obtenerPista(Pista pista) {
+        return pista.getDificil();
+    }
 }

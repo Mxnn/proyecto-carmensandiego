@@ -12,7 +12,7 @@ public class Pista {
 	}
 	
 	// GETTERS:
-	public String getPista(Novato rango) {
+	/*public String getPista(Novato rango) {
 		return this.facil;
 	}
 	
@@ -30,5 +30,15 @@ public class Pista {
 
     public String getPista(Rango rango) {
         return this.facil;
+    }*/
+
+    public String getFacil() {
+        return this.facil;
+    }
+    public String getIntermedio() {
+        return this.intermedio;
+    }
+    public String getDificil() {
+        return this.dificil;
     }
 }
