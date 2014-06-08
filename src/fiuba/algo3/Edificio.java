@@ -1,18 +1,31 @@
 package fiuba.algo3;
 
 public class Edificio {
-    private Pista pista;
+    private String nombre;
+    private Pista pistaDificultadFacil;
+    private Pista pistaDificultadIntermedia;
+    private Pista pistaDificultadDificil;
 
-    public void setPista(Pista pista) {
-        this.pista = pista;
+    public Edificio(String nombre) {
+        this.nombre = nombre;
     }
-    public String getPistaFacil() {
-        return this.pista.getFacil();
+
+    public void setPistas(Pista unaPistaDificultadFacil, Pista unaPistaDificultadIntermedia, Pista unaPistaDificultadDificil) {
+        this.pistaDificultadFacil = unaPistaDificultadFacil;
+        this.pistaDificultadIntermedia = unaPistaDificultadIntermedia;
+        this.pistaDificultadDificil = unaPistaDificultadDificil;
     }
-    public String getPistaIntermedio() {
-        return this.pista.getIntermedio();
+
+    public String getPista(Novato novato) {
+        return this.pistaDificultadFacil.getPista();
     }
-    public String getPistaDificil() {
-        return this.pista.getDificil();
+    public String getPista(Detective detective) {
+        return this.pistaDificultadIntermedia.getPista();
+    }
+    public String getPista(Investigador investigador) {
+        return this.pistaDificultadIntermedia.getPista();
+    }
+    public String getPista(Sargento sargento) {
+        return this.pistaDificultadDificil.getPista();
     }
 }
