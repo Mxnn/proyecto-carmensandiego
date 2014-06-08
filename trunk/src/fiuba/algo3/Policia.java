@@ -18,24 +18,31 @@ public class Policia {
     public void setRango(Rango unRango) {
         this.rango = unRango;
     }
-	
+
 	//GETTERS:
 	public int getTiempoDisponible() {
         return this.tiempoDisponible;
     }
-	
+
 	public Rango getRango(){
     	return this.rango;
     }
-	
-    public void viajar(Ciudad ciudadDestino) {
+
+    public boolean viajar(Ciudad ciudadDestino) {
         Coordenada coordenadasCiudadActual;
         double distanciaEnKM;
         coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
         distanciaEnKM = coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
+        int tiempoDescontado = (this.rango).calcularTiempoDeViaje(distanciaEnKM);
+        if (this.tiempoDisponible < tiempoDescontado){
+        	return false;
+        }
         this.tiempoDisponible -= (this.rango).calcularTiempoDeViaje(distanciaEnKM);
         this.ciudadActual = ciudadDestino;
+        return true;
+
     }
+
 
     public Ciudad getCiudadActual() {
         return this.ciudadActual;
