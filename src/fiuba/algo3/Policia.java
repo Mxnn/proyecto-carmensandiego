@@ -42,7 +42,9 @@ public class Policia {
         return true;
 
     }
-
+    public void setTiempoDisponible(int tiempoDelPolicia){
+    	this.tiempoDisponible=tiempoDelPolicia ;
+    }
 
     public Ciudad getCiudadActual() {
         return this.ciudadActual;
