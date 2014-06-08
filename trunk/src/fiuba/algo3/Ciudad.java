@@ -11,9 +11,9 @@ public class Ciudad {
 	public Ciudad(String nombre, Coordenada coordenadas) {
 		this.nombre = nombre;
 		this.coordenadas = coordenadas;
-        edificioBiblioteca = new Biblioteca();
-        edificioEconomia = new Banco();
-        edificioSalida = new Aeropuerto();
+        edificioBiblioteca = new Edificio("Biblioteca");
+        edificioEconomia = new Edificio("Economia");
+        edificioSalida = new Edificio("Aeropuerto");
 	}
 
 	// SETTERS:
@@ -33,4 +33,16 @@ public class Ciudad {
 	public Coordenada getCoordenadas() {
 		return this.coordenadas;
 	}
+
+    public Edificio getEdificioBiblioteca() {
+        return this.edificioBiblioteca;
+    }
+
+    public Edificio getEdificioEconomia() {
+        return this.edificioEconomia;
+    }
+
+    public Edificio getEdificioSalida() {
+        return this.edificioSalida;
+    }
 }
