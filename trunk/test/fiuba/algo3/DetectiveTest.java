@@ -21,4 +21,10 @@ public class DetectiveTest {
 
         Assert.assertEquals(detective.calcularTiempoDeViaje(1100.0), 1);
     }
+    @Test
+    public void calcularTiempoDeViajeDevuelve1SiLaDistanciaEsMenoraLaVelosidadDelPolicia() {
+        Detective detective = new Detective();
+
+        Assert.assertEquals(detective.calcularTiempoDeViaje(100.0), 1);
+    }
 }

@@ -8,9 +8,12 @@ public class Detective implements Rango {
     }
 
     public int calcularTiempoDeViaje(double distancia) {
-        return (int) (distancia/this.velocidad);
+    	int tiempoDeViaje=(int) distancia/this.velocidad;
+    	if (tiempoDeViaje>0){
+    		return tiempoDeViaje;
+    	}
+    	return 1;
     }
-
     public String pedirPista(Edificio edificio) {
         return edificio.getPista(this);
     }
