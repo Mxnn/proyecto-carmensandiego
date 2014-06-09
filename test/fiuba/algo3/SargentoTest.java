@@ -22,10 +22,10 @@ public class SargentoTest {
         Assert.assertEquals(sargento.calcularTiempoDeViaje(1500.0), 1);
     }
 
-        @Test
-    public void calcularTiempoDeViajeDevuelve1SiLaDistanciaEsMenoraLaVelosidadDelPolicia() {
-        Sargento sarjento = new Sargento();
+    @Test
+    public void calcularTiempoDeViajeDevuelve1SiLaDistanciaEsMenoraLaVelocidadDelPolicia() {
+        Sargento sargento = new Sargento();
 
-        Assert.assertEquals(sarjento.calcularTiempoDeViaje(100.0), 1);
+        Assert.assertEquals(sargento.calcularTiempoDeViaje(100.0), 1);
     }
 }

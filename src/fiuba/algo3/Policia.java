@@ -34,16 +34,18 @@ public class Policia {
         coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
         distanciaEnKM = coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
         int tiempoDescontado = (this.rango).calcularTiempoDeViaje(distanciaEnKM);
+
         if (this.tiempoDisponible < tiempoDescontado){
         	return false;
         }
-        this.tiempoDisponible -= (this.rango).calcularTiempoDeViaje(distanciaEnKM);
+
+        this.tiempoDisponible -= tiempoDescontado;
         this.ciudadActual = ciudadDestino;
         return true;
-
     }
+
     public void setTiempoDisponible(int tiempoDelPolicia){
-    	this.tiempoDisponible=tiempoDelPolicia ;
+    	this.tiempoDisponible = tiempoDelPolicia ;
     }
 
     public Ciudad getCiudadActual() {

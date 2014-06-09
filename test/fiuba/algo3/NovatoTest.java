@@ -21,8 +21,9 @@ public class NovatoTest {
 
         Assert.assertEquals(novato.calcularTiempoDeViaje(900.0), 1);
     }
+
     @Test
-    public void calcularTiempoDeViajeDevuelve1SiLaDistanciaEsMenoraLaVelosidadDelPolicia() {
+    public void calcularTiempoDeViajeDevuelve1SiLaDistanciaEsMenoraLaVelocidadDelPolicia() {
         Novato novato = new Novato();
 
         Assert.assertEquals(novato.calcularTiempoDeViaje(100.0), 1);

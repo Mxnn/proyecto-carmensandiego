@@ -42,22 +42,21 @@ public class PoliciaTest {
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000,3000));
 
-        Assert.assertSame(unPolicia.viajar(ciudadDestino),true);
-
+        Assert.assertTrue(unPolicia.viajar(ciudadDestino));
         Assert.assertEquals(unPolicia.getCiudadActual(), ciudadDestino);
         Assert.assertEquals(unPolicia.getTiempoDisponible(), 151);
     }
 
     @Test
-    public void viajarSiNoLeQuedaTiempoNoCambiaLaCiudadActual() {
+    public void viajarSiNoLeQuedaTiempoNoCambiaLaCiudadActualNiLeRestaTiempo() {
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000,5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000,3000));
-        int tiempoDelPolicia=1;
-        unPolicia.setTiempoDisponible( tiempoDelPolicia);
-        Assert.assertEquals(1, unPolicia.getTiempoDisponible());
-        Assert.assertEquals(false,unPolicia.viajar(ciudadDestino));
+        int tiempoDelPolicia = 1;
 
+        unPolicia.setTiempoDisponible(tiempoDelPolicia);
+
+        Assert.assertFalse(unPolicia.viajar(ciudadDestino));
         Assert.assertEquals(unPolicia.getCiudadActual(), ciudadSalida);
         Assert.assertEquals(unPolicia.getTiempoDisponible(), 1);
     }
