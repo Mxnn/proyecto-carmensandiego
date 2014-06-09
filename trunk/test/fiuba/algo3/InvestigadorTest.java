@@ -1,4 +1,4 @@
- package fiuba.algo3;
+package fiuba.algo3;
 
 import org.junit.Test;
 import junit.framework.Assert;
@@ -23,7 +23,7 @@ public class InvestigadorTest {
     }
 
     @Test
-    public void calcularTiempoDeViajeDevuelve1SiLaDistanciaEsMenoraLaVelosidadDelPolicia() {
+    public void calcularTiempoDeViajeDevuelve1SiLaDistanciaEsMenoraLaVelocidadDelPolicia() {
         Investigador investigador  = new Investigador();
 
         Assert.assertEquals(investigador.calcularTiempoDeViaje(100.0), 1);

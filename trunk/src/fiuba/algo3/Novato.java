@@ -8,11 +8,11 @@ public class Novato implements Rango {
     }
 
     public int calcularTiempoDeViaje(double distancia) {
-    	int tiempoDeViaje=(int) distancia/this.velocidad;
-    	if (tiempoDeViaje>0){
-    		return tiempoDeViaje;
+    	int tiempoDeViaje = (int) distancia/this.velocidad;
+    	if (tiempoDeViaje < 1) {
+    		return 1;
     	}
-    	return 1;
+    	return tiempoDeViaje;
     }
 
     public String pedirPista(Edificio edificio) {
