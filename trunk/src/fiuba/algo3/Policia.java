@@ -18,6 +18,10 @@ public class Policia {
     public void setRango(Rango unRango) {
         this.rango = unRango;
     }
+	
+	public void setTiempoDisponible(int tiempoDelPolicia){
+    	this.tiempoDisponible = tiempoDelPolicia ;
+    }
 
 	//GETTERS:
 	public int getTiempoDisponible() {
@@ -26,6 +30,10 @@ public class Policia {
 
 	public Rango getRango(){
     	return this.rango;
+    }
+	
+	public Ciudad getCiudadActual() {
+        return this.ciudadActual;
     }
 
     public boolean viajar(Ciudad ciudadDestino) {
@@ -42,13 +50,5 @@ public class Policia {
         this.tiempoDisponible -= tiempoDescontado;
         this.ciudadActual = ciudadDestino;
         return true;
-    }
-
-    public void setTiempoDisponible(int tiempoDelPolicia){
-    	this.tiempoDisponible = tiempoDelPolicia ;
-    }
-
-    public Ciudad getCiudadActual() {
-        return this.ciudadActual;
     }
 }
