@@ -31,21 +31,32 @@ public class IntegradoresTest {
         Assert.assertEquals(unPolicia.getRango().pedirPista(aeropuerto), "AI");
     }
 	
-	@Test
 	public void viajarHastaQueElMetodoDevuelveFalseCuandoSeTerminaElTiempo() {
 		Coordenada coordenadaSalida = new Coordenada(-11000.0, -9000.0);
 		Ciudad ciudadSalida = new Ciudad("Buenos Aires", coordenadaSalida);
-        Policia unPolicia = new Policia("Juan", ciudadSalida);
+        
+		Policia unPolicia = new Policia("Juan", ciudadSalida);
 		Rango novato = new Novato();
-		
 		unPolicia.setRango(novato);
-		unPolicia.setTiempoDisponible(10);
 		
-		Coordenada coordenadaDestino = new Coordenada(200000, 8000.0);
+		double valorCoordenada = 2000.0;
+		Coordenada coordenadaDestino = new Coordenada(200000.0, 8000.0);
         Ciudad ciudadDestino = new Ciudad("Tokio", coordenadaDestino);
 		double distanciaViaje = coordenadaSalida.calcularDistancia(coordenadaDestino);
 		int tiempoNecesario = novato.calcularTiempoDeViaje(distanciaViaje);
-		Assert.assertTrue(unPolicia.getTiempoDisponible() < tiempoNecesario);
+		while (tiempoNecesario <= unPolicia.getTiempoDisponible()) {
+			unPolicia.viajar(ciudadDestino);
+			
+			coordenadaSalida = coordenadaDestino;
+			coordenadaDestino = new Coordenada(valorCoordenada, valorCoordenada);
+			valorCoordenada = valorCoordenada*2;
+			
+			ciudadDestino = new Ciudad("Random", coordenadaDestino);
+			
+			distanciaViaje = coordenadaSalida.calcularDistancia(coordenadaDestino);
+			tiempoNecesario = novato.calcularTiempoDeViaje(distanciaViaje);
+		}
+		
 		Assert.assertFalse(unPolicia.viajar(ciudadDestino));
 	}	
 }

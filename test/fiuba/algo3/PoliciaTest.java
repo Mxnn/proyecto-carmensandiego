@@ -4,6 +4,8 @@ import org.junit.Test;
 import junit.framework.Assert;
 
 public class PoliciaTest {
+	final int TIEMPO_DISPONIBLE_INICIAL = 154;
+
     @Test
     public void unPoliciaIniciaConRangoNovatoPorDefecto() {
         Policia unPolicia = new Policia("Juan", new Ciudad("Praga", new Coordenada(3,5)));
@@ -22,8 +24,7 @@ public class PoliciaTest {
     public void getTiempoDisponibleDevuelveElTiempoQueLeQuedaAlPolicia() {
         Policia unPolicia = new Policia("Pepe", new Ciudad("Cardiff", new Coordenada(3,5)));
 
-        //Un policia empieza con 154hs
-        Assert.assertEquals(unPolicia.getTiempoDisponible(), 154);
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), TIEMPO_DISPONIBLE_INICIAL);
     }
 
     @Test
@@ -60,5 +61,22 @@ public class PoliciaTest {
         Assert.assertEquals(unPolicia.getCiudadActual(), ciudadSalida);
         Assert.assertEquals(unPolicia.getTiempoDisponible(), 1);
     }
-
+	
+	@Test
+	public void viajarDevuelveFalseCuandoSeTerminaElTiempo() {
+		Coordenada coordenadaSalida = new Coordenada(-11000.0, -9000.0);
+		Ciudad ciudadSalida = new Ciudad("Buenos Aires", coordenadaSalida);
+        Policia unPolicia = new Policia("Juan", ciudadSalida);
+		Rango novato = new Novato();
+		
+		unPolicia.setRango(novato);
+		unPolicia.setTiempoDisponible(1);
+		
+		Coordenada coordenadaDestino = new Coordenada(200000, 8000.0);
+        Ciudad ciudadDestino = new Ciudad("Tokio", coordenadaDestino);
+		double distanciaViaje = coordenadaSalida.calcularDistancia(coordenadaDestino);
+		int tiempoNecesario = novato.calcularTiempoDeViaje(distanciaViaje);
+		
+		Assert.assertFalse(unPolicia.viajar(ciudadDestino));
+	}	
 }
