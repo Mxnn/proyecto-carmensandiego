@@ -14,6 +14,7 @@ public class Detective implements Rango {
     	}
     	return tiempoDeViaje;
     }
+	
     public String pedirPista(Edificio edificio) {
         return edificio.getPista(this);
     }

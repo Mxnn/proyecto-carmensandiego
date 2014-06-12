@@ -47,4 +47,28 @@ public class EdificioTest {
 
         Assert.assertEquals(edificio.getPista(sargento), "ED");
     }
+	
+	@Test
+    public void elConstructorDelEdificioSeteaPistaFacilPorDefecto() {
+        Edificio edificio = new Edificio("Cualquiera");
+        Novato novato = new Novato();
+
+        Assert.assertEquals(edificio.getPista(novato), Pista.PISTA_POR_DEFECTO);
+    }
+	
+	@Test
+    public void elConstructorDelEdificioSeteaPistaIntermediaPorDefecto() {
+        Edificio edificio = new Edificio("Cualquiera");
+        Detective detective = new Detective();
+
+        Assert.assertEquals(edificio.getPista(detective), Pista.PISTA_POR_DEFECTO);
+    }
+	
+	@Test
+    public void elConstructorDelEdificioSeteaPistaDificilPorDefecto() {
+        Edificio edificio = new Edificio("Cualquiera");
+        Sargento sargento = new Sargento();
+
+        Assert.assertEquals(edificio.getPista(sargento), Pista.PISTA_POR_DEFECTO);
+    }
 }
