@@ -1,7 +1,7 @@
 package fiuba.algo3;
 
 public class Policia {
-	public static final int TIEMPO_DISPONIBLE_INICIAL = 154; 
+	public final static int TIEMPO_DISPONIBLE_INICIAL = 154; 
 
     private String nombre;
     private int tiempoDisponible;
