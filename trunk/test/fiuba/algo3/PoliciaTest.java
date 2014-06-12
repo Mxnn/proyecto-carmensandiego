@@ -4,8 +4,6 @@ import org.junit.Test;
 import junit.framework.Assert;
 
 public class PoliciaTest {
-	final int TIEMPO_DISPONIBLE_INICIAL = 154;
-
     @Test
     public void unPoliciaIniciaConRangoNovatoPorDefecto() {
         Policia unPolicia = new Policia("Juan", new Ciudad("Praga", new Coordenada(3,5)));
@@ -24,7 +22,7 @@ public class PoliciaTest {
     public void getTiempoDisponibleDevuelveElTiempoQueLeQuedaAlPolicia() {
         Policia unPolicia = new Policia("Pepe", new Ciudad("Cardiff", new Coordenada(3,5)));
 
-        Assert.assertEquals(unPolicia.getTiempoDisponible(), TIEMPO_DISPONIBLE_INICIAL);
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL);
     }
 
     @Test
@@ -38,45 +36,102 @@ public class PoliciaTest {
     }
 
     @Test
-    public void viajarSiTieneTiempoCambiaLaCiudadActualDelPoliciaYLeRestaTiempo() {
-        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000,5000));
+    public void viajarSiTieneTiempoCambiaLaCiudadActual() {
+        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
-        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000,3000));
+        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
+		
+		unPolicia.viajar(ciudadDestino);
+
+        Assert.assertEquals(unPolicia.getCiudadActual(), ciudadDestino);
+    }
+	
+	@Test
+    public void viajarSiTieneTiempoLeRestaTiempo() {
+        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
+		
+		unPolicia.viajar(ciudadDestino);
+
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 3);
+    }
+	
+	@Test
+    public void viajarSiTieneTiempoDevuelveTrue() {
+        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
+		
+		unPolicia.viajar(ciudadDestino);
 
         Assert.assertTrue(unPolicia.viajar(ciudadDestino));
-        Assert.assertEquals(unPolicia.getCiudadActual(), ciudadDestino);
-        Assert.assertEquals(unPolicia.getTiempoDisponible(), 151);
     }
 
     @Test
-    public void viajarSiNoLeQuedaTiempoNoCambiaLaCiudadActualNiLeRestaTiempo() {
-        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000,5000));
+    public void viajarSiNoLeQuedaTiempoDevuelveFalse() {
+        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
-        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000,3000));
+        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
+
+        unPolicia.setTiempoDisponible(1);
+
+        Assert.assertFalse(unPolicia.viajar(ciudadDestino));
+    }
+	
+	@Test
+    public void viajarSiNoLeQuedaTiempoNoCambiaLaCiudadActual() {
+        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
+
+        unPolicia.setTiempoDisponible(1);
+
+        Assert.assertEquals(unPolicia.getCiudadActual(), ciudadSalida);
+    }
+	
+	@Test
+    public void viajarSiNoLeQuedaTiempoNoLeRestaTiempo() {
+        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
         int tiempoDelPolicia = 1;
 
         unPolicia.setTiempoDisponible(tiempoDelPolicia);
 
-        Assert.assertFalse(unPolicia.viajar(ciudadDestino));
-        Assert.assertEquals(unPolicia.getCiudadActual(), ciudadSalida);
-        Assert.assertEquals(unPolicia.getTiempoDisponible(), 1);
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), tiempoDelPolicia);
     }
 	
 	@Test
-	public void viajarDevuelveFalseCuandoSeTerminaElTiempo() {
-		Coordenada coordenadaSalida = new Coordenada(-11000.0, -9000.0);
-		Ciudad ciudadSalida = new Ciudad("Buenos Aires", coordenadaSalida);
-        Policia unPolicia = new Policia("Juan", ciudadSalida);
-		Rango novato = new Novato();
-		
-		unPolicia.setRango(novato);
-		unPolicia.setTiempoDisponible(1);
-		
-		Coordenada coordenadaDestino = new Coordenada(200000, 8000.0);
-        Ciudad ciudadDestino = new Ciudad("Tokio", coordenadaDestino);
-		double distanciaViaje = coordenadaSalida.calcularDistancia(coordenadaDestino);
-		int tiempoNecesario = novato.calcularTiempoDeViaje(distanciaViaje);
-		
-		Assert.assertFalse(unPolicia.viajar(ciudadDestino));
-	}	
+	public void visitarUnEdificioRestaUnaHora() {
+		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Antonio", ciudadSalida);
+
+        unPolicia.visitarEdificioEconomia();
+
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 1);
+	}
+	
+	@Test
+	public void visitarDosEdificiosRestaTresHoras() {
+		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Antonio", ciudadSalida);
+
+        unPolicia.visitarEdificioEconomia();
+		unPolicia.visitarEdificioCultural();
+
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 3);
+	}
+	
+	@Test
+	public void visitarDosEdificiosRestaSeisHoras() {
+		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Antonio", ciudadSalida);
+
+        unPolicia.visitarEdificioEconomia();
+		unPolicia.visitarEdificioCultural();
+		unPolicia.visitarEdificioTransporte();
+
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 6);
+	}
 }

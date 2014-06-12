@@ -6,10 +6,10 @@ import junit.framework.Assert;
 public class CiudadTest {
     @Test
     public void ciudadComienzaConEdificiosPorDefectoCreados() {
-        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1,1));
+        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1, 1));
 
-        Assert.assertTrue(ciudad.getEdificioBiblioteca() != null);
-        Assert.assertTrue(ciudad.getEdificioSalida() != null);
+        Assert.assertTrue(ciudad.getEdificioCultural() != null);
+        Assert.assertTrue(ciudad.getEdificioTransporte() != null);
         Assert.assertTrue(ciudad.getEdificioEconomia() != null);
     }
 
@@ -22,29 +22,29 @@ public class CiudadTest {
     }
 
     @Test
-    public void setEdificioSalidaCambiaElEdificioDeSalida() {
-        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1,1));
-        Edificio nuevoEdificioSalida = new Edificio("AeropuertoNuevo");
+    public void setEdificioTransporteCambiaElEdificioDeTransporte() {
+        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+        Edificio nuevoEdificioTransporte = new Edificio("Aeropuerto");
 
-        ciudad.setEdificioSalida(nuevoEdificioSalida);
-        Assert.assertEquals(ciudad.getEdificioSalida(), nuevoEdificioSalida);
+        ciudad.setEdificioTransporte(nuevoEdificioTransporte);
+        Assert.assertEquals(ciudad.getEdificioTransporte(), nuevoEdificioTransporte);
     }
 
     @Test
-    public void setEdificioBibliotecaCambiaElEdificioDeBiblioteca() {
-        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1,1));
-        Edificio nuevoEdificioBiblioteca = new Edificio("BibliotecaNuevo");
+    public void setEdificioCulturalCambiaElEdificioDeCultural() {
+        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+        Edificio nuevoEdificioCultural = new Edificio("Biblioteca");
 
-        ciudad.setEdificioSalida(nuevoEdificioBiblioteca);
-        Assert.assertEquals(ciudad.getEdificioSalida(), nuevoEdificioBiblioteca);
+        ciudad.setEdificioCultural(nuevoEdificioCultural);
+        Assert.assertEquals(ciudad.getEdificioCultural(), nuevoEdificioCultural);
     }
 
     @Test
     public void setEdificioEconomiaCambiaElEdificioDeEconomia() {
-        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1,1));
-        Edificio nuevoEdificioEconomia = new Edificio("EconomiaNuevo");
+        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+        Edificio nuevoEdificioEconomia = new Edificio("Bolsa");
 
-        ciudad.setEdificioSalida(nuevoEdificioEconomia);
-        Assert.assertEquals(ciudad.getEdificioSalida(), nuevoEdificioEconomia);
+        ciudad.setEdificioEconomia(nuevoEdificioEconomia);
+        Assert.assertEquals(ciudad.getEdificioEconomia(), nuevoEdificioEconomia);
     }
 }

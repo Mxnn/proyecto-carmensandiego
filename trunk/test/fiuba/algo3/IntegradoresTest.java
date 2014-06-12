@@ -2,61 +2,128 @@ package fiuba.algo3;
 
 import org.junit.Test;
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 public class IntegradoresTest {
-    @Test
-    public void calcularTiempoDeViajeCalculaDependiendoDelRangoDelPolicia() {
-        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(900.0, 900.0));
-        Policia unPolicia = new Policia("Juan", ciudadSalida);
-        Ciudad ciudadDestino = new Ciudad("Londres", new Coordenada(900.0, 0.0));
-        int tiempoDisponible;
+	final double KMPORHORA_NOVATO = 900.0;
+	final double KMPORHORA_DETECTIVE = 1100.0;
+	final double KMPORHORA_INVESTIGADOR = 1300.0;
+	final double KMPORHORA_SARGENTO = 1500.0;
 
+    @Test
+    public void calcularTiempoDeViajeConNovatoEnDistanciaQueLlevaUnaHora() {
+        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(KMPORHORA_NOVATO, KMPORHORA_NOVATO));
+        Policia unPolicia = new Policia("Juan", ciudadSalida);
+		
+        Ciudad ciudadDestino = new Ciudad("Londres", new Coordenada(KMPORHORA_NOVATO, 0.0));
+        int tiempoDisponible;
         tiempoDisponible = unPolicia.getTiempoDisponible();
+		
         unPolicia.viajar(ciudadDestino);
 
-        Assert.assertEquals(unPolicia.getTiempoDisponible(), (tiempoDisponible - 1));
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), tiempoDisponible - 1);
     }
 
-    @Test
-    public void policiaDeRangoDetectiveObtienePistaNivelIntermedio() {
-        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(900.0, 900.0));
+	@Test
+    public void calcularTiempoDeViajeConDetectiveEnDistanciaQueLlevaUnaHora() {
+        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(KMPORHORA_DETECTIVE, KMPORHORA_DETECTIVE));
         Policia unPolicia = new Policia("Juan", ciudadSalida);
-        Rango detective = new Detective();
-        Edificio aeropuerto = new Edificio("Aeropuerto");
+		unPolicia.setRango(new Detective());
+		
+        Ciudad ciudadDestino = new Ciudad("Londres", new Coordenada(KMPORHORA_DETECTIVE, 0.0));
+        int tiempoDisponible;
+        tiempoDisponible = unPolicia.getTiempoDisponible();
+		
+        unPolicia.viajar(ciudadDestino);
 
-        aeropuerto.setPistas(new Pista("AF"), new Pista("AI"), new Pista("AD"));
-        unPolicia.setRango(detective);
-        ciudadSalida.setEdificioSalida(aeropuerto);
-
-        Assert.assertEquals(unPolicia.getRango().pedirPista(aeropuerto), "AI");
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), tiempoDisponible - 1);
     }
 	
-	public void viajarHastaQueElMetodoDevuelveFalseCuandoSeTerminaElTiempo() {
-		Coordenada coordenadaSalida = new Coordenada(-11000.0, -9000.0);
-		Ciudad ciudadSalida = new Ciudad("Buenos Aires", coordenadaSalida);
-        
-		Policia unPolicia = new Policia("Juan", ciudadSalida);
-		Rango novato = new Novato();
-		unPolicia.setRango(novato);
+	@Test
+    public void calcularTiempoDeViajeConInvestigadorEnDistanciaQueLlevaUnaHora() {
+        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(KMPORHORA_INVESTIGADOR, KMPORHORA_INVESTIGADOR));
+        Policia unPolicia = new Policia("Juan", ciudadSalida);
+		unPolicia.setRango(new Investigador());
 		
-		double valorCoordenada = 2000.0;
-		Coordenada coordenadaDestino = new Coordenada(200000.0, 8000.0);
-        Ciudad ciudadDestino = new Ciudad("Tokio", coordenadaDestino);
-		double distanciaViaje = coordenadaSalida.calcularDistancia(coordenadaDestino);
-		int tiempoNecesario = novato.calcularTiempoDeViaje(distanciaViaje);
-		while (tiempoNecesario <= unPolicia.getTiempoDisponible()) {
-			unPolicia.viajar(ciudadDestino);
-			
-			coordenadaSalida = coordenadaDestino;
-			coordenadaDestino = new Coordenada(valorCoordenada, valorCoordenada);
-			valorCoordenada = valorCoordenada*2;
-			
-			ciudadDestino = new Ciudad("Random", coordenadaDestino);
-			
-			distanciaViaje = coordenadaSalida.calcularDistancia(coordenadaDestino);
-			tiempoNecesario = novato.calcularTiempoDeViaje(distanciaViaje);
-		}
+        Ciudad ciudadDestino = new Ciudad("Londres", new Coordenada(KMPORHORA_INVESTIGADOR, 0.0));
+        int tiempoDisponible;
+        tiempoDisponible = unPolicia.getTiempoDisponible();
 		
-		Assert.assertFalse(unPolicia.viajar(ciudadDestino));
-	}	
+        unPolicia.viajar(ciudadDestino);
+
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), tiempoDisponible - 1);
+    }
+	
+	@Test
+    public void calcularTiempoDeViajeConSargentoEnDistanciaQueLlevaUnaHora() {
+        Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(KMPORHORA_SARGENTO, KMPORHORA_SARGENTO));
+        Policia unPolicia = new Policia("Juan", ciudadSalida);
+		unPolicia.setRango(new Sargento());
+		
+        Ciudad ciudadDestino = new Ciudad("Londres", new Coordenada(KMPORHORA_SARGENTO, 0.0));
+        int tiempoDisponible;
+        tiempoDisponible = unPolicia.getTiempoDisponible();
+		
+        unPolicia.viajar(ciudadDestino);
+
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), tiempoDisponible - 1);
+    }
+	
+	@Test
+    public void policiaDeRangoNovatoObtienePistaNivelFacil() {
+		Edificio aeropuerto = new Edificio("Aeropuerto");
+        aeropuerto.setPistas(new Pista("AF"), new Pista("AI"), new Pista("AD"));
+		
+		Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(900.0, 900.0));
+		ciudadSalida.setEdificioTransporte(aeropuerto);
+		
+        Policia unPolicia = new Policia("Juan", ciudadSalida);
+
+        Assert.assertEquals(unPolicia.visitarEdificioTransporte(), "AF");
+    }
+	
+    @Test
+    public void policiaDeRangoDetectiveObtienePistaNivelIntermedio() {
+		Edificio aeropuerto = new Edificio("Aeropuerto");
+        aeropuerto.setPistas(new Pista("AF"), new Pista("AI"), new Pista("AD"));
+		
+		Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(900.0, 900.0));
+		ciudadSalida.setEdificioTransporte(aeropuerto);
+		
+        Policia unPolicia = new Policia("Juan", ciudadSalida);
+        Rango detective = new Detective();
+        unPolicia.setRango(detective);
+
+        Assert.assertEquals(unPolicia.visitarEdificioTransporte(), "AI");
+    }
+	
+	@Test
+    public void policiaDeRangoInvestigadorObtienePistaNivelIntermedio() {
+		Edificio aeropuerto = new Edificio("Aeropuerto");
+        aeropuerto.setPistas(new Pista("AF"), new Pista("AI"), new Pista("AD"));
+		
+		Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(900.0, 900.0));
+		ciudadSalida.setEdificioTransporte(aeropuerto);
+		
+        Policia unPolicia = new Policia("Juan", ciudadSalida);
+        Rango investigador = new Investigador();
+        unPolicia.setRango(investigador);
+
+        Assert.assertEquals(unPolicia.visitarEdificioTransporte(), "AI");
+    }
+	
+	@Test
+    public void policiaDeRangoSargentoObtienePistaNivelDificil() {
+		Edificio aeropuerto = new Edificio("Aeropuerto");
+        aeropuerto.setPistas(new Pista("AF"), new Pista("AI"), new Pista("AD"));
+		
+		Ciudad ciudadSalida = new Ciudad("Buenos Aires", new Coordenada(900.0, 900.0));
+		ciudadSalida.setEdificioTransporte(aeropuerto);
+		
+        Policia unPolicia = new Policia("Juan", ciudadSalida);
+        Rango sargento = new Sargento();
+        unPolicia.setRango(sargento);
+
+        Assert.assertEquals(unPolicia.visitarEdificioTransporte(), "AD");
+    }
 }
