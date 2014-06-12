@@ -1,7 +1,7 @@
 package fiuba.algo3;
 
 public class Pista {
-	public static final String PISTA_POR_DEFECTO = "No se nada sobre ese sujeto.";
+	public final static String PISTA_POR_DEFECTO = "No se nada sobre ese sujeto.";
 	
 	private String pista;
 
