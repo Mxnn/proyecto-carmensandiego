@@ -9,5 +9,14 @@ public class Computadora {
 	public Computadora(Ladron buscado) {
 		this.buscado = buscado;
 		sospechosos = new ArrayList();
+		sospechosos.add(buscado);
+	}
+	
+	public void setSospechoso(Ladron ladron) {
+		sospechosos.add(ladron);
+	}
+	
+	public ArrayList<Ladron> getSospechosos() {
+		return sospechosos;
 	}
 }
