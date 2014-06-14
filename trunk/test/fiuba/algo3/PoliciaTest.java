@@ -36,74 +36,90 @@ public class PoliciaTest {
     }
 
     @Test
-    public void viajarSiTieneTiempoCambiaLaCiudadActual() {
+    public void viajarAUnaCiudadConectadaSiTieneTiempoCambiaLaCiudadActual() throws ExcepcionJugadorSinTiempoDisponible{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
-		
+
+        ciudadSalida.conectarCiudad(ciudadDestino);
 		unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getCiudadActual(), ciudadDestino);
     }
 	
 	@Test
-    public void viajarSiTieneTiempoLeRestaTiempo() {
+    public void viajarAUnaCiudadConectadaSiTieneTiempoLeRestaTiempo() throws ExcepcionJugadorSinTiempoDisponible{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
-		
-		unPolicia.viajar(ciudadDestino);
+
+        ciudadSalida.conectarCiudad(ciudadDestino);
+        unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 3);
     }
-	
+
 	@Test
-    public void viajarSiTieneTiempoDevuelveTrue() {
+    public void viajarAUnaCiudadConectadaSiTieneTiempoDevuelveTrue() throws ExcepcionJugadorSinTiempoDisponible{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
-		
-		unPolicia.viajar(ciudadDestino);
+
+        ciudadSalida.conectarCiudad(ciudadDestino);
 
         Assert.assertTrue(unPolicia.viajar(ciudadDestino));
     }
 
     @Test
-    public void viajarSiNoLeQuedaTiempoDevuelveFalse() {
+    public void viajarAUnaCiudadNoConectadaSiTieneTiempoDevuelveFalse() throws ExcepcionJugadorSinTiempoDisponible{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
-
-        unPolicia.setTiempoDisponible(1);
 
         Assert.assertFalse(unPolicia.viajar(ciudadDestino));
     }
+
+    @Test (expected=ExcepcionJugadorSinTiempoDisponible.class)
+    public void viajarAUnaCiudadConectadaSiNoLeQuedaTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible{
+        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
+
+        ciudadSalida.conectarCiudad(ciudadDestino);
+        unPolicia.setTiempoDisponible(1);
+
+        unPolicia.viajar(ciudadDestino);
+    }
 	
-	@Test
-    public void viajarSiNoLeQuedaTiempoNoCambiaLaCiudadActual() {
+	@Test (expected=ExcepcionJugadorSinTiempoDisponible.class)
+    public void viajarAUnaCiudadConectadaSiNoLeQuedaTiempoLanzaExcepcionYNoCambiaLaCiudadActual() throws ExcepcionJugadorSinTiempoDisponible{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
 
         unPolicia.setTiempoDisponible(1);
+        ciudadSalida.conectarCiudad(ciudadDestino);
+        unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getCiudadActual(), ciudadSalida);
     }
-	
-	@Test
-    public void viajarSiNoLeQuedaTiempoNoLeRestaTiempo() {
+
+	@Test (expected=ExcepcionJugadorSinTiempoDisponible.class)
+    public void viajarAUnaCiudadConectadaSiNoLeQuedaTiempoLanzaExcepcionYNoLeRestaTiempo() throws ExcepcionJugadorSinTiempoDisponible{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
         int tiempoDelPolicia = 1;
 
         unPolicia.setTiempoDisponible(tiempoDelPolicia);
+        ciudadSalida.conectarCiudad(ciudadDestino);
+        unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), tiempoDelPolicia);
     }
 	
 	@Test
-	public void visitarUnEdificioRestaUnaHora() {
+	public void visitarUnEdificioRestaUnaHora() throws ExcepcionJugadorSinTiempoDisponible {
 		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio", ciudadSalida);
 
@@ -113,7 +129,7 @@ public class PoliciaTest {
 	}
 	
 	@Test
-	public void visitarDosEdificiosRestaTresHoras() {
+	public void visitarDosEdificiosRestaTresHoras() throws ExcepcionJugadorSinTiempoDisponible {
 		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio", ciudadSalida);
 
@@ -124,7 +140,7 @@ public class PoliciaTest {
 	}
 	
 	@Test
-	public void visitarDosEdificiosRestaSeisHoras() {
+	public void visitarTresEdificiosRestaSeisHoras() throws ExcepcionJugadorSinTiempoDisponible {
 		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio", ciudadSalida);
 
@@ -134,4 +150,13 @@ public class PoliciaTest {
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 6);
 	}
+
+    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
+    public void visitarEdificioSinTiempoDisponibleLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Antonio", ciudadSalida);
+
+        unPolicia.setTiempoDisponible(0);
+        unPolicia.visitarEdificioEconomia();
+    }
 }

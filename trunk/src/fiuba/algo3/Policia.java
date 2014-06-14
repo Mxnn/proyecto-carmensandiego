@@ -39,45 +39,56 @@ public class Policia {
         return this.ciudadActual;
     }
 
-    public boolean viajar(Ciudad ciudadDestino) {
-        Coordenada coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
-        double distanciaEnKM = coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
-        int tiempoDescontado = (this.rango).calcularTiempoDeViaje(distanciaEnKM);
+    public boolean viajar(Ciudad ciudadDestino) throws ExcepcionJugadorSinTiempoDisponible {
+        if (this.ciudadActual.ciudadEstaConectada(ciudadDestino)) {
+            Coordenada coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
+            double distanciaEnKM = coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
+            int tiempoDescontado = (this.rango).calcularTiempoDeViaje(distanciaEnKM);
 
-        if (this.tiempoDisponible < tiempoDescontado){
-        	return false;
+            if (this.tiempoDisponible < tiempoDescontado) {
+                throw new ExcepcionJugadorSinTiempoDisponible();
+            }
+
+            this.tiempoDisponible -= tiempoDescontado;
+            this.ciudadActual = ciudadDestino;
+            this.edificiosVisitadosEnEstaCiudad = 0;
+            return true;
         }
-
-        this.tiempoDisponible -= tiempoDescontado;
-        this.ciudadActual = ciudadDestino;
-		this.edificiosVisitadosEnEstaCiudad = 0;
-        return true;
+        return false;
     }
 	
-	private void descuentoDeTiempoPorVisitarEdificio() {
+	private void descuentoDeTiempoPorVisitarEdificio() throws ExcepcionJugadorSinTiempoDisponible {
 		if (edificiosVisitadosEnEstaCiudad == 0) {
-			this.tiempoDisponible -= 1;
+            this.descontarTiempo(1);
 		} else if (edificiosVisitadosEnEstaCiudad == 1){
-			this.tiempoDisponible -= 2;
+			this.descontarTiempo(2);
 		} else {
-			this.tiempoDisponible -= 3;
+            this.descontarTiempo(3);
 		}
 		this.edificiosVisitadosEnEstaCiudad += 1;
 	}
+
+    private void descontarTiempo(int cantidad) throws ExcepcionJugadorSinTiempoDisponible {
+        if (cantidad <= this.tiempoDisponible) {
+            this.tiempoDisponible -= cantidad;
+        }
+        else
+            throw new ExcepcionJugadorSinTiempoDisponible();
+    }
 	
-	public String visitarEdificioEconomia() {
+	public String visitarEdificioEconomia() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioEconomia();
 		descuentoDeTiempoPorVisitarEdificio();
 		return this.rango.pedirPista(edificio);
 	}
 	
-	public String visitarEdificioCultural() {
+	public String visitarEdificioCultural() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioCultural();
 		descuentoDeTiempoPorVisitarEdificio();
 		return this.rango.pedirPista(edificio);
 	}
 	
-	public String visitarEdificioTransporte() {
+	public String visitarEdificioTransporte() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioTransporte();
 		descuentoDeTiempoPorVisitarEdificio();
 		return this.rango.pedirPista(edificio);
