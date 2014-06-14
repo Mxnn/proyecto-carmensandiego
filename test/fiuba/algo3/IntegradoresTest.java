@@ -5,13 +5,17 @@ import junit.framework.Assert;
 
 public class IntegradoresTest {
 	@Test
-	public void viajarTresPaisesYAtraparLadronConNovato() {
+	public void viajarTresPaisesYAtraparLadronConNovato() throws ExcepcionJugadorSinTiempoDisponible {
 		Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
 		Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
 		Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(-3000.0, -9000.0));
 		Ciudad tokio = new Ciudad("Tokio", new Coordenada(9000.0, 1500.0));
 		Policia unPolicia = new Policia("Esteban", buenosAires);
-		
+
+        buenosAires.conectarCiudad(londres);
+        londres.conectarCiudad(reykjavic);
+        reykjavic.conectarCiudad(tokio);
+
 		unPolicia.visitarEdificioEconomia();
 		unPolicia.visitarEdificioCultural();
 		unPolicia.visitarEdificioTransporte();
