@@ -9,7 +9,7 @@ public class Ciudad {
     private Edificio edificioCultural;
     private Edificio edificioEconomia;
     private Edificio edificioTransporte;
-    private ArrayList<Ciudad> ciudadesLimitrofes;
+    private ArrayList<Ciudad> ciudadesConectadas;
 
 	public Ciudad(String nombre, Coordenada coordenadas) {
 		this.nombre = nombre;
@@ -17,7 +17,7 @@ public class Ciudad {
         edificioCultural = new Edificio("Biblioteca");
         edificioEconomia = new Edificio("Mercado");
         edificioTransporte = new Edificio("Aeropuerto");
-        ciudadesLimitrofes = new ArrayList<Ciudad>();
+        ciudadesConectadas = new ArrayList<Ciudad>();
 	}
 
 	// SETTERS:
@@ -34,11 +34,11 @@ public class Ciudad {
     }
 
     public void conectarCiudad(Ciudad ciudad) {
-        this.ciudadesLimitrofes.add(ciudad);
+        this.ciudadesConectadas.add(ciudad);
     }
 
     public void desconectarCiudad(Ciudad ciudad) {
-        this.ciudadesLimitrofes.remove(ciudad);
+        this.ciudadesConectadas.remove(ciudad);
     }
 	
 	//GETTERS:
@@ -58,11 +58,11 @@ public class Ciudad {
         return this.edificioTransporte;
     }
 
-    public ArrayList<Ciudad> getCiudadesLimitrofes() {
-        return ciudadesLimitrofes;
+    public ArrayList<Ciudad> getCiudadesConectadas() {
+        return ciudadesConectadas;
     }
 
-    public boolean esCiudadLimitrofe(Ciudad ciudad) {
-        return this.ciudadesLimitrofes.contains(ciudad);
+    public boolean ciudadEstaConectada(Ciudad ciudad) {
+        return this.ciudadesConectadas.contains(ciudad);
     }
 }
