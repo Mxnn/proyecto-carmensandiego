@@ -8,7 +8,7 @@ public class Computadora {
 	
 	public Computadora(Ladron buscado) {
 		this.buscado = buscado;
-		sospechosos = new ArrayList();
+		sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(buscado);
 	}
 	
@@ -21,13 +21,11 @@ public class Computadora {
 	}
 	
 	public void filtrarCaracteristica(Ladron.Sexo sexo) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList();
+		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
 		
-		int cantidadSospechosos = sospechosos.size();
-		for (int i = 0; i < cantidadSospechosos ; i++) {
-			Ladron ladron = sospechosos.get(i);
-			if (ladron.tieneEstaCaracteristica(sexo)) {
-				sospechososFiltrados.add(ladron);
+		for (Ladron sospechoso : this.sospechosos) {
+			if (sospechoso.tieneEstaCaracteristica(sexo)) {
+				sospechososFiltrados.add(sospechoso);
 			}
 		}
 		
@@ -35,7 +33,7 @@ public class Computadora {
 	}
 	
 	public void filtrarCaracteristica(Ladron.Pelo pelo) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList();
+		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
 		
 		int cantidadSospechosos = sospechosos.size();
 		for (int i = 0; i < cantidadSospechosos ; i++) {
@@ -49,7 +47,7 @@ public class Computadora {
 	}
 	
 	public void filtrarCaracteristica(Ladron.Hobby hobby) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList();
+		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
 		
 		int cantidadSospechosos = sospechosos.size();
 		for (int i = 0; i < cantidadSospechosos ; i++) {
@@ -63,7 +61,7 @@ public class Computadora {
 	}
 	
 	public void filtrarCaracteristica(Ladron.Auto auto) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList();
+		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
 		
 		int cantidadSospechosos = sospechosos.size();
 		for (int i = 0; i < cantidadSospechosos ; i++) {
@@ -77,7 +75,7 @@ public class Computadora {
 	}
 	
 	public void filtrarCaracteristica(Ladron.MarcaPersonal marcaPersonal) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList();
+		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
 		
 		int cantidadSospechosos = sospechosos.size();
 		for (int i = 0; i < cantidadSospechosos ; i++) {
