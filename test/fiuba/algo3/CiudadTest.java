@@ -47,4 +47,34 @@ public class CiudadTest {
         ciudad.setEdificioEconomia(nuevoEdificioEconomia);
         Assert.assertEquals(ciudad.getEdificioEconomia(), nuevoEdificioEconomia);
     }
+
+    @Test
+    public void setCiudadLimitrofeAgregaCiudadLimitrofe() {
+        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
+
+        londres.conectarCiudad(paris);
+        Assert.assertTrue((londres.getCiudadesLimitrofes()).size() == 1);
+    }
+
+    @Test
+    public void setCiudadLimitrofeAgregaConexionSolamenteALaCiudadALaCualLeConectoUnaCiudad() {
+        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
+
+        londres.conectarCiudad(paris);
+
+        Assert.assertTrue((paris.getCiudadesLimitrofes()).size() == 0);
+    }
+
+    @Test
+    public void desconectarCiudadSacaLaCiudadEnviadaComoCiudadLimitrofe() {
+        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
+
+        londres.conectarCiudad(paris);
+        londres.desconectarCiudad(paris);
+
+        Assert.assertTrue((londres.getCiudadesLimitrofes()).size() == 0);
+    }
 }
