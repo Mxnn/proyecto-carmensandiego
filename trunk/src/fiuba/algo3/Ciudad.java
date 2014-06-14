@@ -1,5 +1,7 @@
 package fiuba.algo3;
 
+import java.util.ArrayList;
+
 public class Ciudad {
 
 	private String nombre;
@@ -7,6 +9,7 @@ public class Ciudad {
     private Edificio edificioCultural;
     private Edificio edificioEconomia;
     private Edificio edificioTransporte;
+    private ArrayList<Ciudad> ciudadesLimitrofes;
 
 	public Ciudad(String nombre, Coordenada coordenadas) {
 		this.nombre = nombre;
@@ -14,6 +17,7 @@ public class Ciudad {
         edificioCultural = new Edificio("Biblioteca");
         edificioEconomia = new Edificio("Mercado");
         edificioTransporte = new Edificio("Aeropuerto");
+        ciudadesLimitrofes = new ArrayList<Ciudad>();
 	}
 
 	// SETTERS:
@@ -27,6 +31,14 @@ public class Ciudad {
 
     public void setEdificioTransporte(Edificio edificio) {
         this.edificioTransporte = edificio;
+    }
+
+    public void conectarCiudad(Ciudad ciudad) {
+        ciudadesLimitrofes.add(ciudad);
+    }
+
+    public void desconectarCiudad(Ciudad ciudad) {
+        ciudadesLimitrofes.remove(ciudad);
     }
 	
 	//GETTERS:
@@ -44,5 +56,9 @@ public class Ciudad {
 
     public Edificio getEdificioTransporte() {
         return this.edificioTransporte;
+    }
+
+    public ArrayList<Ciudad> getCiudadesLimitrofes() {
+        return ciudadesLimitrofes;
     }
 }
