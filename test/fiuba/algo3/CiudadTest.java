@@ -54,6 +54,7 @@ public class CiudadTest {
         Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
 
         londres.conectarCiudad(paris);
+        Assert.assertTrue(londres.esCiudadLimitrofe(paris));
         Assert.assertTrue((londres.getCiudadesLimitrofes()).size() == 1);
     }
 
@@ -77,4 +78,15 @@ public class CiudadTest {
 
         Assert.assertTrue((londres.getCiudadesLimitrofes()).size() == 0);
     }
+
+    @Test
+    public void esCiudadLimitrofeDevuelveTrueSiLaCiudadEsLimitrofe() {
+        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
+
+        londres.conectarCiudad(paris);
+
+        Assert.assertTrue(londres.esCiudadLimitrofe(paris));
+    }
+
 }
