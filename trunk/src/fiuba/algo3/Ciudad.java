@@ -34,11 +34,11 @@ public class Ciudad {
     }
 
     public void conectarCiudad(Ciudad ciudad) {
-        ciudadesLimitrofes.add(ciudad);
+        this.ciudadesLimitrofes.add(ciudad);
     }
 
     public void desconectarCiudad(Ciudad ciudad) {
-        ciudadesLimitrofes.remove(ciudad);
+        this.ciudadesLimitrofes.remove(ciudad);
     }
 	
 	//GETTERS:
@@ -60,5 +60,9 @@ public class Ciudad {
 
     public ArrayList<Ciudad> getCiudadesLimitrofes() {
         return ciudadesLimitrofes;
+    }
+
+    public boolean esCiudadLimitrofe(Ciudad ciudad) {
+        return this.ciudadesLimitrofes.contains(ciudad);
     }
 }
