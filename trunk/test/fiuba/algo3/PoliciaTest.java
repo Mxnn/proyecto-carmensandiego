@@ -26,6 +26,13 @@ public class PoliciaTest {
     }
 
     @Test
+    public void emitioLaOrdenDeArrestoContraElLadronCorrectoComienzaEnFalsePorDefecto() {
+        Policia unPolicia = new Policia("Pepe", new Ciudad("Cardiff", new Coordenada(3,5)));
+
+        Assert.assertFalse(unPolicia.emitioLaOrdenDeArrestoContraElLadronCorrecto());
+    }
+
+    @Test
     public void setRangoCambiaElRangoDelPolicia() {
         Policia unPolicia = new Policia("Andrew", new Ciudad("Brujas", new Coordenada(3,5)));
         Rango detective = new Detective();
@@ -158,5 +165,83 @@ public class PoliciaTest {
 
         unPolicia.setTiempoDisponible(0);
         unPolicia.visitarEdificioEconomia();
+    }
+
+    @Test
+    public void emitioLaOrdenDeArrestoContraElLadronCorrectoDevuelveTrueSiLaOrdenFueEmitidaContraElLadronBuscado() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+
+        computadora.setSospechoso(sospechoso1);
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Assert.assertTrue(unPolicia.emitioLaOrdenDeArrestoContraElLadronCorrecto());
+    }
+
+    @Test
+    public void emitioLaOrdenDeArrestoContraElLadronCorrectoDevuelveFalseSiLaOrdenNoFueEmitidaContraElLadronBuscado() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+
+        computadora.setSospechoso(sospechoso1);
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+        Assert.assertFalse(unPolicia.emitioLaOrdenDeArrestoContraElLadronCorrecto());
+    }
+
+    @Test
+    public void emitirOrdenDeArrestoConTiempoLeRestaTiempoSiElLadronEsElBuscado() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+
+        computadora.setSospechoso(sospechoso1);
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
+    }
+
+    @Test
+    public void emitirOrdenDeArrestoConTiempoLeRestaTiempoSiElLadronNoEsElBuscado() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+
+        computadora.setSospechoso(sospechoso1);
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
+    }
+
+    @Test
+    public void emitirOrdenDeArrestoConTiempoLeRestaTiempoSiElLadronNoEstaEnLaComputadora() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+
+        computadora.setSospechoso(sospechoso1);
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.FEMENINO, Ladron.Pelo.ROJO, Ladron.Hobby.TENNIS, Ladron.Auto.LIMUSINA, Ladron.MarcaPersonal.JOYAS);
+        Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
+    }
+
+    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
+    public void emitirOrdenDeArrestoSinTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+
+        computadora.setSospechoso(sospechoso1);
+        unPolicia.setTiempoDisponible(2);
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
     }
 }

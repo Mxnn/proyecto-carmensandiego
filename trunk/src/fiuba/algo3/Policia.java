@@ -1,13 +1,18 @@
 package fiuba.algo3;
 
 public class Policia {
-	public final static int TIEMPO_DISPONIBLE_INICIAL = 154; 
+	public final static int TIEMPO_DISPONIBLE_INICIAL = 154;
+    public final static int TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO = 3;
+    public final static int TIEMPO_POR_ENTRAR_AL_PRIMER_EDIFICIO = 1;
+    public final static int TIEMPO_POR_ENTRAR_AL_SEGUNDO_EDIFICIO = 2;
+    public final static int TIEMPO_POR_ENTRAR_AL_TERCER_EDIFICIO = 3;
 
     private String nombre;
     private int tiempoDisponible;
     private Rango rango;
     private Ciudad ciudadActual;
 	private int edificiosVisitadosEnEstaCiudad;
+    private boolean ordenDeArrestoEmitidaContraElLadron;
 
     public Policia(String unNombre, Ciudad ciudadInicial) {
         this.nombre = unNombre;
@@ -15,6 +20,7 @@ public class Policia {
         this.ciudadActual = ciudadInicial;
         this.rango = new Novato();
 		this.edificiosVisitadosEnEstaCiudad = 0;
+        this.ordenDeArrestoEmitidaContraElLadron = false;
     }
 
 	//SETTERS:
@@ -39,6 +45,10 @@ public class Policia {
         return this.ciudadActual;
     }
 
+    public boolean emitioLaOrdenDeArrestoContraElLadronCorrecto() {
+        return this.ordenDeArrestoEmitidaContraElLadron;
+    }
+
     public boolean viajar(Ciudad ciudadDestino) throws ExcepcionJugadorSinTiempoDisponible {
         if (this.ciudadActual.ciudadEstaConectada(ciudadDestino)) {
             Coordenada coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
@@ -59,11 +69,11 @@ public class Policia {
 	
 	private void descuentoDeTiempoPorVisitarEdificio() throws ExcepcionJugadorSinTiempoDisponible {
 		if (edificiosVisitadosEnEstaCiudad == 0) {
-            this.descontarTiempo(1);
+            this.descontarTiempo(TIEMPO_POR_ENTRAR_AL_PRIMER_EDIFICIO);
 		} else if (edificiosVisitadosEnEstaCiudad == 1){
-			this.descontarTiempo(2);
+			this.descontarTiempo(TIEMPO_POR_ENTRAR_AL_SEGUNDO_EDIFICIO);
 		} else {
-            this.descontarTiempo(3);
+            this.descontarTiempo(TIEMPO_POR_ENTRAR_AL_TERCER_EDIFICIO);
 		}
 		this.edificiosVisitadosEnEstaCiudad += 1;
 	}
@@ -93,4 +103,13 @@ public class Policia {
 		descuentoDeTiempoPorVisitarEdificio();
 		return this.rango.pedirPista(edificio);
 	}
+
+    public boolean emitirOrdenDeArresto(Computadora computadora, Ladron.Sexo sexo, Ladron.Pelo pelo, Ladron.Hobby hobbie, Ladron.Auto auto, Ladron.MarcaPersonal marcaPersonal) throws ExcepcionJugadorSinTiempoDisponible{
+        descontarTiempo(TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
+        if (computadora.filtrarLadron(sexo, pelo, hobbie, auto, marcaPersonal)) {
+            this.ordenDeArrestoEmitidaContraElLadron = true;
+            return true;
+        }
+        else return false;
+    }
 }

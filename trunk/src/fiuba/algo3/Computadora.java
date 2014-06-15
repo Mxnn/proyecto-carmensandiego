@@ -3,92 +3,41 @@ package fiuba.algo3;
 import java.util.ArrayList;
 
 public class Computadora {
-	Ladron buscado;
-	ArrayList<Ladron> sospechosos;
+	private Ladron sospechosoBuscado;
+	private ArrayList<Ladron> sospechosos;
+    private Ladron sospechosoFiltrado;
 	
 	public Computadora(Ladron buscado) {
-		this.buscado = buscado;
-		sospechosos = new ArrayList<Ladron>();
-		sospechosos.add(buscado);
+		this.sospechosoBuscado = buscado;
+		this.sospechosos = new ArrayList<Ladron>();
+		this.sospechosos.add(buscado);
 	}
 	
 	public void setSospechoso(Ladron ladron) {
-		sospechosos.add(ladron);
+		this.sospechosos.add(ladron);
 	}
-	
-	public ArrayList<Ladron> getSospechosos() {
-		return sospechosos;
-	}
-	
-	public void filtrarCaracteristica(Ladron.Sexo sexo) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
-		
-		for (Ladron sospechoso : this.sospechosos) {
-			if (sospechoso.tieneEstaCaracteristica(sexo)) {
-				sospechososFiltrados.add(sospechoso);
-			}
-		}
-		
-		sospechosos = sospechososFiltrados;
-	}
-	
-	public void filtrarCaracteristica(Ladron.Pelo pelo) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
-		
-		int cantidadSospechosos = sospechosos.size();
-		for (int i = 0; i < cantidadSospechosos ; i++) {
-			Ladron ladron = sospechosos.get(i);
-			if (ladron.tieneEstaCaracteristica(pelo)) {
-				sospechososFiltrados.add(ladron);
-			}
-		}
-		
-		sospechosos = sospechososFiltrados;
-	}
-	
-	public void filtrarCaracteristica(Ladron.Hobby hobby) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
-		
-		int cantidadSospechosos = sospechosos.size();
-		for (int i = 0; i < cantidadSospechosos ; i++) {
-			Ladron ladron = sospechosos.get(i);
-			if (ladron.tieneEstaCaracteristica(hobby)) {
-				sospechososFiltrados.add(ladron);
-			}
-		}
-		
-		sospechosos = sospechososFiltrados;
-	}
-	
-	public void filtrarCaracteristica(Ladron.Auto auto) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
-		
-		int cantidadSospechosos = sospechosos.size();
-		for (int i = 0; i < cantidadSospechosos ; i++) {
-			Ladron ladron = sospechosos.get(i);
-			if (ladron.tieneEstaCaracteristica(auto)) {
-				sospechososFiltrados.add(ladron);
-			}
-		}
-		
-		sospechosos = sospechososFiltrados;
-	}
-	
-	public void filtrarCaracteristica(Ladron.MarcaPersonal marcaPersonal) {
-		ArrayList<Ladron> sospechososFiltrados = new ArrayList<Ladron>();
-		
-		int cantidadSospechosos = sospechosos.size();
-		for (int i = 0; i < cantidadSospechosos ; i++) {
-			Ladron ladron = sospechosos.get(i);
-			if (ladron.tieneEstaCaracteristica(marcaPersonal)) {
-				sospechososFiltrados.add(ladron);
-			}
-		}
-		
-		sospechosos = sospechososFiltrados;
-	}
-	
-	public boolean puedoEmitirOrdenDeArresto() {
-		return (sospechosos.size() == 1) && (sospechosos.get(0) == buscado);
-	}
+
+    private void filtrarSospechososPor(Ladron.Sexo sexo, Ladron.Pelo pelo, Ladron.Hobby hobby, Ladron.Auto auto, Ladron.MarcaPersonal marcaPersonal) {
+        this.sospechosoFiltrado = null;
+        ArrayList<Ladron> temp = new ArrayList<Ladron>();
+        for(Ladron ladron: this.sospechosos) {
+            if (ladron.tieneEstaCaracteristica(sexo) &&
+                ladron.tieneEstaCaracteristica(pelo) &&
+                ladron.tieneEstaCaracteristica(hobby) &&
+                ladron.tieneEstaCaracteristica(auto) &&
+                ladron.tieneEstaCaracteristica(marcaPersonal) ) {
+                temp.add(ladron);
+            }
+        }
+
+        if (temp.size() == 1) {
+            this.sospechosoFiltrado = temp.get(0);
+        }
+    }
+
+    public boolean filtrarLadron(Ladron.Sexo sexo, Ladron.Pelo pelo, Ladron.Hobby hobby, Ladron.Auto auto, Ladron.MarcaPersonal marcaPersonal) {
+        filtrarSospechososPor(sexo, pelo, hobby, auto, marcaPersonal);
+
+        return (this.sospechosoFiltrado == this.sospechosoBuscado);
+    }
 }
