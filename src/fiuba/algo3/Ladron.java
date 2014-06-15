@@ -3,9 +3,9 @@ package fiuba.algo3;
 public class Ladron {
 	public enum Sexo { FEMENINO, MASCULINO }
 	public enum Pelo { NEGRO, RUBIO, ROJO, MARRON }
-	public enum Hobby { BASQUET, FUTBOL, TENNIS }
-	public enum Auto { MOTO, CONVERTIBLE, CAMIONETA }
-	public enum MarcaPersonal { ANILLO, TATUAJE, CICATRIZ }
+	public enum Hobby { CROQUET, TENNIS, ALPINISMO }
+	public enum Auto { MOTO, CONVERTIBLE, LIMUSINA }
+	public enum MarcaPersonal { ANILLO, TATUAJE, CICATRIZ, JOYAS }
 	
 	private String nombre;
 	private Sexo sexo;
@@ -22,6 +22,10 @@ public class Ladron {
 		this.auto = auto;
 		this.marcaPersonal = marcaPersonal;
 	}
+
+    public String getNombre() {
+        return this.nombre;
+    }
 	
 	public boolean tieneEstaCaracteristica(Sexo sexo) {
 		return this.sexo == sexo;

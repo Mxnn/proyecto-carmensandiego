@@ -30,8 +30,8 @@ public class GeneradorDeCasos {
 		ArrayList<Ciudad> listaDeCiudades=new ArrayList<Ciudad>();
 
 		Ciudad ciudadInicial= new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
-		ciudadInicial.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a drachmas."), new Pista("Me consulto si convenia invertir en la insustria de los olivos."), new Pista("Estaba pensando invertir en los higos."));
-		ciudadInicial.getEdificioTransporte().setPistas(new Pista("Ha tomado un avion cuya ala estaba adornada con una bandera azul y blanca."), new Pista("Me pregunto sobre algun tour para visitar el mar Egeo."), new Pista("Me pregunto sobre algun tour para conocer las montañas pindo."));
+		ciudadInicial.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a drachmas."), new Pista("Me consulto si convenia invertir en la industria de los olivos."), new Pista("Estaba pensando invertir en los higos."));
+		ciudadInicial.getEdificioTransporte().setPistas(new Pista("Ha tomado un avion cuya ala estaba adornada con una bandera azul y blanca."), new Pista("Me pregunto sobre algun tour para visitar el mar Egeo."), new Pista("Me pregunto sobre algun tour para conocer las montanias pindo."));
 		ciudadInicial.getEdificioCultural().setPistas(new Pista("Pidio un libro sobre los espartanos."), new Pista("Me dijo que estaba muy interesado en Platon."), new Pista("Me pregunto si tenia algun libro sobre restos arqueologicos"));
 		listaDeCiudades.add (ciudadInicial);
 
@@ -49,20 +49,20 @@ public class GeneradorDeCasos {
 
 		Ciudad ciudad3= new Ciudad("Pekin", new Coordenada(1800.0, 8472.0));
 		ciudad3.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a Kinas."), new Pista("Queria invertir en la industria del oro."), new Pista("Pregunto si tenia futuro invertir en mandioca."));
-		ciudad3.getEdificioTransporte().setPistas(new Pista("El tomo un avion cuya ala estaba adornada por una bandera roja, amarilla y negra."), new Pista("Me dijo que iba a un pais donde se hablaba Inglés, tok pisin y motu ."), new Pista("El dijo que iba a una barbacoa con el primer ministro."));
+		ciudad3.getEdificioTransporte().setPistas(new Pista("El tomo un avion cuya ala estaba adornada por una bandera roja, amarilla y negra."), new Pista("Me dijo que iba a un pais donde se hablaba ingles, tok pisin y motu ."), new Pista("El dijo que iba a una barbacoa con el primer ministro."));
 		ciudad3.getEdificioCultural().setPistas(new Pista("Me pidio un libro sobre volcanes."), new Pista("El comento que queria escalar el monte Wilthalm."), new Pista("Me pidio un libro del monte Karkar."));
 		listaDeCiudades.add (ciudad3);
 
 		Ciudad ciudad4= new Ciudad("Port Moresby", new Coordenada(-4627.0, -1243.0));
 		ciudad4.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a Rupias"), new Pista("Queria invertir en las citronella"), new Pista("Me consulto cuanto el saldria algun artefacto de los Veddas"));
-		ciudad4.getEdificioTransporte().setPistas(new Pista("Se marcho hacia Asia Meriodional."), new Pista("Fue a un pais donde se habla Cingalés y tamil"), new Pista("Se marcho en un vehiculo que llevaba una bandera adornada con un leon dorado"));
+		ciudad4.getEdificioTransporte().setPistas(new Pista("Se marcho hacia Asia Meriodional."), new Pista("Fue a un pais donde se habla cingales y tamil"), new Pista("Se marcho en un vehiculo que llevaba una bandera adornada con un leon dorado"));
 		ciudad4.getEdificioCultural().setPistas(new Pista("Estaba investigando la cultura y la mitologia cingaleses"), new Pista("Estaba buscando articulos sobre las tensiones entre tamiles y cingaleses"), new Pista("Me comento que fue a un pais donde habia division religiosa pero la mayoria eran budistas."));
 		listaDeCiudades.add (ciudad4);
 
 		Ciudad ciudad5= new Ciudad("Colombo", new Coordenada(-1437, 6740.0));
-		ciudad5.getEdificioEconomia().setPistas(new Pista("Solo se que algo muy extraño esta pasando en la ciudad."), new Pista("Solo se que algo muy extraño esta pasando en la ciudad."), new Pista("Solo se que algo muy extraño esta pasando en la ciudad."));
-		ciudad5.getEdificioTransporte().setPistas(new Pista("Solo se que algo muy extraño esta pasando en la ciudad."), new Pista("Solo se que algo muy extraño esta pasando en la ciudad."), new Pista("Solo se que algo muy extraño esta pasando en la ciudad."));
-		ciudad5.getEdificioCultural().setPistas(new Pista("Solo se que algo muy extraño esta pasando en la ciudad."), new Pista("Solo se que algo muy extraño esta pasando en la ciudad."), new Pista("Solo se que algo muy extraño esta pasando en la ciudad."));
+		ciudad5.getEdificioEconomia().setPistas(new Pista("Solo se que algo muy extranio esta pasando en la ciudad."), new Pista("Solo se que algo muy extranio esta pasando en la ciudad."), new Pista("Solo se que algo muy extranio esta pasando en la ciudad."));
+		ciudad5.getEdificioTransporte().setPistas(new Pista("Solo se que algo muy extranio esta pasando en la ciudad."), new Pista("Solo se que algo muy extranio esta pasando en la ciudad."), new Pista("Solo se que algo muy extranio esta pasando en la ciudad."));
+		ciudad5.getEdificioCultural().setPistas(new Pista("Solo se que algo muy extranio esta pasando en la ciudad."), new Pista("Solo se que algo muy extranio esta pasando en la ciudad."), new Pista("Solo se que algo muy extranio esta pasando en la ciudad."));
 		listaDeCiudades.add (ciudad5);
 
 		/*

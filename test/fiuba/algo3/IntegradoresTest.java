@@ -11,6 +11,8 @@ public class IntegradoresTest {
 		Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(-3000.0, -9000.0));
 		Ciudad tokio = new Ciudad("Tokio", new Coordenada(9000.0, 1500.0));
 		Policia unPolicia = new Policia("Esteban", buenosAires);
+        Ladron unLadron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+        Computadora computadora = new Computadora(unLadron);
 
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(reykjavic);
@@ -27,8 +29,14 @@ public class IntegradoresTest {
 		unPolicia.visitarEdificioEconomia();
 		unPolicia.visitarEdificioCultural();
 		unPolicia.visitarEdificioTransporte();
+
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+
 		unPolicia.viajar(tokio);
-		
+		unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioTransporte();
+
 		//FALTA COMPLETAR
 		
 		Assert.assertTrue(true);
