@@ -49,13 +49,13 @@ public class GeneradorDeCasos {
 
 		Ciudad ciudad3= new Ciudad("Pekin", new Coordenada(1800.0, 8472.0));
 		ciudad3.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a Kinas."), new Pista("Queria invertir en la industria del oro."), new Pista("Pregunto si tenia futuro invertir en mandioca."));
-		ciudad3.getEdificioTransporte().setPistas(new Pista("El tomo un avion cuya ala estaba adornada por una bandera roja, amarilla y negra."), new Pista("Me dijo que iba a un pais donde se hablaba Inglés, tok pisin y motu ."), new Pista("El dijo que iba a una barbacoa con el primer ministro."));
+		ciudad3.getEdificioTransporte().setPistas(new Pista("El tomo un avion cuya ala estaba adornada por una bandera roja, amarilla y negra."), new Pista("Me dijo que iba a un pais donde se hablaba Ingles, tok pisin y motu ."), new Pista("El dijo que iba a una barbacoa con el primer ministro."));
 		ciudad3.getEdificioCultural().setPistas(new Pista("Me pidio un libro sobre volcanes."), new Pista("El comento que queria escalar el monte Wilthalm."), new Pista("Me pidio un libro del monte Karkar."));
 		listaDeCiudades.add (ciudad3);
 
 		Ciudad ciudad4= new Ciudad("Port Moresby", new Coordenada(-4627.0, -1243.0));
 		ciudad4.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a Rupias"), new Pista("Queria invertir en las citronella"), new Pista("Me consulto cuanto el saldria algun artefacto de los Veddas"));
-		ciudad4.getEdificioTransporte().setPistas(new Pista("Se marcho hacia Asia Meriodional."), new Pista("Fue a un pais donde se habla Cingalés y tamil"), new Pista("Se marcho en un vehiculo que llevaba una bandera adornada con un leon dorado"));
+		ciudad4.getEdificioTransporte().setPistas(new Pista("Se marcho hacia Asia Meriodional."), new Pista("Fue a un pais donde se habla Cingales y tamil"), new Pista("Se marcho en un vehiculo que llevaba una bandera adornada con un leon dorado"));
 		ciudad4.getEdificioCultural().setPistas(new Pista("Estaba investigando la cultura y la mitologia cingaleses"), new Pista("Estaba buscando articulos sobre las tensiones entre tamiles y cingaleses"), new Pista("Me comento que fue a un pais donde habia division religiosa pero la mayoria eran budistas."));
 		listaDeCiudades.add (ciudad4);
 
@@ -100,7 +100,7 @@ public void crearCasoDePruebaSyngaourSydneyMoscuBadgadLima() throws ParserConfig
 
 	Ciudad ciudadInicial= new Ciudad("Colombo", new Coordenada(-1437, 6740.0));
 	ciudadInicial.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a dolares."), new Pista("Fue a el pais mas avanzado en armamento militar en el Sudeste de Asia"), new Pista("Queria invertir en la indutria del caucho."));
-	ciudadInicial.getEdificioTransporte().setPistas(new Pista("Ha tomado un avion cuya ala estaba adornada con una bandera roja y blanca."), new Pista("Me comento que al pais al que fue se habla en Inglés, Malayo, Mandarín, Tamil"), new Pista("Estaba investigando sobre el parlamento de este pais."));
+	ciudadInicial.getEdificioTransporte().setPistas(new Pista("Ha tomado un avion cuya ala estaba adornada con una bandera roja y blanca."), new Pista("Me comento que al pais al que fue se habla en Ingles, Malayo, Mandarin, Tamil"), new Pista("Estaba investigando sobre el parlamento de este pais."));
 	ciudadInicial.getEdificioCultural().setPistas(new Pista("Dijo que queria tirarse de cabeza en el puerto Calder."), new Pista("Me pregunto donde podia conseguir un documental sobre el pez piedra."), new Pista("Estaba leyendo sobre las ex colonias britanicas"));
 	listaDeCiudades.add (ciudadInicial);
 
@@ -125,7 +125,7 @@ public void crearCasoDePruebaSyngaourSydneyMoscuBadgadLima() throws ParserConfig
 	Ciudad ciudad4= new Ciudad("Badgad", new Coordenada(6427.0, -1243.0));
 	ciudad4.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a Soles."), new Pista("Queria saber si daria fruto invertir en la agricultura."), new Pista("Queria saber si daria fruto invertir en la mineria."));
 	ciudad4.getEdificioTransporte().setPistas(new Pista("Tomo un vehiculo que tenia una bandera roja y blanca."), new Pista("Comento que iba a asistir en una recepcion ofrecida por el presidente"), new Pista("Dijo que iba a ir a un pais que era un ex colonia espaniola."));
-	ciudad4.getEdificioCultural().setPistas(new Pista("Dijo que iba a visitar el Machu Picchu"), new Pista("Estaba viendo un diccionario de Espaniol."), new Pista("Comento que tenia puesto ropa especial para ir a las Pirámides de Caral."));
+	ciudad4.getEdificioCultural().setPistas(new Pista("Dijo que iba a visitar el Machu Picchu"), new Pista("Estaba viendo un diccionario de Espaniol."), new Pista("Comento que tenia puesto ropa especial para ir a las Piramides de Caral."));
 	listaDeCiudades.add (ciudad4);
 
 	Ciudad ciudad5= new Ciudad("Lima", new Coordenada(-3570, -4714.0));
@@ -170,7 +170,7 @@ public void crearCasoDePruebaBuenosAiresMadridTokioBadgadParis() throws ParserCo
 	Ciudad ciudadInicial= new Ciudad("Lima", new Coordenada(-3570, -4714.0));
 	ciudadInicial.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a Pesos."), new Pista("Quiso inveritr en el mercado ganadero"), new Pista("Me pregutnto si invertir en la soja daria fruto. "));
 	ciudadInicial.getEdificioTransporte().setPistas(new Pista("Ha tomado un avion cuya ala estaba adornada con una bandera celeste y blanca."), new Pista("Compro un diccionario en espaniol"), new Pista("Estaba investigando sobre las ex colonias de Espania."));
-	ciudadInicial.getEdificioCultural().setPistas(new Pista("Estaba buscando unos cds de tango."), new Pista("Me comento que queria visitar el obelisco"), new Pista("Estaba leyendo una biblografia de Benito Quinquela Martín."));
+	ciudadInicial.getEdificioCultural().setPistas(new Pista("Estaba buscando unos cds de tango."), new Pista("Me comento que queria visitar el obelisco"), new Pista("Estaba leyendo una biblografia de Benito Quinquela Martin."));
 	listaDeCiudades.add (ciudadInicial);
 
 	Ciudad ciudad1= new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
@@ -181,7 +181,7 @@ public void crearCasoDePruebaBuenosAiresMadridTokioBadgadParis() throws ParserCo
 
 	Ciudad ciudad2= new Ciudad("Madrid", new Coordenada(2741.0, 5406.0));
 	ciudad2.getEdificioEconomia().setPistas(new Pista("Cambio su dinero a yenes."), new Pista("Dijo que iba a ir a un pais que tenia una de las economias mas grandes del mundo."), new Pista("Pregunto si convenia invertir en la tecnologia."));
-	ciudad2.getEdificioTransporte().setPistas(new Pista("Compro un diccionario Japones."), new Pista("Tomo un avion cuya ala estaba adornada con una bandera roja y blanca."), new Pista("Me comento que iba a ir a un pais donde el budismo es la religión mayoritaria."));
+	ciudad2.getEdificioTransporte().setPistas(new Pista("Compro un diccionario Japones."), new Pista("Tomo un avion cuya ala estaba adornada con una bandera roja y blanca."), new Pista("Me comento que iba a ir a un pais donde el budismo es la religion mayoritaria."));
 	ciudad2.getEdificioCultural().setPistas(new Pista("Tenia unos folletos del monte fuji"), new Pista("Pidio un libro sobre los samurais."), new Pista("Dijo que queria visitar los arboles de cerezo."));
 	listaDeCiudades.add (ciudad2);
 
