@@ -5,7 +5,7 @@ import junit.framework.Assert;
 
 public class IntegradoresTest {
 	@Test
-	public void viajarTresPaisesYAtraparLadronConNovato() throws ExcepcionJugadorSinTiempoDisponible {
+	public void policiaDeRangoNovatoViajaATresPaisesYAtrapaAlLadronEmitiendoOrdenDeArrestoPrevia() throws ExcepcionJugadorSinTiempoDisponible {
 		Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
 		Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
 		Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(-3000.0, -9000.0));
@@ -17,6 +17,7 @@ public class IntegradoresTest {
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(reykjavic);
         reykjavic.conectarCiudad(tokio);
+        tokio.esconderLadron(unLadron);
 
 		unPolicia.visitarEdificioEconomia();
 		unPolicia.visitarEdificioCultural();
@@ -36,9 +37,68 @@ public class IntegradoresTest {
 		unPolicia.visitarEdificioCultural();
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioTransporte();
-
-		//FALTA COMPLETAR
 		
-		Assert.assertTrue(true);
+		Assert.assertTrue(unLadron.fueArrestado());
 	}
+
+    @Test
+    public void policiaDeRangoDetectiveViajaATresPaisesYNoAtrapaAlLadronPorNoEmitirOrdenDeArrestoYAdemasElLadronSeEscapa() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
+        Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
+        Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(-3000.0, -9000.0));
+        Ciudad tokio = new Ciudad("Tokio", new Coordenada(9000.0, 1500.0));
+        Policia unPolicia = new Policia("Esteban", buenosAires);
+        Ladron unLadron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+
+        unPolicia.setRango(new Detective());
+        buenosAires.conectarCiudad(londres);
+        londres.conectarCiudad(reykjavic);
+        reykjavic.conectarCiudad(tokio);
+        tokio.esconderLadron(unLadron);
+
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioTransporte();
+        unPolicia.viajar(londres);
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioTransporte();
+        unPolicia.viajar(reykjavic);
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioTransporte();
+
+        unPolicia.viajar(tokio);
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioTransporte();
+
+        Assert.assertFalse(unLadron.fueArrestado());
+        Assert.assertTrue(unLadron.seEscapo());
+    }
+
+    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
+    public void policiaDeRangoSargentoViajaPorLosPaisesYSeQuedaSinTiempo() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(0, -50000.0));
+        Ciudad londres = new Ciudad("Londres", new Coordenada(0, 50000.0));
+        Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(0, 200000));
+        Ciudad tokio = new Ciudad("Tokio", new Coordenada(9000.0, 1500.0));
+        Policia unPolicia = new Policia("Esteban", buenosAires);
+        Ladron unLadron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+
+        unPolicia.setRango(new Sargento());
+        buenosAires.conectarCiudad(londres);
+        londres.conectarCiudad(reykjavic);
+        reykjavic.conectarCiudad(tokio);
+        tokio.esconderLadron(unLadron);
+
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioTransporte();
+        unPolicia.viajar(londres);
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioTransporte();
+        unPolicia.viajar(reykjavic);
+    }
 }
