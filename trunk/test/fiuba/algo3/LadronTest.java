@@ -80,4 +80,44 @@ public class LadronTest {
 								   
 		Assert.assertFalse(ladron.tieneEstaCaracteristica(Ladron.MarcaPersonal.ANILLO));
 	}
+
+    @Test
+    public void fueArrestadoDevuelveTrueSiElLadronRecibioElArresto() {
+        Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+
+        ladron.recibirArresto();
+
+        Assert.assertTrue(ladron.fueArrestado());
+    }
+
+    @Test
+    public void fueArrestadoDevuelveFalseSiElLadronNoRecibioElArrestoPreviamente() {
+        Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+
+        Assert.assertFalse(ladron.fueArrestado());
+    }
+
+    @Test
+    public void seEscapoDevuelveTrueSiElLadronEscapo() {
+        Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+
+        ladron.escapar();
+
+        Assert.assertTrue(ladron.seEscapo());
+    }
+
+    @Test
+    public void seEscapoDevuelveFalseSiElLadronNoEscapo() {
+        Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+
+        Assert.assertFalse(ladron.seEscapo());
+    }
+
+    @Test
+    public void ladronComienzaSinSerArrestadoYSinEscaparPorDefecto() {
+        Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+
+        Assert.assertFalse(ladron.seEscapo());
+        Assert.assertFalse(ladron.fueArrestado());
+    }
 }

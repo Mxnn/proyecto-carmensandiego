@@ -13,6 +13,8 @@ public class Ladron {
 	private Hobby hobby;
 	private Auto auto;
 	private MarcaPersonal marcaPersonal;
+    private boolean fueArrestado;
+    private boolean ladronEscapo;
 	
 	public Ladron(String nombre, Sexo sexo, Pelo pelo, Hobby hobby, Auto auto, MarcaPersonal marcaPersonal) {
 		this.nombre = nombre;
@@ -21,6 +23,8 @@ public class Ladron {
 		this.hobby = hobby;
 		this.auto = auto;
 		this.marcaPersonal = marcaPersonal;
+        this.fueArrestado = false;
+        this.ladronEscapo = false;
 	}
 
     public String getNombre() {
@@ -46,4 +50,20 @@ public class Ladron {
 	public boolean tieneEstaCaracteristica(MarcaPersonal marcaPersonal) {
 		return this.marcaPersonal == marcaPersonal;
 	}
+
+    public void recibirArresto() {
+        this.fueArrestado = true;
+    }
+
+    public boolean fueArrestado() {
+        return this.fueArrestado;
+    }
+
+    public void escapar() {
+        this.ladronEscapo = true;
+    }
+
+    public boolean seEscapo() {
+        return this.ladronEscapo;
+    }
 }
