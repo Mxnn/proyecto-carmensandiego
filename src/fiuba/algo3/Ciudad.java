@@ -10,6 +10,7 @@ public class Ciudad {
     private Edificio edificioEconomia;
     private Edificio edificioTransporte;
     private ArrayList<Ciudad> ciudadesConectadas;
+    private Ladron ladronEscondido;
 
 	public Ciudad(String nombre, Coordenada coordenadas) {
 		this.nombre = nombre;
@@ -18,6 +19,7 @@ public class Ciudad {
         edificioEconomia = new Edificio("Mercado");
         edificioTransporte = new Edificio("Aeropuerto");
         ciudadesConectadas = new ArrayList<Ciudad>();
+        ladronEscondido = null;
 	}
 
 	// SETTERS:
@@ -39,6 +41,10 @@ public class Ciudad {
 
     public void desconectarCiudad(Ciudad ciudad) {
         this.ciudadesConectadas.remove(ciudad);
+    }
+
+    public void esconderLadron(Ladron ladron) {
+        ladronEscondido = ladron;
     }
 	
 	//GETTERS:
@@ -64,5 +70,13 @@ public class Ciudad {
 
     public boolean ciudadEstaConectada(Ciudad ciudad) {
         return this.ciudadesConectadas.contains(ciudad);
+    }
+
+    public boolean ladronEstaEnLaCiudad() {
+        return (ladronEscondido != null);
+    }
+
+    public Ladron getLadronEscondido() {
+        return ladronEscondido;
     }
 }
