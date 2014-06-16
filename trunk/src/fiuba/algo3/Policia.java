@@ -89,20 +89,32 @@ public class Policia {
 	public String visitarEdificioEconomia() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioEconomia();
 		descuentoDeTiempoPorVisitarEdificio();
+        comprobarArresto();
 		return this.rango.pedirPista(edificio);
 	}
 	
 	public String visitarEdificioCultural() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioCultural();
 		descuentoDeTiempoPorVisitarEdificio();
+        comprobarArresto();
 		return this.rango.pedirPista(edificio);
 	}
 	
 	public String visitarEdificioTransporte() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioTransporte();
 		descuentoDeTiempoPorVisitarEdificio();
+        comprobarArresto();
 		return this.rango.pedirPista(edificio);
 	}
+
+    private void comprobarArresto() {
+        if (this.ciudadActual.ladronEstaEnLaCiudad() && this.edificiosVisitadosEnEstaCiudad == 3) {
+            if (ordenDeArrestoEmitidaContraElLadron)
+                (this.ciudadActual.getLadronEscondido()).recibirArresto();
+            else
+                (this.ciudadActual.getLadronEscondido()).escapar();
+        }
+    }
 
     public boolean emitirOrdenDeArresto(Computadora computadora, Ladron.Sexo sexo, Ladron.Pelo pelo, Ladron.Hobby hobbie, Ladron.Auto auto, Ladron.MarcaPersonal marcaPersonal) throws ExcepcionJugadorSinTiempoDisponible{
         descontarTiempo(TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);

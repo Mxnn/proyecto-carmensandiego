@@ -244,4 +244,54 @@ public class PoliciaTest {
         unPolicia.setTiempoDisponible(2);
         unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
     }
+
+    @Test
+    public void policiaArrestaAlLadronSiVisitaLosTresEdificiosEnCualquierOrdenDeLaCiudadEnLaCualEstaYEmiteOrdenDeArrestoPreviamente() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+
+        ciudadSalida.esconderLadron(buscado);
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioTransporte();
+
+        Assert.assertTrue(buscado.fueArrestado());
+    }
+
+    @Test
+    public void policiaArrestaAlLadronSiVisitaLosTresEdificiosEnOrdenDeLaCiudadEnLaCualEstaYEmiteOrdenDeArrestoPreviamente() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+
+        ciudadSalida.esconderLadron(buscado);
+        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioTransporte();
+
+        Assert.assertTrue(buscado.fueArrestado());
+    }
+
+    @Test
+    public void policiaNoArrestaAlLadronSiNoEmiteOrdenDeArrestoPreviamenteYElLadronEscapa() throws ExcepcionJugadorSinTiempoDisponible {
+        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Pedro", ciudadSalida);
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+
+        ciudadSalida.esconderLadron(buscado);
+
+        unPolicia.visitarEdificioCultural();
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioTransporte();
+
+        Assert.assertFalse(buscado.fueArrestado());
+        Assert.assertTrue(buscado.seEscapo());
+    }
 }
