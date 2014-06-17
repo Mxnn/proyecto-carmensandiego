@@ -44,11 +44,11 @@ public class Computadora {
     public  ArrayList<Ladron> obtenerSospechosos() {
         ArrayList<Ladron> temp = new ArrayList<Ladron>();
         for(Ladron ladron: this.sospechosos) {
-            if (ladron.tieneEstaCaracteristica(sexoDelLadron) &&
-                ladron.tieneEstaCaracteristica(peloDelLadron) &&
-                ladron.tieneEstaCaracteristica(hobbyDelLadron) &&
-                ladron.tieneEstaCaracteristica(autoDelLadron) &&
-                ladron.tieneEstaCaracteristica(marcaPersonalDelLadron) ) {
+            if ((sexoDelLadron==null || ladron.tieneEstaCaracteristica(sexoDelLadron)) &&
+                (peloDelLadron==null ||  ladron.tieneEstaCaracteristica(peloDelLadron) )&&
+                (hobbyDelLadron==null || ladron.tieneEstaCaracteristica(hobbyDelLadron)) &&
+                (autoDelLadron==null || ladron.tieneEstaCaracteristica(autoDelLadron) )&&
+                (marcaPersonalDelLadron==null || ladron.tieneEstaCaracteristica(marcaPersonalDelLadron) ) ){
                 temp.add(ladron);
             }
         }
