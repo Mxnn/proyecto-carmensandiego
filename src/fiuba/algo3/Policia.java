@@ -45,10 +45,6 @@ public class Policia {
         return this.ciudadActual;
     }
 
-    public boolean emitioLaOrdenDeArrestoContraElLadronCorrecto() {
-        return this.ordenDeArrestoEmitidaContraElLadron;
-    }
-
     public boolean viajar(Ciudad ciudadDestino) throws ExcepcionJugadorSinTiempoDisponible {
         if (this.ciudadActual.ciudadEstaConectada(ciudadDestino)) {
             Coordenada coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
@@ -116,14 +112,13 @@ public class Policia {
         }
     }
 
-    public boolean emitirOrdenDeArresto(Computadora computadora, Ladron.Sexo sexo, Ladron.Pelo pelo, Ladron.Hobby hobbie, Ladron.Auto auto, Ladron.MarcaPersonal marcaPersonal) throws ExcepcionJugadorSinTiempoDisponible{
+    public boolean emitirOrdenDeArresto(Computadora computadora) throws ExcepcionJugadorSinTiempoDisponible {
         descontarTiempo(TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
-        computadora.setCaracteritica(sexo);
-        computadora.setCaracteritica(pelo);
-        computadora.setCaracteritica(hobbie);
-        computadora.setCaracteritica(auto);
-        computadora.setCaracteritica(marcaPersonal);
-
-       return computadora.emitirOrdenDeArresto();
+        if (computadora.emitirOrdenDeArresto()) {
+            this.ordenDeArrestoEmitidaContraElLadron = true;
+                return true;
+        }
+        else
+            return (computadora.getSospechososFiltrados().size() == 1);
     }
 }
