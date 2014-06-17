@@ -19,26 +19,30 @@ public class IntegradoresTest {
         reykjavic.conectarCiudad(tokio);
         tokio.esconderLadron(unLadron);
 
+        computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
 		unPolicia.visitarEdificioEconomia();
 		unPolicia.visitarEdificioCultural();
+        computadora.setCaracteristicaDelLadron(Ladron.Pelo.MARRON);
 		unPolicia.visitarEdificioTransporte();
 		unPolicia.viajar(londres);
 		unPolicia.visitarEdificioEconomia();
 		unPolicia.visitarEdificioCultural();
+        computadora.setCaracteristicaDelLadron(Ladron.Hobby.ALPINISMO);
 		unPolicia.visitarEdificioTransporte();
 		unPolicia.viajar(reykjavic);
 		unPolicia.visitarEdificioEconomia();
+        computadora.setCaracteristicaDelLadron(Ladron.Auto.MOTO);
 		unPolicia.visitarEdificioCultural();
 		unPolicia.visitarEdificioTransporte();
-/*
-        unPolicia.emitirOrdenDeArresto(computadora, Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+        computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);
 
+        unPolicia.emitirOrdenDeArresto(computadora);
 		unPolicia.viajar(tokio);
 		unPolicia.visitarEdificioCultural();
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioTransporte();
 
-		Assert.assertTrue(unLadron.fueArrestado());*/
+		Assert.assertTrue(unLadron.fueArrestado());
 	}
 
     @Test
