@@ -16,7 +16,7 @@ public class Policia {
 
     public Policia(String unNombre, Ciudad ciudadInicial) {
         this.nombre = unNombre;
-        this.tiempoDisponible = TIEMPO_DISPONIBLE_INICIAL; 
+        this.tiempoDisponible = TIEMPO_DISPONIBLE_INICIAL;
         this.ciudadActual = ciudadInicial;
         this.rango = new Novato();
 		this.edificiosVisitadosEnEstaCiudad = 0;
@@ -27,7 +27,7 @@ public class Policia {
     public void setRango(Rango unRango) {
         this.rango = unRango;
     }
-	
+
 	public void setTiempoDisponible(int tiempoDelPolicia){
     	this.tiempoDisponible = tiempoDelPolicia ;
     }
@@ -40,7 +40,7 @@ public class Policia {
 	public Rango getRango(){
     	return this.rango;
     }
-	
+
 	public Ciudad getCiudadActual() {
         return this.ciudadActual;
     }
@@ -66,7 +66,7 @@ public class Policia {
         }
         return false;
     }
-	
+
 	private void descuentoDeTiempoPorVisitarEdificio() throws ExcepcionJugadorSinTiempoDisponible {
 		if (edificiosVisitadosEnEstaCiudad == 0) {
             this.descontarTiempo(TIEMPO_POR_ENTRAR_AL_PRIMER_EDIFICIO);
@@ -85,21 +85,21 @@ public class Policia {
         else
             throw new ExcepcionJugadorSinTiempoDisponible();
     }
-	
+
 	public String visitarEdificioEconomia() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioEconomia();
 		descuentoDeTiempoPorVisitarEdificio();
         comprobarArresto();
 		return this.rango.pedirPista(edificio);
 	}
-	
+
 	public String visitarEdificioCultural() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioCultural();
 		descuentoDeTiempoPorVisitarEdificio();
         comprobarArresto();
 		return this.rango.pedirPista(edificio);
 	}
-	
+
 	public String visitarEdificioTransporte() throws ExcepcionJugadorSinTiempoDisponible {
 		Edificio edificio = this.ciudadActual.getEdificioTransporte();
 		descuentoDeTiempoPorVisitarEdificio();
@@ -118,10 +118,12 @@ public class Policia {
 
     public boolean emitirOrdenDeArresto(Computadora computadora, Ladron.Sexo sexo, Ladron.Pelo pelo, Ladron.Hobby hobbie, Ladron.Auto auto, Ladron.MarcaPersonal marcaPersonal) throws ExcepcionJugadorSinTiempoDisponible{
         descontarTiempo(TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
-        if (computadora.filtrarLadron(sexo, pelo, hobbie, auto, marcaPersonal)) {
-            this.ordenDeArrestoEmitidaContraElLadron = true;
-            return true;
-        }
-        else return false;
+        computadora.setCaracteritica(sexo);
+        computadora.setCaracteritica(pelo);
+        computadora.setCaracteritica(hobbie);
+        computadora.setCaracteritica(auto);
+        computadora.setCaracteritica(marcaPersonal);
+
+       return computadora.emitirOrdenDeArresto();
     }
 }

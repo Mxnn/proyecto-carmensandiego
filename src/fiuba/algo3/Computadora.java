@@ -5,39 +5,63 @@ import java.util.ArrayList;
 public class Computadora {
 	private Ladron sospechosoBuscado;
 	private ArrayList<Ladron> sospechosos;
-    private Ladron sospechosoFiltrado;
-	
+    private Ladron.Sexo sexoDelLadron;
+    private Ladron.Pelo peloDelLadron;
+    private Ladron.Hobby hobbyDelLadron;
+    private Ladron.Auto autoDelLadron;
+    private Ladron.MarcaPersonal marcaPersonalDelLadron;
+
 	public Computadora(Ladron buscado) {
 		this.sospechosoBuscado = buscado;
 		this.sospechosos = new ArrayList<Ladron>();
 		this.sospechosos.add(buscado);
 	}
-	
+
 	public void setSospechoso(Ladron ladron) {
 		this.sospechosos.add(ladron);
 	}
 
-    private void filtrarSospechososPor(Ladron.Sexo sexo, Ladron.Pelo pelo, Ladron.Hobby hobby, Ladron.Auto auto, Ladron.MarcaPersonal marcaPersonal) {
-        this.sospechosoFiltrado = null;
+	public void setCaracteritica (Ladron.Sexo sexo){
+        this.sexoDelLadron=sexo;
+	}
+
+	public void setCaracteritica (Ladron.Pelo pelo){
+        this.peloDelLadron=pelo;
+	}
+
+    public void setCaracteritica (Ladron.Hobby hobby){
+        this.hobbyDelLadron=hobby;
+	}
+
+    public void setCaracteritica (Ladron.Auto auto){
+        this.autoDelLadron=auto;
+	}
+
+    public void setCaracteritica (Ladron.MarcaPersonal marcaPersonal){
+        this.marcaPersonalDelLadron=marcaPersonal;
+	}
+
+    public  ArrayList<Ladron> obtenerSospechosos() {
         ArrayList<Ladron> temp = new ArrayList<Ladron>();
         for(Ladron ladron: this.sospechosos) {
-            if (ladron.tieneEstaCaracteristica(sexo) &&
-                ladron.tieneEstaCaracteristica(pelo) &&
-                ladron.tieneEstaCaracteristica(hobby) &&
-                ladron.tieneEstaCaracteristica(auto) &&
-                ladron.tieneEstaCaracteristica(marcaPersonal) ) {
+            if (ladron.tieneEstaCaracteristica(sexoDelLadron) &&
+                ladron.tieneEstaCaracteristica(peloDelLadron) &&
+                ladron.tieneEstaCaracteristica(hobbyDelLadron) &&
+                ladron.tieneEstaCaracteristica(autoDelLadron) &&
+                ladron.tieneEstaCaracteristica(marcaPersonalDelLadron) ) {
                 temp.add(ladron);
             }
         }
 
-        if (temp.size() == 1) {
-            this.sospechosoFiltrado = temp.get(0);
-        }
+        return temp;
     }
 
-    public boolean filtrarLadron(Ladron.Sexo sexo, Ladron.Pelo pelo, Ladron.Hobby hobby, Ladron.Auto auto, Ladron.MarcaPersonal marcaPersonal) {
-        filtrarSospechososPor(sexo, pelo, hobby, auto, marcaPersonal);
+    public boolean emitirOrdenDeArresto() {
+        sospechosos=obtenerSospechosos();
+        if (sospechosos.size() ==1){
+          return (sospechosos.get(0) == this.sospechosoBuscado);
+        }
+        return false;
 
-        return (this.sospechosoFiltrado == this.sospechosoBuscado);
     }
 }
