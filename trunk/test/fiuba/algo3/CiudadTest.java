@@ -98,36 +98,18 @@ public class CiudadTest {
     }
 
     @Test
-    public void ladronEstaEnLaCiudadDevuelveTrueSiElLadronEstaEnLaCiudad() {
+    public void getEstaElLadronDevuelveTrueSiElLadronEstaEnLaCiudad() {
         Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
-        Ladron ladron = new Ladron("Joseph", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+        
+        londres.setEstaElLadron();
 
-        londres.esconderLadron(ladron);
-
-        Assert.assertTrue(londres.ladronEstaEnLaCiudad());
+        Assert.assertTrue(londres.getEstaElLadron());
     }
 
     @Test
     public void ladronEstaEnLaCiudadDevuelveFalseSiElLadronNoEstaEnLaCiudad() {
         Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
 
-        Assert.assertFalse(londres.ladronEstaEnLaCiudad());
-    }
-
-    @Test
-    public void getLadronDevuelveElLadronSiElLadronEstaEnLaCiudad() {
-        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
-        Ladron ladron = new Ladron("Joseph", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
-
-        londres.esconderLadron(ladron);
-
-        Assert.assertTrue(londres.getLadronEscondido().getClass() == Ladron.class);
-    }
-
-    @Test
-    public void getLadronDevuelveNullSiElLadronNoEstaEnLaCiudad() {
-        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
-
-        Assert.assertTrue(londres.getLadronEscondido() == null);
+        Assert.assertFalse(londres.getEstaElLadron());
     }
 }
