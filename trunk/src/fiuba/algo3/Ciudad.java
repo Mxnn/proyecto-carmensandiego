@@ -43,7 +43,7 @@ public class Ciudad {
         this.ciudadesConectadas.remove(ciudad);
     }
 	
-	public void setEstaElLadron() {
+	public void escondeAlLadron() {
 		this.acaEstaElLadron = true;
 	}
 	
@@ -76,7 +76,7 @@ public class Ciudad {
         return this.ciudadesConectadas.contains(ciudad);
     }
 
-    public boolean getEstaElLadron() {
+    public boolean getEscondeAlLadron() {
         return this.acaEstaElLadron;
     }
 }

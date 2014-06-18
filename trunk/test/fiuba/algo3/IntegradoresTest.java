@@ -18,7 +18,7 @@ public class IntegradoresTest {
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(reykjavic);
         reykjavic.conectarCiudad(tokio);
-		tokio.setEstaElLadron();
+		tokio.escondeAlLadron();
 
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
 		unPolicia.visitarEdificioEconomia();
@@ -46,9 +46,7 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioTransporte();
 		
-		if (computadora.ordenDeArrestoEmitidaContraLadronCorrecto()) {
-			computadora.getLadronEncontrado().arrestar();
-		}
+		unPolicia.arrestarAlLadron(computadora);
 
 		Assert.assertTrue(unLadron.estaArrestado());
 	}
@@ -68,7 +66,7 @@ public class IntegradoresTest {
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(reykjavic);
         reykjavic.conectarCiudad(tokio);
-		tokio.setEstaElLadron();
+		tokio.escondeAlLadron();
 
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioCultural();
@@ -89,9 +87,7 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioTransporte();
 		
-        if (computadora.ordenDeArrestoEmitidaContraLadronCorrecto()) {
-			computadora.getLadronEncontrado().arrestar();
-		}
+        unPolicia.arrestarAlLadron(computadora);
     }
 
     @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
@@ -108,6 +104,7 @@ public class IntegradoresTest {
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(reykjavic);
         reykjavic.conectarCiudad(tokio);
+		tokio.escondeAlLadron();
 
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioCultural();

@@ -92,7 +92,7 @@ public class LadronTest {
 	public void estaArrestadoDevuelveTrueSiRecibioArresto() {
 		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
 					
-		ladron.arrestar();
+		ladron.recibirArresto();
 					
 		Assert.assertTrue(ladron.estaArrestado());
 	}

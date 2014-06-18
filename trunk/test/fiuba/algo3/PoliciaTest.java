@@ -274,7 +274,8 @@ public class PoliciaTest {
         Policia unPolicia = new Policia("Pedro", ciudadSalida);
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
-
+		ciudadSalida.escondeAlLadron();
+		
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
         computadora.setCaracteristicaDelLadron(Ladron.Hobby.CROQUET);
@@ -287,17 +288,16 @@ public class PoliciaTest {
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioTransporte();
 	
-		if (computadora.ordenDeArrestoEmitidaContraLadronCorrecto()) {
-			computadora.getLadronEncontrado().arrestar();
-		}
+		unPolicia.arrestarAlLadron(computadora);
 		
-        Assert.assertTrue(computadora.getLadronEncontrado().estaArrestado());
+        Assert.assertTrue(computadora.getLadronBuscado().estaArrestado());
     }
 
     @Test
     public void policiaNoArrestaAlLadronSiEmiteOrdenDeArrestoPreviamenteContraLadronQueNoEsElBuscado() 
 	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+		ciudadSalida.escondeAlLadron();
         Policia unPolicia = new Policia("Pedro", ciudadSalida);
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -318,10 +318,8 @@ public class PoliciaTest {
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioTransporte();
 		
-		if (computadora.ordenDeArrestoEmitidaContraLadronCorrecto()) {
-			computadora.getLadronEncontrado().arrestar();
-		}
+		unPolicia.arrestarAlLadron(computadora);
 
-        Assert.assertFalse(computadora.getLadronEncontrado().estaArrestado());
+        Assert.assertFalse(computadora.getLadronBuscado().estaArrestado());
     }
 }

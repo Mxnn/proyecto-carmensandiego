@@ -88,8 +88,10 @@ public class Policia {
 		return false;
     }
 	
-	public boolean llegoAlFinalDelRecorrido() {
-		return (this.ciudadActual.getEstaElLadron() && this.edificiosVisitadosEnEstaCiudad == 3);
+	public void arrestarAlLadron(Computadora computadora) throws ExcepcionOrdenDeArrestoNoEmitida {
+		if (llegoAlFinalDelRecorrido() && computadora.ordenDeArrestoEmitidaContraLadronCorrecto()) {
+			computadora.getLadronBuscado().recibirArresto();
+		}
 	}
 	
 	//PRIVADOS
@@ -111,4 +113,8 @@ public class Policia {
         else
             throw new ExcepcionJugadorSinTiempoDisponible();
     }
+	
+	private boolean llegoAlFinalDelRecorrido() {
+		return (this.ciudadActual.getEscondeAlLadron() && this.edificiosVisitadosEnEstaCiudad == 3);
+	}
 }
