@@ -244,6 +244,13 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
 
+        unPolicia.emitirOrdenDeArresto(computadora);
+
+        unPolicia.viajar(beijing);
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioTransporte();
+        unPolicia.visitarEdificioCultural();
+
         unPolicia.arrestarAlLadron(computadora);
 
         Assert.assertTrue(unLadron.estaArrestado());
@@ -345,6 +352,11 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioCultural();
 
         unPolicia.emitirOrdenDeArresto(computadora);
+
+        unPolicia.viajar(barcelona);
+        unPolicia.visitarEdificioEconomia();
+        unPolicia.visitarEdificioTransporte();
+        unPolicia.visitarEdificioCultural();
 
         unPolicia.arrestarAlLadron(computadora);
 
