@@ -98,18 +98,18 @@ public class CiudadTest {
     }
 
     @Test
-    public void getEstaElLadronDevuelveTrueSiElLadronEstaEnLaCiudad() {
+    public void getEscondeAlLadronDevuelveTrueSiElLadronEstaEnLaCiudad() {
         Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
         
-        londres.setEstaElLadron();
+        londres.escondeAlLadron();
 
-        Assert.assertTrue(londres.getEstaElLadron());
+        Assert.assertTrue(londres.getEscondeAlLadron());
     }
 
     @Test
     public void ladronEstaEnLaCiudadDevuelveFalseSiElLadronNoEstaEnLaCiudad() {
         Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
 
-        Assert.assertFalse(londres.getEstaElLadron());
+        Assert.assertFalse(londres.getEscondeAlLadron());
     }
 }

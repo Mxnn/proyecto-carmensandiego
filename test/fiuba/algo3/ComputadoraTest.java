@@ -6,14 +6,6 @@ import java.util.ArrayList;
 
 public class ComputadoraTest {
 	@Test
-    public void siLaOrdenDeArrestoNoFueEmitidaCambiarUnaCaracteristicaDevuelveTrue() {
-        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
-		
-		Assert.assertTrue(computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO));
-    }
-
-    @Test
     public void getSospechososFiltradosDevuelveUnaListaConTodosLosSospechososSiNoHayFiltro() {
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -109,45 +101,6 @@ public class ComputadoraTest {
     }
 	
 	@Test
-    public void siLaOrdenDeArrestoFueEmitidaCambiarUnaCaracteristicaDevuelveFalse() {
-        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
-        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
-        Ladron sospechoso2 = new Ladron("Graciela", Ladron.Sexo.FEMENINO, Ladron.Pelo.NEGRO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
-        Ladron sospechoso3 = new Ladron("Carla", Ladron.Sexo.FEMENINO, Ladron.Pelo.RUBIO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-
-        computadora.setSospechoso(sospechoso1);
-        computadora.setSospechoso(sospechoso2);
-        computadora.setSospechoso(sospechoso3);
-
-        computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
-        computadora.setCaracteristicaDelLadron(Ladron.Sexo.FEMENINO);
-		computadora.emitirOrdenDeArresto();
-		
-		Assert.assertFalse(computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO));
-    }
-	
-	@Test
-    public void siLaOrdenDeArrestoFueEmitidaCambiarUnaCaracteristicaNoCambiaAlSospechosoEncontrado() throws ExcepcionOrdenDeArrestoNoEmitida {
-        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
-        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
-        Ladron sospechoso2 = new Ladron("Graciela", Ladron.Sexo.FEMENINO, Ladron.Pelo.NEGRO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
-        Ladron sospechoso3 = new Ladron("Carla", Ladron.Sexo.FEMENINO, Ladron.Pelo.RUBIO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-
-        computadora.setSospechoso(sospechoso1);
-        computadora.setSospechoso(sospechoso2);
-        computadora.setSospechoso(sospechoso3);
-
-        computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
-        computadora.setCaracteristicaDelLadron(Ladron.Sexo.FEMENINO);
-		computadora.emitirOrdenDeArresto();
-		
-		computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
-		Assert.assertEquals(computadora.getSospechososFiltrados().get(0), sospechoso2);
-    }
-	
-	@Test
     public void hayUnSoloSospechosoDevuelveTrueSiSoloHayUnSospechosoFiltrado() {
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -200,7 +153,7 @@ public class ComputadoraTest {
     }
 	
 	@Test
-    public void ordenDeArrestoEmitidaContraElLadronCorrectoDuelveFalseSiElSospechosoFiltradoNoEsElBuscado() throws ExcepcionOrdenDeArrestoNoEmitida {
+    public void ordenDeArrestoEmitidaContraElLadronCorrectoDuelveFalseSiElBuscadoNoRecibioOrdenDeArresto() throws ExcepcionOrdenDeArrestoNoEmitida {
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
@@ -212,18 +165,18 @@ public class ComputadoraTest {
     }
 	
 	@Test (expected = ExcepcionOrdenDeArrestoNoEmitida.class)
-    public void getNombreDelLadronQueTieneOrdenDeArrestoLanzaExcepcionSiNoSeEmitioOrden() throws ExcepcionOrdenDeArrestoNoEmitida {
+    public void getLadronBuscadoLanzaExcepcionSiNoSeEmitioOrden() throws ExcepcionOrdenDeArrestoNoEmitida {
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		computadora.setSospechoso(sospechoso1);
 		computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
 		
-		computadora.getLadronEncontrado();
+		computadora.getLadronBuscado();
     }
 	
 	@Test
-    public void getLadronEncontradoDevuelveSospechosoFiltrado() throws ExcepcionOrdenDeArrestoNoEmitida {
+    public void getLadronBuscadoDevuelveAlLadronBuscadoSiSeLeEmitioOrdenDeArresto() throws ExcepcionOrdenDeArrestoNoEmitida {
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
@@ -231,11 +184,11 @@ public class ComputadoraTest {
 		computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
 		
 		computadora.emitirOrdenDeArresto();
-		Assert.assertEquals(computadora.getLadronEncontrado(), buscado);
+		Assert.assertEquals(computadora.getLadronBuscado(), buscado);
     }
 	
 	@Test
-    public void getNombreDelLadronQueTieneOrdenDeArrestoDevuelveElSospechosoFiltradoAunSiNoEsElBuscado() throws ExcepcionOrdenDeArrestoNoEmitida {
+    public void getLadronBuscadoDevuelveAlBuscadoSiElSospechosoAlQueSeEmitioOrdenNoEsElBuscado() throws ExcepcionOrdenDeArrestoNoEmitida {
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
@@ -243,6 +196,6 @@ public class ComputadoraTest {
 		computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
 		
 		computadora.emitirOrdenDeArresto();
-		Assert.assertEquals(computadora.getLadronEncontrado(), sospechoso1);
+		Assert.assertEquals(computadora.getLadronBuscado(), buscado);
     }
 }
