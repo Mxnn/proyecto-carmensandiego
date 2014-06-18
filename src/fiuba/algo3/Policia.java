@@ -12,7 +12,6 @@ public class Policia {
     private Rango rango;
     private Ciudad ciudadActual;
 	private int edificiosVisitadosEnEstaCiudad;
-    private boolean ordenDeArrestoEmitidaContraElLadron;
 
     public Policia(String unNombre, Ciudad ciudadInicial) {
         this.nombre = unNombre;
@@ -20,7 +19,6 @@ public class Policia {
         this.ciudadActual = ciudadInicial;
         this.rango = new Novato();
 		this.edificiosVisitadosEnEstaCiudad = 0;
-        this.ordenDeArrestoEmitidaContraElLadron = false;
     }
 
 	//SETTERS:
@@ -63,6 +61,38 @@ public class Policia {
         return false;
     }
 
+	public String visitarEdificioEconomia() throws ExcepcionJugadorSinTiempoDisponible {
+		Edificio edificio = this.ciudadActual.getEdificioEconomia();
+		descuentoDeTiempoPorVisitarEdificio();
+		return this.rango.pedirPista(edificio);
+	}
+
+	public String visitarEdificioCultural() throws ExcepcionJugadorSinTiempoDisponible {
+		Edificio edificio = this.ciudadActual.getEdificioCultural();
+		descuentoDeTiempoPorVisitarEdificio();
+		return this.rango.pedirPista(edificio);
+	}
+
+	public String visitarEdificioTransporte() throws ExcepcionJugadorSinTiempoDisponible {
+		Edificio edificio = this.ciudadActual.getEdificioTransporte();
+		descuentoDeTiempoPorVisitarEdificio();
+		return this.rango.pedirPista(edificio);
+	}
+
+    public boolean emitirOrdenDeArresto(Computadora computadora) throws ExcepcionJugadorSinTiempoDisponible {
+        descontarTiempo(TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
+        if (computadora.hayUnSoloSospechoso()) {
+            computadora.emitirOrdenDeArresto();
+			return true;
+		}
+		return false;
+    }
+	
+	public boolean llegoAlFinalDelRecorrido() {
+		return (this.ciudadActual.getEstaElLadron() && this.edificiosVisitadosEnEstaCiudad == 3);
+	}
+	
+	//PRIVADOS
 	private void descuentoDeTiempoPorVisitarEdificio() throws ExcepcionJugadorSinTiempoDisponible {
 		if (edificiosVisitadosEnEstaCiudad == 0) {
             this.descontarTiempo(TIEMPO_POR_ENTRAR_AL_PRIMER_EDIFICIO);
@@ -80,45 +110,5 @@ public class Policia {
         }
         else
             throw new ExcepcionJugadorSinTiempoDisponible();
-    }
-
-	public String visitarEdificioEconomia() throws ExcepcionJugadorSinTiempoDisponible {
-		Edificio edificio = this.ciudadActual.getEdificioEconomia();
-		descuentoDeTiempoPorVisitarEdificio();
-        comprobarArresto();
-		return this.rango.pedirPista(edificio);
-	}
-
-	public String visitarEdificioCultural() throws ExcepcionJugadorSinTiempoDisponible {
-		Edificio edificio = this.ciudadActual.getEdificioCultural();
-		descuentoDeTiempoPorVisitarEdificio();
-        comprobarArresto();
-		return this.rango.pedirPista(edificio);
-	}
-
-	public String visitarEdificioTransporte() throws ExcepcionJugadorSinTiempoDisponible {
-		Edificio edificio = this.ciudadActual.getEdificioTransporte();
-		descuentoDeTiempoPorVisitarEdificio();
-        comprobarArresto();
-		return this.rango.pedirPista(edificio);
-	}
-
-    private void comprobarArresto() {
-        if (this.ciudadActual.ladronEstaEnLaCiudad() && this.edificiosVisitadosEnEstaCiudad == 3) {
-            if (ordenDeArrestoEmitidaContraElLadron)
-                (this.ciudadActual.getLadronEscondido()).recibirArresto();
-            else
-                (this.ciudadActual.getLadronEscondido()).escapar();
-        }
-    }
-
-    public boolean emitirOrdenDeArresto(Computadora computadora) throws ExcepcionJugadorSinTiempoDisponible {
-        descontarTiempo(TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
-        if (computadora.emitirOrdenDeArresto()) {
-            this.ordenDeArrestoEmitidaContraElLadron = true;
-                return true;
-        }
-        else
-            return (computadora.getSospechososFiltrados().size() == 1);
     }
 }
