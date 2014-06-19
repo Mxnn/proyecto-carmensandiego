@@ -25,6 +25,7 @@ public class ListaDeCiudades {
 		
 	}	
 	public static void hidratar(Document doc, ArrayList <String>NombresDeCiudadesVisitadasPorDelicuente) {
+	// tiene q devovler la lista de ciudades lo pongo asi para q ande
 		ListaDeCiudades listaDeCiudadesVisitadasPorDelicuente= new ListaDeCiudades();
 		Element elementoListaDeTodasLasciudades=(Element)doc.getElementsByTagName("TODASLASCIUDADES").item(0);
 		Element elementoJugadores = (Element)doc.getElementsByTagName("Ciudad").item(0);		

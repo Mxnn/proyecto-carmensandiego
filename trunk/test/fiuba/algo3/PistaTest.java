@@ -9,13 +9,27 @@ public class PistaTest {
     public void getPistaDevuelveLaPistaPorDefecto() {
         Pista pista = new Pista();
 
-        Assert.assertEquals(pista.getPista(), Pista.PISTA_POR_DEFECTO);
+        Assert.assertEquals(pista.getPista(), Pista.PISTA_POR_DEFECTO_LUGAR);
     }
 
     @Test
-    public void getPistaDevuelveLaPistaSeteada() {
+    public void getPistaDevuelveLaPistaSeteadaDelLugar() {
         Pista pista = new Pista("MiPista");
 
         Assert.assertEquals(pista.getPista(), "MiPista");
     }
+    @Test
+    public void getPistaDevuelveLaPistaDelLugarYDelLadronCreadaConElConstructor() {
+        Pista pista = new Pista("Mi Pista.","Tenia Pelo Negro");
+
+        Assert.assertEquals(pista.getPista(), "Mi Pista.Tenia Pelo Negro");
+    }    
+    @Test
+    public void getPistaDevuelveLaPistaDelLugarCreadaConElCOnstructorYDelLadronSeteada() {
+        Pista pista = new Pista("Mi Pista.");
+        pista.setPistaLadron("Tenia Pelo Negro");
+
+        Assert.assertEquals(pista.getPista(), "Mi Pista.Tenia Pelo Negro");
+    }    
+  
 }
