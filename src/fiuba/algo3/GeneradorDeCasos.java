@@ -19,7 +19,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class GeneradorDeCasos {
-	public final static String NOMBRE_ARCHIVO_INFO_CIUDADES = "PistasDeCiudades.xml";
+	public final static String NOMBRE_ARCHIVO_INFO_CIUDADES = "archivosXML/PistasDeCiudades.xml";
 	
 	private ArrayList<Ciudad> ciudades;
 	private ArrayList<ArrayList<Pista>> pistasDeLasCiudades;
