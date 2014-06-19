@@ -4,7 +4,7 @@ import org.junit.Test;
 import junit.framework.Assert;
 
 public class LadronTest {
-    @Test
+	@Test
     public void getNombreDevuelveElNombreDelLadron() {
         Ladron ladron = new Ladron("Arturo", Ladron.Sexo.FEMENINO, Ladron.Pelo.MARRON, Ladron.Hobby.CROQUET, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
 
