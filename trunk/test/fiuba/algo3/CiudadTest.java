@@ -54,7 +54,6 @@ public class CiudadTest {
         Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
 
         londres.conectarCiudad(paris);
-        Assert.assertTrue(londres.ciudadEstaConectada(paris));
         Assert.assertTrue((londres.getCiudadesConectadas()).size() == 1);
     }
 
@@ -80,36 +79,18 @@ public class CiudadTest {
     }
 
     @Test
-    public void ciudadEstaConectadaDevuelveTrueSiLaCiudadEstaConectada() {
-        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
-        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
-
-        londres.conectarCiudad(paris);
-
-        Assert.assertTrue(londres.ciudadEstaConectada(paris));
-    }
-
-    @Test
-    public void ciudadEstaConectadaDevuelveFalseSiLaCiudadNoEstaConectada() {
-        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
-        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
-
-        Assert.assertFalse(londres.ciudadEstaConectada(paris));
-    }
-
-    @Test
-    public void getEscondeAlLadronDevuelveTrueSiElLadronEstaEnLaCiudad() {
+    public void escondeAlLadronDevuelveTrueSiElLadronEstaEnLaCiudad() {
         Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
         
-        londres.escondeAlLadron();
+        londres.esconderAlLadron();
 
-        Assert.assertTrue(londres.getEscondeAlLadron());
+        Assert.assertTrue(londres.escondeAlLadron());
     }
 
     @Test
     public void ladronEstaEnLaCiudadDevuelveFalseSiElLadronNoEstaEnLaCiudad() {
         Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
 
-        Assert.assertFalse(londres.getEscondeAlLadron());
+        Assert.assertFalse(londres.escondeAlLadron());
     }
 }

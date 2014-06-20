@@ -51,23 +51,7 @@ public class Computadora {
 		this.marcaPersonalDelLadron = marcaPersonal;
 	}
 	
-	public void emitirOrdenDeArresto() {
-		filtrarSospechosos();
-		this.sospechososFiltrados.get(0).recibirOrdenDeArresto();
-		this.ordenDeArrestoEmitida = true;
-	}
-	
 	//GETTERS:
-    public ArrayList<Ladron> getSospechososFiltrados() {
-        filtrarSospechosos();
-		return this.sospechososFiltrados;
-    }
-
-    public boolean hayUnSoloSospechoso() {
-		filtrarSospechosos();
-        return sospechososFiltrados.size() == 1;
-    }
-	
 	public boolean ordenDeArrestoEmitidaContraLadronCorrecto() throws ExcepcionOrdenDeArrestoNoEmitida {
 		if (this.ordenDeArrestoEmitida) {
 			return ladronBuscado.tieneOrdenDeArresto();
@@ -80,6 +64,17 @@ public class Computadora {
 			return this.ladronBuscado;
 		}
 		throw new ExcepcionOrdenDeArrestoNoEmitida();
+	}
+	
+	public String emitirOrdenDeArresto() {
+		filtrarSospechosos();
+		if (this.sospechososFiltrados.size() == 1){	
+			Ladron sospechosoAlQueEmitirOrden = this.sospechososFiltrados.get(0);
+			sospechosoAlQueEmitirOrden.recibirOrdenDeArresto();
+			this.ordenDeArrestoEmitida = true;
+			return sospechosoAlQueEmitirOrden.getNombre();
+		}
+		return "";
 	}
 	
 	//PRIVADOS:

@@ -42,23 +42,20 @@ public class Policia {
 	public Ciudad getCiudadActual() {
         return this.ciudadActual;
     }
+	
+	public boolean yaVisitoTresEdificios() {
+		return this.edificiosVisitadosEnEstaCiudad == 3;
+	}
 
-    public boolean viajar(Ciudad ciudadDestino) throws ExcepcionJugadorSinTiempoDisponible {
-        if (this.ciudadActual.ciudadEstaConectada(ciudadDestino)) {
-            Coordenada coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
-            double distanciaEnKM = coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
-            int tiempoDescontado = (this.rango).calcularTiempoDeViaje(distanciaEnKM);
-
-            if (this.tiempoDisponible < tiempoDescontado) {
-                throw new ExcepcionJugadorSinTiempoDisponible();
-            }
-
-            this.tiempoDisponible -= tiempoDescontado;
-            this.ciudadActual = ciudadDestino;
-            this.edificiosVisitadosEnEstaCiudad = 0;
-            return true;
-        }
-        return false;
+    public void viajar(Ciudad ciudadDestino) throws ExcepcionJugadorSinTiempoDisponible {
+		Coordenada coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
+		
+		double distanciaEnKM = coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
+		int tiempoDelViaje = (this.rango).calcularTiempoDeViaje(distanciaEnKM);
+		descontarTiempo(tiempoDelViaje);
+		
+		this.ciudadActual = ciudadDestino;
+		this.edificiosVisitadosEnEstaCiudad = 0;
     }
 
 	public String visitarEdificioEconomia() throws ExcepcionJugadorSinTiempoDisponible {
@@ -79,19 +76,13 @@ public class Policia {
 		return this.rango.pedirPista(edificio);
 	}
 
-    public boolean emitirOrdenDeArresto(Computadora computadora) throws ExcepcionJugadorSinTiempoDisponible {
+    public String emitirOrdenDeArresto(Computadora computadora) throws ExcepcionJugadorSinTiempoDisponible {
         descontarTiempo(TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
-        if (computadora.hayUnSoloSospechoso()) {
-            computadora.emitirOrdenDeArresto();
-			return true;
-		}
-		return false;
+        return computadora.emitirOrdenDeArresto();
     }
 	
-	public void arrestarAlLadron(Computadora computadora) throws ExcepcionOrdenDeArrestoNoEmitida {
-		if (llegoAlFinalDelRecorrido() && computadora.ordenDeArrestoEmitidaContraLadronCorrecto()) {
-			computadora.getLadronBuscado().recibirArresto();
-		}
+	public void arrestarAlLadron(Ladron buscado) {
+		buscado.recibirArresto();
 	}
 	
 	//PRIVADOS
@@ -113,8 +104,4 @@ public class Policia {
         else
             throw new ExcepcionJugadorSinTiempoDisponible();
     }
-	
-	private boolean llegoAlFinalDelRecorrido() {
-		return (this.ciudadActual.getEscondeAlLadron() && this.edificiosVisitadosEnEstaCiudad == 3);
-	}
 }

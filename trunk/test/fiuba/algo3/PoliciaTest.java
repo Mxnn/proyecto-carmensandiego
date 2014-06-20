@@ -34,71 +34,78 @@ public class PoliciaTest {
 
         Assert.assertEquals(unPolicia.getRango(), detective);
     }
+	
+	@Test
+	public void yaVisitoTresEdificiosDevuelveTrueSiVisitaTresEdificios() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+		
+		unPolicia.visitarEdificioEconomia();
+		unPolicia.visitarEdificioCultural();
+		unPolicia.visitarEdificioTransporte();
+		
+		Assert.assertTrue(unPolicia.yaVisitoTresEdificios());
+	}
+	
+	@Test
+	public void yaVisitoTresEdificiosDevuelveFalseSiNoVisitaEdificios() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+		
+		Assert.assertFalse(unPolicia.yaVisitoTresEdificios());
+	}
+	
+	@Test
+	public void yaVisitoTresEdificiosDevuelveTrueSiVisitaMenosDeTresEdificios() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+		
+		unPolicia.visitarEdificioEconomia();
+		unPolicia.visitarEdificioCultural();
+		
+		Assert.assertFalse(unPolicia.yaVisitoTresEdificios());
+	}
 
     @Test
-    public void viajarAUnaCiudadConectadaSiTieneTiempoCambiaLaCiudadActual() throws ExcepcionJugadorSinTiempoDisponible{
+    public void viajarAUnaCiudadSiTieneTiempoCambiaLaCiudadActual() throws ExcepcionJugadorSinTiempoDisponible {
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
 
-        ciudadSalida.conectarCiudad(ciudadDestino);
 		unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getCiudadActual(), ciudadDestino);
     }
 
 	@Test
-    public void viajarAUnaCiudadConectadaSiTieneTiempoLeRestaTiempo() throws ExcepcionJugadorSinTiempoDisponible{
+    public void viajarAUnaCiudadSiTieneTiempoLeRestaElTiempoCorrespondiente() throws ExcepcionJugadorSinTiempoDisponible{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
 
-        ciudadSalida.conectarCiudad(ciudadDestino);
         unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 3);
     }
 
-	@Test
-    public void viajarAUnaCiudadConectadaSiTieneTiempoDevuelveTrue() throws ExcepcionJugadorSinTiempoDisponible{
-        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
-        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
-        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
-
-        ciudadSalida.conectarCiudad(ciudadDestino);
-
-        Assert.assertTrue(unPolicia.viajar(ciudadDestino));
-    }
-
-    @Test
-    public void viajarAUnaCiudadNoConectadaSiTieneTiempoDevuelveFalse() throws ExcepcionJugadorSinTiempoDisponible {
-        Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
-        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
-        Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
-
-        Assert.assertFalse(unPolicia.viajar(ciudadDestino));
-    }
-
     @Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-    public void viajarAUnaCiudadConectadaSiNoLeQuedaTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+    public void viajarAUnaCiudadSiNoLeQuedaTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
 
-        ciudadSalida.conectarCiudad(ciudadDestino);
         unPolicia.setTiempoDisponible(1);
 
         unPolicia.viajar(ciudadDestino);
     }
 
 	@Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-    public void viajarAUnaCiudadConectadaSiNoLeQuedaTiempoLanzaExcepcionYNoCambiaLaCiudadActual() throws ExcepcionJugadorSinTiempoDisponible{
+    public void viajarAUnaCiudadSiNoLeQuedaTiempoLanzaExcepcionYNoCambiaLaCiudadActual() throws ExcepcionJugadorSinTiempoDisponible{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas", ciudadSalida);
         Ciudad ciudadDestino = new Ciudad("Moscu", new Coordenada(1000, 3000));
 
         unPolicia.setTiempoDisponible(1);
-        ciudadSalida.conectarCiudad(ciudadDestino);
         unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getCiudadActual(), ciudadSalida);
@@ -112,11 +119,33 @@ public class PoliciaTest {
         int tiempoDelPolicia = 1;
 
         unPolicia.setTiempoDisponible(tiempoDelPolicia);
-        ciudadSalida.conectarCiudad(ciudadDestino);
         unPolicia.viajar(ciudadDestino);
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), tiempoDelPolicia);
     }
+	
+	@Test
+	public void yaVisitoTresEdificiosDevuelveFalseSiVisitaTresEdificiosYLuegoViaja() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
+        Policia unPolicia = new Policia("Nicolas", ciudadSalida);
+		Ciudad ciudadDestino = new Ciudad("Pekin", new Coordenada(6000, 1000));
+		
+		unPolicia.visitarEdificioEconomia();
+		unPolicia.visitarEdificioCultural();
+		unPolicia.visitarEdificioTransporte();
+		
+		unPolicia.viajar(ciudadDestino);
+		
+		Assert.assertFalse(unPolicia.yaVisitoTresEdificios());
+	}
+	
+	@Test
+	public void visitarUnEdificioDevuelveUnaPista() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+        Policia unPolicia = new Policia("Antonio", ciudadSalida);
+
+        Assert.assertEquals(unPolicia.visitarEdificioEconomia(), Pista.PISTA_POR_DEFECTO_LUGAR);
+	}
 
 	@Test
 	public void visitarUnEdificioRestaUnaHora() throws ExcepcionJugadorSinTiempoDisponible {
@@ -161,7 +190,7 @@ public class PoliciaTest {
     }
 
     @Test
-    public void emitirOrdenDeArrestoDevuelveTrueSiEmitioOrdenDeArrestoContraAlgunLadron() 
+    public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraAlgunLadron() 
 	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Pedro", ciudadSalida);
@@ -170,17 +199,13 @@ public class PoliciaTest {
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 
         computadora.setSospechoso(sospechoso1);
-        computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
-        computadora.setCaracteristicaDelLadron(Ladron.Hobby.CROQUET);
-        computadora.setCaracteristicaDelLadron(Ladron.Auto.CONVERTIBLE);
-        computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
         
-        Assert.assertTrue(unPolicia.emitirOrdenDeArresto(computadora));
+        Assert.assertEquals(unPolicia.emitirOrdenDeArresto(computadora), "Jaime");
     }
 
     @Test
-    public void emitirOrdenDeArrestoDevuelveTrueSiEmitioOrdenDeArrestoContraUnSospechosoQueNoEsElBuscado() 
+    public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraUnSospechosoQueNoEsElBuscado() 
 	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Pedro", ciudadSalida);
@@ -189,17 +214,13 @@ public class PoliciaTest {
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 
         computadora.setSospechoso(sospechoso1);
-        computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
-        computadora.setCaracteristicaDelLadron(Ladron.Hobby.ALPINISMO);
-        computadora.setCaracteristicaDelLadron(Ladron.Auto.MOTO);
-        computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
 
-        Assert.assertTrue(unPolicia.emitirOrdenDeArresto(computadora));
+        Assert.assertEquals(unPolicia.emitirOrdenDeArresto(computadora), "Tomas");
     }
 
     @Test
-    public void emitirOrdenDeArrestoDevuelveFalseSiHayMasDeUnSospechosoConLasCaracteristicasFijadas() 
+    public void emitirOrdenDeArrestoDevuelveUnStringVacioSiHayMasDeUnSospechosoConLasCaracteristicasFijadas() 
 	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Pedro", ciudadSalida);
@@ -209,9 +230,8 @@ public class PoliciaTest {
 
         computadora.setSospechoso(sospechoso1);
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
-        computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
 
-        Assert.assertFalse(unPolicia.emitirOrdenDeArresto(computadora));
+        Assert.assertEquals(unPolicia.emitirOrdenDeArresto(computadora), "");
     }
     
     @Test
@@ -224,11 +244,7 @@ public class PoliciaTest {
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 
         computadora.setSospechoso(sospechoso1);
-        computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
-        computadora.setCaracteristicaDelLadron(Ladron.Hobby.CROQUET);
-        computadora.setCaracteristicaDelLadron(Ladron.Auto.CONVERTIBLE);
-        computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
         unPolicia.emitirOrdenDeArresto(computadora);
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
@@ -244,11 +260,7 @@ public class PoliciaTest {
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 
         computadora.setSospechoso(sospechoso1);
-        computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
-        computadora.setCaracteristicaDelLadron(Ladron.Hobby.ALPINISMO);
-        computadora.setCaracteristicaDelLadron(Ladron.Auto.MOTO);
-        computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
         unPolicia.emitirOrdenDeArresto(computadora);
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
@@ -268,58 +280,14 @@ public class PoliciaTest {
     }
 
     @Test
-    public void policiaArrestaAlLadronSiVisitaLosTresEdificiosEnCualquierOrdenDeLaCiudadEnLaCualEstaYEmiteOrdenDeArrestoPreviamente() 
+    public void policiaArrestaAlLadron() 
 	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Pedro", ciudadSalida);
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
-		ciudadSalida.escondeAlLadron();
-		
-        computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
-        computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
-        computadora.setCaracteristicaDelLadron(Ladron.Hobby.CROQUET);
-        computadora.setCaracteristicaDelLadron(Ladron.Auto.CONVERTIBLE);
-        computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
-		
-        unPolicia.emitirOrdenDeArresto(computadora);
-		
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
 	
-		unPolicia.arrestarAlLadron(computadora);
+		unPolicia.arrestarAlLadron(buscado);
 		
-        Assert.assertTrue(computadora.getLadronBuscado().estaArrestado());
-    }
-
-    @Test
-    public void policiaNoArrestaAlLadronSiEmiteOrdenDeArrestoPreviamenteContraLadronQueNoEsElBuscado() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
-        Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
-		ciudadSalida.escondeAlLadron();
-        Policia unPolicia = new Policia("Pedro", ciudadSalida);
-        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
-        Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
-
-        computadora.setSospechoso(sospechoso1);
-
-        computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
-        computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
-        computadora.setCaracteristicaDelLadron(Ladron.Hobby.ALPINISMO);
-        computadora.setCaracteristicaDelLadron(Ladron.Auto.MOTO);
-        computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
-		
-		
-        unPolicia.emitirOrdenDeArresto(computadora);
-
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
-		
-		unPolicia.arrestarAlLadron(computadora);
-
-        Assert.assertFalse(computadora.getLadronBuscado().estaArrestado());
+        Assert.assertTrue(buscado.estaArrestado());
     }
 }
