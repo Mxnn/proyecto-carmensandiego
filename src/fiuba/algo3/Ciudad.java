@@ -43,16 +43,22 @@ public class Ciudad {
     public void conectarCiudad(Ciudad ciudad) {
         this.ciudadesConectadas.add(ciudad);
     }
-	
+    public boolean estaConectadaConEstaCiudad(Ciudad ciudad) {
+        return this.ciudadesConectadas.contains(ciudad);
+    }
+
+    public int cantidadDeCiudadesConectadas(){
+    	return ciudadesConectadas.size();
+    }
 	public void esconderAlLadron() {
 		this.acaEstaElLadron = true;
 	}
-	
+
 	//GETTERS:
 	public Coordenada getCoordenadas() {
 		return this.coordenadas;
 	}
-	
+
 	public String getNombre() {
 		return this.nombre;
 	}
