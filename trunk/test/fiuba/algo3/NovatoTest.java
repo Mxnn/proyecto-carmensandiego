@@ -7,7 +7,7 @@ public class NovatoTest {
     @Test
     public void pedirPistaDevuelveLaPistaDeDificultadFacil() {
         Novato novato = new Novato();
-        Edificio edificio = new Edificio("Aeropuerto");
+        Edificio edificio = new Edificio();
         Pista pistaFacil = new Pista("PF");
 
         edificio.setPistas(pistaFacil, new Pista("PI"), new Pista("PD"));

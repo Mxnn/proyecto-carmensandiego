@@ -5,6 +5,14 @@ import junit.framework.Assert;
 import java.util.ArrayList;
 
 public class ComputadoraTest {
+	@Test (expected = ExcepcionOrdenDeArrestoNoEmitida.class)
+    public void ordenDeArrestoEmitidaContraElLadronCorrectoLanzaExcepcionSiNoSeEmitioOrden() throws ExcepcionOrdenDeArrestoNoEmitida {
+        Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+		
+		computadora.ordenDeArrestoEmitidaContraLadronCorrecto();
+    }
+	
 	@Test
 	public void emitirOrdenDeArrestoDevuelveElNombreDelLadronAlQueSeLeEmitioLaOrden() {
 		Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
@@ -28,7 +36,7 @@ public class ComputadoraTest {
 	}
 
 	@Test (expected = ExcepcionOrdenDeArrestoNoEmitida.class)
-    public void ordenDeArrestoEmitidaContraElLadronCorrectoLanzaExcepcionSiNoSeEmitioOrden() throws ExcepcionOrdenDeArrestoNoEmitida {
+    public void ordenDeArrestoEmitidaContraElLadronCorrectoLanzaExcepcionSiFiltraSospechososPeroNoSeEmitioOrden() throws ExcepcionOrdenDeArrestoNoEmitida {
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);

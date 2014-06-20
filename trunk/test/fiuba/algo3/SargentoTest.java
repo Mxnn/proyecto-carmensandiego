@@ -7,7 +7,7 @@ public class SargentoTest {
     @Test
     public void pedirPistaDevuelveLaPistaDeDificultadDificil() {
         Sargento sargento = new Sargento();
-        Edificio edificio = new Edificio("Aeropuerto");
+        Edificio edificio = new Edificio();
         Pista pistaNivelDificil = new Pista("PD");
 
         edificio.setPistas(new Pista("PF"), new Pista("PI"), pistaNivelDificil);

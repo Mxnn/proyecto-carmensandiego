@@ -20,9 +20,9 @@ public class Ciudad {
 	public Ciudad(String nombre, Coordenada coordenadas) {
 		this.nombre = nombre;
 		this.coordenadas = coordenadas;
-        edificioCultural = new Edificio("Biblioteca");
-        edificioEconomia = new Edificio("Mercado");
-        edificioTransporte = new Edificio("Aeropuerto");
+        edificioCultural = new Edificio();
+        edificioEconomia = new Edificio();
+        edificioTransporte = new Edificio();
         ciudadesConectadas = new ArrayList<Ciudad>();
 		acaEstaElLadron = false;
 	}
@@ -42,10 +42,6 @@ public class Ciudad {
 
     public void conectarCiudad(Ciudad ciudad) {
         this.ciudadesConectadas.add(ciudad);
-    }
-
-    public void desconectarCiudad(Ciudad ciudad) {
-        this.ciudadesConectadas.remove(ciudad);
     }
 	
 	public void esconderAlLadron() {
@@ -80,42 +76,4 @@ public class Ciudad {
     public boolean escondeAlLadron() {
         return this.acaEstaElLadron;
     }
-	
-	public static Ciudad hidratar(Node elementoCiudad) {
-		String nombre=((Element)elementoCiudad).getAttribute("nombre");
-
-		String stringCoordenadaX = ((Element)elementoCiudad).getAttribute("CoordenadaX");
-		int coordenadaX=Integer.parseInt(stringCoordenadaX);
-		String stringCoordenadaY = ((Element)elementoCiudad).getAttribute("CoordenadaY");
-		int coordenadaY=Integer.parseInt(stringCoordenadaY);
-		Ciudad ciudad= new Ciudad(nombre,new Coordenada((double)coordenadaX, (double) coordenadaY));
-		return ciudad;
-		}
-		
-/*		Esto no sirve pero lo guarde por las dudas es codigo q estaba probando
-		int coordenadaX = Integer.parseInt(ciudad.getAttribute("CoordenadaX"));
-		int coordenadaY = Integer.parseInt(ciudad.getAttribute("CoordenadaY"));
-		Coordenada coordenada=new Coordenada((double)coordenadaX, (double) coordenadaY);
-		
-		Ciudad nuevoCiudad = new Ciudad(listaDeCiudades.get(posicionDeLaLista), coordenada);
-
-		Pista pistaFE= Pista.hidratar((Element)doc.getElementsByTagName("pistaFE").item(0));
-		Pista pistaIE= Pista.hidratar((Element)doc.getElementsByTagName("pistaIE").item(0));
-		Pista pistaDE= Pista.hidratar((Element)doc.getElementsByTagName("pistaDE").item(0));
-		Pista pistaFT= Pista.hidratar((Element)doc.getElementsByTagName("pistaFT").item(0));
-		Pista pistaIT= Pista.hidratar((Element)doc.getElementsByTagName("pistaIT").item(0));
-		Pista pistaDT= Pista.hidratar((Element)doc.getElementsByTagName("pistaDT").item(0));
-		Pista pistaFC= Pista.hidratar((Element)doc.getElementsByTagName("pistaFC").item(0));
-		Pista pistaIC= Pista.hidratar((Element)doc.getElementsByTagName("pistaIC").item(0));
-		Pista pistaDC= Pista.hidratar((Element)doc.getElementsByTagName("pistaDC").item(0));
-		Ciudad nuevoCiudad = new Ciudad();
-		Element elementoEquipo = (Element)doc.getElementsByTagName("Equipo").item(0);
-		nuevoEquipo.nombre = elementoEquipo.getAttribute("nombre");
-		Element elementoJugadores = (Element)doc.getElementsByTagName("Jugadores").item(0);
-		for(int i=0; i< elementoJugadores.getChildNodes().getLength(); i++) {
-			Jugador jugador = Jugador.hidratar(elementoJugadores.getChildNodes().item(i));
-			nuevoEquipo.agregarJugador(jugador);
-		}
-		return nuevoEquipo;*/
-	
 }

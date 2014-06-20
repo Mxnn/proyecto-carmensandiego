@@ -7,7 +7,7 @@ public class InvestigadorTest {
     @Test
     public void pedirPistaDevuelveLaPistaDeDificultadIntermedia() {
         Investigador investigador = new Investigador();
-        Edificio edificio = new Edificio("Aeropuerto");
+        Edificio edificio = new Edificio();
         Pista pistaNivelIntermedia = new Pista("PI");
 
         edificio.setPistas(new Pista("PF"), pistaNivelIntermedia, new Pista("PD"));

@@ -1,13 +1,11 @@
 package fiuba.algo3;
 
 public class Edificio {
-    private String nombre;
     private Pista pistaNivelFacil;
     private Pista pistaNivelIntermedia;
     private Pista pistaNivelDificil;
 
-    public Edificio(String nombre) {
-        this.nombre = nombre;
+    public Edificio() {
 		this.pistaNivelFacil = new Pista();
 		this.pistaNivelIntermedia = new Pista();
 		this.pistaNivelDificil = new Pista();
