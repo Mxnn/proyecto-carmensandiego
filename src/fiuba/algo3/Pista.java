@@ -20,15 +20,9 @@ public class Pista {
         this.pistaLadron = "";
     }
 	
-    public Pista(String pistaLugar, String pistaLadron) {
-        this.pistaLugar = pistaLugar;
-        this.pistaLadron = pistaLadron;
-    }   
-    
-    
-    public void setPistaLadron (String pista) {
-    	this.pistaLadron = pista;
-    }
+	public void setPistaLadron(String pista) {
+		this.pistaLadron = " " + pista;
+	}
 
     public String getPista() {
         return this.pistaLugar + this.pistaLadron;

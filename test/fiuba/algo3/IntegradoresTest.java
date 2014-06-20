@@ -21,8 +21,6 @@ public class IntegradoresTest {
         Ladron unLadron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
         Computadora computadora = new Computadora(unLadron);
 
-        
-
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
 		unPolicia.visitarEdificioEconomia();
 		unPolicia.visitarEdificioCultural();

@@ -67,6 +67,10 @@ public class Juego {
 		return nombreCiudades;
 	}
 	
+	public void viajar() {
+		
+	}
+	
 	public String emitirOrdenDeArresto() {
 		return this.computadora.emitirOrdenDeArresto();
 	}

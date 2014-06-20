@@ -82,6 +82,22 @@ public class LadronTest {
 	}
 	
 	@Test
+	public void tieneOrdenDeArrestoDevuelveFalseSiNoRecibioArresto() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+								   
+		Assert.assertFalse(ladron.tieneOrdenDeArresto());
+	}
+	
+	@Test
+	public void tieneOrdenDeArrestoDevuelveTrueSiRecibioArresto() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+					
+		ladron.recibirOrdenDeArresto();
+					
+		Assert.assertTrue(ladron.tieneOrdenDeArresto());
+	}
+	
+	@Test
 	public void estaArrestadoDevuelveFalseSiNoRecibioArresto() {
 		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
 								   
