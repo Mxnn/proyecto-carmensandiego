@@ -43,6 +43,7 @@ public class Ciudad {
     public void conectarCiudad(Ciudad ciudad) {
         this.ciudadesConectadas.add(ciudad);
     }
+	
     public boolean estaConectadaConEstaCiudad(Ciudad ciudad) {
         return this.ciudadesConectadas.contains(ciudad);
     }
@@ -50,6 +51,7 @@ public class Ciudad {
     public int cantidadDeCiudadesConectadas(){
     	return ciudadesConectadas.size();
     }
+	
 	public void esconderAlLadron() {
 		this.acaEstaElLadron = true;
 	}

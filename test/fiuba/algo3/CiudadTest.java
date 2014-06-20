@@ -28,6 +28,13 @@ public class CiudadTest {
     }
 	
 	@Test
+    public void ciudadSeCreaYCantidadDeCiudadesConectadasEsCero() {
+        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+		
+        Assert.assertTrue(ciudad.cantidadDeCiudadesConectadas() == 0);
+    }
+	
+	@Test
     public void ciudadSeCreaSinEsconderAlLadron() {
         Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1, 1));
 		
@@ -88,6 +95,28 @@ public class CiudadTest {
     }
 	
 	@Test
+    public void conectarUnaCiudadCantidadDeCiudadesConectadasDevuelveUno() {
+        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
+
+        londres.conectarCiudad(paris);
+        Assert.assertTrue(londres.cantidadDeCiudadesConectadas() == 1);
+    }
+	
+	@Test
+    public void cantidadDeCiudadesConectadasDevuelveUnoSiConectoUnaCiudadYAEsaLeConectoOtra() {
+        Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5, 7));
+		Ciudad londres = new Ciudad("Londres", new Coordenada(4, 9));
+
+        londres.conectarCiudad(paris);
+		paris.conectarCiudad(buenosAires);
+		
+        Assert.assertTrue(londres.cantidadDeCiudadesConectadas() == 1);
+		Assert.assertTrue(paris.cantidadDeCiudadesConectadas() == 1);
+    }
+	
+	@Test
     public void getCiudadesConectadasDevuelveATodasLasCiudadesQueSeConectaron() {
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(1, 1));
         Ciudad paris = new Ciudad("Paris", new Coordenada(5, 7));
@@ -98,6 +127,40 @@ public class CiudadTest {
 		
         Assert.assertEquals((londres.getCiudadesConectadas()).get(0), paris);
 		Assert.assertEquals((londres.getCiudadesConectadas()).get(1), buenosAires);
+    }
+	
+	@Test
+    public void estaConectadaConEstaCiudadDevuelveTrueSiLasCiudadesEstanConectadas() {
+        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
+
+        londres.conectarCiudad(paris);
+        Assert.assertTrue(londres.estaConectadaConEstaCiudad(paris));
+    }
+	
+	@Test
+    public void estaConectadaConEstaCiudadDevuelveFalseSiLasCiudadesNoEstanConectadas() {
+        Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5, 7));
+		Ciudad londres = new Ciudad("Londres", new Coordenada(4, 9));
+
+        londres.conectarCiudad(paris);
+		londres.conectarCiudad(buenosAires);
+	
+		Assert.assertFalse(paris.estaConectadaConEstaCiudad(buenosAires));
+    }
+	
+	@Test
+    public void estaConectadaConEstaCiudadDevuelveTrueSiLasDosCiudadesEstanConectadas() {
+        Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5, 7));
+		Ciudad londres = new Ciudad("Londres", new Coordenada(4, 9));
+
+        londres.conectarCiudad(paris);
+		londres.conectarCiudad(buenosAires);
+		
+        Assert.assertTrue(londres.estaConectadaConEstaCiudad(paris));
+		Assert.assertTrue(londres.estaConectadaConEstaCiudad(buenosAires));
     }
 
     @Test
