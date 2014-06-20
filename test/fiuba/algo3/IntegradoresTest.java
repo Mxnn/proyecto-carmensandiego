@@ -11,14 +11,17 @@ public class IntegradoresTest {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
 		Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(-3000.0, -9000.0));
 		Ciudad tokio = new Ciudad("Tokio", new Coordenada(9000.0, 1500.0));
+		
+		buenosAires.conectarCiudad(londres);
+        londres.conectarCiudad(reykjavic);
+        reykjavic.conectarCiudad(tokio);
+		tokio.escondeAlLadron();
+		
 		Policia unPolicia = new Policia("Esteban", buenosAires);
         Ladron unLadron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
         Computadora computadora = new Computadora(unLadron);
 
-        buenosAires.conectarCiudad(londres);
-        londres.conectarCiudad(reykjavic);
-        reykjavic.conectarCiudad(tokio);
-		tokio.escondeAlLadron();
+        
 
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
 		unPolicia.visitarEdificioEconomia();
@@ -46,7 +49,7 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioTransporte();
 		
-		unPolicia.arrestarAlLadron(computadora);
+		unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
 
 		Assert.assertTrue(unLadron.estaArrestado());
 	}
@@ -87,7 +90,7 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioEconomia();
         unPolicia.visitarEdificioTransporte();
 		
-        unPolicia.arrestarAlLadron(computadora);
+        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
     }
 
     @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
@@ -158,7 +161,7 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioCultural();
         unPolicia.visitarEdificioTransporte();
 
-        unPolicia.arrestarAlLadron(computadora);
+        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
 
         Assert.assertTrue(unLadron.estaArrestado());
     }
@@ -251,7 +254,7 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioTransporte();
         unPolicia.visitarEdificioCultural();
 
-        unPolicia.arrestarAlLadron(computadora);
+        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
 
         Assert.assertTrue(unLadron.estaArrestado());
     }
@@ -358,7 +361,7 @@ public class IntegradoresTest {
         unPolicia.visitarEdificioTransporte();
         unPolicia.visitarEdificioCultural();
 
-        unPolicia.arrestarAlLadron(computadora);
+        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
 
         Assert.assertTrue(unLadron.estaArrestado());
     }
@@ -429,7 +432,7 @@ public class IntegradoresTest {
 
         unPolicia.emitirOrdenDeArresto(computadora);
 
-        unPolicia.arrestarAlLadron(computadora);
+        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
 
         Assert.assertTrue(unLadron.estaArrestado());
     }

@@ -15,6 +15,16 @@ public class Juego {
 		this.computadora.setSospechoso(sospechoso);
 	}
 	
+	public boolean corroborarQueElLadronBuscadoFueArrestado() throws ExcepcionOrdenDeArrestoNoEmitida {
+		Ladron buscado = this.computadora.getLadronBuscado();
+		return buscado.estaArrestado();
+	}
+	
+	public boolean elPoliciaLlegoAlFinalDelRecorrido() {
+		Ciudad ciudadActualDelPolicia = this.policia.getCiudadActual();
+		return (this.policia.yaVisitoTresEdificios() && ciudadActualDelPolicia.escondeAlLadron());
+	}
+	
 	//ACCIONES PERMITIDAS AL JUGADOR:
 	public void ingresarCaracteristicaDelLadron(Ladron.Sexo sexo) {
 		this.computadora.setCaracteristicaDelLadron(sexo);
@@ -57,9 +67,14 @@ public class Juego {
 		return nombreCiudades;
 	}
 	
-	public void emitirOrdenDeArresto() throws ExcepcionJugadorSinTiempoDisponible {
-		if (computadora.hayUnSoloSospechoso()) {
-			policia.emitirOrdenDeArresto(this.computadora);
+	public String emitirOrdenDeArresto() {
+		return this.computadora.emitirOrdenDeArresto();
+	}
+	
+	public void arrestarAlLadron() throws ExcepcionOrdenDeArrestoNoEmitida {
+		if (this.computadora.ordenDeArrestoEmitidaContraLadronCorrecto()){
+			Ladron buscado = this.computadora.getLadronBuscado();
+			this.policia.arrestarAlLadron(buscado);
 		}
 	}
 }
