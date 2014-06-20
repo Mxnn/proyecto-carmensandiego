@@ -371,4 +371,5 @@ public class GeneradorDeCasosTest {
 		Assert.assertEquals(pistasCiudadSiguiente.get(7).getPista(), edificioCultural.getPista(investigador));
 
 	}
+
 }
