@@ -28,9 +28,9 @@ public class ElectorDeLadron {
 	private ArrayList<Ladron> listaDeLadrones;
 	
 	
-	public ElectorDeLadron (){
+	public ElectorDeLadron() {
 		
-		listaDeLadrones=new ArrayList<Ladron>();
+		listaDeLadrones = new ArrayList<Ladron>();
 	}
 	
 	public void leerXMLDeLadrones()	
@@ -51,27 +51,29 @@ public class ElectorDeLadron {
 			NodeList listaNodosCaracteristicas = elementoLadron.getElementsByTagName("Caracteristica");
 
 			Element elementoCaracteristica = (Element)listaNodosCaracteristicas.item(0);		
-			Sexo sexo=Sexo.valueOf(elementoCaracteristica.getAttribute("Sexo")) ;
+			Sexo sexo = Sexo.valueOf(elementoCaracteristica.getAttribute("Sexo")) ;
 			
 			elementoCaracteristica = (Element)listaNodosCaracteristicas.item(1);		
-			Pelo pelo=Pelo.valueOf(elementoCaracteristica.getAttribute("Pelo")) ;
+			Pelo pelo = Pelo.valueOf(elementoCaracteristica.getAttribute("Pelo")) ;
 			
 			elementoCaracteristica = (Element)listaNodosCaracteristicas.item(2);		
-			Hobby hobby=Hobby.valueOf(elementoCaracteristica.getAttribute("Hobby"))	;
+			Hobby hobby = Hobby.valueOf(elementoCaracteristica.getAttribute("Hobby"))	;
 			
 			elementoCaracteristica = (Element)listaNodosCaracteristicas.item(3);		
-			Auto auto=Auto.valueOf(elementoCaracteristica.getAttribute("Auto"));
+			Auto auto = Auto.valueOf(elementoCaracteristica.getAttribute("Auto"));
 			
 			elementoCaracteristica = (Element)listaNodosCaracteristicas.item(4);
-			MarcaPersonal marcaPersonal=MarcaPersonal.valueOf(elementoCaracteristica.getAttribute("MarcaPersonal"));
+			MarcaPersonal marcaPersonal = MarcaPersonal.valueOf(elementoCaracteristica.getAttribute("MarcaPersonal"));
 			
-			this.listaDeLadrones.add(new Ladron (nombre,sexo,pelo,hobby,auto,marcaPersonal));
+			this.listaDeLadrones.add(new Ladron(nombre,sexo,pelo,hobby,auto,marcaPersonal));
 		}
 	}
+	
 	public ArrayList<Ladron> getListaDeLadrones() {
 		return listaDeLadrones;
 		
 	}
+	
 	public Ladron generarUnLadronBuscado() {
 		Random rand = new Random();
 		int posicion = rand.nextInt(this.listaDeLadrones.size());
