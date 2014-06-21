@@ -32,6 +32,10 @@ public class Policia {
     }
 
 	//GETTERS:
+	public String getNombre() {
+		return this.nombre;
+	}
+	
 	public int getTiempoDisponible() {
         return this.tiempoDisponible;
     }
