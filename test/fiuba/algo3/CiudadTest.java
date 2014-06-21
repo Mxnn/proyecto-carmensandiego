@@ -298,4 +298,43 @@ public class CiudadTest {
 		
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
 	}
+	
+	@Test
+	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMasDe6CaracteresEImpar = "Florencia";
+		Policia policia = new Policia(nombreConMasDe6CaracteresEImpar);
+		policia.setCiudadActual(londres);
+		
+		londres.getEdificioCultural(policia);
+		
+		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+	}
+	
+	@Test
+	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMasDe6CaracteresYPar = "Macarena";
+		Policia policia = new Policia(nombreConMasDe6CaracteresYPar);
+		policia.setCiudadActual(londres);
+		
+		londres.getEdificioEconomia(policia);
+		
+		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+	}
+	
+	@Test
+	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMenosDe6Caracteres = "Ana";
+		Policia policia = new Policia(nombreConMenosDe6Caracteres);
+		policia.setCiudadActual(londres);
+		
+		londres.getEdificioTransporte(policia);
+		
+		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+	}
 }
