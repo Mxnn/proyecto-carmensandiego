@@ -3,6 +3,7 @@ package fiuba.algo3;
 public class Policia {
 	public final static int TIEMPO_DISPONIBLE_INICIAL = 154;
     public final static int TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO = 3;
+	public final static int TIEMPO_POR_RECIBIR_HERIDA = 3;
     public final static int TIEMPO_POR_ENTRAR_AL_PRIMER_EDIFICIO = 1;
     public final static int TIEMPO_POR_ENTRAR_AL_SEGUNDO_EDIFICIO = 2;
     public final static int TIEMPO_POR_ENTRAR_AL_TERCER_EDIFICIO = 3;
@@ -59,20 +60,20 @@ public class Policia {
     }
 
 	public String visitarEdificioEconomia() throws ExcepcionJugadorSinTiempoDisponible {
-		Edificio edificio = this.ciudadActual.getEdificioEconomia();
 		descuentoDeTiempoPorVisitarEdificio();
+		Edificio edificio = this.ciudadActual.getEdificioEconomia(this);
 		return this.rango.pedirPista(edificio);
 	}
 
 	public String visitarEdificioCultural() throws ExcepcionJugadorSinTiempoDisponible {
-		Edificio edificio = this.ciudadActual.getEdificioCultural();
 		descuentoDeTiempoPorVisitarEdificio();
+		Edificio edificio = this.ciudadActual.getEdificioCultural(this);
 		return this.rango.pedirPista(edificio);
 	}
 
 	public String visitarEdificioTransporte() throws ExcepcionJugadorSinTiempoDisponible {
-		Edificio edificio = this.ciudadActual.getEdificioTransporte();
 		descuentoDeTiempoPorVisitarEdificio();
+		Edificio edificio = this.ciudadActual.getEdificioTransporte(this);
 		return this.rango.pedirPista(edificio);
 	}
 
@@ -83,6 +84,10 @@ public class Policia {
 	
 	public void arrestarAlLadron(Ladron buscado) {
 		buscado.recibirArresto();
+	}
+	
+	public void recibirHerida() throws ExcepcionJugadorSinTiempoDisponible {
+		descontarTiempo(TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
 	//PRIVADOS

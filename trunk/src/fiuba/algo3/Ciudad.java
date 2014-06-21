@@ -8,7 +8,6 @@ import org.w3c.dom.Node;
 
 
 public class Ciudad {
-
 	private String nombre;
 	private Coordenada coordenadas;
     private Edificio edificioCultural;
@@ -41,7 +40,7 @@ public class Ciudad {
     }
 
 	public boolean conectarCiudad(Ciudad ciudad) {
-        if ( (ciudad!=this) && (!this.estaConectadaConEstaCiudad(ciudad) ) ){
+        if ( (ciudad != this) && (!this.estaConectadaConEstaCiudad(ciudad)) ) {
 			this.ciudadesConectadas.add(ciudad);
         	return true;
         }
@@ -68,17 +67,38 @@ public class Ciudad {
 	public String getNombre() {
 		return this.nombre;
 	}
-
-    public Edificio getEdificioCultural() {
-        return this.edificioCultural;
+	
+	public Edificio getEdificioCultural() {
+		return this.edificioCultural;
     }
 
     public Edificio getEdificioEconomia() {
-        return this.edificioEconomia;
+		return this.edificioEconomia;
     }
 
     public Edificio getEdificioTransporte() {
-        return this.edificioTransporte;
+		return this.edificioTransporte;
+    }
+
+    public Edificio getEdificioCultural(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
+        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(this.edificioCultural)) {
+			policia.recibirHerida();
+		}
+		return this.edificioCultural;
+    }
+
+    public Edificio getEdificioEconomia(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
+        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(this.edificioEconomia)) {
+			policia.recibirHerida();
+		}
+		return this.edificioEconomia;
+    }
+
+    public Edificio getEdificioTransporte(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
+        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(this.edificioTransporte)) {
+			policia.recibirHerida();
+		}
+		return this.edificioTransporte;
     }
 
     public ArrayList<Ciudad> getCiudadesConectadas() {
@@ -88,4 +108,20 @@ public class Ciudad {
     public boolean escondeAlLadron() {
         return this.acaEstaElLadron;
     }
+	
+	//PRIVADOS:
+	private boolean enEsteEdificioHiereAlPolicia(Edificio edificio) {
+		int caracteresNombre = this.nombre.length();
+		if (caracteresNombre <= 6 && this.edificioEconomia == edificio) {
+			return true;
+		} else if (caracteresNombre > 6) {
+			if (caracteresNombre % 2 == 0 && this.edificioCultural == edificio) {
+				return true;
+			}
+			else if (this.edificioTransporte == edificio) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

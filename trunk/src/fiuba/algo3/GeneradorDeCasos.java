@@ -80,7 +80,7 @@ public class GeneradorDeCasos {
 			}
 		}
 
-		for (int i = 0; i < ciudadesPorRecorrer.size(); i += 1){
+		for (int i = 0; i < ciudadesPorRecorrer.size(); i++){
 			Ciudad ciudadActual = ciudadesPorRecorrer.get(i);
             setearCiudadesConectadas(ciudadActual,ciudadesPorRecorrer);
 
@@ -88,7 +88,7 @@ public class GeneradorDeCasos {
 			Edificio EdificioTransporteActual = ciudadActual.getEdificioTransporte();
 			Edificio EdificioCulturalActual = ciudadActual.getEdificioCultural();
 
-			if (i+1 < ciudadesPorRecorrer.size()){
+			if (i + 1 < ciudadesPorRecorrer.size()){
 				ArrayList<Pista> pistasDeLaCiudadSiguiente = pistasDeLaCiudadesPorRecorrer.get(i+1);
 
 				EdificioEconomicoActual.setPistas(pistasDeLaCiudadSiguiente.get(0), pistasDeLaCiudadSiguiente.get(1), pistasDeLaCiudadSiguiente.get(2));
@@ -113,7 +113,7 @@ public class GeneradorDeCasos {
 		if (posicionCiudadActual >=1){
 			ciudadActual.conectarCiudad(ciudadesPorRecorrer.get(posicionCiudadActual-1));
 		}
-		while (ciudadActual.cantidadDeCiudadesConectadas()<4){
+		while (ciudadActual.cantidadDeCiudadesConectadas() < 4){
 			int posicionRandom = rand.nextInt(this.ciudades.size());
 			Ciudad ciudadPorAgregar=ciudades.get(posicionRandom);
 			ciudadActual.conectarCiudad(ciudadPorAgregar);
