@@ -188,6 +188,9 @@ public class PoliciaTest {
         unPolicia.setTiempoDisponible(0);
         unPolicia.visitarEdificioEconomia();
     }
+	
+	// @Test
+	// public void elPoliciaVisita
 
     @Test
     public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraAlgunLadron() 
@@ -290,4 +293,23 @@ public class PoliciaTest {
 		
         Assert.assertTrue(buscado.estaArrestado());
     }
+	
+	@Test 
+	public void recibirHeridaDescuentaTiempo() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+		Policia policia = new Policia("Juancito", ciudadSalida);
+		
+		policia.recibirHerida();
+		
+		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_RECIBIR_HERIDA);
+	}
+	
+	@Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
+	public void recibirHeridaLanzaExcepcionSiNoHayTiempo() throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
+		Policia policia = new Policia("Juancito", ciudadSalida);
+		policia.setTiempoDisponible(1);
+		
+		policia.recibirHerida();
+	}
 }

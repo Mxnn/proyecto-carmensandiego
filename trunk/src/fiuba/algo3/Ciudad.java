@@ -81,21 +81,22 @@ public class Ciudad {
     }
 
     public Edificio getEdificioCultural(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
-        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(this.edificioCultural)) {
+        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioCultural) {
 			policia.recibirHerida();
 		}
 		return this.edificioCultural;
     }
 
     public Edificio getEdificioEconomia(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
-        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(this.edificioEconomia)) {
+        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioEconomia) {
 			policia.recibirHerida();
 		}
 		return this.edificioEconomia;
     }
 
     public Edificio getEdificioTransporte(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
-        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(this.edificioTransporte)) {
+        int caracteresNombre = this.nombre.length();
+		if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioTransporte) {
 			policia.recibirHerida();
 		}
 		return this.edificioTransporte;
@@ -110,18 +111,17 @@ public class Ciudad {
     }
 	
 	//PRIVADOS:
-	private boolean enEsteEdificioHiereAlPolicia(Edificio edificio) {
-		int caracteresNombre = this.nombre.length();
-		if (caracteresNombre <= 6 && this.edificioEconomia == edificio) {
-			return true;
-		} else if (caracteresNombre > 6) {
-			if (caracteresNombre % 2 == 0 && this.edificioCultural == edificio) {
-				return true;
+	private Edificio enEsteEdificioHiereAlPolicia(Policia policia) {
+		int caracteresNombre = policia.getNombre().length();
+		if (caracteresNombre > 6) {
+			if (caracteresNombre % 2 == 0) {
+				return this.edificioCultural;
 			}
-			else if (this.edificioTransporte == edificio) {
-				return true;
+			else {
+				return this.edificioTransporte;
 			}
+		} else {
+			return this.edificioEconomia;
 		}
-		return false;
 	}
 }
