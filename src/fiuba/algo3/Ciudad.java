@@ -40,8 +40,12 @@ public class Ciudad {
         this.edificioTransporte = edificio;
     }
 
-    public void conectarCiudad(Ciudad ciudad) {
-        this.ciudadesConectadas.add(ciudad);
+	public boolean conectarCiudad(Ciudad ciudad) {
+        if ( (ciudad!=this) && (!this.estaConectadaConEstaCiudad(ciudad) ) ){
+			this.ciudadesConectadas.add(ciudad);
+        	return true;
+        }
+        return false;
     }
 	
     public boolean estaConectadaConEstaCiudad(Ciudad ciudad) {

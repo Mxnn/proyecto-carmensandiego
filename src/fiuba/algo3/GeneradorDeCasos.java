@@ -107,20 +107,17 @@ public class GeneradorDeCasos {
     public void setearCiudadesConectadas(Ciudad ciudadActual,ArrayList<Ciudad> ciudadesPorRecorrer){
 		Random rand = new Random();
 		int posicionCiudadActual= ciudadesPorRecorrer.indexOf(ciudadActual);
-		if (posicionCiudadActual <5){
+		if (posicionCiudadActual <=4){
 			ciudadActual.conectarCiudad(ciudadesPorRecorrer.get(posicionCiudadActual+1));
 		}
-		if (posicionCiudadActual >1){
+		if (posicionCiudadActual >=1){
 			ciudadActual.conectarCiudad(ciudadesPorRecorrer.get(posicionCiudadActual-1));
 		}
 		while (ciudadActual.cantidadDeCiudadesConectadas()<4){
 			int posicionRandom = rand.nextInt(this.ciudades.size());
 			Ciudad ciudadPorAgregar=ciudades.get(posicionRandom);
-			if ((!ciudadActual.estaConectadaConEstaCiudad(ciudadPorAgregar) && (ciudadActual!=ciudadPorAgregar) && (!ciudadesPorRecorrer.contains(ciudadPorAgregar)))) {
-				ciudadActual.conectarCiudad(ciudadPorAgregar);
-
-
-			}
+			ciudadActual.conectarCiudad(ciudadPorAgregar);
+			
 		}
 	}
 

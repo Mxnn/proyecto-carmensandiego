@@ -371,5 +371,80 @@ public class GeneradorDeCasosTest {
 		Assert.assertEquals(pistasCiudadSiguiente.get(7).getPista(), edificioCultural.getPista(investigador));
 
 	}
+	@Test
+    public void	laPrimeraCiudadDeSetearCiudadesContieneALaCiudadSiguienteDelRecorrido()
+    throws ParserConfigurationException, TransformerException, SAXException, IOException{
 
+		GeneradorDeCasos generador = new GeneradorDeCasos();
+		
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+		ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
+		ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
+		ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
+		Ciudad ciudadActual=ciudadesPorRecorrer.get(0);
+		generador.setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+		
+		Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(1)));
+		Assert.assertEquals(ciudadActual.cantidadDeCiudadesConectadas(), 4);		
+	}	
+	@Test
+    public void	UnaCiudadDelMedioDeSetearCiudadesContieneALaCiudadSiguienteYALaAnteriorDelRecorrido()
+    throws ParserConfigurationException, TransformerException, SAXException, IOException{
+
+		GeneradorDeCasos generador = new GeneradorDeCasos();
+		
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+		ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
+		ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
+		ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
+		Ciudad ciudadActual=ciudadesPorRecorrer.get(3);
+		generador.setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+		
+		Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(4)));
+		Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(2)));
+		Assert.assertEquals(ciudadActual.cantidadDeCiudadesConectadas(), 4);	
+	}		
+	@Test
+    public void	UnaCiudadDelFinalDeSetearCiudadesContieneALaAnteriorDelRecorrido()
+    throws ParserConfigurationException, TransformerException, SAXException, IOException{
+
+		GeneradorDeCasos generador = new GeneradorDeCasos();
+		
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+		ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
+		ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
+		ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
+		Ciudad ciudadActual=ciudadesPorRecorrer.get(5);
+		generador.setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+		
+		Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(4)));
+		Assert.assertEquals(ciudadActual.cantidadDeCiudadesConectadas(), 4);	
+	}		
+	@Test
+    public void	GenerarCiudadesConectadasCreaUnaListaDeCiudadesDiferenteALaOrignialYNoRepetidas()
+    throws ParserConfigurationException, TransformerException, SAXException, IOException{
+
+		GeneradorDeCasos generador = new GeneradorDeCasos();
+		
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+		ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
+		ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
+		ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
+		Ciudad ciudadActual=ciudadesPorRecorrer.get(3);
+		generador.setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+		
+		ArrayList <Ciudad> ciudadesConectadas=ciudadActual.getCiudadesConectadas();
+		Assert.assertNotSame(ciudadesConectadas.get(0), ciudadesConectadas.get(1));
+		Assert.assertNotSame(ciudadesConectadas.get(1) , ciudadesConectadas.get(2));
+		Assert.assertNotSame(ciudadesConectadas.get(2) , ciudadesConectadas.get(3));		
+		Assert.assertNotSame(ciudadesConectadas.get(1) , ciudadesConectadas.get(3));
+		Assert.assertNotSame(ciudadesConectadas.get(0) , ciudadesConectadas.get(3));				
+		Assert.assertNotSame(ciudadesConectadas.get(0) , ciudadesConectadas.get(2));	
+		
+		Assert.assertNotSame(ciudadesConectadas.get(0) , ciudadActual);
+		Assert.assertNotSame(ciudadesConectadas.get(1) , ciudadActual);
+		Assert.assertNotSame(ciudadesConectadas.get(2) , ciudadActual);		
+		Assert.assertNotSame(ciudadesConectadas.get(3), ciudadActual);			
+		
+	}
 }
