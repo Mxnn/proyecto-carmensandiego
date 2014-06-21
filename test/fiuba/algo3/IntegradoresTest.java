@@ -1,5 +1,6 @@
 package fiuba.algo3;
 
+import java.util.ArrayList;
 import org.junit.Test;
 import junit.framework.Assert;
 
@@ -17,37 +18,38 @@ public class IntegradoresTest {
         reykjavic.conectarCiudad(tokio);
 		tokio.escondeAlLadron();
 		
-		Policia unPolicia = new Policia("Esteban", buenosAires);
+		Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(buenosAires);
         Ladron unLadron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
         Computadora computadora = new Computadora(unLadron);
 
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
-		unPolicia.visitarEdificioEconomia();
-		unPolicia.visitarEdificioCultural();
+		policia.visitarEdificioEconomia();
+		policia.visitarEdificioCultural();
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.MARRON);
-		unPolicia.visitarEdificioTransporte();
+		policia.visitarEdificioTransporte();
 		
-		unPolicia.viajar(londres);
-		unPolicia.visitarEdificioEconomia();
-		unPolicia.visitarEdificioCultural();
+		policia.viajar(londres);
+		policia.visitarEdificioEconomia();
+		policia.visitarEdificioCultural();
         computadora.setCaracteristicaDelLadron(Ladron.Hobby.ALPINISMO);
-		unPolicia.visitarEdificioTransporte();
+		policia.visitarEdificioTransporte();
 		
-		unPolicia.viajar(reykjavic);
-		unPolicia.visitarEdificioEconomia();
+		policia.viajar(reykjavic);
+		policia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.Auto.MOTO);
-		unPolicia.visitarEdificioCultural();
-		unPolicia.visitarEdificioTransporte();
+		policia.visitarEdificioCultural();
+		policia.visitarEdificioTransporte();
         computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);
 
-        unPolicia.emitirOrdenDeArresto(computadora);
+        policia.emitirOrdenDeArresto(computadora);
 		
-		unPolicia.viajar(tokio);
-		unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
+		policia.viajar(tokio);
+		policia.visitarEdificioCultural();
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioTransporte();
 		
-		unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
+		policia.arrestarAlLadron(computadora.getLadronBuscado());
 
 		Assert.assertTrue(unLadron.estaArrestado());
 	}
@@ -59,36 +61,37 @@ public class IntegradoresTest {
         Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
         Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(-3000.0, -9000.0));
         Ciudad tokio = new Ciudad("Tokio", new Coordenada(9000.0, 1500.0));
-        Policia unPolicia = new Policia("Esteban", buenosAires);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(buenosAires);
         Ladron unLadron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
 		Computadora computadora = new Computadora(unLadron);
 		
-        unPolicia.setRango(new Detective());
+        policia.setRango(new Detective());
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(reykjavic);
         reykjavic.conectarCiudad(tokio);
 		tokio.escondeAlLadron();
 
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioTransporte();
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
 		
-        unPolicia.viajar(londres);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(londres);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
 		
-        unPolicia.viajar(reykjavic);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(reykjavic);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
 
-        unPolicia.viajar(tokio);
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(tokio);
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioTransporte();
 		
-        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
+        policia.arrestarAlLadron(computadora.getLadronBuscado());
     }
 
     @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
@@ -98,23 +101,25 @@ public class IntegradoresTest {
         Ciudad londres = new Ciudad("Londres", new Coordenada(0, 50000.0));
         Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(0, 200000));
         Ciudad tokio = new Ciudad("Tokio", new Coordenada(9000.0, 1500.0));
-        Policia unPolicia = new Policia("Esteban", buenosAires);
-
-        unPolicia.setRango(new Sargento());
+        
+		Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(buenosAires);
+		policia.setRango(new Sargento());
+		
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(reykjavic);
         reykjavic.conectarCiudad(tokio);
 		tokio.escondeAlLadron();
 
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioTransporte();
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
 		
-        unPolicia.viajar(londres);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.viajar(reykjavic);
+        policia.viajar(londres);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
+        policia.viajar(reykjavic);
     }
 
     @Test
@@ -123,12 +128,15 @@ public class IntegradoresTest {
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
         Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
         Ciudad nuevaYork = new Ciudad("Nueva York", new Coordenada(-3000.0, -9000.0));
-        Policia unPolicia = new Policia("Esteban", buenosAires);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(buenosAires);
         Ladron unLadron = new Ladron("Tylen Perez", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.TENNIS, Ladron.Auto.LIMUSINA, Ladron.MarcaPersonal.TATUAJE);
         Ladron sospechoso = new Ladron("John Wayne", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.TENNIS, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(unLadron);
 
-        computadora.setSospechoso(sospechoso);
+        ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
+		sospechosos.add(sospechoso);
+		computadora.setSospechosos(sospechosos);
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(nuevaYork);
         nuevaYork.escondeAlLadron();
@@ -142,24 +150,24 @@ public class IntegradoresTest {
         nuevaYork.getEdificioEconomia().setPistas(new Pista("Hay gente que nunca antes habia visto"), null, null);
         nuevaYork.getEdificioTransporte().setPistas(new Pista("Pasan cosas extranias en la ciudad"), null, null);
 
-        unPolicia.visitarEdificioTransporte();
+        policia.visitarEdificioTransporte();
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.MARRON);
-        unPolicia.visitarEdificioEconomia();
+        policia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.Hobby.TENNIS);
 
-        unPolicia.viajar(londres);
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioEconomia();
+        policia.viajar(londres);
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.emitirOrdenDeArresto(computadora);
+        policia.visitarEdificioTransporte();
+        policia.emitirOrdenDeArresto(computadora);
 
-        unPolicia.viajar(nuevaYork);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(nuevaYork);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
 
-        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
+        policia.arrestarAlLadron(computadora.getLadronBuscado());
 
         Assert.assertTrue(unLadron.estaArrestado());
     }
@@ -171,7 +179,8 @@ public class IntegradoresTest {
         Ciudad milan = new Ciudad("Milan", new Coordenada(200000, 200000));
         Ciudad sidney = new Ciudad("Sidney", new Coordenada(5, 5));
         Ciudad nuevaYork = new Ciudad("Nueva York", new Coordenada(200000, 200000));
-        Policia unPolicia = new Policia("Esteban", veracruz);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(veracruz);
 
         veracruz.conectarCiudad(milan);
         milan.conectarCiudad(sidney);
@@ -188,18 +197,18 @@ public class IntegradoresTest {
         nuevaYork.getEdificioEconomia().setPistas(new Pista("Hay gente que nunca antes habia visto"), null, null);
         nuevaYork.getEdificioTransporte().setPistas(new Pista("Pasan cosas extranias en la ciudad"), null, null);
 
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
+        policia.visitarEdificioCultural();
 
-        unPolicia.viajar(milan);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(milan);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioTransporte();
 
-        unPolicia.viajar(sidney);
-        unPolicia.visitarEdificioCultural();
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(sidney);
+        policia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
 
-        unPolicia.viajar(nuevaYork);
+        policia.viajar(nuevaYork);
     }
 
     @Test
@@ -210,12 +219,15 @@ public class IntegradoresTest {
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(3, 3));
         Ciudad ottawa = new Ciudad("Ottawa", new Coordenada(4, 4));
         Ciudad beijing = new Ciudad("Beijing", new Coordenada(5, 5));
-        Policia unPolicia = new Policia("Esteban", buenosAires);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(buenosAires);
         Ladron unLadron = new Ladron("Zulma Lovato", Ladron.Sexo.FEMENINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.LIMUSINA, Ladron.MarcaPersonal.TATUAJE);
         Ladron sospechoso = new Ladron("John Wayne", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.TENNIS, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(unLadron);
 
-        computadora.setSospechoso(sospechoso);
+        ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
+		sospechosos.add(sospechoso);
+		computadora.setSospechosos(sospechosos);
         paris.conectarCiudad(londres);
         londres.conectarCiudad(buenosAires);
         buenosAires.conectarCiudad(ottawa);
@@ -230,29 +242,29 @@ public class IntegradoresTest {
         beijing.getEdificioCultural().setPistas(new Pista("Hay gente que nunca antes habia visto"), null, null);
         beijing.getEdificioEconomia().setPistas(new Pista("Te estas acercando"), null, null);
 
-        unPolicia.visitarEdificioEconomia();
+        policia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.FEMENINO);
 
-        unPolicia.viajar(londres);
-        unPolicia.visitarEdificioCultural();
+        policia.viajar(londres);
+        policia.visitarEdificioCultural();
         computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);
 
-        unPolicia.viajar(buenosAires);
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(buenosAires);
+        policia.visitarEdificioTransporte();
         computadora.setCaracteristicaDelLadron(Ladron.Hobby.ALPINISMO);
 
-        unPolicia.viajar(ottawa);
-        unPolicia.visitarEdificioEconomia();
+        policia.viajar(ottawa);
+        policia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
 
-        unPolicia.emitirOrdenDeArresto(computadora);
+        policia.emitirOrdenDeArresto(computadora);
 
-        unPolicia.viajar(beijing);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.visitarEdificioCultural();
+        policia.viajar(beijing);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioTransporte();
+        policia.visitarEdificioCultural();
 
-        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
+        policia.arrestarAlLadron(computadora.getLadronBuscado());
 
         Assert.assertTrue(unLadron.estaArrestado());
     }
@@ -264,12 +276,15 @@ public class IntegradoresTest {
         Ciudad hongKong = new Ciudad("Hong Kong", new Coordenada(200000, 200000));
         Ciudad tokio = new Ciudad("Tokio", new Coordenada(5, 5));
         Ciudad londres = new Ciudad("Londres", new Coordenada(200000, 200000));
-        Policia unPolicia = new Policia("Esteban", buenosAires);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(buenosAires);
         Ladron ladron = new Ladron("Carmen SanDiego", Ladron.Sexo.FEMENINO, Ladron.Pelo.RUBIO, Ladron.Hobby.TENNIS, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
         Ladron sospechoso = new Ladron("John Wayne", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(ladron);
 
-        computadora.setSospechoso(sospechoso);
+        ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
+		sospechosos.add(sospechoso);
+		computadora.setSospechosos(sospechosos);
         buenosAires.conectarCiudad(hongKong);
         hongKong.conectarCiudad(tokio);
         tokio.conectarCiudad(londres);
@@ -283,24 +298,24 @@ public class IntegradoresTest {
         londres.getEdificioEconomia().setPistas(new Pista("Hay gente que nunca antes habia visto"), null, null);
         londres.getEdificioTransporte().setPistas(new Pista("Pasan cosas extranias en la ciudad"), null, null);
 
-        unPolicia.visitarEdificioCultural();
+        policia.visitarEdificioCultural();
         computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
 
-        unPolicia.viajar(hongKong);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(hongKong);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioTransporte();
         computadora.setCaracteristicaDelLadron(Ladron.Hobby.ALPINISMO);
 
-        unPolicia.viajar(tokio);
-        unPolicia.visitarEdificioEconomia();
+        policia.viajar(tokio);
+        policia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
 
-        unPolicia.emitirOrdenDeArresto(computadora);
+        policia.emitirOrdenDeArresto(computadora);
 
-        unPolicia.viajar(londres);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.visitarEdificioCultural();
+        policia.viajar(londres);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioTransporte();
+        policia.visitarEdificioCultural();
 
         Assert.assertFalse(ladron.estaArrestado());
     }
@@ -313,12 +328,15 @@ public class IntegradoresTest {
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(3, 3));
         Ciudad toronto = new Ciudad("Toronto", new Coordenada(4, 4));
         Ciudad barcelona = new Ciudad("Barcelona", new Coordenada(5, 5));
-        Policia unPolicia = new Policia("Esteban", buenosAires);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(buenosAires);
         Ladron unLadron = new Ladron("Tylen Perez", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.TENNIS, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
         Ladron sospechoso = new Ladron("John Wayne", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.TENNIS, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(unLadron);
 
-        computadora.setSospechoso(sospechoso);
+        ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
+		sospechosos.add(sospechoso);
+		computadora.setSospechosos(sospechosos);
         buenosAires.conectarCiudad(paris);
         paris.conectarCiudad(toronto);
         toronto.conectarCiudad(londres);
@@ -336,30 +354,30 @@ public class IntegradoresTest {
         barcelona.getEdificioCultural().setPistas(new Pista("Hay gente que nunca antes habia visto"), null, null);
         barcelona.getEdificioEconomia().setPistas(new Pista("Te estas acercando"), null, null);
 
-        unPolicia.visitarEdificioCultural();
+        policia.visitarEdificioCultural();
 
-        unPolicia.viajar(paris);
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(paris);
+        policia.visitarEdificioTransporte();
 
-        unPolicia.viajar(toronto);
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(toronto);
+        policia.visitarEdificioTransporte();
         computadora.setCaracteristicaDelLadron(Ladron.Auto.MOTO);
-        unPolicia.visitarEdificioEconomia();
+        policia.visitarEdificioEconomia();
 
-        unPolicia.viajar(londres);
-        unPolicia.visitarEdificioEconomia();
+        policia.viajar(londres);
+        policia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.visitarEdificioCultural();
+        policia.visitarEdificioTransporte();
+        policia.visitarEdificioCultural();
 
-        unPolicia.emitirOrdenDeArresto(computadora);
+        policia.emitirOrdenDeArresto(computadora);
 
-        unPolicia.viajar(barcelona);
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.visitarEdificioCultural();
+        policia.viajar(barcelona);
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioTransporte();
+        policia.visitarEdificioCultural();
 
-        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
+        policia.arrestarAlLadron(computadora.getLadronBuscado());
 
         Assert.assertTrue(unLadron.estaArrestado());
     }
@@ -370,7 +388,8 @@ public class IntegradoresTest {
         Ciudad toronto = new Ciudad("Toronto", new Coordenada(1, 1));
         Ciudad hongKong = new Ciudad("Hong Kong", new Coordenada(200000, 200000));
         Ciudad managua = new Ciudad("Managua", new Coordenada(5, 5));
-        Policia unPolicia = new Policia("Esteban", hongKong);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(hongKong);
         Ladron ladron = new Ladron("Carmen SanDiego", Ladron.Sexo.FEMENINO, Ladron.Pelo.RUBIO, Ladron.Hobby.TENNIS, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 
         hongKong.conectarCiudad(toronto);
@@ -381,14 +400,14 @@ public class IntegradoresTest {
         hongKong.getEdificioTransporte().setPistas(new Pista("Tomo un avion con estrellas y franjas rojas"), null, null);
         toronto.getEdificioEconomia().setPistas(new Pista("No vi a nadie con esas caracteristicas"), null, null);
 
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.visitarEdificioEconomia();
+        policia.visitarEdificioTransporte();
+        policia.visitarEdificioEconomia();
 
-        unPolicia.viajar(toronto);
-        unPolicia.visitarEdificioEconomia();
+        policia.viajar(toronto);
+        policia.visitarEdificioEconomia();
 
-        unPolicia.viajar(managua);
-        unPolicia.visitarEdificioEconomia();
+        policia.viajar(managua);
+        policia.visitarEdificioEconomia();
 
         Assert.assertFalse(ladron.estaArrestado());
     }
@@ -399,12 +418,15 @@ public class IntegradoresTest {
         Ciudad paris = new Ciudad("Paris", new Coordenada(1, 1));
         Ciudad rio = new Ciudad("Rio de Janeiro", new Coordenada(2, 2));
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(3, 3));
-        Policia unPolicia = new Policia("Esteban", rio);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(rio);
         Ladron unLadron = new Ladron("Tylen Perez", Ladron.Sexo.MASCULINO, Ladron.Pelo.ROJO, Ladron.Hobby.TENNIS, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
         Ladron sospechoso = new Ladron("John Wayne", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.TENNIS, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(unLadron);
 
-        computadora.setSospechoso(sospechoso);
+        ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
+		sospechosos.add(sospechoso);
+		computadora.setSospechosos(sospechosos);
         buenosAires.conectarCiudad(paris);
         rio.conectarCiudad(buenosAires);
         buenosAires.conectarCiudad(paris);
@@ -416,21 +438,21 @@ public class IntegradoresTest {
         paris.getEdificioCultural().setPistas(new Pista("Hay gente que nunca antes habia visto"), null, null);
         paris.getEdificioEconomia().setPistas(new Pista("Te estas acercando"), null, null);
 
-        unPolicia.visitarEdificioTransporte();
+        policia.visitarEdificioTransporte();
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.ROJO);
 
-        unPolicia.viajar(buenosAires);
-        unPolicia.visitarEdificioEconomia();
+        policia.viajar(buenosAires);
+        policia.visitarEdificioEconomia();
         computadora.setCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);
 
-        unPolicia.viajar(paris);
-        unPolicia.visitarEdificioTransporte();
-        unPolicia.visitarEdificioEconomia();
-        unPolicia.visitarEdificioCultural();
+        policia.viajar(paris);
+        policia.visitarEdificioTransporte();
+        policia.visitarEdificioEconomia();
+        policia.visitarEdificioCultural();
 
-        unPolicia.emitirOrdenDeArresto(computadora);
+        policia.emitirOrdenDeArresto(computadora);
 
-        unPolicia.arrestarAlLadron(computadora.getLadronBuscado());
+        policia.arrestarAlLadron(computadora.getLadronBuscado());
 
         Assert.assertTrue(unLadron.estaArrestado());
     }
@@ -442,7 +464,8 @@ public class IntegradoresTest {
         Ciudad rio = new Ciudad("Rio de Janeiro", new Coordenada(20000, 20000));
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(3, 3));
         Ciudad roma = new Ciudad("Roma", new Coordenada(-40000, -40000));
-        Policia unPolicia = new Policia("Esteban", rio);
+        Policia policia = new Policia("Esteban");
+		policia.setCiudadActual(rio);
         Ladron ladron = new Ladron("John Bonachon", Ladron.Sexo.FEMENINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
 
         rio.conectarCiudad(londres);
@@ -458,17 +481,17 @@ public class IntegradoresTest {
         londres.getEdificioTransporte().setPistas(new Pista("Lo siento no hemos visto a nadie con esa descripcion por aqui"), null, null);
         roma.getEdificioEconomia().setPistas(new Pista("Lo siento no hemos visto a nadie con esa descripcion por aqui"), null, null);
 
-        unPolicia.visitarEdificioEconomia();
+        policia.visitarEdificioEconomia();
 
-        unPolicia.viajar(londres);
-        unPolicia.visitarEdificioTransporte();
+        policia.viajar(londres);
+        policia.visitarEdificioTransporte();
 
-        unPolicia.viajar(rio);
-        unPolicia.viajar(roma);
-        unPolicia.visitarEdificioEconomia();
+        policia.viajar(rio);
+        policia.viajar(roma);
+        policia.visitarEdificioEconomia();
 
-        unPolicia.viajar(rio);
-        unPolicia.viajar(buenosAires);
+        policia.viajar(rio);
+        policia.viajar(buenosAires);
 
         Assert.assertFalse(ladron.estaArrestado());
     }

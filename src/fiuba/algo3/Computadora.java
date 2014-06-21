@@ -27,8 +27,9 @@ public class Computadora {
 	}
 
 	//SETTERS:
-	public void setSospechoso(Ladron ladron) {
-		this.sospechosos.add(ladron);
+	public void setSospechosos(ArrayList<Ladron> ladrones) {
+		this.sospechosos = ladrones;
+		this.sospechosos.add(this.ladronBuscado);
 	}
 
 	public void setCaracteristicaDelLadron(Ladron.Sexo sexo) {

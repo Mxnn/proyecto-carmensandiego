@@ -2,6 +2,11 @@ package fiuba.algo3;
 
 import java.util.ArrayList;
 
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
+
 public class Juego {
 	Policia policia;
 	Computadora computadora;
@@ -15,19 +20,14 @@ public class Juego {
 	public void crearPartida (Ladron buscado)
 	throws ParserConfigurationException, TransformerException, SAXException, IOException{	
 		
-		ElectorDeLadron elector= new ElectorDeLadron();
+		ElectorDeLadron elector = new ElectorDeLadron();
 		elector.leerXMLDeLadrones();
 		computadora = new Computadora(elector.generarUnLadronBuscado());
 		computadora.setSospechosos(elector.getListaDeLadrones());
 		
-		
-		ArrayList <Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
+		ArrayList<Ciudad> ciudadesPorRecorrer = generador.generarUnCaso();
 		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));
 		ciudadesPorRecorrer.get(5).esconderAlLadron();
-	}
-	
-	public void setSospechoso(Ladron sospechoso) {
-		this.computadora.setSospechoso(sospechoso);
 	}
 	
 	public boolean corroborarQueElLadronBuscadoFueArrestado() throws ExcepcionOrdenDeArrestoNoEmitida {
