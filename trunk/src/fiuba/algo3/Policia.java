@@ -14,13 +14,6 @@ public class Policia {
     private Ciudad ciudadActual;
 	private int edificiosVisitadosEnEstaCiudad;
 
-    public Policia(String unNombre, Ciudad ciudadInicial) {
-        this.nombre = unNombre;
-        this.tiempoDisponible = TIEMPO_DISPONIBLE_INICIAL;
-        this.ciudadActual = ciudadInicial;
-        this.rango = new Novato();
-		this.edificiosVisitadosEnEstaCiudad = 0;
-    }
     public Policia (String unNombre){
         this.nombre = unNombre;
         this.tiempoDisponible = TIEMPO_DISPONIBLE_INICIAL;
@@ -36,6 +29,10 @@ public class Policia {
 	public void setTiempoDisponible(int tiempoDelPolicia){
     	this.tiempoDisponible = tiempoDelPolicia ;
     }
+	
+	public void setCiudadActual(Ciudad ciudad) {
+		this.ciudadActual = ciudad;
+	}
 
 	//GETTERS:
 	public String getNombre() {
