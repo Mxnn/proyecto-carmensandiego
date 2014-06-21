@@ -3,7 +3,7 @@
 	<Ladron Nombre="Nick Brunch">
 		<Caracteristica Sexo="MASCULINO"/>
 		<Caracteristica Pelo="NEGRO"/>
-		<Caracteristica Hobby="FUTBOL"/>
+		<Caracteristica Hobby="ALPINISMO"/>
 		<Caracteristica Auto="MOTO"/>
 		<Caracteristica MarcaPersonal="ANILLO"/>
 	</Ladron>
@@ -11,7 +11,7 @@
 	<Ladron Nombre="Len Bulk">
 		<Caracteristica Sexo="MASCULINO"/>
 		<Caracteristica Pelo="ROJO"/>
-		<Caracteristica Hobby="FUTBOL"/>
+		<Caracteristica Hobby="ALPINISMO"/>
 		<Caracteristica Auto="CONVERTIBLE"/>
 		<Caracteristica MarcaPersonal="TATUAJE"/>
 	</Ladron>
@@ -35,7 +35,7 @@
 	<Ladron Nombre="Scar Graynolt">
 		<Caracteristica Sexo="MASCULINO"/>
 		<Caracteristica Pelo="ROJO"/>
-		<Caracteristica Hobby="BASQUET"/>
+		<Caracteristica Hobby="CROQUET"/>
 		<Caracteristica Auto="CONVERTIBLE"/>
 		<Caracteristica MarcaPersonal="ANILLO"/>
 	</Ladron>
@@ -43,7 +43,7 @@
 	<Ladron Nombre="Merey Laroc">
 		<Caracteristica Sexo="FEMENINO"/>
 		<Caracteristica Pelo="MARRON"/>
-		<Caracteristica Hobby="FUTBOL"/>
+		<Caracteristica Hobby="ALPINISMO"/>
 		<Caracteristica Auto="LIMUSINA"/>
 		<Caracteristica MarcaPersonal="CICATRIZ"/>
 	</Ladron>
@@ -59,7 +59,7 @@
 	<Ladron Nombre="Katherine Drib">
 		<Caracteristica Sexo="FEMENINO"/>
 		<Caracteristica Pelo="MARRON"/>
-		<Caracteristica Hobby="FUTBOL"/>
+		<Caracteristica Hobby="ALPINISMO"/>
 		<Caracteristica Auto="MOTO"/>
 		<Caracteristica MarcaPersonal="TATUAJE"/>
 	</Ladron>
