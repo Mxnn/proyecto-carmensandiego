@@ -5,10 +5,25 @@ import java.util.ArrayList;
 public class Juego {
 	Policia policia;
 	Computadora computadora;
+	GeneradorDeCasos generador;
 	
-	public Juego(String nombreJugador, Ciudad ciudadInicial, Ladron buscado) {
-		policia = new Policia(nombreJugador, ciudadInicial);
-		computadora = new Computadora(buscado);
+	public Juego(String nombreJugador) {
+		policia = new Policia(nombreJugador);
+		generador= new GeneradorDeCasos();
+	}
+	
+	public void crearPartida (Ladron buscado)
+	throws ParserConfigurationException, TransformerException, SAXException, IOException{	
+		
+		ElectorDeLadron elector= new ElectorDeLadron();
+		elector.leerXMLDeLadrones();
+		computadora = new Computadora(elector.generarUnLadronBuscado());
+		computadora.setSospechosos(elector.getListaDeLadrones());
+		
+		
+		ArrayList <Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
+		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));
+		ciudadesPorRecorrer.get(5).esconderAlLadron();
 	}
 	
 	public void setSospechoso(Ladron sospechoso) {

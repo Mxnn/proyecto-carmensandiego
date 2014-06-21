@@ -21,7 +21,13 @@ public class Policia {
         this.rango = new Novato();
 		this.edificiosVisitadosEnEstaCiudad = 0;
     }
+    public Policia (String unNombre){
+        this.nombre = unNombre;
+        this.tiempoDisponible = TIEMPO_DISPONIBLE_INICIAL;
+        this.rango = new Novato();
+		this.edificiosVisitadosEnEstaCiudad = 0;   	
 
+    }
 	//SETTERS:
     public void setRango(Rango unRango) {
         this.rango = unRango;
