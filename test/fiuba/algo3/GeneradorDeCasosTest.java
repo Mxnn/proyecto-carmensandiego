@@ -194,7 +194,8 @@ public class GeneradorDeCasosTest {
 
 		Assert.assertEquals(pistasDeUnaCiudad.get(8).getPista(), "Estaba llendo una biblografia de Luis XIV, el rey Sol.");
 	}
-		@Test
+	
+	@Test
     public void	generarUnCasoSeteaLaPrimerCiudadConLasPistasDeLaSiguienteParaUnNovato()
     throws ParserConfigurationException, TransformerException, SAXException, IOException{
 
@@ -222,6 +223,7 @@ public class GeneradorDeCasosTest {
 		Assert.assertEquals(pistasCiudadSiguiente.get(6).getPista(), edificioCultural.getPista(novato));
 
 	}
+	
 	@Test
     public void	generarUnCasoSeteaUnaCiudadDelMedioConLasPistasDeLaSiguienteParaUnNovato()
     throws ParserConfigurationException, TransformerException, SAXException, IOException{
@@ -287,6 +289,7 @@ public class GeneradorDeCasosTest {
 		Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioTransporte.getPista(detective));
 		Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioCultural.getPista(detective));
 	}
+	
 	@Test
     public void	generarUnCasoSeteaUnaCiudadDelMedioConLasPistasDeLaSiguienteParaUnSargento()
     throws ParserConfigurationException, TransformerException, SAXException, IOException{
@@ -315,6 +318,7 @@ public class GeneradorDeCasosTest {
 		Assert.assertEquals(pistasCiudadSiguiente.get(8).getPista(), edificioCultural.getPista(sargento));
 
 	}
+	
 	@Test
     public void	generarUnCasoSeteaLaPrimerCiudadConLasPistasDeLaSiguienteParaUnDetective()
     throws ParserConfigurationException, TransformerException, SAXException, IOException{
@@ -343,6 +347,7 @@ public class GeneradorDeCasosTest {
 		Assert.assertEquals(pistasCiudadSiguiente.get(7).getPista(), edificioCultural.getPista(detective));
 
 	}
+	
 	@Test
     public void	generarUnCasoSeteaUnaCiudadDelMedioConLasPistasDeLaSiguienteParaUnInvestigador()
     throws ParserConfigurationException, TransformerException, SAXException, IOException{
@@ -369,7 +374,6 @@ public class GeneradorDeCasosTest {
 		Assert.assertEquals(pistasCiudadSiguiente.get(1).getPista(), edificioEconomico.getPista(investigador));
 		Assert.assertEquals(pistasCiudadSiguiente.get(4).getPista(), edificioTransporte.getPista(investigador));
 		Assert.assertEquals(pistasCiudadSiguiente.get(7).getPista(), edificioCultural.getPista(investigador));
-
 	}
 	@Test
     public void	laPrimeraCiudadDeSetearCiudadesContieneALaCiudadSiguienteDelRecorrido()
