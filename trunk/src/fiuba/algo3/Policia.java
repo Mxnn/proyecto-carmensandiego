@@ -1,7 +1,7 @@
 package fiuba.algo3;
 
 public class Policia {
-	public final static int TIEMPO_DISPONIBLE_INICIAL = 154;
+	public final static int TIEMPO_DISPONIBLE_INICIAL = 106;
     public final static int TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO = 3;
 	public final static int TIEMPO_POR_RECIBIR_HERIDA = 3;
     public final static int TIEMPO_POR_ENTRAR_AL_PRIMER_EDIFICIO = 1;

@@ -21,7 +21,7 @@ public class ComputadoraTest {
         Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
-		
+		sospechosos.add(buscado);
 		computadora.setSospechosos(sospechosos);
 		computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
 		
@@ -36,7 +36,7 @@ public class ComputadoraTest {
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
-		
+		sospechosos.add(buscado);
 		computadora.setSospechosos(sospechosos);
 		
 		computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
@@ -52,7 +52,7 @@ public class ComputadoraTest {
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
-		
+		sospechosos.add(buscado);
 		computadora.setSospechosos(sospechosos);
 		
 		Assert.assertEquals(computadora.emitirOrdenDeArresto(), "");
@@ -85,7 +85,7 @@ public class ComputadoraTest {
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
-		
+		sospechosos.add(buscado);
 		computadora.setSospechosos(sospechosos);
 		computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
 		
@@ -132,7 +132,7 @@ public class ComputadoraTest {
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
-		
+		sospechosos.add(buscado);
 		computadora.setSospechosos(sospechosos);
 		computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
 		
