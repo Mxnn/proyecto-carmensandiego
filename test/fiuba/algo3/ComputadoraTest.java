@@ -43,6 +43,20 @@ public class ComputadoraTest {
 		
 		Assert.assertEquals(computadora.emitirOrdenDeArresto(), "");
 	}
+	
+	@Test
+	public void emitirOrdenDeArrestoDevuelveUnStringVacioSiNoSeEmitioOrdenPorNoAplicarFiltros() {
+		Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
+        Computadora computadora = new Computadora(buscado);
+        
+		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
+		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
+		sospechosos.add(sospechoso1);
+		
+		computadora.setSospechosos(sospechosos);
+		
+		Assert.assertEquals(computadora.emitirOrdenDeArresto(), "");
+	}
 
 	@Test (expected = ExcepcionOrdenDeArrestoNoEmitida.class)
     public void ordenDeArrestoEmitidaContraElLadronCorrectoLanzaExcepcionSiFiltraSospechososPeroNoSeEmitioOrden() throws ExcepcionOrdenDeArrestoNoEmitida {

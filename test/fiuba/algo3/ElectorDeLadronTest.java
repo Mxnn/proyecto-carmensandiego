@@ -87,16 +87,4 @@ public class ElectorDeLadronTest {
 		
 		Assert.assertTrue(ladron.tieneEstaCaracteristica(Ladron.MarcaPersonal.ANILLO));
 	}
-	
-	@Test
-	public void generarUnLadronBuscadoMeDevuelveDistintosLadronesCadaVez() 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		ElectorDeLadron elector = new ElectorDeLadron();
-		elector.leerXMLDeLadrones();
-		
-		Ladron ladron1 = elector.generarUnLadronBuscado();
-		Ladron ladron2 = elector.generarUnLadronBuscado();
-		
-		Assert.assertNotSame(ladron1, ladron2);
-	}
 }
