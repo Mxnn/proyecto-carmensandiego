@@ -11,19 +11,23 @@ public class Juego {
 	Policia policia;
 	Computadora computadora;
 	GeneradorDeCasos generador;
+	ElectorDeLadron elector;
 	
-	public Juego(String nombreJugador) {
+	public Juego(String nombreJugador)
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
 		policia = new Policia(nombreJugador);
-		generador= new GeneradorDeCasos();
+		
+		generador = new GeneradorDeCasos();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+		
+		elector = new ElectorDeLadron();
+		elector.leerXMLDeLadrones();
 	}
 	
-	public void crearPartida (Ladron buscado)
+	public void crearPartida(Ladron buscado)
 	throws ParserConfigurationException, TransformerException, SAXException, IOException{	
-		
-		ElectorDeLadron elector = new ElectorDeLadron();
-		elector.leerXMLDeLadrones();
-		computadora = new Computadora(elector.generarUnLadronBuscado());
-		computadora.setSospechosos(elector.getListaDeLadrones());
+		this.computadora = new Computadora(elector.generarUnLadronBuscado());
+		this.computadora.setSospechosos(elector.getListaDeLadrones());
 		
 		ArrayList<Ciudad> ciudadesPorRecorrer = generador.generarUnCaso();
 		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));

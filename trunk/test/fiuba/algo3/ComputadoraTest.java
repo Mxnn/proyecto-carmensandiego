@@ -70,7 +70,11 @@ public class ComputadoraTest {
 		computadora.setSospechosos(sospechosos);
 		computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
 		
+		computadora.setSospechosos(sospechosos);
+		computadora.setCaracteristicaDelLadron(Ladron.Hobby.CROQUET);
+		
 		computadora.ordenDeArrestoEmitidaContraLadronCorrecto();
+		sospechosos.add(sospechoso1);
     }
 	
 	@Test
