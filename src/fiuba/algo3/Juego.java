@@ -1,13 +1,14 @@
 package fiuba.algo3;
 
 import java.util.ArrayList;
-
 import java.io.IOException;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
 import org.xml.sax.SAXException;
 
-public class Juego {
+public class Juego  {
 	Policia policia;
 	Computadora computadora;
 	GeneradorDeCasos generador;
@@ -24,7 +25,21 @@ public class Juego {
 		elector.leerXMLDeLadrones();
 	}
 	
-	public void crearPartida(Ladron buscado)
+	
+	
+	public Juego(String nombreJugador , ArrayList<Ciudad>ciudadesPorRecorrer,ArrayList<Ladron>ladrones){
+		
+		policia = new Policia(nombreJugador);
+		generador = new GeneradorDeCasos();
+		elector = new ElectorDeLadron();
+		this.computadora = new Computadora(ladrones.get(0));
+		this.computadora.setSospechosos(ladrones);
+		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));
+		ciudadesPorRecorrer.get(ciudadesPorRecorrer.size()-1).esconderAlLadron();
+
+	}
+	
+	public void crearPartida()
 	throws ParserConfigurationException, TransformerException, SAXException, IOException{	
 		this.computadora = new Computadora(elector.generarUnLadronBuscado());
 		this.computadora.setSospechosos(elector.getListaDeLadrones());
@@ -86,10 +101,24 @@ public class Juego {
 		return nombreCiudades;
 	}
 	
-	public void viajar() {
-		
+	public void viajar(String nombreCiudadDestino) throws ExcepcionJugadorSinTiempoDisponible {
+		Ciudad ciudadDestino=buscarCiudadConectadaConNombre (nombreCiudadDestino);
+		policia.viajar(ciudadDestino);
 	}
 	
+	private Ciudad buscarCiudadConectadaConNombre(String nombreCiudadDestino) {
+		ArrayList<String> nombreCiudades = new ArrayList<String>();
+		Ciudad ciudadActual = policia.getCiudadActual();
+		Ciudad ciudadbuscada = null;
+		for (Ciudad ciudad : ciudadActual.getCiudadesConectadas()) {
+			if (ciudad.getNombre()==nombreCiudadDestino){	
+				ciudadbuscada=ciudad;
+			}
+		}
+		return ciudadbuscada;
+	}
+		
+
 	public String emitirOrdenDeArresto() {
 		return this.computadora.emitirOrdenDeArresto();
 	}
@@ -100,4 +129,6 @@ public class Juego {
 			this.policia.arrestarAlLadron(buscado);
 		}
 	}
+
+
 }

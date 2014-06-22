@@ -20,9 +20,13 @@ public class IntegradoresTest {
 		
 		Policia policia = new Policia("Esteban");
 		policia.setCiudadActual(buenosAires);
+		
         Ladron unLadron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
         Computadora computadora = new Computadora(unLadron);
-
+        
+        ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
+		sospechosos.add(unLadron);
+		computadora.setSospechosos(sospechosos);
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
 		policia.visitarEdificioEconomia();
 		policia.visitarEdificioCultural();
@@ -136,6 +140,7 @@ public class IntegradoresTest {
 
         ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso);
+		sospechosos.add(unLadron);
 		computadora.setSospechosos(sospechosos);
         buenosAires.conectarCiudad(londres);
         londres.conectarCiudad(nuevaYork);
@@ -227,6 +232,7 @@ public class IntegradoresTest {
 
         ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso);
+		sospechosos.add(unLadron);
 		computadora.setSospechosos(sospechosos);
         paris.conectarCiudad(londres);
         londres.conectarCiudad(buenosAires);
@@ -336,6 +342,7 @@ public class IntegradoresTest {
 
         ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso);
+		sospechosos.add(unLadron);
 		computadora.setSospechosos(sospechosos);
         buenosAires.conectarCiudad(paris);
         paris.conectarCiudad(toronto);
@@ -426,6 +433,7 @@ public class IntegradoresTest {
 
         ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso);
+		sospechosos.add(unLadron);
 		computadora.setSospechosos(sospechosos);
         buenosAires.conectarCiudad(paris);
         rio.conectarCiudad(buenosAires);

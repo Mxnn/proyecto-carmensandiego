@@ -16,7 +16,6 @@ public class Computadora {
 	public Computadora(Ladron ladronBuscado) {
         this.ladronBuscado = ladronBuscado;
 		this.sospechosos = new ArrayList<Ladron>();
-        this.sospechosos.add(ladronBuscado);
         this.sexoDelLadron = null;
         this.peloDelLadron = null;
         this.hobbyDelLadron = null;
@@ -29,7 +28,7 @@ public class Computadora {
 	//SETTERS:
 	public void setSospechosos(ArrayList<Ladron> ladrones) {
 		this.sospechosos = ladrones;
-		this.sospechosos.add(this.ladronBuscado);
+
 	}
 
 	public void setCaracteristicaDelLadron(Ladron.Sexo sexo) {

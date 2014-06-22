@@ -227,6 +227,7 @@ public class PoliciaTest {
         
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
+		sospechosos.add(buscado);
 		sospechosos.add(sospechoso1);
 		
         computadora.setSospechosos(sospechosos);
@@ -262,7 +263,7 @@ public class PoliciaTest {
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
-		
+		sospechosos.add(buscado);
         computadora.setSospechosos(sospechosos);
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
 
