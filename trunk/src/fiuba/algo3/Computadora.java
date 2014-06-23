@@ -28,7 +28,6 @@ public class Computadora {
 	//SETTERS:
 	public void setSospechosos(ArrayList<Ladron> ladrones) {
 		this.sospechosos = ladrones;
-
 	}
 
 	public void setCaracteristicaDelLadron(Ladron.Sexo sexo) {

@@ -25,10 +25,7 @@ public class Juego  {
 		elector.leerXMLDeLadrones();
 	}
 	
-	
-	
-	public Juego(String nombreJugador , ArrayList<Ciudad>ciudadesPorRecorrer,ArrayList<Ladron>ladrones){
-		
+	public Juego(String nombreJugador, ArrayList<Ciudad> ciudadesPorRecorrer, ArrayList<Ladron> ladrones) {
 		policia = new Policia(nombreJugador);
 		generador = new GeneradorDeCasos();
 		elector = new ElectorDeLadron();
@@ -40,7 +37,7 @@ public class Juego  {
 	}
 	
 	public void crearPartida()
-	throws ParserConfigurationException, TransformerException, SAXException, IOException{	
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {	
 		this.computadora = new Computadora(elector.generarUnLadronBuscado());
 		this.computadora.setSospechosos(elector.getListaDeLadrones());
 		
