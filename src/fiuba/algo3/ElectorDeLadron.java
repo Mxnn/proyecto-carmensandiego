@@ -24,9 +24,7 @@ import fiuba.algo3.Ladron.Sexo;
 public class ElectorDeLadron {
 	public final static String NOMBRE_ARCHIVO_INFO_LADRONES = "archivosXML/CaracteristicasLadrones.xml";
 
-	
 	private ArrayList<Ladron> listaDeLadrones;
-	
 	
 	public ElectorDeLadron() {
 		

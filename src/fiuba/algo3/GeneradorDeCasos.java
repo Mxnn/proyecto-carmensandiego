@@ -82,7 +82,7 @@ public class GeneradorDeCasos {
 
 		for (int i = 0; i < ciudadesPorRecorrer.size(); i++){
 			Ciudad ciudadActual = ciudadesPorRecorrer.get(i);
-            setearCiudadesConectadas(ciudadActual,ciudadesPorRecorrer);
+            setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
 
 			Edificio EdificioEconomicoActual = ciudadActual.getEdificioEconomia();
 			Edificio EdificioTransporteActual = ciudadActual.getEdificioTransporte();
@@ -104,7 +104,7 @@ public class GeneradorDeCasos {
 		return ciudadesPorRecorrer;
 	}
 
-    public void setearCiudadesConectadas(Ciudad ciudadActual,ArrayList<Ciudad> ciudadesPorRecorrer){
+    public void setearCiudadesConectadas(Ciudad ciudadActual, ArrayList<Ciudad> ciudadesPorRecorrer){
 		Random rand = new Random();
 		int posicionCiudadActual= ciudadesPorRecorrer.indexOf(ciudadActual);
 		if (posicionCiudadActual <=4){
@@ -121,6 +121,9 @@ public class GeneradorDeCasos {
 		}
 	}
 
+	/***********************************************************************************************/
+	/*                            PARA TESTEAR COMO SE LEE EL ARCHIVO                             */
+	/***********************************************************************************************/
 	public ArrayList<Ciudad> getCiudades() {
 		return this.ciudades;
 	}
@@ -128,10 +131,7 @@ public class GeneradorDeCasos {
 	public ArrayList<ArrayList<Pista>> getPistasPorCiudad() {
 		return this.pistasDeLasCiudades;
 	}
-
-	/***********************************************************************************************/
-	/*                            PARA TESTEAR COMO SE LEE EL ARCHIVO                             */
-	/***********************************************************************************************/
+	
 	public int estoyLeyendoTodasLasCiudades()
 	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception {
 		File archivo = new File(NOMBRE_ARCHIVO_INFO_CIUDADES);
