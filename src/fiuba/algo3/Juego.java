@@ -126,6 +126,9 @@ public class Juego  {
 			this.policia.arrestarAlLadron(buscado);
 		}
 	}
-
+	public String getTiempoDisponible (){
+		return Integer.toString(policia.getTiempoDisponible());
+	}
+	
 
 }
