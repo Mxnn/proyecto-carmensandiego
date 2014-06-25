@@ -113,7 +113,7 @@ public class CiudadTest {
 		paris.conectarCiudad(buenosAires);
 		
         Assert.assertTrue(londres.cantidadDeCiudadesConectadas() == 1);
-		Assert.assertTrue(paris.cantidadDeCiudadesConectadas() == 1);
+		Assert.assertTrue(paris.cantidadDeCiudadesConectadas() == 2);
     }
 	
 	@Test

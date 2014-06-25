@@ -75,7 +75,48 @@ public class ElectorDeLadron {
 	public Ladron generarUnLadronBuscado() {
 		Random rand = new Random();
 		int posicion = rand.nextInt(this.listaDeLadrones.size());
-		return listaDeLadrones.get(posicion);
+		Ladron buscado=listaDeLadrones.get(posicion);
+		return buscado;
+
+		
+	}
+
+	void setearPistasDelLadronBuscado(Ladron buscado,ArrayList <Ciudad> ciudadesPorRecorrer) throws ParserConfigurationException, SAXException, IOException {
+		
+	
+		File archivo = new File(NOMBRE_ARCHIVO_INFO_LADRONES);
+
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		Document doc = dBuilder.parse(archivo);
+
+		NodeList listaNodosLadrones = doc.getElementsByTagName("Ladron");
+
+		for (int i = 0; i < listaNodosLadrones.getLength(); i++) {
+			Element elementoLadron = (Element)listaNodosLadrones.item(i);
+
+			if (elementoLadron.getAttribute("Nombre")==buscado.getNombre()){		
+				NodeList listaNodosCaracteristicas = elementoLadron.getElementsByTagName("Caracteristica");
+				
+				Element elementoCaracteristica = (Element)listaNodosCaracteristicas.item(0);	
+				ciudadesPorRecorrer.get(0).getEdificioCultural().setPistaLadron(elementoCaracteristica.getAttribute("PistaSexo"));
+						
+				elementoCaracteristica = (Element)listaNodosCaracteristicas.item(1);	
+				ciudadesPorRecorrer.get(1).getEdificioTransporte().setPistaLadron(elementoCaracteristica.getAttribute("PistaPelo"));
+	
+			
+				elementoCaracteristica = (Element)listaNodosCaracteristicas.item(2);	
+				ciudadesPorRecorrer.get(2).getEdificioEconomia().setPistaLadron(elementoCaracteristica.getAttribute("PistaHobby"));
+	
+				elementoCaracteristica = (Element)listaNodosCaracteristicas.item(3);	
+				ciudadesPorRecorrer.get(3).getEdificioEconomia().setPistaLadron(elementoCaracteristica.getAttribute("PistaAuto"));
+				
+				elementoCaracteristica = (Element)listaNodosCaracteristicas.item(4);	
+				ciudadesPorRecorrer.get(4).getEdificioCultural().setPistaLadron(elementoCaracteristica.getAttribute("PistaMarcaPersonal"));
+					
+			}
+				
+		}	
 	}
 }
 		

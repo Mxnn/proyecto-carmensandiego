@@ -1,6 +1,8 @@
+
 package fiuba.algo3;
 import java.awt.geom.Arc2D.Double;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -40,8 +42,9 @@ public class Ciudad {
     }
 
 	public boolean conectarCiudad(Ciudad ciudad) {
-        if ( (ciudad != this) && (!this.estaConectadaConEstaCiudad(ciudad)) ) {
+        if ( (ciudad != this) && (!estaConectadaConEstaCiudad(ciudad)) ) {
 			this.ciudadesConectadas.add(ciudad);
+			ciudad.ciudadesConectadas.add(this);
         	return true;
         }
         return false;
@@ -110,6 +113,8 @@ public class Ciudad {
         return this.acaEstaElLadron;
     }
 	
+
+    
 	//PRIVADOS:
 	private Edificio enEsteEdificioHiereAlPolicia(Policia policia) {
 		int caracteresNombre = policia.getNombre().length();

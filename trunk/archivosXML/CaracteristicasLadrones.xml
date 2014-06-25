@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <TODOSLOSLADRONES>
 	<Ladron Nombre="Nick Brunch">
-		<Caracteristica Sexo="MASCULINO"/>
-		<Caracteristica Pelo="NEGRO"/>
-		<Caracteristica Hobby="ALPINISMO"/>
-		<Caracteristica Auto="MOTO"/>
-		<Caracteristica MarcaPersonal="ANILLO"/>
+		<Caracteristica Sexo="MASCULINO" />
+		<Caracteristica Pelo="NEGRO" />
+		<Caracteristica Hobby="ALPINISMO" />
+		<Caracteristica Auto="MOTO" />
+		<Caracteristica MarcaPersonal="ANILLO" />
 	</Ladron>
 
 	<Ladron Nombre="Len Bulk">
-		<Caracteristica Sexo="MASCULINO"/>
-		<Caracteristica Pelo="ROJO"/>
-		<Caracteristica Hobby="ALPINISMO"/>
-		<Caracteristica Auto="CONVERTIBLE"/>
+		<Caracteristica Sexo="MASCULINO" />
+		<Caracteristica Pelo="ROJO" />
+		<Caracteristica Hobby="ALPINISMO" />
+		<Caracteristica Auto="CONVERTIBLE" />
 		<Caracteristica MarcaPersonal="TATUAJE"/>
 	</Ladron>
 	
 	<Ladron Nombre="Ihor Ihorovitch">
-		<Caracteristica Sexo="MASCULINO"/>
-		<Caracteristica Pelo="RUBIO"/>
+		<Caracteristica Sexo="MASCULINO" />
+		<Caracteristica Pelo="RUBIO" />
 		<Caracteristica Hobby="TENNIS"/>
-		<Caracteristica Auto="LIMUSINA"/>
-		<Caracteristica MarcaPersonal="CICATRIZ"/>
+		<Caracteristica Auto="LIMUSINA" />
+		<Caracteristica MarcaPersonal="CICATRIZ" />
 	</Ladron>
 	
 	<Ladron Nombre="Fast Eddie B.">
-		<Caracteristica Sexo="MASCULINO"/>
-		<Caracteristica Pelo="NEGRO"/>
-		<Caracteristica Hobby="TENNIS"/>
-		<Caracteristica Auto="CONVERTIBLE"/>
-		<Caracteristica MarcaPersonal="CICATRIZ"/>
+		<Caracteristica Sexo="MASCULINO" />
+		<Caracteristica Pelo="NEGRO" />
+		<Caracteristica Hobby="TENNIS" />
+		<Caracteristica Auto="CONVERTIBLE" />
+		<Caracteristica MarcaPersonal="CICATRIZ" />
 	</Ladron>
 	
 	<Ladron Nombre="Scar Graynolt">
-		<Caracteristica Sexo="MASCULINO"/>
-		<Caracteristica Pelo="ROJO"/>
-		<Caracteristica Hobby="CROQUET"/>
-		<Caracteristica Auto="CONVERTIBLE"/>
-		<Caracteristica MarcaPersonal="ANILLO"/>
+		<Caracteristica Sexo="MASCULINO" />
+		<Caracteristica Pelo="ROJO" />
+		<Caracteristica Hobby="CROQUET" />
+		<Caracteristica Auto="CONVERTIBLE" />
+		<Caracteristica MarcaPersonal="ANILLO" />
 	</Ladron>
 	
 	<Ladron Nombre="Merey Laroc">
-		<Caracteristica Sexo="FEMENINO"/>
+		<Caracteristica Sexo="FEMENINO"  />
 		<Caracteristica Pelo="MARRON"/>
-		<Caracteristica Hobby="ALPINISMO"/>
-		<Caracteristica Auto="LIMUSINA"/>
-		<Caracteristica MarcaPersonal="CICATRIZ"/>
+		<Caracteristica Hobby="ALPINISMO" />
+		<Caracteristica Auto="LIMUSINA" />
+		<Caracteristica MarcaPersonal="CICATRIZ" />
 	</Ladron>
 	
 	<Ladron Nombre="Lady Agatha">
-		<Caracteristica Sexo="FEMENINO"/>
-		<Caracteristica Pelo="ROJO"/>
-		<Caracteristica Hobby="TENNIS"/>
-		<Caracteristica Auto="CONVERTIBLE"/>
-		<Caracteristica MarcaPersonal="ANILLO"/>
+		<Caracteristica Sexo="FEMENINO" />
+		<Caracteristica Pelo="ROJO" />
+		<Caracteristica Hobby="TENNIS" />
+		<Caracteristica Auto="CONVERTIBLE" />
+		<Caracteristica MarcaPersonal="ANILLO" />
 	</Ladron>
 	
 	<Ladron Nombre="Katherine Drib">
 		<Caracteristica Sexo="FEMENINO"/>
-		<Caracteristica Pelo="MARRON"/>
-		<Caracteristica Hobby="ALPINISMO"/>
-		<Caracteristica Auto="MOTO"/>
-		<Caracteristica MarcaPersonal="TATUAJE"/>
+		<Caracteristica Pelo="MARRON" />
+		<Caracteristica Hobby="ALPINISMO" />
+		<Caracteristica Auto="MOTO" />
+		<Caracteristica MarcaPersonal="TATUAJE" />
 	</Ladron>
 	
 	<Ladron Nombre="Dazzle Annie">
 		<Caracteristica Sexo="FEMENINO"/>
-		<Caracteristica Pelo="RUBIO"/>
-		<Caracteristica Hobby="TENNIS"/>
-		<Caracteristica Auto="LIMUSINA"/>
-		<Caracteristica MarcaPersonal="TATUAJE"/>
+		<Caracteristica Pelo="RUBIO" />
+		<Caracteristica Hobby="TENNIS" />
+		<Caracteristica Auto="LIMUSINA" />
+		<Caracteristica MarcaPersonal="TATUAJE" />
 	</Ladron>
 	
 	<Ladron Nombre="Carmen Sandiego">
 		<Caracteristica Sexo="FEMENINO"/>
-		<Caracteristica Pelo="MARRON"/>
-		<Caracteristica Hobby="TENNIS"/>
-		<Caracteristica Auto="CONVERTIBLE"/>
-		<Caracteristica MarcaPersonal="CICATRIZ"/>
+		<Caracteristica Pelo="MARRON" />
+		<Caracteristica Hobby="TENNIS" />
+		<Caracteristica Auto="CONVERTIBLE" />
+		<Caracteristica MarcaPersonal="CICATRIZ" />
 	</Ladron>
 </TODOSLOSLADRONES>

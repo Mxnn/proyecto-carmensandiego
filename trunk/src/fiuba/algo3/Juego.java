@@ -39,12 +39,14 @@ public class Juego  {
 	
 	public void crearPartida()
 	throws ParserConfigurationException, TransformerException, SAXException, IOException {	
-		this.computadora = new Computadora(elector.generarUnLadronBuscado());
+		Ladron buscado=elector.generarUnLadronBuscado();
+		this.computadora = new Computadora(buscado);
 		this.computadora.setSospechosos(elector.getListaDeLadrones());
 		
 		ArrayList<Ciudad> ciudadesPorRecorrer = generador.generarUnCaso();
 		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));
 		ciudadesPorRecorrer.get(5).esconderAlLadron();
+		elector.setearPistasDelLadronBuscado(buscado,ciudadesPorRecorrer);
 	}
 	
 	public boolean corroborarQueElLadronBuscadoFueArrestado() throws ExcepcionOrdenDeArrestoNoEmitida {

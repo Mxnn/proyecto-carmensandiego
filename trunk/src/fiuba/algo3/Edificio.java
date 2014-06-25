@@ -16,7 +16,12 @@ public class Edificio {
         this.pistaNivelIntermedia = unaPistaNivelIntermedia;
         this.pistaNivelDificil = unaPistaNivelDificil;
     }
-
+    
+    public void setPistaLadron(String pista){
+    	pistaNivelFacil.setPistaLadron(pista);
+    	pistaNivelIntermedia.setPistaLadron(pista);
+    	pistaNivelDificil.setPistaLadron(pista);
+    }
     public String getPista(Novato novato) {
         return this.pistaNivelFacil.getPista();
     }

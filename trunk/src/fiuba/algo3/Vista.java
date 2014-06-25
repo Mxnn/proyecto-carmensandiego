@@ -48,11 +48,14 @@ public class Vista {
 		controlador.pedirOpcionComputadora();
 	}
 
-	private void mostrarOpcionOrdenDeArresto() {
-		// TODO Auto-generated method stub
-		
+	void mostrarOrdenDeArrestoEmitida(String nombreLadron) {
+		System.out.println ("Se ha emitido una orden de arrestro contra "+nombreLadron);
 	}
-
+	
+	void mostrarOrdenDeArrestoNoEmitida() {
+		System.out.println ("Lamentablemente necesitamos mas informacion para poder emitir una orden de arresto");
+	}
+	
 	void mostrarOpcionFiltrar(){
 		System.out.println ("Que tipo de caracteristica del ladron desea filtrar?");
 		System.out.println ("1. Sexo.");		
@@ -126,6 +129,7 @@ public class Vista {
 		imprimirCiudadActual();
 		imprimirTiempoDisponible();			
 		System.out.println ("A donde desea viajar?");	
+		Collections.sort(nombresCiudades);
 		int numeroOpcion=1;
 		for(String ciudad:nombresCiudades){
 			System.out.println (numeroOpcion+". "+ciudad+".");
