@@ -33,7 +33,6 @@ public class Juego  {
 		this.computadora.setSospechosos(ladrones);
 		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));
 		ciudadesPorRecorrer.get(ciudadesPorRecorrer.size()-1).esconderAlLadron();
-
 	}
 
 	public void crearPartida()
@@ -56,6 +55,18 @@ public class Juego  {
 	public boolean elPoliciaLlegoAlFinalDelRecorrido() {
 		Ciudad ciudadActualDelPolicia = this.policia.getCiudadActual();
 		return (this.policia.yaVisitoTresEdificios() && ciudadActualDelPolicia.escondeAlLadron());
+	}
+	
+	public String getTiempoDisponible (){
+		return Integer.toString(policia.getTiempoDisponible());
+	}
+
+	public void cerrarJuego() {
+		System.exit(0); 
+	}
+	
+	public String getCiudadActualDelPolicia(){
+		return policia.getCiudadActual().getNombre();
 	}
 	
 	//ACCIONES PERMITIDAS AL JUGADOR:
@@ -101,23 +112,21 @@ public class Juego  {
 	}
 	
 	public void viajar(String nombreCiudadDestino) throws ExcepcionTiempoAgotado {
-		Ciudad ciudadDestino = buscarCiudadConectadaConNombre (nombreCiudadDestino);
+		Ciudad ciudadDestino = buscarCiudadConectadaConNombre(nombreCiudadDestino);
 		policia.viajar(ciudadDestino);
 	}
 	
 	private Ciudad buscarCiudadConectadaConNombre(String nombreCiudadDestino) {
-		ArrayList<String> nombreCiudades = new ArrayList<String>();
 		Ciudad ciudadActual = policia.getCiudadActual();
 		Ciudad ciudadbuscada = null;
 		for (Ciudad ciudad : ciudadActual.getCiudadesConectadas()) {
-			if (ciudad.getNombre()==nombreCiudadDestino){	
-				ciudadbuscada=ciudad;
+			if (ciudad.getNombre() == nombreCiudadDestino) {	
+				ciudadbuscada = ciudad;
 			}
 		}
 		return ciudadbuscada;
 	}
 		
-
 	public String emitirOrdenDeArresto() {
 		return this.computadora.emitirOrdenDeArresto();
 	}
@@ -128,18 +137,4 @@ public class Juego  {
 			this.policia.arrestarAlLadron(buscado);
 		}
 	}
-	public String getTiempoDisponible (){
-		return Integer.toString(policia.getTiempoDisponible());
-	}
-
-	public void cerrarJuego() {
-		System.exit(0); 
-	}
-	
-	public String getCiudadActualDelPolicia(){
-		
-		return policia.getCiudadActual().getNombre();
-		
-	}
-
 }
