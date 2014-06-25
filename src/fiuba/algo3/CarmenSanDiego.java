@@ -9,14 +9,13 @@ import org.xml.sax.SAXException;
 
 public class CarmenSanDiego {
 
-	public static void main(String[] args) throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionJugadorSinTiempoDisponible {
+	public static void main(String[] args) 
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
 
-		Juego juego=new Juego("Policia");
+		Juego juego = new Juego("Policia");
 		juego.crearPartida();
-		Controlador controlador= new Controlador(juego);
-		Vista vista=controlador.getVista();
+		Controlador controlador = new Controlador(juego);
+		Vista vista = controlador.getVista();
 		vista.mostrarInicio();
-
 	}
-
 }

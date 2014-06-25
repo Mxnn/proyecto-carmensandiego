@@ -44,7 +44,7 @@ public class PoliciaTest {
     }
 	
 	@Test
-	public void getCiudadActualDevuelveLaCiudadDondeEstaElPolicia() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getCiudadActualDevuelveLaCiudadDondeEstaElPolicia() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -53,7 +53,7 @@ public class PoliciaTest {
 	}
 	
 	@Test
-	public void yaVisitoTresEdificiosDevuelveTrueSiVisitaTresEdificios() throws ExcepcionJugadorSinTiempoDisponible {
+	public void yaVisitoTresEdificiosDevuelveTrueSiVisitaTresEdificios() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -66,14 +66,14 @@ public class PoliciaTest {
 	}
 	
 	@Test
-	public void yaVisitoTresEdificiosDevuelveFalseSiNoVisitaEdificios() throws ExcepcionJugadorSinTiempoDisponible {
+	public void yaVisitoTresEdificiosDevuelveFalseSiNoVisitaEdificios() throws ExcepcionTiempoAgotado {
 		Policia unPolicia = new Policia("Nicolas");
 		
 		Assert.assertFalse(unPolicia.yaVisitoTresEdificios());
 	}
 	
 	@Test
-	public void yaVisitoTresEdificiosDevuelveTrueSiVisitaMenosDeTresEdificios() throws ExcepcionJugadorSinTiempoDisponible {
+	public void yaVisitoTresEdificiosDevuelveTrueSiVisitaMenosDeTresEdificios() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -85,7 +85,7 @@ public class PoliciaTest {
 	}
 
     @Test
-    public void viajarAUnaCiudadSiTieneTiempoCambiaLaCiudadActual() throws ExcepcionJugadorSinTiempoDisponible {
+    public void viajarAUnaCiudadSiTieneTiempoCambiaLaCiudadActual() throws ExcepcionTiempoAgotado {
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -97,7 +97,7 @@ public class PoliciaTest {
     }
 
 	@Test
-    public void viajarAUnaCiudadSiTieneTiempoLeRestaElTiempoCorrespondiente() throws ExcepcionJugadorSinTiempoDisponible{
+    public void viajarAUnaCiudadSiTieneTiempoLeRestaElTiempoCorrespondiente() throws ExcepcionTiempoAgotado{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -108,8 +108,8 @@ public class PoliciaTest {
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 3);
     }
 
-    @Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-    public void viajarAUnaCiudadSiNoLeQuedaTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+    @Test (expected = ExcepcionTiempoAgotado.class)
+    public void viajarAUnaCiudadSiNoLeQuedaTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -120,8 +120,8 @@ public class PoliciaTest {
         unPolicia.viajar(ciudadDestino);
     }
 
-	@Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-    public void viajarAUnaCiudadSiNoLeQuedaTiempoLanzaExcepcionYNoCambiaLaCiudadActual() throws ExcepcionJugadorSinTiempoDisponible{
+	@Test (expected = ExcepcionTiempoAgotado.class)
+    public void viajarAUnaCiudadSiNoLeQuedaTiempoLanzaExcepcionYNoCambiaLaCiudadActual() throws ExcepcionTiempoAgotado{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -133,8 +133,8 @@ public class PoliciaTest {
         Assert.assertEquals(unPolicia.getCiudadActual(), ciudadSalida);
     }
 
-	@Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-    public void viajarAUnaCiudadConectadaSiNoLeQuedaTiempoLanzaExcepcionYNoLeRestaTiempo() throws ExcepcionJugadorSinTiempoDisponible{
+	@Test (expected = ExcepcionTiempoAgotado.class)
+    public void viajarAUnaCiudadConectadaSiNoLeQuedaTiempoLanzaExcepcionYNoLeRestaTiempo() throws ExcepcionTiempoAgotado{
         Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -148,7 +148,7 @@ public class PoliciaTest {
     }
 	
 	@Test
-	public void yaVisitoTresEdificiosDevuelveFalseSiVisitaTresEdificiosYLuegoViaja() throws ExcepcionJugadorSinTiempoDisponible {
+	public void yaVisitoTresEdificiosDevuelveFalseSiVisitaTresEdificiosYLuegoViaja() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
         Policia unPolicia = new Policia("Nicolas");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -164,7 +164,7 @@ public class PoliciaTest {
 	}
 	
 	@Test
-	public void visitarUnEdificioDevuelveUnaPista() throws ExcepcionJugadorSinTiempoDisponible {
+	public void visitarUnEdificioDevuelveUnaPista() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -173,7 +173,7 @@ public class PoliciaTest {
 	}
 
 	@Test
-	public void visitarUnEdificioRestaUnaHora() throws ExcepcionJugadorSinTiempoDisponible {
+	public void visitarUnEdificioRestaUnaHora() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -184,7 +184,7 @@ public class PoliciaTest {
 	}
 
 	@Test
-	public void visitarDosEdificiosRestaTresHoras() throws ExcepcionJugadorSinTiempoDisponible {
+	public void visitarDosEdificiosRestaTresHoras() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -196,7 +196,7 @@ public class PoliciaTest {
 	}
 
 	@Test
-	public void visitarTresEdificiosRestaSeisHoras() throws ExcepcionJugadorSinTiempoDisponible {
+	public void visitarTresEdificiosRestaSeisHoras() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -208,8 +208,8 @@ public class PoliciaTest {
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - 6);
 	}
 
-    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
-    public void visitarEdificioSinTiempoDisponibleLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+    @Test(expected = ExcepcionTiempoAgotado.class)
+    public void visitarEdificioSinTiempoDisponibleLanzaExcepcion() throws ExcepcionTiempoAgotado {
         Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio");
 		unPolicia.setCiudadActual(ciudadSalida);
@@ -220,7 +220,7 @@ public class PoliciaTest {
 
     @Test
     public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraAlgunLadron() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -238,7 +238,7 @@ public class PoliciaTest {
 
     @Test
     public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraUnSospechosoQueNoEsElBuscado() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
 		Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -255,7 +255,7 @@ public class PoliciaTest {
 
     @Test
     public void emitirOrdenDeArrestoDevuelveUnStringVacioSiHayMasDeUnSospechosoConLasCaracteristicasFijadas() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -272,7 +272,7 @@ public class PoliciaTest {
     
     @Test
     public void emitirOrdenDeArrestoRestaTiempoSiElLadronEsElBuscado() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -290,7 +290,7 @@ public class PoliciaTest {
 
     @Test
     public void emitirOrdenDeArrestoRestaTiempoSiElLadronNoEsElBuscado() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -306,8 +306,8 @@ public class PoliciaTest {
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
     }
 
-    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
-    public void emitirOrdenDeArrestoSinTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+    @Test(expected = ExcepcionTiempoAgotado.class)
+    public void emitirOrdenDeArrestoSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
         Computadora computadora = new Computadora(buscado);
@@ -323,7 +323,7 @@ public class PoliciaTest {
 
     @Test
     public void policiaArrestaAlLadron() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
 	
@@ -333,7 +333,7 @@ public class PoliciaTest {
     }
 	
 	@Test 
-	public void recibirHeridaDescuentaTiempo() throws ExcepcionJugadorSinTiempoDisponible {
+	public void recibirHeridaDescuentaTiempo() throws ExcepcionTiempoAgotado {
 		Policia policia = new Policia("Juancito");
 		
 		policia.recibirHerida();
@@ -341,8 +341,8 @@ public class PoliciaTest {
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
-	@Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-	public void recibirHeridaLanzaExcepcionSiNoHayTiempo() throws ExcepcionJugadorSinTiempoDisponible {
+	@Test (expected = ExcepcionTiempoAgotado.class)
+	public void recibirHeridaLanzaExcepcionSiNoHayTiempo() throws ExcepcionTiempoAgotado {
 		Policia policia = new Policia("Juancito");
 		policia.setTiempoDisponible(1);
 		

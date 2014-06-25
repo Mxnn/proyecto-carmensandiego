@@ -55,7 +55,7 @@ public class Policia {
 		return this.edificiosVisitadosEnEstaCiudad == 3;
 	}
 
-    public void viajar(Ciudad ciudadDestino) throws ExcepcionJugadorSinTiempoDisponible {
+    public void viajar(Ciudad ciudadDestino) throws ExcepcionTiempoAgotado {
 		Coordenada coordenadasCiudadActual = (this.ciudadActual).getCoordenadas();
 		
 		double distanciaEnKM = coordenadasCiudadActual.calcularDistancia(ciudadDestino.getCoordenadas());
@@ -66,25 +66,25 @@ public class Policia {
 		this.edificiosVisitadosEnEstaCiudad = 0;
     }
 
-	public String visitarEdificioEconomia() throws ExcepcionJugadorSinTiempoDisponible {
+	public String visitarEdificioEconomia() throws ExcepcionTiempoAgotado {
 		descuentoDeTiempoPorVisitarEdificio();
 		Edificio edificio = this.ciudadActual.getEdificioEconomia(this);
 		return this.rango.pedirPista(edificio);
 	}
 
-	public String visitarEdificioCultural() throws ExcepcionJugadorSinTiempoDisponible {
+	public String visitarEdificioCultural() throws ExcepcionTiempoAgotado {
 		descuentoDeTiempoPorVisitarEdificio();
 		Edificio edificio = this.ciudadActual.getEdificioCultural(this);
 		return this.rango.pedirPista(edificio);
 	}
 
-	public String visitarEdificioTransporte() throws ExcepcionJugadorSinTiempoDisponible {
+	public String visitarEdificioTransporte() throws ExcepcionTiempoAgotado {
 		descuentoDeTiempoPorVisitarEdificio();
 		Edificio edificio = this.ciudadActual.getEdificioTransporte(this);
 		return this.rango.pedirPista(edificio);
 	}
 
-    public String emitirOrdenDeArresto(Computadora computadora) throws ExcepcionJugadorSinTiempoDisponible {
+    public String emitirOrdenDeArresto(Computadora computadora) throws ExcepcionTiempoAgotado {
         descontarTiempo(TIEMPO_POR_EMITIR_ORDEN_DE_ARRESTO);
         return computadora.emitirOrdenDeArresto();
     }
@@ -93,12 +93,12 @@ public class Policia {
 		buscado.recibirArresto();
 	}
 	
-	public void recibirHerida() throws ExcepcionJugadorSinTiempoDisponible {
+	public void recibirHerida() throws ExcepcionTiempoAgotado {
 		descontarTiempo(TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
 	//PRIVADOS
-	private void descuentoDeTiempoPorVisitarEdificio() throws ExcepcionJugadorSinTiempoDisponible {
+	private void descuentoDeTiempoPorVisitarEdificio() throws ExcepcionTiempoAgotado {
 		if (edificiosVisitadosEnEstaCiudad == 0) {
             this.descontarTiempo(TIEMPO_POR_ENTRAR_AL_PRIMER_EDIFICIO);
 		} else if (edificiosVisitadosEnEstaCiudad == 1){
@@ -109,11 +109,11 @@ public class Policia {
 		this.edificiosVisitadosEnEstaCiudad += 1;
 	}
 
-    private void descontarTiempo(int cantidad) throws ExcepcionJugadorSinTiempoDisponible {
+    private void descontarTiempo(int cantidad) throws ExcepcionTiempoAgotado {
         if (cantidad <= this.tiempoDisponible) {
             this.tiempoDisponible -= cantidad;
         }
         else
-            throw new ExcepcionJugadorSinTiempoDisponible();
+            throw new ExcepcionTiempoAgotado();
     }
 }

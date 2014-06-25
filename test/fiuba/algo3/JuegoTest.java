@@ -29,9 +29,9 @@ public class JuegoTest {
 		Assert.assertFalse(juego.elPoliciaLlegoAlFinalDelRecorrido());
 		juego.corroborarQueElLadronBuscadoFueArrestado();
 	}
-	@Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
-	public void SeLanzaLaExcepcionDeJugadorSinTiempoDisponibleSiSeLeAcabaElTiempoALPoliciaPorPedirPistas() 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionJugadorSinTiempoDisponible {
+	@Test(expected = ExcepcionTiempoAgotado.class)
+	public void SeLanzaLaExcepcionDeTiempoAgotadoSiSeLeAcabaElTiempoALPoliciaPorPedirPistas() 
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionTiempoAgotado {
 		Juego juego=new Juego("Gonzalo");
 		Assert.assertNotNull(juego);
 		Ladron buscado= new Ladron ("Juan", Sexo.MASCULINO, Pelo.ROJO, Hobby.TENNIS, Auto.LIMUSINA, MarcaPersonal.ANILLO);
@@ -45,9 +45,9 @@ public class JuegoTest {
 		juego.verPistaEconomia();
 
 	}
-	@Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
-	public void SeLanzaLaExcepcionDeJugadorSinTiempoDisponibleSiSeLeAcabaElTiempoALPoliciaPorViajar() 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionJugadorSinTiempoDisponible {
+	@Test(expected = ExcepcionTiempoAgotado.class)
+	public void SeLanzaLaExcepcionDeTiempoAgotadoSiSeLeAcabaElTiempoALPoliciaPorViajar() 
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionTiempoAgotado {
 		Juego juego=new Juego("Gonzalo");
 		Assert.assertNotNull(juego);
 		Ladron buscado= new Ladron ("Juan", Sexo.MASCULINO, Pelo.ROJO, Hobby.TENNIS, Auto.LIMUSINA, MarcaPersonal.ANILLO);
@@ -62,7 +62,7 @@ public class JuegoTest {
 	
 	@Test
 	public void elPoliciaLlegoAlFinalDevuelveTrueSiEstaEnLaCiudadFinalYVisitoLosTresLugares() 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionJugadorSinTiempoDisponible {
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionTiempoAgotado {
 		ArrayList <Ciudad>ciudades=new ArrayList<Ciudad>();
 		ciudades.add (new Ciudad ("Buenos Aires",new Coordenada(5241.0,8475.0)));
 		ciudades.add (new Ciudad ("Madrid",new Coordenada(4781.0,5379.0)));	
@@ -83,7 +83,7 @@ public class JuegoTest {
 	
 	@Test
 	public void corroborarQueElLadronBUscadoFueArrestadoDevuelvoFalseSiSeEmitioUNaOrdenDeArrestoContraElLadronEquivocado() 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionJugadorSinTiempoDisponible {
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionTiempoAgotado {
 		ArrayList <Ciudad>ciudades=new ArrayList<Ciudad>();
 		ciudades.add (new Ciudad ("Buenos Aires",new Coordenada(5241.0,8475.0)));
 		ciudades.add (new Ciudad ("Madrid",new Coordenada(4781.0,5379.0)));	
@@ -105,7 +105,7 @@ public class JuegoTest {
 	}
 	@Test
 	public void emitirOrdenDeArrestoDevuelveElNombreDelLadronBUscadoCUandoSeAplicanLosFiltrosCorectos() 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionJugadorSinTiempoDisponible {
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionTiempoAgotado {
 		ArrayList <Ciudad>ciudades=new ArrayList<Ciudad>();
 		ciudades.add (new Ciudad ("Buenos Aires",new Coordenada(5241.0,8475.0)));
 		ciudades.add (new Ciudad ("Madrid",new Coordenada(4781.0,5379.0)));	
@@ -128,7 +128,7 @@ public class JuegoTest {
 	}
 	@Test
 	public void corroborarQueElLadronBUscadoFueArrestadoCuandoEfectivamenteSePudoAtraparAlLadron() 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionJugadorSinTiempoDisponible {
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionTiempoAgotado {
 		ArrayList <Ciudad>ciudades=new ArrayList<Ciudad>();
 		ciudades.add (new Ciudad ("Buenos Aires",new Coordenada(5241.0,8475.0)));
 		ciudades.add (new Ciudad ("Madrid",new Coordenada(4781.0,5379.0)));	
@@ -150,7 +150,7 @@ public class JuegoTest {
 	}	
 	@Test(expected = ExcepcionOrdenDeArrestoNoEmitida.class)
 	public void corroborarQueElLadronBUscadoNoFueArrestadoSiNoSeEmitioLaOrdenAunqueEsteEnLaCiudadFinal() 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionJugadorSinTiempoDisponible {
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionOrdenDeArrestoNoEmitida, ExcepcionTiempoAgotado {
 		ArrayList <Ciudad>ciudades=new ArrayList<Ciudad>();
 		ciudades.add (new Ciudad ("Buenos Aires",new Coordenada(5241.0,8475.0)));
 		ciudades.add (new Ciudad ("Madrid",new Coordenada(4781.0,5379.0)));	

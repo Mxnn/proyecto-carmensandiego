@@ -36,17 +36,16 @@ public class Juego  {
 
 	}
 
-	
 	public void crearPartida()
 	throws ParserConfigurationException, TransformerException, SAXException, IOException {	
-		Ladron buscado=elector.generarUnLadronBuscado();
+		Ladron buscado = elector.generarUnLadronBuscado();
 		this.computadora = new Computadora(buscado);
 		this.computadora.setSospechosos(elector.getListaDeLadrones());
 		
 		ArrayList<Ciudad> ciudadesPorRecorrer = generador.generarUnCaso();
 		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));
 		ciudadesPorRecorrer.get(5).esconderAlLadron();
-		elector.setearPistasDelLadronBuscado(buscado,ciudadesPorRecorrer);
+		elector.setPistasDelLadronBuscado(buscado, ciudadesPorRecorrer);
 	}
 	
 	public boolean corroborarQueElLadronBuscadoFueArrestado() throws ExcepcionOrdenDeArrestoNoEmitida {
@@ -80,15 +79,15 @@ public class Juego  {
 		this.computadora.setCaracteristicaDelLadron(marcaPersonal);
 	}
 	
-	public String verPistaEconomia() throws ExcepcionJugadorSinTiempoDisponible {
+	public String verPistaEconomia() throws ExcepcionTiempoAgotado {
 		return this.policia.visitarEdificioEconomia();
 	}
 	
-	public String verPistaCultural() throws ExcepcionJugadorSinTiempoDisponible {
+	public String verPistaCultural() throws ExcepcionTiempoAgotado {
 		return this.policia.visitarEdificioCultural();
 	}
 	
-	public String verPistaTransporte() throws ExcepcionJugadorSinTiempoDisponible {
+	public String verPistaTransporte() throws ExcepcionTiempoAgotado {
 		return this.policia.visitarEdificioTransporte();
 	}
 	
@@ -101,8 +100,8 @@ public class Juego  {
 		return nombreCiudades;
 	}
 	
-	public void viajar(String nombreCiudadDestino) throws ExcepcionJugadorSinTiempoDisponible {
-		Ciudad ciudadDestino=buscarCiudadConectadaConNombre (nombreCiudadDestino);
+	public void viajar(String nombreCiudadDestino) throws ExcepcionTiempoAgotado {
+		Ciudad ciudadDestino = buscarCiudadConectadaConNombre (nombreCiudadDestino);
 		policia.viajar(ciudadDestino);
 	}
 	
@@ -136,6 +135,7 @@ public class Juego  {
 	public void cerrarJuego() {
 		System.exit(0); 
 	}
+	
 	public String getCiudadActualDelPolicia(){
 		
 		return policia.getCiudadActual().getNombre();

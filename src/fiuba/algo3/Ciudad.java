@@ -83,21 +83,21 @@ public class Ciudad {
 		return this.edificioTransporte;
     }
 
-    public Edificio getEdificioCultural(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
+    public Edificio getEdificioCultural(Policia policia) throws ExcepcionTiempoAgotado {
         if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioCultural) {
 			policia.recibirHerida();
 		}
 		return this.edificioCultural;
     }
 
-    public Edificio getEdificioEconomia(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
+    public Edificio getEdificioEconomia(Policia policia) throws ExcepcionTiempoAgotado {
         if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioEconomia) {
 			policia.recibirHerida();
 		}
 		return this.edificioEconomia;
     }
 
-    public Edificio getEdificioTransporte(Policia policia) throws ExcepcionJugadorSinTiempoDisponible {
+    public Edificio getEdificioTransporte(Policia policia) throws ExcepcionTiempoAgotado {
         int caracteresNombre = this.nombre.length();
 		if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioTransporte) {
 			policia.recibirHerida();

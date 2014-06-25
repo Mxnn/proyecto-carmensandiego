@@ -180,7 +180,7 @@ public class CiudadTest {
     }
 	
 	@Test
-	public void getEdificioCulturalQueRecibePoliciaHiereAlPolicia() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioCulturalQueRecibePoliciaHiereAlPolicia() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -193,8 +193,8 @@ public class CiudadTest {
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
-	@Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-	public void getEdificioCulturalQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+	@Test (expected = ExcepcionTiempoAgotado.class)
+	public void getEdificioCulturalQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -207,7 +207,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioEconomiaQueRecibePoliciaHiereAlPolicia() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioEconomiaQueRecibePoliciaHiereAlPolicia() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -220,8 +220,8 @@ public class CiudadTest {
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
-	@Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-	public void getEdificioEconomiaQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+	@Test (expected = ExcepcionTiempoAgotado.class)
+	public void getEdificioEconomiaQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -234,7 +234,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioTransporteQueRecibePoliciaHiereAlPolicia() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioTransporteQueRecibePoliciaHiereAlPolicia() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -247,8 +247,8 @@ public class CiudadTest {
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
-	@Test (expected = ExcepcionJugadorSinTiempoDisponible.class)
-	public void getEdificioTransporteQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionJugadorSinTiempoDisponible {
+	@Test (expected = ExcepcionTiempoAgotado.class)
+	public void getEdificioTransporteQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -261,7 +261,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		
 		String nombreConMasDe6CaracteresYPar = "Macarena";
@@ -274,7 +274,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		
 		String nombreConMenosDe6Caracteres = "Ana";
@@ -287,7 +287,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		
 		String nombreConMasDe6CaracteresEImpar = "Florencia";
@@ -300,7 +300,7 @@ public class CiudadTest {
 	}
 	
 		@Test
-	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -314,7 +314,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -328,7 +328,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
@@ -342,7 +342,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		
 		String nombreConMasDe6CaracteresEImpar = "Florencia";
@@ -355,7 +355,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		
 		String nombreConMasDe6CaracteresYPar = "Macarena";
@@ -368,7 +368,7 @@ public class CiudadTest {
 	}
 	
 	@Test
-	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionJugadorSinTiempoDisponible {
+	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		
 		String nombreConMenosDe6Caracteres = "Ana";

@@ -112,4 +112,39 @@ public class LadronTest {
 					
 		Assert.assertTrue(ladron.estaArrestado());
 	}
+	
+	@Test
+	public void generarUnaPistaSobreElSexoDevuelveElStringDeSexoMasculino() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+		
+		Assert.assertEquals(ladron.generarUnaPistaSobreElSexo(), "masculino");
+	}
+	
+	@Test
+	public void generarUnaPistaSobreElPeloDevuelveElStringDePeloMarron() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+		
+		Assert.assertEquals(ladron.generarUnaPistaSobreElPelo(), "Tenia el pelo marron");
+	}
+	
+	@Test
+	public void generarUnaPistaSobreElHobbyDevuelveElStringDeAlpinismo() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+		
+		Assert.assertEquals(ladron.generarUnaPistaSobreElHobby(), "Dijo que era bueno en alpinismo");
+	}
+	
+	@Test
+	public void generarUnaPistaSobreElAutoDevuelveElStringDeMoto() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+		
+		Assert.assertEquals(ladron.generarUnaPistaSobreElAuto(), "Conducia una moto");
+	}
+	
+	@Test
+	public void generarUnaPistaSobreLaMarcaPersonalDevuelveElStringDeTatuaje() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+		
+		Assert.assertEquals(ladron.generarUnaPistaSobreLaMarcaPersonal(), "Vi que llevaba un tatuaje");
+	}
 }
