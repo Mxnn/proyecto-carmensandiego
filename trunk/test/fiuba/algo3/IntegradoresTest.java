@@ -7,7 +7,7 @@ import junit.framework.Assert;
 public class IntegradoresTest {
 	@Test
 	public void policiaDeRangoNovatoViajaATresPaisesYAtrapaAlLadronEmitiendoOrdenDeArrestoPrevia() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
 		Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
 		Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
 		Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(-3000.0, -9000.0));
@@ -60,7 +60,7 @@ public class IntegradoresTest {
 
     @Test (expected = ExcepcionOrdenDeArrestoNoEmitida.class)
     public void policiaDeRangoDetectiveViajaATresPaisesYNoAtrapaAlLadronLanzaExcepcionPorNoEmitirOrdenDeArresto() 
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
         Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
         Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(-3000.0, -9000.0));
@@ -98,9 +98,9 @@ public class IntegradoresTest {
         policia.arrestarAlLadron(computadora.getLadronBuscado());
     }
 
-    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
+    @Test(expected = ExcepcionTiempoAgotado.class)
     public void policiaDeRangoSargentoViajaPorLosPaisesYSeQuedaSinTiempo()
-	throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(0, -50000.0));
         Ciudad londres = new Ciudad("Londres", new Coordenada(0, 50000.0));
         Ciudad reykjavic = new Ciudad("Reykjavic", new Coordenada(0, 200000));
@@ -128,7 +128,7 @@ public class IntegradoresTest {
 
     @Test
     public void casoPruebaGrupo1AtrapaAlLadron()
-            throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+            throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(-3000.0, -9000.0));
         Ciudad londres = new Ciudad("Londres", new Coordenada(-3000.0, -9000.0));
         Ciudad nuevaYork = new Ciudad("Nueva York", new Coordenada(-3000.0, -9000.0));
@@ -177,9 +177,9 @@ public class IntegradoresTest {
         Assert.assertTrue(unLadron.estaArrestado());
     }
 
-    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
+    @Test(expected = ExcepcionTiempoAgotado.class)
     public void casoPruebaGrupo1NoAtrapaAlLadronYSeQuedaSinTiempo()
-            throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+            throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad veracruz = new Ciudad("Veracruz", new Coordenada(1, 1));
         Ciudad milan = new Ciudad("Milan", new Coordenada(200000, 200000));
         Ciudad sidney = new Ciudad("Sidney", new Coordenada(5, 5));
@@ -218,7 +218,7 @@ public class IntegradoresTest {
 
     @Test
     public void casoPruebaGrupo2ElLadronEsAtrapado()
-            throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+            throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad paris = new Ciudad("Paris", new Coordenada(1, 1));
         Ciudad londres = new Ciudad("Londres", new Coordenada(2, 2));
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(3, 3));
@@ -275,9 +275,9 @@ public class IntegradoresTest {
         Assert.assertTrue(unLadron.estaArrestado());
     }
 
-    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
+    @Test(expected = ExcepcionTiempoAgotado.class)
     public void casoPruebaGrupo2NoAtrapaAlLadronPorEmitirMalLaOrdenDeArresto()
-            throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+            throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(1, 1));
         Ciudad hongKong = new Ciudad("Hong Kong", new Coordenada(200000, 200000));
         Ciudad tokio = new Ciudad("Tokio", new Coordenada(5, 5));
@@ -328,7 +328,7 @@ public class IntegradoresTest {
 
     @Test
     public void casoPruebaGrupo4ElLadronEsAtrapado()
-            throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+            throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad paris = new Ciudad("Paris", new Coordenada(1, 1));
         Ciudad londres = new Ciudad("Londres", new Coordenada(2, 2));
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(3, 3));
@@ -389,9 +389,9 @@ public class IntegradoresTest {
         Assert.assertTrue(unLadron.estaArrestado());
     }
 
-    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
+    @Test(expected = ExcepcionTiempoAgotado.class)
     public void casoPruebaGrupo4NoAtrapaAlLadronPorEmitirMalLaOrdenDeArresto()
-            throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+            throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad toronto = new Ciudad("Toronto", new Coordenada(1, 1));
         Ciudad hongKong = new Ciudad("Hong Kong", new Coordenada(200000, 200000));
         Ciudad managua = new Ciudad("Managua", new Coordenada(5, 5));
@@ -421,7 +421,7 @@ public class IntegradoresTest {
 
     @Test
      public void casoPruebaGrupo5ElLadronEsAtrapado()
-            throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+            throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad paris = new Ciudad("Paris", new Coordenada(1, 1));
         Ciudad rio = new Ciudad("Rio de Janeiro", new Coordenada(2, 2));
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(3, 3));
@@ -465,9 +465,9 @@ public class IntegradoresTest {
         Assert.assertTrue(unLadron.estaArrestado());
     }
 
-    @Test(expected = ExcepcionJugadorSinTiempoDisponible.class)
+    @Test(expected = ExcepcionTiempoAgotado.class)
     public void casoPruebaGrupo5NoAtrapaAlLadronPorQuedarseSinTiempo()
-            throws ExcepcionJugadorSinTiempoDisponible, ExcepcionOrdenDeArrestoNoEmitida {
+            throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
         Ciudad londres = new Ciudad("Londres", new Coordenada(1, 1));
         Ciudad rio = new Ciudad("Rio de Janeiro", new Coordenada(20000, 20000));
         Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(3, 3));

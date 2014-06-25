@@ -96,7 +96,7 @@ public class Controlador {
 				vista.imprimirPista(juego.verPistaCultural());
 			}	
 		}
-		catch (ExcepcionJugadorSinTiempoDisponible e) {
+		catch (ExcepcionTiempoAgotado e) {
 			vista.mostrarElJugadorSeQuedoSinTiempo();
 			vista.mostrarJugarDeNuevo();
 			
@@ -115,7 +115,7 @@ public class Controlador {
 			try {
 				juego.viajar(NombreDeLasCiudadesALasQuePuedoIr.get(opcion-1));
 			} 
-			catch (ExcepcionJugadorSinTiempoDisponible e) {
+			catch (ExcepcionTiempoAgotado e) {
 				vista.mostrarElJugadorSeQuedoSinTiempo();
 				vista.mostrarJugarDeNuevo();
 			}
@@ -170,9 +170,6 @@ public class Controlador {
  			juego.ingresarCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);	
  		}	
  		else if (opcion==3){
- 			juego.ingresarCaracteristicaDelLadron(Ladron.MarcaPersonal.JOYAS);		
- 		}	
- 		else if (opcion==4){
  			juego.ingresarCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);		
  		}	
  		else if (opcion==0){

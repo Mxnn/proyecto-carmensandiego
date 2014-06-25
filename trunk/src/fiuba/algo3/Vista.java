@@ -9,7 +9,6 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
 public class Vista {
-	
 	private Controlador controlador;
 	private Juego juego; 
 
@@ -163,7 +162,7 @@ public class Vista {
 	}
 		
 	private void imprimirOpcionRegresar() {	
-	System.out.println ("0. Regresar.");
+		System.out.println ("0. Regresar.");
 	}
 
 	public void mostrarPedidoDeNombre() {

@@ -95,4 +95,37 @@ public class EdificioTest {
 
         Assert.assertEquals(edificio.getPista(sargento), Pista.PISTA_POR_DEFECTO_LUGAR);
     }
+	
+	@Test
+	public void seAgregaUnaPistaDelLadronEnPistasPorDefectoFacil() {
+		Edificio edificio = new Edificio();
+        Novato novato = new Novato();
+		String pistaDeLadron = "Pista Ladron";
+		
+		edificio.setPistaLadron(pistaDeLadron);
+		
+		Assert.assertEquals(edificio.getPista(novato), Pista.PISTA_POR_DEFECTO_LUGAR + " " + pistaDeLadron);
+	}
+	
+	@Test
+	public void seAgregaUnaPistaDelLadronEnPistasPorDefectoIntermedia() {
+		Edificio edificio = new Edificio();
+        Detective detective = new Detective();
+		String pistaDeLadron = "Pista Ladron";
+		
+		edificio.setPistaLadron(pistaDeLadron);
+		
+		Assert.assertEquals(edificio.getPista(detective), Pista.PISTA_POR_DEFECTO_LUGAR + " " + pistaDeLadron);
+	}
+	
+	@Test
+	public void seAgregaUnaPistaDelLadronEnPistasPorDefectoDificil() {
+		Edificio edificio = new Edificio();
+        Sargento sargento = new Sargento();
+		String pistaDeLadron = "Pista Ladron";
+		
+		edificio.setPistaLadron(pistaDeLadron);
+		
+		Assert.assertEquals(edificio.getPista(sargento), Pista.PISTA_POR_DEFECTO_LUGAR + " " + pistaDeLadron);
+	}
 }

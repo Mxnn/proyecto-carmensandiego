@@ -49,13 +49,13 @@ public class ElectorDeLadron {
 			NodeList listaNodosCaracteristicas = elementoLadron.getElementsByTagName("Caracteristica");
 
 			Element elementoCaracteristica = (Element)listaNodosCaracteristicas.item(0);		
-			Sexo sexo = Sexo.valueOf(elementoCaracteristica.getAttribute("Sexo")) ;
+			Sexo sexo = Sexo.valueOf(elementoCaracteristica.getAttribute("Sexo"));
 			
 			elementoCaracteristica = (Element)listaNodosCaracteristicas.item(1);		
-			Pelo pelo = Pelo.valueOf(elementoCaracteristica.getAttribute("Pelo")) ;
+			Pelo pelo = Pelo.valueOf(elementoCaracteristica.getAttribute("Pelo"));
 			
 			elementoCaracteristica = (Element)listaNodosCaracteristicas.item(2);		
-			Hobby hobby = Hobby.valueOf(elementoCaracteristica.getAttribute("Hobby"))	;
+			Hobby hobby = Hobby.valueOf(elementoCaracteristica.getAttribute("Hobby"));
 			
 			elementoCaracteristica = (Element)listaNodosCaracteristicas.item(3);		
 			Auto auto = Auto.valueOf(elementoCaracteristica.getAttribute("Auto"));
@@ -63,60 +63,37 @@ public class ElectorDeLadron {
 			elementoCaracteristica = (Element)listaNodosCaracteristicas.item(4);
 			MarcaPersonal marcaPersonal = MarcaPersonal.valueOf(elementoCaracteristica.getAttribute("MarcaPersonal"));
 			
-			this.listaDeLadrones.add(new Ladron(nombre,sexo,pelo,hobby,auto,marcaPersonal));
+			this.listaDeLadrones.add(new Ladron(nombre, sexo, pelo, hobby, auto, marcaPersonal));
 		}
 	}
 	
 	public ArrayList<Ladron> getListaDeLadrones() {
 		return listaDeLadrones;
-		
 	}
 	
 	public Ladron generarUnLadronBuscado() {
 		Random rand = new Random();
 		int posicion = rand.nextInt(this.listaDeLadrones.size());
-		Ladron buscado=listaDeLadrones.get(posicion);
+		Ladron buscado = listaDeLadrones.get(posicion);
 		return buscado;
-
-		
 	}
 
-	void setearPistasDelLadronBuscado(Ladron buscado,ArrayList <Ciudad> ciudadesPorRecorrer) throws ParserConfigurationException, SAXException, IOException {
+	public void setPistasDelLadronBuscado(Ladron buscado, ArrayList<Ciudad> ciudadesPorRecorrer) {
+		Ciudad ciudad = ciudadesPorRecorrer.get(0);
+		Edificio edificio = ciudad.getEdificioCultural();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElPelo());
 		
-	
-		File archivo = new File(NOMBRE_ARCHIVO_INFO_LADRONES);
-
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document doc = dBuilder.parse(archivo);
-
-		NodeList listaNodosLadrones = doc.getElementsByTagName("Ladron");
-
-		for (int i = 0; i < listaNodosLadrones.getLength(); i++) {
-			Element elementoLadron = (Element)listaNodosLadrones.item(i);
-
-			if (elementoLadron.getAttribute("Nombre")==buscado.getNombre()){		
-				NodeList listaNodosCaracteristicas = elementoLadron.getElementsByTagName("Caracteristica");
-				
-				Element elementoCaracteristica = (Element)listaNodosCaracteristicas.item(0);	
-				ciudadesPorRecorrer.get(0).getEdificioCultural().setPistaLadron(elementoCaracteristica.getAttribute("PistaSexo"));
-						
-				elementoCaracteristica = (Element)listaNodosCaracteristicas.item(1);	
-				ciudadesPorRecorrer.get(1).getEdificioTransporte().setPistaLadron(elementoCaracteristica.getAttribute("PistaPelo"));
-	
-			
-				elementoCaracteristica = (Element)listaNodosCaracteristicas.item(2);	
-				ciudadesPorRecorrer.get(2).getEdificioEconomia().setPistaLadron(elementoCaracteristica.getAttribute("PistaHobby"));
-	
-				elementoCaracteristica = (Element)listaNodosCaracteristicas.item(3);	
-				ciudadesPorRecorrer.get(3).getEdificioEconomia().setPistaLadron(elementoCaracteristica.getAttribute("PistaAuto"));
-				
-				elementoCaracteristica = (Element)listaNodosCaracteristicas.item(4);	
-				ciudadesPorRecorrer.get(4).getEdificioCultural().setPistaLadron(elementoCaracteristica.getAttribute("PistaMarcaPersonal"));
-					
-			}
-				
-		}	
+		ciudad = ciudadesPorRecorrer.get(1);
+		edificio = ciudad.getEdificioTransporte();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElHobby());
+		
+		ciudad = ciudadesPorRecorrer.get(2);
+		edificio = ciudad.getEdificioTransporte();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElAuto());
+		
+		ciudad = ciudadesPorRecorrer.get(4);
+		edificio = ciudad.getEdificioEconomia();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreLaMarcaPersonal());
 	}
 }
 		
