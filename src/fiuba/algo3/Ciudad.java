@@ -42,7 +42,7 @@ public class Ciudad {
         }
         return false;
     }
-	
+
     public boolean estaConectadaConEstaCiudad(Ciudad ciudad) {
         return this.ciudadesConectadas.contains(ciudad);
     }
@@ -50,7 +50,7 @@ public class Ciudad {
     public int cantidadDeCiudadesConectadas(){
     	return ciudadesConectadas.size();
     }
-	
+
 	public void esconderAlLadron() {
 		this.acaEstaElLadron = true;
 	}
@@ -63,7 +63,7 @@ public class Ciudad {
 	public String getNombre() {
 		return this.nombre;
 	}
-	
+
 	public Edificio getEdificioCultural() {
 		return this.edificioCultural;
     }
@@ -79,6 +79,7 @@ public class Ciudad {
     public Edificio getEdificioCultural(Policia policia) throws ExcepcionTiempoAgotado {
         if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioCultural) {
 			policia.recibirHerida();
+			this.edificioCultural.setPistaLadron("El Ladron te ha herido! ten cuidado.");
 		}
 		return this.edificioCultural;
     }
@@ -86,14 +87,15 @@ public class Ciudad {
     public Edificio getEdificioEconomia(Policia policia) throws ExcepcionTiempoAgotado {
         if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioEconomia) {
 			policia.recibirHerida();
+			this.edificioEconomia.setPistaLadron("El Ladron te ha herido! ten cuidado.");
 		}
 		return this.edificioEconomia;
     }
 
     public Edificio getEdificioTransporte(Policia policia) throws ExcepcionTiempoAgotado {
-        int caracteresNombre = this.nombre.length();
 		if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioTransporte) {
 			policia.recibirHerida();
+			this.edificioEconomia.setPistaLadron("El Ladron te ha herido! ten cuidado.");
 		}
 		return this.edificioTransporte;
     }
@@ -105,9 +107,9 @@ public class Ciudad {
     public boolean escondeAlLadron() {
         return this.acaEstaElLadron;
     }
-	
 
-    
+
+
 	//PRIVADOS:
 	private Edificio enEsteEdificioHiereAlPolicia(Policia policia) {
 		int caracteresNombre = policia.getNombre().length();

@@ -34,6 +34,8 @@ public class Computadora {
 		this.sexoDelLadron = sexo;
 	}
 
+
+
 	public void setCaracteristicaDelLadron(Ladron.Pelo pelo) {
 		this.peloDelLadron = pelo;
 	}
@@ -49,7 +51,7 @@ public class Computadora {
     public void setCaracteristicaDelLadron(Ladron.MarcaPersonal marcaPersonal) {
 		this.marcaPersonalDelLadron = marcaPersonal;
 	}
-	
+
 	//GETTERS:
 	public boolean ordenDeArrestoEmitidaContraLadronCorrecto() throws ExcepcionOrdenDeArrestoNoEmitida {
 		if (this.ordenDeArrestoEmitida) {
@@ -57,17 +59,17 @@ public class Computadora {
 		}
 		throw new ExcepcionOrdenDeArrestoNoEmitida();
 	}
-	
+
 	public Ladron getLadronBuscado() throws ExcepcionOrdenDeArrestoNoEmitida {
 		if (this.ordenDeArrestoEmitida) {
 			return this.ladronBuscado;
 		}
 		throw new ExcepcionOrdenDeArrestoNoEmitida();
 	}
-	
+
 	public String emitirOrdenDeArresto() {
 		filtrarSospechosos();
-		if (this.sospechososFiltrados.size() == 1){	
+		if (this.sospechososFiltrados.size() == 1){
 			Ladron sospechosoAlQueEmitirOrden = this.sospechososFiltrados.get(0);
 			sospechosoAlQueEmitirOrden.recibirOrdenDeArresto();
 			this.ordenDeArrestoEmitida = true;
@@ -75,7 +77,7 @@ public class Computadora {
 		}
 		return "";
 	}
-	
+
 	//PRIVADOS:
     private boolean ladronCumpleConLosFiltros(Ladron ladron) {
         return (sexoDelLadron == null || ladron.tieneEstaCaracteristica(sexoDelLadron)) &&
