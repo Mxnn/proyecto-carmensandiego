@@ -35,6 +35,7 @@ public class Juego  {
 		ciudadesPorRecorrer.get(ciudadesPorRecorrer.size()-1).esconderAlLadron();
 
 	}
+
 	
 	public void crearPartida()
 	throws ParserConfigurationException, TransformerException, SAXException, IOException {	
@@ -129,6 +130,14 @@ public class Juego  {
 	public String getTiempoDisponible (){
 		return Integer.toString(policia.getTiempoDisponible());
 	}
-	
+
+	public void cerrarJuego() {
+		System.exit(0); 
+	}
+	public String getCiudadActualDelPolicia(){
+		
+		return policia.getCiudadActual().getNombre();
+		
+	}
 
 }
