@@ -1,6 +1,13 @@
-package fiuba.algo3;
 
+package fiuba.algo3;
+import java.awt.geom.Arc2D.Double;
 import java.util.ArrayList;
+import java.util.Collections;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 
 public class Ciudad {
 	private String nombre;
@@ -42,7 +49,7 @@ public class Ciudad {
         }
         return false;
     }
-
+	
     public boolean estaConectadaConEstaCiudad(Ciudad ciudad) {
         return this.ciudadesConectadas.contains(ciudad);
     }
@@ -50,7 +57,7 @@ public class Ciudad {
     public int cantidadDeCiudadesConectadas(){
     	return ciudadesConectadas.size();
     }
-
+	
 	public void esconderAlLadron() {
 		this.acaEstaElLadron = true;
 	}
@@ -63,7 +70,7 @@ public class Ciudad {
 	public String getNombre() {
 		return this.nombre;
 	}
-
+	
 	public Edificio getEdificioCultural() {
 		return this.edificioCultural;
     }
@@ -107,9 +114,9 @@ public class Ciudad {
     public boolean escondeAlLadron() {
         return this.acaEstaElLadron;
     }
+	
 
-
-
+    
 	//PRIVADOS:
 	private Edificio enEsteEdificioHiereAlPolicia(Policia policia) {
 		int caracteresNombre = policia.getNombre().length();
