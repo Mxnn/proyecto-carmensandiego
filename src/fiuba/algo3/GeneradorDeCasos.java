@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -82,7 +83,7 @@ public class GeneradorDeCasos {
 
 		for (int i = 0; i < ciudadesPorRecorrer.size(); i++){
 			Ciudad ciudadActual = ciudadesPorRecorrer.get(i);
-            setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+            setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
 
 			Edificio EdificioEconomicoActual = ciudadActual.getEdificioEconomia();
 			Edificio EdificioTransporteActual = ciudadActual.getEdificioTransporte();
@@ -101,11 +102,16 @@ public class GeneradorDeCasos {
 				EdificioCulturalActual.setPistas(pistaElLadronEstaCerca, pistaElLadronEstaCerca, pistaElLadronEstaCerca);
 			}
 		}
+		for (Ciudad ciudad : ciudades){
+			
+			if (!ciudadesPorRecorrer.contains(ciudad)){
+				conectarCiudadesRandom(ciudad, ciudadesPorRecorrer);
+			}
+		}
 		return ciudadesPorRecorrer;
 	}
 
-    public void setearCiudadesConectadas(Ciudad ciudadActual, ArrayList<Ciudad> ciudadesPorRecorrer){
-		Random rand = new Random();
+    public void setearCiudadesConectadasPorRecorrer(Ciudad ciudadActual, ArrayList<Ciudad> ciudadesPorRecorrer){
 		int posicionCiudadActual= ciudadesPorRecorrer.indexOf(ciudadActual);
 		if (posicionCiudadActual <=4){
 			ciudadActual.conectarCiudad(ciudadesPorRecorrer.get(posicionCiudadActual+1));
@@ -113,13 +119,22 @@ public class GeneradorDeCasos {
 		if (posicionCiudadActual >=1){
 			ciudadActual.conectarCiudad(ciudadesPorRecorrer.get(posicionCiudadActual-1));
 		}
+		conectarCiudadesRandom(ciudadActual,ciudadesPorRecorrer);
+		
+	}
+    
+    public void conectarCiudadesRandom(Ciudad ciudadActual ,ArrayList<Ciudad> ciudadesPorRecorrer){
+		Random rand = new Random();
 		while (ciudadActual.cantidadDeCiudadesConectadas() < 4){
 			int posicionRandom = rand.nextInt(this.ciudades.size());
 			Ciudad ciudadPorAgregar=ciudades.get(posicionRandom);
-			ciudadActual.conectarCiudad(ciudadPorAgregar);
-			
+			if (!ciudadesPorRecorrer.contains(ciudadPorAgregar)){
+				ciudadActual.conectarCiudad(ciudadPorAgregar);
+		
+			}
 		}
-	}
+    }
+
 
 	/***********************************************************************************************/
 	/*                            PARA TESTEAR COMO SE LEE EL ARCHIVO                             */

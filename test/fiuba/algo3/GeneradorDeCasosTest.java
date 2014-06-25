@@ -386,7 +386,7 @@ public class GeneradorDeCasosTest {
 		ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
 		ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
 		Ciudad ciudadActual=ciudadesPorRecorrer.get(0);
-		generador.setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+		generador.setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
 		
 		Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(1)));
 		Assert.assertEquals(ciudadActual.cantidadDeCiudadesConectadas(), 4);		
@@ -402,7 +402,7 @@ public class GeneradorDeCasosTest {
 		ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
 		ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
 		Ciudad ciudadActual=ciudadesPorRecorrer.get(3);
-		generador.setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+		generador.setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
 		
 		Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(4)));
 		Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(2)));
@@ -419,7 +419,7 @@ public class GeneradorDeCasosTest {
 		ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
 		ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
 		Ciudad ciudadActual=ciudadesPorRecorrer.get(5);
-		generador.setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+		generador.setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
 		
 		Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(4)));
 		Assert.assertEquals(ciudadActual.cantidadDeCiudadesConectadas(), 4);	
@@ -435,7 +435,7 @@ public class GeneradorDeCasosTest {
 		ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
 		ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
 		Ciudad ciudadActual=ciudadesPorRecorrer.get(3);
-		generador.setearCiudadesConectadas(ciudadActual, ciudadesPorRecorrer);
+		generador.setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
 		
 		ArrayList <Ciudad> ciudadesConectadas=ciudadActual.getCiudadesConectadas();
 		Assert.assertNotSame(ciudadesConectadas.get(0), ciudadesConectadas.get(1));

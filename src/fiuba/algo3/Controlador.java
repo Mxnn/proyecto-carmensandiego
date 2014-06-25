@@ -114,41 +114,50 @@ public class Controlador {
 		if (opcion !=0){
 			try {
 				juego.viajar(NombreDeLasCiudadesALasQuePuedoIr.get(opcion-1));
-			} catch (ExcepcionJugadorSinTiempoDisponible e) {
+			} 
+			catch (ExcepcionJugadorSinTiempoDisponible e) {
 				vista.mostrarElJugadorSeQuedoSinTiempo();
 				vista.mostrarJugarDeNuevo();
 			}
-		vista.mostrarMenu();
+	
 		}
+		vista.mostrarMenu();
 	}
 
 	 void pedirOpcionOrdenDeArresto() {
-		// TODO Auto-generated method stub
-		
+		String nombreDelLadron=juego.emitirOrdenDeArresto();
+		if (nombreDelLadron!=""){
+			vista.mostrarOrdenDeArrestoEmitida(nombreDelLadron);
+		}
+		else{
+			vista.mostrarOrdenDeArrestoNoEmitida();
+		}
+ 		vista.mostrarMenu();
 	}
 
 	 void pedirOpcionFiltrar(){
 	
-			int opcion=pedirOpcion();
+		int opcion=pedirOpcion();
 			
-			if (opcion==1){
-				vista.mostrarOpcionFiltrarSexo();
-			}
-			else if (opcion==2){
-				vista.mostrarOpcionFiltrarPelo();		
-			}
-			else if (opcion==3){
-				vista.mostrarOpcionFiltrarHobby();		
-			}		
-			else if (opcion==4){
-				vista.mostrarOpcionFiltrarAuto();		
-			}	
-			else if (opcion==5){
-				vista.mostrarOpcionFiltrarMarcaPersonal();		
-			}
-			else if (opcion==0){
-				vista.mostrarOpcionComputadora();		
-			}
+		if (opcion==1){
+			vista.mostrarOpcionFiltrarSexo();
+		}
+		else if (opcion==2){
+			vista.mostrarOpcionFiltrarPelo();		
+		}
+		else if (opcion==3){
+			vista.mostrarOpcionFiltrarHobby();		
+		}		
+		else if (opcion==4){
+			vista.mostrarOpcionFiltrarAuto();		
+		}	
+		else if (opcion==5){
+			vista.mostrarOpcionFiltrarMarcaPersonal();		
+		}
+		else if (opcion==0){
+			vista.mostrarOpcionComputadora();		
+		}
+		
 	}
 
      void pedirOpcionFiltrarMarcaPersonal()  {
@@ -168,7 +177,8 @@ public class Controlador {
  		}	
  		else if (opcion==0){
  			vista.mostrarOpcionFiltrar();		
- 		}				
+ 		}	
+ 		vista.mostrarMenu();
 	}
 
 	 void pedirOpcionFiltrarAuto() {
@@ -186,6 +196,7 @@ public class Controlador {
 		else if (opcion==0){
 			vista.mostrarOpcionFiltrar();		
 		}		
+ 		vista.mostrarMenu();
 	}
 
 	 void pedirOpcionFiltrarHobby()  {
@@ -203,6 +214,7 @@ public class Controlador {
 		else if (opcion==0){
 			vista.mostrarOpcionFiltrar();		
 		}				
+ 		vista.mostrarMenu();
 	}
 
 	void pedirOpcionFiltrarPelo()  {
@@ -224,6 +236,7 @@ public class Controlador {
 		else if (opcion==0){
 			vista.mostrarOpcionFiltrar();		
 		}		
+ 		vista.mostrarMenu();
 	}
 
 	void pedirOpcionFiltrarSexo()  {
@@ -239,6 +252,7 @@ public class Controlador {
 		else if (opcion==0){
 			vista.mostrarOpcionFiltrar();		
 		}		
+ 		vista.mostrarMenu();
 	}
 
 	public String getTiempoDisponible() {
