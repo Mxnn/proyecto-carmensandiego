@@ -1,13 +1,6 @@
-
 package fiuba.algo3;
-import java.awt.geom.Arc2D.Double;
+
 import java.util.ArrayList;
-import java.util.Collections;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 
 public class Ciudad {
 	private String nombre;
