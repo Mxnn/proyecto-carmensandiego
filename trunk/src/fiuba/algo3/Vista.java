@@ -12,32 +12,31 @@ public class Vista {
 	private Controlador controlador;
 	private Juego juego; 
 
-	public Vista( Controlador controlador, Juego juego)
-	{	
-		this.juego=juego;
-		this.controlador=controlador;
+	public Vista( Controlador controlador, Juego juego) {	
+		this.juego = juego;
+		this.controlador = controlador;
 	}
 	
-	public void mostrarInicio(){
-		System.out.println ("Carmen San Diego");
-		System.out.println ("1. Iniciar juego nuevo");		
-		System.out.println ("0. Salir.");						
+	public void mostrarInicio() {
+		System.out.println("Carmen San Diego");
+		System.out.println("1. Iniciar juego nuevo");		
+		System.out.println("0. Salir.");						
 		controlador.pedirOpcionInicio();
 	}
 	
 	public void mostrarMenu() {
 		imprimirCiudadActual();
 		imprimirTiempoDisponible();
-		System.out.println ("Que desea hacer?");
-		System.out.println ("1. Pedir Pista.");		
-		System.out.println ("2. Viajar.");				
-		System.out.println ("3. Acceder a la computadora.");
-		System.out.println ("0. Salir.");		
-		System.out.println ("Ingrese el numero de la opcion que desee");
+		System.out.println("Que desea hacer?");
+		System.out.println("1. Pedir Pista.");		
+		System.out.println("2. Viajar.");				
+		System.out.println("3. Acceder a la computadora.");
+		System.out.println("0. Salir.");		
+		System.out.println("Ingrese el numero de la opcion que desee");
 		controlador.pedirOpcionMenu();
 	}
 
-	void mostrarOpcionComputadora()  {
+	void mostrarOpcionComputadora() {
 		System.out.println ("Que desea hacer?");
 		System.out.println ("1. Filtrar sospechosos.");		
 		System.out.println ("2. Pedir orden de arresto.");				
@@ -66,20 +65,16 @@ public class Vista {
 		System.out.println ("Ingrese el numero de la opcion que desee");	
 		
 		controlador.pedirOpcionFiltrar();
-
 	}
 
 	void mostrarOpcionFiltrarMarcaPersonal()  {
 		System.out.println ("Que tipo de marca personal tiene el ladron?");
 		System.out.println ("1. Anillo.");		
 		System.out.println ("2. Cicatriz.");				
-		System.out.println ("3. Joyas.");	
-		System.out.println ("4. Tatuaje.");		
+		System.out.println ("3. Tatuaje.");		
 		imprimirOpcionRegresar();	
 		
 		controlador.pedirOpcionFiltrarMarcaPersonal();
-
-		
 	}
 
 	void mostrarOpcionFiltrarAuto() {
@@ -99,8 +94,6 @@ public class Vista {
 		System.out.println ("3. Tennis.");
 		imprimirOpcionRegresar();			
 		controlador.pedirOpcionFiltrarHobby();
-		
-
 	}
 
 	void mostrarOpcionFiltrarSexo() {
@@ -109,7 +102,6 @@ public class Vista {
 		System.out.println ("2. Femenino.");
 		imprimirOpcionRegresar();			
 		controlador.pedirOpcionFiltrarSexo();
-
 	}
 
 	void mostrarOpcionFiltrarPelo()  {
@@ -118,10 +110,9 @@ public class Vista {
 		System.out.println ("2. Rubio.");				
 		System.out.println ("3. Rojo.");	
 		System.out.println ("4. Marron.");	
-		imprimirOpcionRegresar()	;
+		imprimirOpcionRegresar();
 		
 		controlador.pedirOpcionFiltrarPelo();
-
 	}
 
 	void mostrarOpcionViajar(ArrayList<String> nombresCiudades)  {
@@ -170,8 +161,7 @@ public class Vista {
 		System.out.println ("Por favor identificate");			
 	}
 
-	public void mostrarResultadoDelJuego()  {
-		
+	public void mostrarResultadoDelJuego()  {	
 		try {
 			if (juego.corroborarQueElLadronBuscadoFueArrestado()){
 				System.out.println ("Felicidades atrapo al ladron!");				
@@ -185,25 +175,21 @@ public class Vista {
 		}
 		finally{
 			mostrarJugarDeNuevo();
-		
-			
 		}
 	}
 
 	public void mostrarErrorAlAbrirArchivo() {
 		System.out.println ("Hubo un error al cargar los datos del juego.");
-		
 	}
 
 	public void mostrarElJugadorSeQuedoSinTiempo() {
 		System.out.println ("El Policia no pudo atrapar al culpable antes que se le acabara el tiempo.El ladron escapo.");
 	}
+	
 	public void mostrarJugarDeNuevo(){
 		System.out.println ("Desea segui jugando?");
 		System.out.println ("1. Jugar otra partida");
 		System.out.println ("0. Salir");		
 		controlador.preguntarJugarDeNuevo();
-		
 	}
-	
 }
