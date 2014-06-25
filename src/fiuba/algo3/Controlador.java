@@ -1,7 +1,13 @@
 package fiuba.algo3;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 public class Controlador {
 	
@@ -12,15 +18,19 @@ public class Controlador {
 	Controlador (Juego juego){
 		this.scan= new Scanner(System.in);
 		this.juego=juego;
-		this.vista=new Vista(this);
+		this.vista=new Vista(this,juego);
 	}
 
 	public int pedirOpcion() {
 
 		return scan.nextInt();
 	}
+	public Vista getVista(){
+		return vista;
+		
+	}
 	
-	public void elegir_opcion_filtro() throws ExcepcionJugadorSinTiempoDisponible{
+	public void elegir_opcion_filtro() {
 		
 		int opcion=pedirOpcion();
 		if (opcion==1){
@@ -43,7 +53,7 @@ public class Controlador {
 		}
 	}
 
-	void pedirOpcionComputadora() throws ExcepcionJugadorSinTiempoDisponible {
+	void pedirOpcionComputadora(){
 		int opcion=pedirOpcion();
 		if (opcion==1){
 			vista.mostrarOpcionFiltrar();
@@ -56,7 +66,7 @@ public class Controlador {
 		}
 	}
 
-	void pedirOpcionMenu() throws ExcepcionJugadorSinTiempoDisponible {
+	void pedirOpcionMenu()  {
 		int opcion=pedirOpcion();
 		
 		if (opcion==1){
@@ -70,26 +80,46 @@ public class Controlador {
 		}
 	}
 
-	private void pedirOpcionPista() throws ExcepcionJugadorSinTiempoDisponible {
+	void pedirOpcionPista()  {
 		// TODO Auto-generated method stub
 		int opcion=pedirOpcion();
 		
-		if (opcion==1){
+		try {
+			
+			if (opcion==1){
 				vista.imprimirPista(juego.verPistaEconomia());
+			}
+			else if (opcion==2){
+				vista.imprimirPista(juego.verPistaTransporte());
+			}
+			else if (opcion==3){
+				vista.imprimirPista(juego.verPistaCultural());
+			}	
 		}
-		else if (opcion==2){
-			vista.imprimirPista(juego.verPistaTransporte());
+		catch (ExcepcionJugadorSinTiempoDisponible e) {
+			vista.mostrarElJugadorSeQuedoSinTiempo();
+			vista.mostrarJugarDeNuevo();
+			
 		}
-		else if (opcion==3){
-			vista.imprimirPista(juego.verPistaCultural());
-		}	
+		if(juego.elPoliciaLlegoAlFinalDelRecorrido()){
+			
+			vista.mostrarResultadoDelJuego();
+		}
 		vista.mostrarMenu();
 	}
 
-	void pedirOpcionViajar(ArrayList<String> NombreDeLasCiudadesALasQuePuedoIr) throws ExcepcionJugadorSinTiempoDisponible {
+	void pedirOpcionViajar(ArrayList<String> NombreDeLasCiudadesALasQuePuedoIr)   {
 		int opcion=pedirOpcion();
 		
-		juego.viajar(NombreDeLasCiudadesALasQuePuedoIr.get(opcion-1));
+		if (opcion !=0){
+			try {
+				juego.viajar(NombreDeLasCiudadesALasQuePuedoIr.get(opcion-1));
+			} catch (ExcepcionJugadorSinTiempoDisponible e) {
+				vista.mostrarElJugadorSeQuedoSinTiempo();
+				vista.mostrarJugarDeNuevo();
+			}
+		vista.mostrarMenu();
+		}
 	}
 
 	 void pedirOpcionOrdenDeArresto() {
@@ -97,7 +127,7 @@ public class Controlador {
 		
 	}
 
-	 void pedirOpcionFiltrar() throws ExcepcionJugadorSinTiempoDisponible {
+	 void pedirOpcionFiltrar(){
 	
 			int opcion=pedirOpcion();
 			
@@ -121,7 +151,7 @@ public class Controlador {
 			}
 	}
 
-     void pedirOpcionFiltrarMarcaPersonal() throws ExcepcionJugadorSinTiempoDisponible {
+     void pedirOpcionFiltrarMarcaPersonal()  {
  		int opcion=pedirOpcion();			
 		
  		if (opcion==1){
@@ -141,7 +171,7 @@ public class Controlador {
  		}				
 	}
 
-	 void pedirOpcionFiltrarAuto() throws ExcepcionJugadorSinTiempoDisponible {
+	 void pedirOpcionFiltrarAuto() {
 		int opcion=pedirOpcion();			
 			
 		if (opcion==1){
@@ -158,7 +188,7 @@ public class Controlador {
 		}		
 	}
 
-	 void pedirOpcionFiltrarHobby() throws ExcepcionJugadorSinTiempoDisponible {
+	 void pedirOpcionFiltrarHobby()  {
 		int opcion=pedirOpcion();			
 	
 		if(opcion==1){
@@ -175,7 +205,7 @@ public class Controlador {
 		}				
 	}
 
-	void pedirOpcionFiltrarPelo() throws ExcepcionJugadorSinTiempoDisponible {
+	void pedirOpcionFiltrarPelo()  {
 
 		int opcion=pedirOpcion();
 		
@@ -196,7 +226,7 @@ public class Controlador {
 		}		
 	}
 
-	void pedirOpcionFiltrarSexo() throws ExcepcionJugadorSinTiempoDisponible {
+	void pedirOpcionFiltrarSexo()  {
 
 		int opcion=pedirOpcion();	
 		
@@ -215,4 +245,51 @@ public class Controlador {
 		return juego.getTiempoDisponible();
 	}
 
+	public void pedirOpcionInicio()  {
+		int opcion=pedirOpcion();	
+		
+		if (opcion==1){
+			vista.mostrarMenu();
+		}
+		else if (opcion==0){
+			juego.cerrarJuego();
+		}
+	}
+
+	public void pedirNombre() {
+		String nombre=scan.next();
+		
+	}
+
+	public String getCiudadActualDelPolicia(){
+		return juego.getCiudadActualDelPolicia();
+}
+
+	public void preguntarJugarDeNuevo()  {
+		int opcion=pedirOpcion();	
+		
+		if (opcion==1){
+		
+			try {
+				juego.crearPartida();
+			} catch (ParserConfigurationException e) {
+				vista.mostrarErrorAlAbrirArchivo();
+				juego.cerrarJuego();
+			} catch (TransformerException e) {
+				vista.mostrarErrorAlAbrirArchivo();
+				juego.cerrarJuego();
+			} catch (SAXException e) {
+				vista.mostrarErrorAlAbrirArchivo();
+				juego.cerrarJuego();
+			} catch (IOException e) {
+				vista.mostrarErrorAlAbrirArchivo();
+				juego.cerrarJuego();
+			}	
+			vista.mostrarMenu();
+		}
+		else if (opcion==0){
+			juego.cerrarJuego();
+		}
+	}		// TODO Auto-generated method stub
+		
 }
