@@ -30,39 +30,16 @@ public class Controlador {
 		
 	}
 	
-	public void elegir_opcion_filtro() {
-		
-		int opcion=pedirOpcion();
-		if (opcion==1){
-			pedirOpcionFiltrarSexo();
-		}
-		else if (opcion==2){
-			pedirOpcionFiltrarPelo();		
-		}
-		else if (opcion==3){
-			pedirOpcionFiltrarHobby();		
-		}		
-		else if (opcion==4){
-			pedirOpcionFiltrarAuto();		
-		}	
-		else if (opcion==5){
-			pedirOpcionFiltrarMarcaPersonal();		
-		}
-		else if (opcion==0){
-			pedirOpcionComputadora();		
-		}
-	}
+
 
 	void pedirOpcionComputadora(){
 		int opcion=pedirOpcion();
 		if (opcion==1){
 			vista.mostrarOpcionFiltrar();
+			pedirOpcionFiltrar();
 		}
 		else if (opcion==2){
 			pedirOpcionOrdenDeArresto();		
-		}
-		else if (opcion==0){
-			pedirOpcionMenu();
 		}
 	}
 
@@ -71,12 +48,19 @@ public class Controlador {
 		
 		if (opcion==1){
 			vista.mostrarOpcionPista();
+			this.pedirOpcionPista();
 		}
 		else if (opcion==2){
-			vista.mostrarOpcionViajar(juego.obtenerNombreDeLasCiudadesALasQuePuedoIr());
+			ArrayList<String> ciudadesConectadas=juego.obtenerNombreDeLasCiudadesALasQuePuedoIr();
+			vista.mostrarOpcionViajar(ciudadesConectadas);
+			this.pedirOpcionViajar(ciudadesConectadas);
 		}
 		else if (opcion==3){
-			vista.mostrarOpcionComputadora();		
+			vista.mostrarOpcionComputadora();
+			this.pedirOpcionComputadora();
+		}
+		else if (opcion==0){
+			System.exit(0);
 		}
 	}
 
@@ -98,23 +82,12 @@ public class Controlador {
 		}
 		catch (ExcepcionTiempoAgotado e) {
 			vista.mostrarElJugadorSeQuedoSinTiempo();
-			vista.mostrarJugarDeNuevo();
-			
+			vista.mostrarJugarDeNuevo();		
 		}
-		if(juego.elPoliciaLlegoAlFinalDelRecorrido()){
-			try {
-				juego.arrestarAlLadron();
-			} catch (ExcepcionOrdenDeArrestoNoEmitida e) {
-				vista.mostrarErrorOrdenDeArrestoNoEmitida();
-			}
-			vista.mostrarResultadoDelJuego();
-		}
-		vista.mostrarMenu();
 	}
 
 	void pedirOpcionViajar(ArrayList<String> NombreDeLasCiudadesALasQuePuedoIr)   {
 		int opcion=pedirOpcion();
-		
 		if (opcion !=0){
 			try {
 				juego.viajar(NombreDeLasCiudadesALasQuePuedoIr.get(opcion-1));
@@ -123,9 +96,7 @@ public class Controlador {
 				vista.mostrarElJugadorSeQuedoSinTiempo();
 				vista.mostrarJugarDeNuevo();
 			}
-	
 		}
-		vista.mostrarMenu();
 	}
 
 	 void pedirOpcionOrdenDeArresto() {
@@ -136,7 +107,6 @@ public class Controlador {
 		else{
 			vista.mostrarOrdenDeArrestoNoEmitida();
 		}
- 		vista.mostrarMenu();
 	}
 
 	 void pedirOpcionFiltrar(){
@@ -145,23 +115,24 @@ public class Controlador {
 			
 		if (opcion==1){
 			vista.mostrarOpcionFiltrarSexo();
+			pedirOpcionFiltrarSexo();
 		}
 		else if (opcion==2){
-			vista.mostrarOpcionFiltrarPelo();		
+			vista.mostrarOpcionFiltrarPelo();
+			pedirOpcionFiltrarPelo();
 		}
 		else if (opcion==3){
-			vista.mostrarOpcionFiltrarHobby();		
+			vista.mostrarOpcionFiltrarHobby();	
+			pedirOpcionFiltrarHobby();
 		}		
 		else if (opcion==4){
-			vista.mostrarOpcionFiltrarAuto();		
+			vista.mostrarOpcionFiltrarAuto();
+			pedirOpcionFiltrarAuto();
 		}	
 		else if (opcion==5){
-			vista.mostrarOpcionFiltrarMarcaPersonal();		
+			vista.mostrarOpcionFiltrarMarcaPersonal();	
+			pedirOpcionFiltrarMarcaPersonal();
 		}
-		else if (opcion==0){
-			vista.mostrarOpcionComputadora();		
-		}
-		
 	}
 
      void pedirOpcionFiltrarMarcaPersonal()  {
@@ -179,7 +150,6 @@ public class Controlador {
  		else if (opcion==0){
  			vista.mostrarOpcionFiltrar();		
  		}	
- 		vista.mostrarMenu();
 	}
 
 	 void pedirOpcionFiltrarAuto() {
@@ -197,7 +167,6 @@ public class Controlador {
 		else if (opcion==0){
 			vista.mostrarOpcionFiltrar();		
 		}		
- 		vista.mostrarMenu();
 	}
 
 	 void pedirOpcionFiltrarHobby()  {
@@ -215,7 +184,6 @@ public class Controlador {
 		else if (opcion==0){
 			vista.mostrarOpcionFiltrar();		
 		}				
- 		vista.mostrarMenu();
 	}
 
 	void pedirOpcionFiltrarPelo()  {
@@ -237,7 +205,6 @@ public class Controlador {
 		else if (opcion==0){
 			vista.mostrarOpcionFiltrar();		
 		}		
- 		vista.mostrarMenu();
 	}
 
 	void pedirOpcionFiltrarSexo()  {
@@ -253,7 +220,6 @@ public class Controlador {
 		else if (opcion==0){
 			vista.mostrarOpcionFiltrar();		
 		}		
- 		vista.mostrarMenu();
 	}
 
 	public String getTiempoDisponible() {
@@ -271,20 +237,14 @@ public class Controlador {
 		}
 	}
 
-	public void pedirNombre() {
-		String nombre=scan.next();
-		
-	}
-
 	public String getCiudadActualDelPolicia(){
 		return juego.getCiudadActualDelPolicia();
-}
+	}
 
-	public void preguntarJugarDeNuevo()  {
+	public boolean preguntarJugarDeNuevo()  {
 		int opcion=pedirOpcion();	
-		
+
 		if (opcion==1){
-		
 			try {
 				juego.crearPartida();
 			} catch (ParserConfigurationException e) {
@@ -300,12 +260,43 @@ public class Controlador {
 				vista.mostrarErrorAlAbrirArchivo();
 				juego.cerrarJuego();
 			}	
-			vista.mostrarPresentacion();
-			
+			return true;
 		}
-		else if (opcion==0){
-			juego.cerrarJuego();
-		}
-	}		// TODO Auto-generated method stub
 		
+		else{
+			return false;
+		}
+	}		
+
+	public void arrestarAlLadron(){
+		try {
+			juego.arrestarAlLadron();
+			if (juego.corroborarQueElLadronBuscadoFueArrestado()){
+				vista.mostrarResultadoAtrapoAlLadronCorrecto();				
+			}
+			else{
+				vista.mostrarResultadoAtrapoAlLadronCorrecto();				
+			}
+		} 
+		catch (ExcepcionOrdenDeArrestoNoEmitida e) {
+			vista.mostrarErrorOrdenDeArrestoNoEmitida();
+		} 
+	}	
+	
+	public void jugar() {
+		vista.mostrarPresentacion();
+		while (!juego.elPoliciaLlegoAlFinalDelRecorrido()){
+			vista.mostrarMenu();
+			this.pedirOpcionMenu();
+		}
+		arrestarAlLadron();
+	}
+	
+	public void iniciar(){
+		vista.mostrarInicio();
+		while (preguntarJugarDeNuevo()){
+			jugar();
+			vista.mostrarJugarDeNuevo();
+		}
+	}
 }
