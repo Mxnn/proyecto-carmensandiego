@@ -16,6 +16,6 @@ public class CarmenSanDiego {
 		juego.crearPartida();
 		Controlador controlador = new Controlador(juego);
 		Vista vista = controlador.getVista();
-		vista.mostrarInicio();
+		controlador.iniciar();
 	}
 }
