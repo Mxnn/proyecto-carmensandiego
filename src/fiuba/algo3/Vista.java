@@ -9,14 +9,9 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
 public class Vista {
-	private Controlador controlador;
-	private Juego juego; 
 
-	public Vista( Controlador controlador, Juego juego)
-	{	
-		this.juego=juego;
-		this.controlador=controlador;
-	}
+
+	public Vista(){}
 	
 	public void mostrarInicio(){
 		System.out.println ("Carmen San Diego");
@@ -25,9 +20,9 @@ public class Vista {
 
 	}
 	
-	public void mostrarMenu() {
-		imprimirCiudadActual();
-		imprimirTiempoDisponible();
+	public void mostrarMenu(String ciudadActual,String tiempoDisponible) {
+		imprimirCiudadActual(ciudadActual);
+		imprimirTiempoDisponible(tiempoDisponible);
 		System.out.println ("Que desea hacer?");
 		System.out.println ("1. Pedir Pista.");		
 		System.out.println ("2. Viajar.");				
@@ -36,10 +31,10 @@ public class Vista {
 
 	}
 
-	void mostrarPresentacion(){
-		System.out.println ("Se han robado un tesoro muy importante en el museo de "+ juego.getCiudadActualDelPolicia());		
+	void mostrarPresentacion(String ciudadInicial,String sexoLadron){
+		System.out.println ("Se han robado un tesoro muy importante en el museo de "+ ciudadInicial);		
 		System.out.println ("Es tu deber atrapar a este criminal antes que se acabe el tiempo");
-		System.out.println ("Se ha visto a un sospechoso del sexo "+ juego.getSexoLadronBuscado()+ " en la escena del crimen");
+		System.out.println ("Se ha visto a un sospechoso del sexo "+sexoLadron+ " en la escena del crimen");
 
 	}
 	void mostrarOpcionComputadora()  {
@@ -109,9 +104,9 @@ public class Vista {
 		imprimirOpcionRegresar();
 	}
 
-	void mostrarOpcionViajar(ArrayList<String> nombresCiudades)  {
-		imprimirCiudadActual();
-		imprimirTiempoDisponible();			
+	void mostrarOpcionViajar(ArrayList<String> nombresCiudades,String ciudadActual,String tiempoDisponible)  {
+		imprimirCiudadActual(ciudadActual);
+		imprimirTiempoDisponible(tiempoDisponible);			
 		System.out.println ("A donde desea viajar?");	
 		Collections.sort(nombresCiudades);
 		int numeroOpcion=1;
@@ -123,9 +118,9 @@ public class Vista {
 
 	}
 
-	void mostrarOpcionPista()  {
-		imprimirCiudadActual();
-		imprimirTiempoDisponible();
+	void mostrarOpcionPista(String ciudadActual,String tiempoDisponible)  {
+		imprimirCiudadActual(ciudadActual);
+		imprimirTiempoDisponible(tiempoDisponible);
 		System.out.println ("Que lugar desea visitar?");
 		System.out.println ("1. Bolsa.");		
 		System.out.println ("2. Aeropuerto.");				
@@ -138,12 +133,12 @@ public class Vista {
 		System.out.println (pista);
 	}	
 	
-	private void imprimirTiempoDisponible() {
-		System.out.println ("Tiempo Disponible:"+juego.getTiempoDisponible ());
+	private void imprimirTiempoDisponible(String tiempoDisponible) {
+		System.out.println ("Tiempo Disponible:"+tiempoDisponible);
 	}
 	
-	private void imprimirCiudadActual() {
-		System.out.println ("Ciudad Actual:"+juego.getCiudadActualDelPolicia() );
+	private void imprimirCiudadActual(String ciudadActual) {
+		System.out.println ("Ciudad Actual:"+ciudadActual);
 	}
 		
 	private void imprimirOpcionRegresar() {	

@@ -18,16 +18,15 @@ public class Controlador {
 	Controlador (Juego juego){
 		this.scan= new Scanner(System.in);
 		this.juego=juego;
-		this.vista=new Vista(this,juego);
 	}
+	
 
 	public int pedirOpcion() {
 
 		return scan.nextInt();
 	}
-	public Vista getVista(){
-		return vista;
-		
+	public void setVista(Vista vista){
+		this.vista=vista;
 	}
 	
 
@@ -47,12 +46,12 @@ public class Controlador {
 		int opcion=pedirOpcion();
 		
 		if (opcion==1){
-			vista.mostrarOpcionPista();
+			vista.mostrarOpcionPista(juego.getCiudadActualDelPolicia(),juego.getSexoLadronBuscado());
 			this.pedirOpcionPista();
 		}
 		else if (opcion==2){
 			ArrayList<String> ciudadesConectadas=juego.obtenerNombreDeLasCiudadesALasQuePuedoIr();
-			vista.mostrarOpcionViajar(ciudadesConectadas);
+			vista.mostrarOpcionViajar(ciudadesConectadas,juego.getCiudadActualDelPolicia(),juego.getSexoLadronBuscado());
 			this.pedirOpcionViajar(ciudadesConectadas);
 		}
 		else if (opcion==3){
@@ -230,7 +229,7 @@ public class Controlador {
 		int opcion=pedirOpcion();	
 		
 		if (opcion==1){
-			vista.mostrarPresentacion();
+			vista.mostrarPresentacion(juego.getCiudadActualDelPolicia(),juego.getSexoLadronBuscado());
 		}
 		else if (opcion==0){
 			juego.cerrarJuego();
@@ -284,12 +283,13 @@ public class Controlador {
 	}	
 	
 	public void jugar() {
-		vista.mostrarPresentacion();
+		vista.mostrarPresentacion(juego.getCiudadActualDelPolicia(),juego.getSexoLadronBuscado());
 		while (!juego.elPoliciaLlegoAlFinalDelRecorrido()){
-			vista.mostrarMenu();
+			vista.mostrarMenu(juego.getCiudadActualDelPolicia(),juego.getSexoLadronBuscado());
 			this.pedirOpcionMenu();
 		}
 		arrestarAlLadron();
+		juego.resetearCiudades();
 	}
 	
 	public void iniciar(){
@@ -297,6 +297,7 @@ public class Controlador {
 		while (preguntarJugarDeNuevo()){
 			jugar();
 			vista.mostrarJugarDeNuevo();
+
 		}
 	}
 }

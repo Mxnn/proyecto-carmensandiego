@@ -41,9 +41,6 @@ public class Juego  {
 	public void crearPartida()
 	throws ParserConfigurationException, TransformerException, SAXException, IOException {
 
-		generador = new GeneradorDeCasos();
-		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-
 		 buscado= elector.generarUnLadronBuscado();
 		this.computadora = new Computadora(buscado);
 		this.computadora.setSospechosos(elector.getListaDeLadrones());
@@ -55,6 +52,18 @@ public class Juego  {
 		policia.setTiempoDisponible(106);
 	}
 
+	
+	public void resetearCiudades(){
+		ArrayList<Ciudad> ciudadesReseteadas=new ArrayList<Ciudad>();
+		for (Ciudad ciudad:generador.getCiudades()){
+			Ciudad ciudadReseteada=new Ciudad(ciudad.getNombre(),ciudad.getCoordenadas());
+			ciudadesReseteadas.add(ciudadReseteada);
+			
+		}
+		generador.agregarCiudades(ciudadesReseteadas);
+	}
+	
+	
 	public String getSexoLadronBuscado() {
 		return buscado.generarUnaPistaSobreElSexo();
 	}
