@@ -114,9 +114,11 @@ public class Ciudad {
     public boolean escondeAlLadron() {
         return this.acaEstaElLadron;
     }
-	
-
     
+	public Ciudad copiar() {
+		return new Ciudad (this.getNombre(),this.getCoordenadas());
+	}
+
 	//PRIVADOS:
 	private Edificio enEsteEdificioHiereAlPolicia(Policia policia) {
 		int caracteresNombre = policia.getNombre().length();
@@ -127,7 +129,8 @@ public class Ciudad {
 			else {
 				return this.edificioTransporte;
 			}
-		} else {
+		} 
+		else {
 			return this.edificioEconomia;
 		}
 	}

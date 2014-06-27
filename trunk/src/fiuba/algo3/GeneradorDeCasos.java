@@ -30,6 +30,7 @@ public class GeneradorDeCasos {
 	public GeneradorDeCasos() {
 		ciudades = new ArrayList<Ciudad>();
 		pistasDeLasCiudades = new ArrayList<ArrayList<Pista>>();
+	
 	}
 
 	public void leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas()
@@ -65,16 +66,35 @@ public class GeneradorDeCasos {
 			}
 			this.pistasDeLasCiudades.add(pistasPorCiudad);
 		}
-	}
 
+	}
+	
+  /*  public ArrayList<Ciudad> copiarCiudades (ArrayList<Ciudad> ciudades ){
+    	
+    	ArrayList <Ciudad> copiaCiudades=new ArrayList <Ciudad>();
+    	for (Ciudad ciudad:ciudades){
+    		Ciudad ciudadNueva=ciudad.copiar();
+    		copiaCiudades.add(ciudadNueva);
+    		
+    	}
+		return copiaCiudades;*/
+    	
+    public void agregarCiudades(ArrayList<Ciudad> ciudades){
+    	this.ciudades=ciudades;
+    	
+    }
+	
+	
 	public ArrayList<Ciudad> generarUnCaso() {
+
 		Random rand = new Random();
 		ArrayList<Ciudad> ciudadesPorRecorrer = new ArrayList<Ciudad>();
 		ArrayList<ArrayList<Pista>> pistasDeLaCiudadesPorRecorrer = new ArrayList<ArrayList<Pista>>();
 
+		
 		while (CANTIDAD_DE_CIUDADES_POR_RECORRER > ciudadesPorRecorrer.size()) {
-			int posicion = rand.nextInt(this.ciudades.size());
-			Ciudad ciudadAgregada = this.ciudades.get(posicion);
+			int posicion = rand.nextInt(ciudades.size());
+			Ciudad ciudadAgregada=ciudades.get(posicion);
 			if (!ciudadesPorRecorrer.contains(ciudadAgregada)){
 				ciudadesPorRecorrer.add(ciudadAgregada);
 				pistasDeLaCiudadesPorRecorrer.add(pistasDeLasCiudades.get(posicion));
@@ -102,7 +122,7 @@ public class GeneradorDeCasos {
 				EdificioCulturalActual.setPistas(pistaElLadronEstaCerca, pistaElLadronEstaCerca, pistaElLadronEstaCerca);
 			}
 		}
-		for (Ciudad ciudad : ciudades){
+		for (Ciudad ciudad :ciudades){
 			
 			if (!ciudadesPorRecorrer.contains(ciudad)){
 				conectarCiudadesRandom(ciudad, ciudadesPorRecorrer);
@@ -114,10 +134,13 @@ public class GeneradorDeCasos {
     public void setearCiudadesConectadasPorRecorrer(Ciudad ciudadActual, ArrayList<Ciudad> ciudadesPorRecorrer){
 		int posicionCiudadActual= ciudadesPorRecorrer.indexOf(ciudadActual);
 		if (posicionCiudadActual <=4){
-			ciudadActual.conectarCiudad(ciudadesPorRecorrer.get(posicionCiudadActual+1));
+	
+			Ciudad ciudadPorAgregar=ciudadesPorRecorrer.get(posicionCiudadActual+1);
+			ciudadActual.conectarCiudad( ciudadPorAgregar);
 		}
 		if (posicionCiudadActual >=1){
-			ciudadActual.conectarCiudad(ciudadesPorRecorrer.get(posicionCiudadActual-1));
+			Ciudad ciudadPorAgregar=ciudadesPorRecorrer.get(posicionCiudadActual-1);
+			ciudadActual.conectarCiudad( ciudadPorAgregar);
 		}
 		conectarCiudadesRandom(ciudadActual,ciudadesPorRecorrer);
 		
@@ -126,8 +149,8 @@ public class GeneradorDeCasos {
     public void conectarCiudadesRandom(Ciudad ciudadActual ,ArrayList<Ciudad> ciudadesPorRecorrer){
 		Random rand = new Random();
 		while (ciudadActual.cantidadDeCiudadesConectadas() < 4){
-			int posicionRandom = rand.nextInt(this.ciudades.size());
-			Ciudad ciudadPorAgregar=ciudades.get(posicionRandom);
+			int posicionRandom = rand.nextInt(ciudades.size());
+			Ciudad ciudadPorAgregar= ciudades.get(posicionRandom);
 			if (!ciudadesPorRecorrer.contains(ciudadPorAgregar)){
 				ciudadActual.conectarCiudad(ciudadPorAgregar);
 		
