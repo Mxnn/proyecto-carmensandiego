@@ -1,23 +1,19 @@
 package fiuba.algo3;
 
-import java.io.IOException;
 import java.util.*;
 
+import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
 import org.xml.sax.SAXException;
 
 public class Vista {
-
-
 	public Vista(){}
 	
 	public void mostrarInicio(){
 		System.out.println ("Carmen San Diego");
 		System.out.println ("1. Iniciar juego nuevo");		
 		System.out.println ("0. Salir.");						
-
 	}
 	
 	public void mostrarMenu(String ciudadActual,String tiempoDisponible) {
