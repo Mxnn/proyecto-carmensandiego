@@ -1,13 +1,17 @@
 package fiuba.algo3;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
 import org.xml.sax.SAXException;
+
+import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.Ladron;
+import fiuba.algo3.modelo.ExcepcionOrdenDeArrestoNoEmitida;
+import fiuba.algo3.modelo.ExcepcionTiempoAgotado;
 
 public class Controlador {
 	
@@ -29,8 +33,6 @@ public class Controlador {
 		this.vista=vista;
 	}
 	
-
-
 	void pedirOpcionComputadora(){
 		int opcion=pedirOpcion();
 		if (opcion==1){
