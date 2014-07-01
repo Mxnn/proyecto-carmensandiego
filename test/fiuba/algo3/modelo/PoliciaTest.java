@@ -51,38 +51,6 @@ public class PoliciaTest {
 		
 		Assert.assertEquals(unPolicia.getCiudadActual(), ciudadSalida);
 	}
-	
-	@Test
-	public void yaVisitoTresEdificiosDevuelveTrueSiVisitaTresEdificios() throws ExcepcionTiempoAgotado {
-		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
-        Policia unPolicia = new Policia("Nicolas");
-		unPolicia.setCiudadActual(ciudadSalida);
-		
-		unPolicia.visitarEdificioEconomia();
-		unPolicia.visitarEdificioCultural();
-		unPolicia.visitarEdificioTransporte();
-		
-		Assert.assertTrue(unPolicia.yaVisitoTresEdificios());
-	}
-	
-	@Test
-	public void yaVisitoTresEdificiosDevuelveFalseSiNoVisitaEdificios() throws ExcepcionTiempoAgotado {
-		Policia unPolicia = new Policia("Nicolas");
-		
-		Assert.assertFalse(unPolicia.yaVisitoTresEdificios());
-	}
-	
-	@Test
-	public void yaVisitoTresEdificiosDevuelveTrueSiVisitaMenosDeTresEdificios() throws ExcepcionTiempoAgotado {
-		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
-        Policia unPolicia = new Policia("Nicolas");
-		unPolicia.setCiudadActual(ciudadSalida);
-		
-		unPolicia.visitarEdificioEconomia();
-		unPolicia.visitarEdificioCultural();
-		
-		Assert.assertFalse(unPolicia.yaVisitoTresEdificios());
-	}
 
     @Test
     public void viajarAUnaCiudadSiTieneTiempoCambiaLaCiudadActual() throws ExcepcionTiempoAgotado {
@@ -148,22 +116,6 @@ public class PoliciaTest {
     }
 	
 	@Test
-	public void yaVisitoTresEdificiosDevuelveFalseSiVisitaTresEdificiosYLuegoViaja() throws ExcepcionTiempoAgotado {
-		Ciudad ciudadSalida = new Ciudad("Madrid", new Coordenada(3000, 5000));
-        Policia unPolicia = new Policia("Nicolas");
-		unPolicia.setCiudadActual(ciudadSalida);
-		Ciudad ciudadDestino = new Ciudad("Pekin", new Coordenada(6000, 1000));
-		
-		unPolicia.visitarEdificioEconomia();
-		unPolicia.visitarEdificioCultural();
-		unPolicia.visitarEdificioTransporte();
-		
-		unPolicia.viajar(ciudadDestino);
-		
-		Assert.assertFalse(unPolicia.yaVisitoTresEdificios());
-	}
-	
-	@Test
 	public void visitarUnEdificioDevuelveUnaPista() throws ExcepcionTiempoAgotado {
 		Ciudad ciudadSalida = new Ciudad("Paris", new Coordenada(200, 100));
         Policia unPolicia = new Policia("Antonio");
@@ -219,69 +171,66 @@ public class PoliciaTest {
     }
 
     @Test
-    public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraAlgunLadron() 
-	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
+    public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraAlgunLadron() throws ExcepcionTiempoAgotado {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
-        
+                
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(buscado);
 		sospechosos.add(sospechoso1);
 		
-        computadora.setSospechosos(sospechosos);
+        Computadora computadora = new Computadora(sospechosos);
+		
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
         
         Assert.assertEquals(unPolicia.emitirOrdenDeArresto(computadora), "Jaime");
     }
 
     @Test
-    public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraUnSospechosoQueNoEsElBuscado() 
-	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
+    public void emitirOrdenDeArrestoDevuelveElNombreDelLadronSiEmitioOrdenDeArrestoContraUnSospechosoQueNoEsElBuscado() throws ExcepcionTiempoAgotado {
 		Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
-        
+                
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
 		
-        computadora.setSospechosos(sospechosos);
+        Computadora computadora = new Computadora(sospechosos);
+		
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
 
         Assert.assertEquals(unPolicia.emitirOrdenDeArresto(computadora), "Tomas");
     }
 
     @Test
-    public void emitirOrdenDeArrestoDevuelveUnStringVacioSiHayMasDeUnSospechosoConLasCaracteristicasFijadas() 
-	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
+    public void emitirOrdenDeArrestoDevuelveUnStringVacioSiHayMasDeUnSospechosoConLasCaracteristicasFijadas() throws ExcepcionTiempoAgotado {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
-        
+                
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
 		sospechosos.add(buscado);
-        computadora.setSospechosos(sospechosos);
+        
+		Computadora computadora = new Computadora(sospechosos);
+		
         computadora.setCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
 
         Assert.assertEquals(unPolicia.emitirOrdenDeArresto(computadora), "");
     }
     
     @Test
-    public void emitirOrdenDeArrestoRestaTiempoSiElLadronEsElBuscado() 
-	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
+    public void emitirOrdenDeArrestoRestaTiempoSiElLadronEsElBuscado() throws ExcepcionTiempoAgotado {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
         
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
 		
-        computadora.setSospechosos(sospechosos);
+        Computadora computadora = new Computadora(sospechosos);
+		
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
         unPolicia.emitirOrdenDeArresto(computadora);
 
@@ -289,17 +238,16 @@ public class PoliciaTest {
     }
 
     @Test
-    public void emitirOrdenDeArrestoRestaTiempoSiElLadronNoEsElBuscado() 
-	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
+    public void emitirOrdenDeArrestoRestaTiempoSiElLadronNoEsElBuscado() throws ExcepcionTiempoAgotado {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
         
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
 		
-        computadora.setSospechosos(sospechosos);
+		Computadora computadora = new Computadora(sospechosos);
+		
         computadora.setCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
         unPolicia.emitirOrdenDeArresto(computadora);
 
@@ -310,24 +258,23 @@ public class PoliciaTest {
     public void emitirOrdenDeArrestoSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
-        Computadora computadora = new Computadora(buscado);
         
 		Ladron sospechoso1 = new Ladron("Tomas", Ladron.Sexo.MASCULINO, Ladron.Pelo.RUBIO, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.CICATRIZ);
 		ArrayList<Ladron> sospechosos = new ArrayList<Ladron>();
 		sospechosos.add(sospechoso1);
 		
-        computadora.setSospechosos(sospechosos);
+        Computadora computadora = new Computadora(sospechosos);
+		
         unPolicia.setTiempoDisponible(2);
         unPolicia.emitirOrdenDeArresto(computadora);
     }
 
     @Test
-    public void policiaArrestaAlLadron() 
-	throws ExcepcionTiempoAgotado, ExcepcionOrdenDeArrestoNoEmitida {
+    public void policiaArrestaAlLadron() throws ExcepcionTiempoAgotado {
         Policia unPolicia = new Policia("Pedro");
         Ladron buscado = new Ladron("Jaime", Ladron.Sexo.MASCULINO, Ladron.Pelo.NEGRO, Ladron.Hobby.CROQUET, Ladron.Auto.CONVERTIBLE, Ladron.MarcaPersonal.CICATRIZ);
 	
-		unPolicia.arrestarAlLadron(buscado);
+		unPolicia.arrestarA(buscado);
 		
         Assert.assertTrue(buscado.estaArrestado());
     }
@@ -347,5 +294,46 @@ public class PoliciaTest {
 		policia.setTiempoDisponible(1);
 		
 		policia.recibirHerida();
+	}
+	
+	@Test
+	public void elPoliciaNovatoNoAsciendeSiNoTieneLaCantidadDeCasosNecesarios() {
+		Policia unPolicia = new Policia("Pedro");
+		
+		unPolicia.ascender();
+		
+		Assert.assertEquals(unPolicia.getRango().getClass(), Novato.class);
+	}
+	
+	@Test
+	public void elPoliciaNovatoAsciendeSiTiene5CasosResueltos() {
+		Policia unPolicia = new Policia("Pedro");
+		
+		unPolicia.resolvioUnCaso();
+		unPolicia.resolvioUnCaso();
+		unPolicia.resolvioUnCaso();
+		unPolicia.resolvioUnCaso();
+		unPolicia.resolvioUnCaso();
+		
+		unPolicia.ascender();
+		
+		Assert.assertEquals(unPolicia.getRango().getClass(), Detective.class);
+	}
+	
+	@Test
+	public void elPoliciaNovatoQueFueAscendidoSiEsReseteadoMantieneElRango() {
+		Policia unPolicia = new Policia("Pedro");
+		
+		unPolicia.resolvioUnCaso();
+		unPolicia.resolvioUnCaso();
+		unPolicia.resolvioUnCaso();
+		unPolicia.resolvioUnCaso();
+		unPolicia.resolvioUnCaso();
+		
+		unPolicia.ascender();
+		
+		unPolicia.resetear();
+		
+		Assert.assertEquals(unPolicia.getRango().getClass(), Detective.class);
 	}
 }

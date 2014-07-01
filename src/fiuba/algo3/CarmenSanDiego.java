@@ -14,9 +14,12 @@ public class CarmenSanDiego {
 	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
 
 		Juego juego = new Juego("Policia");
+		
 		Controlador controlador = new Controlador(juego);
-		Vista vista = new Vista();
+		Vista vista = new Vista(juego);
+		
 		controlador.setVista(vista);
+		
 		controlador.iniciar();
 	}
 }

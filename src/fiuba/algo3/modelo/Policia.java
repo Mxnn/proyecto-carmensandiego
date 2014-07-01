@@ -13,14 +13,16 @@ public class Policia {
     private Rango rango;
     private Ciudad ciudadActual;
 	private int edificiosVisitadosEnEstaCiudad;
+	private int casosResueltos;
 
-    public Policia (String unNombre){
+    public Policia(String unNombre) {
         this.nombre = unNombre;
         this.tiempoDisponible = TIEMPO_DISPONIBLE_INICIAL;
         this.rango = new Novato();
-		this.edificiosVisitadosEnEstaCiudad = 0;   	
-
+		this.edificiosVisitadosEnEstaCiudad = 0;
+		this.casosResueltos	= 0;
     }
+	
 	//SETTERS:
     public void setRango(Rango unRango) {
         this.rango = unRango;
@@ -51,8 +53,10 @@ public class Policia {
         return this.ciudadActual;
     }
 	
-	public boolean yaVisitoTresEdificios() {
-		return this.edificiosVisitadosEnEstaCiudad == 3;
+	//LOGICA:
+	public void resetear() {
+		this.tiempoDisponible = TIEMPO_DISPONIBLE_INICIAL;
+		this.edificiosVisitadosEnEstaCiudad = 0;
 	}
 
     public void viajar(Ciudad ciudadDestino) throws ExcepcionTiempoAgotado {
@@ -68,20 +72,17 @@ public class Policia {
 
 	public String visitarEdificioEconomia() throws ExcepcionTiempoAgotado {
 		descuentoDeTiempoPorVisitarEdificio();
-		Edificio edificio = this.ciudadActual.getEdificioEconomia(this);
-		return this.rango.pedirPista(edificio);
+		return this.ciudadActual.recibirVisitaEdificioEconomia(this);
 	}
 
 	public String visitarEdificioCultural() throws ExcepcionTiempoAgotado {
 		descuentoDeTiempoPorVisitarEdificio();
-		Edificio edificio = this.ciudadActual.getEdificioCultural(this);
-		return this.rango.pedirPista(edificio);
+		return this.ciudadActual.recibirVisitaEdificioCultural(this);
 	}
 
 	public String visitarEdificioTransporte() throws ExcepcionTiempoAgotado {
 		descuentoDeTiempoPorVisitarEdificio();
-		Edificio edificio = this.ciudadActual.getEdificioTransporte(this);
-		return this.rango.pedirPista(edificio);
+		return this.ciudadActual.recibirVisitaEdificioTransporte(this);
 	}
 
     public String emitirOrdenDeArresto(Computadora computadora) throws ExcepcionTiempoAgotado {
@@ -89,12 +90,25 @@ public class Policia {
         return computadora.emitirOrdenDeArresto();
     }
 	
-	public void arrestarAlLadron(Ladron buscado) {
+	public void arrestarA(Ladron buscado) {
 		buscado.recibirArresto();
 	}
 	
 	public void recibirHerida() throws ExcepcionTiempoAgotado {
 		descontarTiempo(TIEMPO_POR_RECIBIR_HERIDA);
+	}
+	
+	public void resolvioUnCaso() {
+		this.casosResueltos++;
+	}
+	
+	public boolean ascender() {
+		Rango siguiente = this.rango.determinarRangoSiguiente(this.casosResueltos);
+		if (siguiente != null) {
+			this.rango = siguiente;
+			return true;
+		}
+		return false;
 	}
 	
 	//PRIVADOS

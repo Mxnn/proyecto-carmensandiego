@@ -3,7 +3,6 @@ package fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 public class Computadora {
-    private Ladron ladronBuscado;
 	private ArrayList<Ladron> sospechosos;
     private Ladron.Sexo sexoDelLadron;
     private Ladron.Pelo peloDelLadron;
@@ -13,9 +12,8 @@ public class Computadora {
     private ArrayList<Ladron> sospechososFiltrados;
 	private boolean ordenDeArrestoEmitida;
 
-	public Computadora(Ladron ladronBuscado) {
-        this.ladronBuscado = ladronBuscado;
-		this.sospechosos = new ArrayList<Ladron>();
+	public Computadora(ArrayList<Ladron> ladrones) {
+		this.sospechosos = ladrones;
         this.sexoDelLadron = null;
         this.peloDelLadron = null;
         this.hobbyDelLadron = null;
@@ -26,16 +24,10 @@ public class Computadora {
 	}
 
 	//SETTERS:
-	public void setSospechosos(ArrayList<Ladron> ladrones) {
-		this.sospechosos = ladrones;
-	}
-
 	public void setCaracteristicaDelLadron(Ladron.Sexo sexo) {
 		this.sexoDelLadron = sexo;
 	}
 
-	
-	
 	public void setCaracteristicaDelLadron(Ladron.Pelo pelo) {
 		this.peloDelLadron = pelo;
 	}
@@ -53,20 +45,6 @@ public class Computadora {
 	}
 	
 	//GETTERS:
-	public boolean ordenDeArrestoEmitidaContraLadronCorrecto() throws ExcepcionOrdenDeArrestoNoEmitida {
-		if (this.ordenDeArrestoEmitida) {
-			return ladronBuscado.tieneOrdenDeArresto();
-		}
-		throw new ExcepcionOrdenDeArrestoNoEmitida();
-	}
-	
-	public Ladron getLadronBuscado() throws ExcepcionOrdenDeArrestoNoEmitida  {
-		if (this.ordenDeArrestoEmitida) {
-			return this.ladronBuscado;
-		}
-		throw new ExcepcionOrdenDeArrestoNoEmitida();
-	}
-	
 	public String emitirOrdenDeArresto() {
 		filtrarSospechosos();
 		if (this.sospechososFiltrados.size() == 1){	
@@ -76,6 +54,10 @@ public class Computadora {
 			return sospechosoAlQueEmitirOrden.getNombre();
 		}
 		return "";
+	}
+	
+	public boolean ordenDeArrestoEmitida() {
+		return this.ordenDeArrestoEmitida;
 	}
 	
 	//PRIVADOS:
@@ -89,7 +71,7 @@ public class Computadora {
 
     private void filtrarSospechosos() {
         this.sospechososFiltrados.clear();
-        for(Ladron ladron: this.sospechosos) {
+        for (Ladron ladron: this.sospechosos) {
             if (ladronCumpleConLosFiltros(ladron)){
                 this.sospechososFiltrados.add(ladron);
             }

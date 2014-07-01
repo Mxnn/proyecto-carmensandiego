@@ -1,7 +1,9 @@
 package fiuba.algo3.modelo;
 
 public class Novato implements Rango {
-    private int velocidad;
+    public final static int CASOS_NECESARIOS_ASCENSO = 5;
+	
+	private int velocidad;
 
     public Novato() {
         this.velocidad = 900;
@@ -18,4 +20,11 @@ public class Novato implements Rango {
     public String pedirPista(Edificio edificio) {
         return edificio.getPista(this);
     }
+	
+	public Detective determinarRangoSiguiente(int cantidadDeCasos) {
+		if (cantidadDeCasos == CASOS_NECESARIOS_ASCENSO) {
+			return new Detective();
+		}
+		return null;
+	}
 }

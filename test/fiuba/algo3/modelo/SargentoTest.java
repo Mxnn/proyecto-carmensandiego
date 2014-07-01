@@ -28,4 +28,18 @@ public class SargentoTest {
 
         Assert.assertEquals(sargento.calcularTiempoDeViaje(100.0), 1);
     }
+	
+	@Test
+	public void determinarRangoSiguienteDevuelveNullPorqueNoTengoLaCantidadDeCasosNecesarios() {
+		Sargento sargento = new Sargento();
+		
+		Assert.assertNull(sargento.determinarRangoSiguiente(0));
+	}
+	
+	@Test
+	public void determinarRangoSiguienteDevuelveNullSiTengoMuchosCasos() {
+		Sargento sargento = new Sargento();
+		
+		Assert.assertNull(sargento.determinarRangoSiguiente(541872154));
+	}
 }
