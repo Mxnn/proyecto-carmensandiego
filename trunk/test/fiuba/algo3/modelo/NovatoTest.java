@@ -28,4 +28,18 @@ public class NovatoTest {
 
         Assert.assertEquals(novato.calcularTiempoDeViaje(100.0), 1);
     }
+	
+	@Test
+	public void determinarRangoSiguienteDevuelveNullPorqueNoTengoLaCantidadDeCasosNecesarios() {
+		Novato novato = new Novato();
+		
+		Assert.assertNull(novato.determinarRangoSiguiente(0));
+	}
+	
+	@Test
+	public void determinarRangoSiguienteDevuelveUnDetectiveSiTengoLaCantidadDeCasosNecesarios() {
+		Novato novato = new Novato();
+		
+		Assert.assertEquals(novato.determinarRangoSiguiente(Novato.CASOS_NECESARIOS_ASCENSO).getClass(), Detective.class);
+	}
 }

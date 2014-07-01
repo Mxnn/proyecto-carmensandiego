@@ -28,4 +28,18 @@ public class DetectiveTest {
 
         Assert.assertEquals(detective.calcularTiempoDeViaje(100.0), 1);
     }
+	
+	@Test
+	public void determinarRangoSiguienteDevuelveNullPorqueNoTengoLaCantidadDeCasosNecesarios() {
+		Detective detective = new Detective();
+		
+		Assert.assertNull(detective.determinarRangoSiguiente(0));
+	}
+	
+	@Test
+	public void determinarRangoSiguienteDevuelveUnInvestigadorSiTengoLaCantidadDeCasosNecesarios() {
+		Detective detective = new Detective();
+		
+		Assert.assertEquals(detective.determinarRangoSiguiente(Detective.CASOS_NECESARIOS_ASCENSO).getClass(), Investigador.class);
+	}
 }

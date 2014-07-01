@@ -30,7 +30,6 @@ public class GeneradorDeCasos {
 	public GeneradorDeCasos() {
 		ciudades = new ArrayList<Ciudad>();
 		pistasDeLasCiudades = new ArrayList<ArrayList<Pista>>();
-	
 	}
 
 	public void leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas()
@@ -66,99 +65,115 @@ public class GeneradorDeCasos {
 			}
 			this.pistasDeLasCiudades.add(pistasPorCiudad);
 		}
-
 	}
 	
-  /*  public ArrayList<Ciudad> copiarCiudades (ArrayList<Ciudad> ciudades ){
-    	
-    	ArrayList <Ciudad> copiaCiudades=new ArrayList <Ciudad>();
-    	for (Ciudad ciudad:ciudades){
-    		Ciudad ciudadNueva=ciudad.copiar();
-    		copiaCiudades.add(ciudadNueva);
-    		
-    	}
-		return copiaCiudades;*/
-    	
-    public void agregarCiudades(ArrayList<Ciudad> ciudades){
-    	this.ciudades=ciudades;
-    	
-    }
-	
-	
-	public ArrayList<Ciudad> generarUnCaso() {
-
+	public void  generarUnCaso(Ladron buscado, Policia policia) {
+		limpiarCiudades();
+		
 		Random rand = new Random();
 		ArrayList<Ciudad> ciudadesPorRecorrer = new ArrayList<Ciudad>();
 		ArrayList<ArrayList<Pista>> pistasDeLaCiudadesPorRecorrer = new ArrayList<ArrayList<Pista>>();
 
-		
 		while (CANTIDAD_DE_CIUDADES_POR_RECORRER > ciudadesPorRecorrer.size()) {
-			int posicion = rand.nextInt(ciudades.size());
-			Ciudad ciudadAgregada=ciudades.get(posicion);
+			int posicion = rand.nextInt(this.ciudades.size());
+			Ciudad ciudadAgregada = this.ciudades.get(posicion);
 			if (!ciudadesPorRecorrer.contains(ciudadAgregada)){
 				ciudadesPorRecorrer.add(ciudadAgregada);
 				pistasDeLaCiudadesPorRecorrer.add(pistasDeLasCiudades.get(posicion));
 			}
 		}
-
-		for (int i = 0; i < ciudadesPorRecorrer.size(); i++){
-			Ciudad ciudadActual = ciudadesPorRecorrer.get(i);
-            setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
-
-			Edificio EdificioEconomicoActual = ciudadActual.getEdificioEconomia();
-			Edificio EdificioTransporteActual = ciudadActual.getEdificioTransporte();
-			Edificio EdificioCulturalActual = ciudadActual.getEdificioCultural();
-
-			if (i + 1 < ciudadesPorRecorrer.size()){
-				ArrayList<Pista> pistasDeLaCiudadSiguiente = pistasDeLaCiudadesPorRecorrer.get(i+1);
-
-				EdificioEconomicoActual.setPistas(pistasDeLaCiudadSiguiente.get(0), pistasDeLaCiudadSiguiente.get(1), pistasDeLaCiudadSiguiente.get(2));
-				EdificioTransporteActual.setPistas(pistasDeLaCiudadSiguiente.get(3), pistasDeLaCiudadSiguiente.get(4), pistasDeLaCiudadSiguiente.get(5));
-				EdificioCulturalActual.setPistas(pistasDeLaCiudadSiguiente.get(6), pistasDeLaCiudadSiguiente.get(7), pistasDeLaCiudadSiguiente.get(8));
-			} else {
-				Pista pistaElLadronEstaCerca = new Pista(PISTA_ESTA_CERCA_EL_LADRON);
-				EdificioEconomicoActual.setPistas(pistaElLadronEstaCerca, pistaElLadronEstaCerca, pistaElLadronEstaCerca);
-				EdificioTransporteActual.setPistas(pistaElLadronEstaCerca, pistaElLadronEstaCerca, pistaElLadronEstaCerca);
-				EdificioCulturalActual.setPistas(pistaElLadronEstaCerca, pistaElLadronEstaCerca, pistaElLadronEstaCerca);
-			}
-		}
-		for (Ciudad ciudad :ciudades){
-			
-			if (!ciudadesPorRecorrer.contains(ciudad)){
-				conectarCiudadesRandom(ciudad, ciudadesPorRecorrer);
-			}
-		}
-		return ciudadesPorRecorrer;
-	}
-
-    public void setearCiudadesConectadasPorRecorrer(Ciudad ciudadActual, ArrayList<Ciudad> ciudadesPorRecorrer){
-		int posicionCiudadActual= ciudadesPorRecorrer.indexOf(ciudadActual);
-		if (posicionCiudadActual <=4){
+		
+		agregarCiudadesSiguientes(ciudadesPorRecorrer);
+		setearPistasDeLaCiudadSiguiente(ciudadesPorRecorrer, pistasDeLaCiudadesPorRecorrer);
+		setearPistasDelLadronBuscado(buscado, ciudadesPorRecorrer);
+		seleccionarCiudadDondeHierenAlPolicia(ciudadesPorRecorrer);
+		policia.setCiudadActual(ciudadesPorRecorrer.get(0));
+		esconderAlLadron(ciudadesPorRecorrer);
+	}	
 	
-			Ciudad ciudadPorAgregar=ciudadesPorRecorrer.get(posicionCiudadActual+1);
-			ciudadActual.conectarCiudad( ciudadPorAgregar);
+	private void limpiarCiudades() {
+		for (Ciudad ciudad : this.ciudades) {
+			ciudad.resetear();
 		}
-		if (posicionCiudadActual >=1){
-			Ciudad ciudadPorAgregar=ciudadesPorRecorrer.get(posicionCiudadActual-1);
-			ciudadActual.conectarCiudad( ciudadPorAgregar);
-		}
-		conectarCiudadesRandom(ciudadActual,ciudadesPorRecorrer);
-		
 	}
-    
-    public void conectarCiudadesRandom(Ciudad ciudadActual ,ArrayList<Ciudad> ciudadesPorRecorrer){
+	
+	private void agregarCiudadesSiguientes(ArrayList<Ciudad> ciudadesPorRecorrer) {
+		for (int i = 0; i < CANTIDAD_DE_CIUDADES_POR_RECORRER; i++) {
+			Ciudad ciudad = ciudadesPorRecorrer.get(i);
+			if (i + 1 < CANTIDAD_DE_CIUDADES_POR_RECORRER) {	
+				ciudad.conectarCiudad(ciudadesPorRecorrer.get(i + 1));
+			}
+			conectarCiudadesRandom(ciudad, ciudadesPorRecorrer);
+		}
+	}
+	
+	private void conectarCiudadesRandom(Ciudad ciudadActual, ArrayList<Ciudad> ciudadesPorRecorrer) {
 		Random rand = new Random();
-		while (ciudadActual.cantidadDeCiudadesConectadas() < 4){
-			int posicionRandom = rand.nextInt(ciudades.size());
-			Ciudad ciudadPorAgregar= ciudades.get(posicionRandom);
-			if (!ciudadesPorRecorrer.contains(ciudadPorAgregar)){
+		while (ciudadActual.cantidadDeCiudadesConectadas() < 4) {
+			int posicionRandom = rand.nextInt(this.ciudades.size());
+			Ciudad ciudadPorAgregar = this.ciudades.get(posicionRandom);
+			if (!ciudadesPorRecorrer.contains(ciudadPorAgregar)) {
 				ciudadActual.conectarCiudad(ciudadPorAgregar);
-		
 			}
 		}
     }
+	
+	private void esconderAlLadron(ArrayList<Ciudad> ciudadesPorRecorrer) {
+		Ciudad ultima = ciudadesPorRecorrer.get(CANTIDAD_DE_CIUDADES_POR_RECORRER - 1);
+		ultima.esconderAlLadron();
+	}	
+		
+	private void setearPistasDeLaCiudadSiguiente(ArrayList<Ciudad> ciudadesPorRecorrer, ArrayList<ArrayList<Pista>> pistasDeLaCiudadesPorRecorrer) {	
+		for (int i = 0; i < CANTIDAD_DE_CIUDADES_POR_RECORRER; i++) {
+			Ciudad ciudadActual = ciudadesPorRecorrer.get(i);
 
+			Edificio edificioEconomicoActual = new Edificio();
+			Edificio edificioTransporteActual = new Edificio();
+			Edificio edificioCulturalActual = new Edificio();
 
+			if (i + 1 < CANTIDAD_DE_CIUDADES_POR_RECORRER) {
+				ArrayList<Pista> pistasDeLaCiudadSiguiente = pistasDeLaCiudadesPorRecorrer.get(i + 1);
+
+				edificioEconomicoActual.setPistas(pistasDeLaCiudadSiguiente.get(0), pistasDeLaCiudadSiguiente.get(1), pistasDeLaCiudadSiguiente.get(2));
+				edificioTransporteActual.setPistas(pistasDeLaCiudadSiguiente.get(3), pistasDeLaCiudadSiguiente.get(4), pistasDeLaCiudadSiguiente.get(5));
+				edificioCulturalActual.setPistas(pistasDeLaCiudadSiguiente.get(6), pistasDeLaCiudadSiguiente.get(7), pistasDeLaCiudadSiguiente.get(8));
+			} else {
+				Pista pistaElLadronEstaCerca = new Pista(PISTA_ESTA_CERCA_EL_LADRON);
+				edificioEconomicoActual.setPistas(pistaElLadronEstaCerca, pistaElLadronEstaCerca, pistaElLadronEstaCerca);
+				edificioTransporteActual.setPistas(pistaElLadronEstaCerca, pistaElLadronEstaCerca, pistaElLadronEstaCerca);
+				edificioCulturalActual.setPistas(pistaElLadronEstaCerca, pistaElLadronEstaCerca, pistaElLadronEstaCerca);
+			}
+			ciudadActual.setEdificioEconomia(edificioEconomicoActual);
+			ciudadActual.setEdificioTransporte(edificioTransporteActual);
+			ciudadActual.setEdificioCultural(edificioCulturalActual);
+		}
+	}
+	
+	private void setearPistasDelLadronBuscado(Ladron buscado, ArrayList<Ciudad> ciudadesPorRecorrer) {
+		Ciudad ciudad = ciudadesPorRecorrer.get(0);
+		Edificio edificio = ciudad.getEdificioCultural();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElPelo());
+		
+		ciudad = ciudadesPorRecorrer.get(1);
+		edificio = ciudad.getEdificioTransporte();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElHobby());
+		
+		ciudad = ciudadesPorRecorrer.get(2);
+		edificio = ciudad.getEdificioTransporte();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElAuto());
+		
+		ciudad = ciudadesPorRecorrer.get(4);
+		edificio = ciudad.getEdificioEconomia();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreLaMarcaPersonal());
+	}
+	
+	private void seleccionarCiudadDondeHierenAlPolicia(ArrayList<Ciudad> ciudadesPorRecorrer) {
+		Random rand = new Random();
+		int posicionRandom = rand.nextInt(this.ciudades.size());
+		Ciudad ciudad = ciudadesPorRecorrer.get(posicionRandom);
+		ciudad.setHierenAlPolicia();
+	}
+	
 	/***********************************************************************************************/
 	/*                            PARA TESTEAR COMO SE LEE EL ARCHIVO                             */
 	/***********************************************************************************************/
@@ -269,5 +284,4 @@ public class GeneradorDeCasos {
 
 		return ( elementoCiudad.getElementsByTagName("Pista") ).getLength();
 	}
-
 }

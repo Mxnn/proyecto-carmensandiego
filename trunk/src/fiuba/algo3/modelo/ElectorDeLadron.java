@@ -27,7 +27,6 @@ public class ElectorDeLadron {
 	private ArrayList<Ladron> listaDeLadrones;
 	
 	public ElectorDeLadron() {
-		
 		listaDeLadrones = new ArrayList<Ladron>();
 	}
 	
@@ -76,24 +75,6 @@ public class ElectorDeLadron {
 		int posicion = rand.nextInt(this.listaDeLadrones.size());
 		Ladron buscado = listaDeLadrones.get(posicion);
 		return buscado;
-	}
-
-	public void setPistasDelLadronBuscado(Ladron buscado, ArrayList<Ciudad> ciudadesPorRecorrer) {
-		Ciudad ciudad = ciudadesPorRecorrer.get(0);
-		Edificio edificio = ciudad.getEdificioCultural();
-		edificio.setPistaLadron(buscado.generarUnaPistaSobreElPelo());
-		
-		ciudad = ciudadesPorRecorrer.get(1);
-		edificio = ciudad.getEdificioTransporte();
-		edificio.setPistaLadron(buscado.generarUnaPistaSobreElHobby());
-		
-		ciudad = ciudadesPorRecorrer.get(2);
-		edificio = ciudad.getEdificioTransporte();
-		edificio.setPistaLadron(buscado.generarUnaPistaSobreElAuto());
-		
-		ciudad = ciudadesPorRecorrer.get(4);
-		edificio = ciudad.getEdificioEconomia();
-		edificio.setPistaLadron(buscado.generarUnaPistaSobreLaMarcaPersonal());
 	}
 }
 		

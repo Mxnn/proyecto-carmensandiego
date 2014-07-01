@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo;
 
-public class Sargento implements Rango{
+public class Sargento implements Rango {
 	private int velocidad;
 
 	public Sargento(){
@@ -18,4 +18,8 @@ public class Sargento implements Rango{
     public String pedirPista(Edificio edificio) {
         return edificio.getPista(this);
     }
+	
+	public Rango determinarRangoSiguiente(int cantidadDeCasos) {
+		return null;
+	}
 }

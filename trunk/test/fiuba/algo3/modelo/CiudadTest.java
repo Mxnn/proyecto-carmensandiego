@@ -33,13 +33,6 @@ public class CiudadTest {
 		
         Assert.assertTrue(ciudad.cantidadDeCiudadesConectadas() == 0);
     }
-	
-	@Test
-    public void ciudadSeCreaSinEsconderAlLadron() {
-        Ciudad ciudad = new Ciudad("Buenos Aires", new Coordenada(1, 1));
-		
-        Assert.assertFalse(ciudad.escondeAlLadron());
-    }
 
     @Test
     public void getCoordenadasDevuelveLasCoordenadasConLasCualesFueCreadaLaCiudad() {
@@ -74,15 +67,6 @@ public class CiudadTest {
 
         ciudad.setEdificioEconomia(nuevoEdificioEconomia);
         Assert.assertEquals(ciudad.getEdificioEconomia(), nuevoEdificioEconomia);
-    }
-
-    @Test
-    public void conectarCiudadAgregaUnaCiudadALaActual() {
-        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
-        Ciudad paris = new Ciudad("Paris", new Coordenada(5,7));
-
-        londres.conectarCiudad(paris);
-        Assert.assertTrue((londres.getCiudadesConectadas()).size() == 1);
     }
 	
 	@Test
@@ -162,221 +146,291 @@ public class CiudadTest {
         Assert.assertTrue(londres.estaConectadaConEstaCiudad(paris));
 		Assert.assertTrue(londres.estaConectadaConEstaCiudad(buenosAires));
     }
-
-    @Test
-    public void escondeAlLadronDevuelveTrueSiElLadronEstaEnLaCiudad() {
-        Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
-        
-        londres.esconderAlLadron();
-
-        Assert.assertTrue(londres.escondeAlLadron());
-    }
-
-    @Test
-    public void ladronEstaEnLaCiudadDevuelveFalseSiElLadronNoEstaEnLaCiudad() {
-        Ciudad londres = new Ciudad("Londres", new Coordenada(1,3));
-
-        Assert.assertFalse(londres.escondeAlLadron());
-    }
 	
 	@Test
-	public void getEdificioCulturalQueRecibePoliciaHiereAlPolicia() throws ExcepcionTiempoAgotado {
-		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
-		londres.esconderAlLadron();
+	public void conectarCiudadNoConectaAUnaCiudadConsigoMisma() {
+		Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(1, 1));
 		
-		String nombreConMasDe6CaracteresYPar = "Macarena";
-		Policia policia = new Policia(nombreConMasDe6CaracteresYPar);
+		buenosAires.conectarCiudad(buenosAires);
+		
+		Assert.assertFalse(buenosAires.estaConectadaConEstaCiudad(buenosAires));
+	}
+	
+	@Test
+	public void conectarCiudadNoConectaUnaCiudadDosVecesALaMisma() {
+		Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+		Ciudad paris = new Ciudad("Paris", new Coordenada(5, 7));
+		
+		buenosAires.conectarCiudad(paris);
+		buenosAires.conectarCiudad(paris);
+		
+		Assert.assertTrue(buenosAires.cantidadDeCiudadesConectadas() == 1);
+	}
+	
+	@Test
+	public void recibirVisitaEdificioCulturalHiereAlPolicia() throws ExcepcionTiempoAgotado {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		londres.setHierenAlPolicia();
+		
+		String nombreConMenosDe8CaracteresYPar = "Melina";
+		Policia policia = new Policia(nombreConMenosDe8CaracteresYPar);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioCultural(policia);
+		londres.recibirVisitaEdificioCultural(policia);
 		
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
 	@Test (expected = ExcepcionTiempoAgotado.class)
-	public void getEdificioCulturalQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioCulturalSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
-		londres.esconderAlLadron();
+		londres.setHierenAlPolicia();
 		
-		String nombreConMasDe6CaracteresYPar = "Macarena";
-		Policia policia = new Policia(nombreConMasDe6CaracteresYPar);
+		String nombreConMenosDe8CaracteresYPar = "Melina";
+		Policia policia = new Policia(nombreConMenosDe8CaracteresYPar);
 		policia.setCiudadActual(londres);
 		policia.setTiempoDisponible(1);
 		
-		londres.getEdificioCultural(policia);
+		londres.recibirVisitaEdificioCultural(policia);
 	}
 	
 	@Test
-	public void getEdificioEconomiaQueRecibePoliciaHiereAlPolicia() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioEconomiaHiereAlPolicia() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
-		londres.esconderAlLadron();
+		londres.setHierenAlPolicia();
 		
-		String nombreConMenosDe6Caracteres = "Ana";
-		Policia policia = new Policia(nombreConMenosDe6Caracteres);
+		String nombreConMasDe8Caracteres = "Macarena";
+		Policia policia = new Policia(nombreConMasDe8Caracteres);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioEconomia(policia);
+		londres.recibirVisitaEdificioEconomia(policia);
 		
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
 	@Test (expected = ExcepcionTiempoAgotado.class)
-	public void getEdificioEconomiaQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioEconomiaSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
-		londres.esconderAlLadron();
+		londres.setHierenAlPolicia();
 		
-		String nombreConMenosDe6Caracteres = "Ana";
-		Policia policia = new Policia(nombreConMenosDe6Caracteres);
+		String nombreConMasDe8Caracteres = "Macarena";
+		Policia policia = new Policia(nombreConMasDe8Caracteres);
 		policia.setCiudadActual(londres);
 		policia.setTiempoDisponible(1);
 		
-		londres.getEdificioEconomia(policia);
+		londres.recibirVisitaEdificioEconomia(policia);
 	}
 	
 	@Test
-	public void getEdificioTransporteQueRecibePoliciaHiereAlPolicia() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioTransporteHiereAlPolicia() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
-		londres.esconderAlLadron();
+		londres.setHierenAlPolicia();
 		
-		String nombreConMasDe6CaracteresEImpar = "Florencia";
-		Policia policia = new Policia(nombreConMasDe6CaracteresEImpar);
+		String nombreConMenosDe8CaracteresEImpar = "Maria";
+		Policia policia = new Policia(nombreConMenosDe8CaracteresEImpar);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioTransporte(policia);
+		londres.recibirVisitaEdificioTransporte(policia);
 		
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL - Policia.TIEMPO_POR_RECIBIR_HERIDA);
 	}
 	
 	@Test (expected = ExcepcionTiempoAgotado.class)
-	public void getEdificioTransporteQueRecibePoliciaSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioTransporteSinTiempoLanzaExcepcion() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
-		londres.esconderAlLadron();
+		londres.setHierenAlPolicia();
 		
-		String nombreConMasDe6CaracteresEImpar = "Florencia";
-		Policia policia = new Policia(nombreConMasDe6CaracteresEImpar);
+		String nombreConMenosDe8CaracteresEImpar = "Maria";
+		Policia policia = new Policia(nombreConMenosDe8CaracteresEImpar);
 		policia.setCiudadActual(londres);
 		policia.setTiempoDisponible(1);
 		
-		londres.getEdificioTransporte(policia);
+		londres.recibirVisitaEdificioTransporte(policia);
 	}
 	
 	@Test
-	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioCulturalNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		londres.setHierenAlPolicia();
 		
-		String nombreConMasDe6CaracteresYPar = "Macarena";
-		Policia policia = new Policia(nombreConMasDe6CaracteresYPar);
+		String nombreConMenosDe8CaracteresEImpar = "Maria";
+		Policia policia = new Policia(nombreConMenosDe8CaracteresEImpar);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioCultural(policia);
+		londres.recibirVisitaEdificioCultural(policia);
 		
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
 	}
 	
 	@Test
-	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioEconomiaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		londres.setHierenAlPolicia();
 		
-		String nombreConMenosDe6Caracteres = "Ana";
-		Policia policia = new Policia(nombreConMenosDe6Caracteres);
+		String nombreConMenosDe8CaracteresYPar = "Melina";
+		Policia policia = new Policia(nombreConMenosDe8CaracteresYPar);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioEconomia(policia);
+		londres.recibirVisitaEdificioEconomia(policia);
 		
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
 	}
 	
 	@Test
-	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoEstaElLadron() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioTransporteNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		londres.setHierenAlPolicia();
 		
-		String nombreConMasDe6CaracteresEImpar = "Florencia";
-		Policia policia = new Policia(nombreConMasDe6CaracteresEImpar);
+		String nombreConMasDe8Caracteres = "Macarena";
+		Policia policia = new Policia(nombreConMasDe8Caracteres);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioTransporte(policia);
+		londres.recibirVisitaEdificioTransporte(policia);
 		
 		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
 	}
 	
-		@Test
-	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
+	@Test
+	public void recibirVisitaEdificioCulturalNoHiereAlPoliciaPorqueNoCorrespondeEnEstaCiudad() throws ExcepcionTiempoAgotado {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMenosDe8CaracteresYPar = "Melina";
+		Policia policia = new Policia(nombreConMenosDe8CaracteresYPar);
+		policia.setCiudadActual(londres);
+		
+		londres.recibirVisitaEdificioCultural(policia);
+		
+		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+	}
+	
+	@Test
+	public void recibirVisitaEdificioEconomiaNoHiereAlPoliciaPorqueNoCorrespondeEnEstaCiudad() throws ExcepcionTiempoAgotado {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMasDe8Caracteres = "Macarena";
+		Policia policia = new Policia(nombreConMasDe8Caracteres);
+		policia.setCiudadActual(londres);
+		
+		londres.recibirVisitaEdificioEconomia(policia);
+		
+		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+	}
+	
+	@Test
+	public void recibirVisitaEdificioTransporteNoHiereAlPoliciaPorqueNoCorrespondeEnEstaCiudad() throws ExcepcionTiempoAgotado {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMenosDe8CaracteresEImpar = "Maria";
+		Policia policia = new Policia(nombreConMenosDe8CaracteresEImpar);
+		policia.setCiudadActual(londres);
+		
+		londres.recibirVisitaEdificioTransporte(policia);
+		
+		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+	}
+	
+	@Test
+	public void recibirVisitaEdificioCulturalDevuelvePistaVaciaPorqueElPoliciaEncuentraAlLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
-		String nombreConMasDe6CaracteresEImpar = "Florencia";
-		Policia policia = new Policia(nombreConMasDe6CaracteresEImpar);
+		String nombreConMasDe4CaracteresYPar = "Melina";
+		Policia policia = new Policia(nombreConMasDe4CaracteresYPar);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioCultural(policia);
-		
-		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+		Assert.assertEquals(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioCultural(policia));
 	}
 	
 	@Test
-	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioEconomiaDevuelvePistaVaciaPorqueElPoliciaEncuentraAlLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
-		String nombreConMasDe6CaracteresYPar = "Macarena";
-		Policia policia = new Policia(nombreConMasDe6CaracteresYPar);
+		String nombreConMenosDe4Caracteres = "Ana";
+		Policia policia = new Policia(nombreConMenosDe4Caracteres);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioEconomia(policia);
-		
-		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+		Assert.assertEquals(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioEconomia(policia));
 	}
 	
 	@Test
-	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificio() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioTransporteDevuelvePistaVaciaPorqueElPoliciaEncuentraAlLadron() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
 		londres.esconderAlLadron();
 		
-		String nombreConMenosDe6Caracteres = "Ana";
-		Policia policia = new Policia(nombreConMenosDe6Caracteres);
+		String nombreConMasDe4CaracteresEImpar = "Florencia";
+		Policia policia = new Policia(nombreConMasDe4CaracteresEImpar);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioTransporte(policia);
-		
-		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+		Assert.assertEquals(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioTransporte(policia));
 	}
 	
 	@Test
-	public void getEdificioCulturalQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioCulturalNODevuelvePistaVaciaPorqueElPoliciaNOEncuentraAlLadronEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		londres.esconderAlLadron();
 		
-		String nombreConMasDe6CaracteresEImpar = "Florencia";
-		Policia policia = new Policia(nombreConMasDe6CaracteresEImpar);
+		String nombreConMasDe4CaracteresEImpar = "Florencia";
+		Policia policia = new Policia(nombreConMasDe4CaracteresEImpar);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioCultural(policia);
-		
-		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+		Assert.assertNotSame(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioCultural(policia));
 	}
 	
 	@Test
-	public void getEdificioEconomiaQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioEconomiaNODevuelvePistaVaciaPorqueElPoliciaNOEncuentraAlLadronEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		londres.esconderAlLadron();
 		
-		String nombreConMasDe6CaracteresYPar = "Macarena";
-		Policia policia = new Policia(nombreConMasDe6CaracteresYPar);
+		String nombreConMasDe4CaracteresYPar = "Melina";
+		Policia policia = new Policia(nombreConMasDe4CaracteresYPar);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioEconomia(policia);
-		
-		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+		Assert.assertNotSame(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioEconomia(policia));
 	}
 	
 	@Test
-	public void getEdificioTransporteQueRecibePoliciaNoHiereAlPoliciaPorqueNoCorrespondeEnEsteEdificioYNoEstaElLadron() throws ExcepcionTiempoAgotado {
+	public void recibirVisitaEdificioTransporteNODevuelvePistaVaciaPorqueElPoliciaNOEncuentraAlLadronEnEsteEdificio() throws ExcepcionTiempoAgotado {
 		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		londres.esconderAlLadron();
 		
-		String nombreConMenosDe6Caracteres = "Ana";
-		Policia policia = new Policia(nombreConMenosDe6Caracteres);
+		String nombreConMenosDe4Caracteres = "Ana";
+		Policia policia = new Policia(nombreConMenosDe4Caracteres);
 		policia.setCiudadActual(londres);
 		
-		londres.getEdificioTransporte(policia);
-		
-		Assert.assertTrue(policia.getTiempoDisponible() == Policia.TIEMPO_DISPONIBLE_INICIAL);
+		Assert.assertNotSame(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioTransporte(policia));
 	}
-}
+	
+	@Test
+	public void recibirVisitaEdificioCulturalNODevuelvePistaVaciaPorqueNOEstaElLadron() throws ExcepcionTiempoAgotado {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMasDe4CaracteresYPar = "Melina";
+		Policia policia = new Policia(nombreConMasDe4CaracteresYPar);
+		policia.setCiudadActual(londres);
+		
+		Assert.assertNotSame(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioCultural(policia));
+	}
+	
+	@Test
+	public void recibirVisitaEdificioEconomiaNODevuelvePistaVaciaPorqueNOEstaElLadron() throws ExcepcionTiempoAgotado {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMenosDe4Caracteres = "Ana";
+		Policia policia = new Policia(nombreConMenosDe4Caracteres);
+		policia.setCiudadActual(londres);
+		
+		Assert.assertNotSame(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioEconomia(policia));
+	}
+	
+	@Test
+	public void recibirVisitaEdificioTransporteNODevuelvePistaVaciaPorqueNOEstaElLadron() throws ExcepcionTiempoAgotado {
+		Ciudad londres = new Ciudad("Londres", new Coordenada(1, 3));
+		
+		String nombreConMasDe4CaracteresEImpar = "Florencia";
+		Policia policia = new Policia(nombreConMasDe4CaracteresEImpar);
+		policia.setCiudadActual(londres);
+		
+		Assert.assertNotSame(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioTransporte(policia));
+	}
+}	

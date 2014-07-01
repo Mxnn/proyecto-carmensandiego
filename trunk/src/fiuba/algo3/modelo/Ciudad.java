@@ -1,22 +1,19 @@
 package fiuba.algo3.modelo;
 
-import java.awt.geom.Arc2D.Double;
 import java.util.ArrayList;
-import java.util.Collections;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 
 public class Ciudad {
+	public final static String MENSAJE_ENCUENTRA_LADRON = "";
+	public final static String MENSAJE_RECIBE_HERIDA = "Ciudado! Te han herido!";
+
 	private String nombre;
 	private Coordenada coordenadas;
     private Edificio edificioCultural;
     private Edificio edificioEconomia;
     private Edificio edificioTransporte;
     private ArrayList<Ciudad> ciudadesConectadas;
-	private boolean acaEstaElLadron;
+	private boolean estaElLadron;
+	private boolean acaHierenAlPolicia;
 
 	public Ciudad(String nombre, Coordenada coordenadas) {
 		this.nombre = nombre;
@@ -25,7 +22,8 @@ public class Ciudad {
         edificioEconomia = new Edificio();
         edificioTransporte = new Edificio();
         ciudadesConectadas = new ArrayList<Ciudad>();
-		acaEstaElLadron = false;
+		this.estaElLadron = false;
+		this.acaHierenAlPolicia = false;
 	}
 
 	// SETTERS:
@@ -50,16 +48,12 @@ public class Ciudad {
         return false;
     }
 	
-    public boolean estaConectadaConEstaCiudad(Ciudad ciudad) {
-        return this.ciudadesConectadas.contains(ciudad);
-    }
-
-    public int cantidadDeCiudadesConectadas(){
-    	return ciudadesConectadas.size();
-    }
-	
 	public void esconderAlLadron() {
-		this.acaEstaElLadron = true;
+		this.estaElLadron = true;
+	}
+	
+	public void setHierenAlPolicia() {
+		this.acaHierenAlPolicia = true;
 	}
 
 	//GETTERS:
@@ -82,56 +76,86 @@ public class Ciudad {
     public Edificio getEdificioTransporte() {
 		return this.edificioTransporte;
     }
-
-    public Edificio getEdificioCultural(Policia policia) throws ExcepcionTiempoAgotado {
-        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioCultural) {
-			policia.recibirHerida();
-			this.edificioCultural.setPistaLadron("El Ladron te ha herido! ten cuidado.");
-		}
-		return this.edificioCultural;
+	
+	public ArrayList<Ciudad> getCiudadesConectadas() {
+        return this.ciudadesConectadas;
+    }
+	
+	public boolean estaConectadaConEstaCiudad(Ciudad ciudad) {
+        return this.ciudadesConectadas.contains(ciudad);
     }
 
-    public Edificio getEdificioEconomia(Policia policia) throws ExcepcionTiempoAgotado {
-        if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioEconomia) {
-			policia.recibirHerida();
-			this.edificioEconomia.setPistaLadron("El Ladron te ha herido! ten cuidado.");
-		}
-		return this.edificioEconomia;
+    public int cantidadDeCiudadesConectadas() {
+    	return ciudadesConectadas.size();
     }
 
-    public Edificio getEdificioTransporte(Policia policia) throws ExcepcionTiempoAgotado {
-		if (this.acaEstaElLadron && enEsteEdificioHiereAlPolicia(policia) == this.edificioTransporte) {
-			policia.recibirHerida();
-			this.edificioEconomia.setPistaLadron("El Ladron te ha herido! ten cuidado.");
-		}
-		return this.edificioTransporte;
-    }
-
-    public ArrayList<Ciudad> getCiudadesConectadas() {
-        return ciudadesConectadas;
-    }
-
-    public boolean escondeAlLadron() {
-        return this.acaEstaElLadron;
-    }
-    
-	public Ciudad copiar() {
-		return new Ciudad (this.getNombre(),this.getCoordenadas());
+	//LOGICA: 
+    public String recibirVisitaEdificioCultural(Policia policia) throws ExcepcionTiempoAgotado {
+		return recibirVisitaEdificio(policia, this.edificioCultural);
+	}
+	
+	public String recibirVisitaEdificioEconomia(Policia policia) throws ExcepcionTiempoAgotado {
+		return recibirVisitaEdificio(policia, this.edificioEconomia);
+	}
+	
+	public String recibirVisitaEdificioTransporte(Policia policia) throws ExcepcionTiempoAgotado {
+		return recibirVisitaEdificio(policia, this.edificioTransporte);
+	}
+	
+	public void resetear() {
+		this.edificioCultural = new Edificio();
+		this.edificioEconomia = new Edificio();
+		this.edificioTransporte = new Edificio();
+		this.ciudadesConectadas = new ArrayList<Ciudad>();
+		this.estaElLadron = false;
+		this.acaHierenAlPolicia = false;
 	}
 
 	//PRIVADOS:
-	private Edificio enEsteEdificioHiereAlPolicia(Policia policia) {
+	private String recibirVisitaEdificio(Policia policia, Edificio edificio) throws ExcepcionTiempoAgotado {
+		if (this.estaElLadron && enEsteEdificioArrestaAlLadron(policia, edificio)) {
+			return MENSAJE_ENCUENTRA_LADRON;
+		} else if (enEsteEdificioHierenAlPolicia(policia, edificio)) {
+			policia.recibirHerida();
+			return MENSAJE_RECIBE_HERIDA;
+		} else {
+			Rango rango = policia.getRango();
+			return rango.pedirPista(edificio);
+		}
+	}
+	
+	private boolean enEsteEdificioArrestaAlLadron(Policia policia, Edificio edificioActual) {
 		int caracteresNombre = policia.getNombre().length();
-		if (caracteresNombre > 6) {
-			if (caracteresNombre % 2 == 0) {
-				return this.edificioCultural;
+		if (caracteresNombre > 4) {
+			if (caracteresNombre % 2 == 0 && edificioActual == this.edificioCultural) {
+				return true;
 			}
-			else {
-				return this.edificioTransporte;
+			else if (edificioActual == this.edificioTransporte) {
+				return true;
 			}
 		} 
-		else {
-			return this.edificioEconomia;
+		else if (edificioActual == this.edificioEconomia) {
+			return true;
 		}
+		return false;
+	}
+	
+	private boolean enEsteEdificioHierenAlPolicia(Policia policia, Edificio edificioActual) {
+		if (!this.acaHierenAlPolicia) {
+			return false;
+		}
+		int caracteresNombre = policia.getNombre().length();
+		if (caracteresNombre < 8) {
+			if (caracteresNombre % 2 == 0 && edificioActual == this.edificioCultural) {
+				return true;
+			}
+			else if (edificioActual == this.edificioTransporte) {
+				return true;
+			}
+		} 
+		else if (edificioActual == this.edificioEconomia) {
+			return true;
+		}
+		return false;
 	}
 }

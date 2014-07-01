@@ -28,4 +28,18 @@ public class InvestigadorTest {
 
         Assert.assertEquals(investigador.calcularTiempoDeViaje(100.0), 1);
     }
+	
+	@Test
+	public void determinarRangoSiguienteDevuelveNullPorqueNoTengoLaCantidadDeCasosNecesarios() {
+		Investigador investigador  = new Investigador();
+		
+		Assert.assertNull(investigador.determinarRangoSiguiente(0));
+	}
+	
+	@Test
+	public void determinarRangoSiguienteDevuelveUnSargentoSiTengoLaCantidadDeCasosNecesarios() {
+		Investigador investigador  = new Investigador();
+		
+		Assert.assertEquals(investigador.determinarRangoSiguiente(Investigador.CASOS_NECESARIOS_ASCENSO).getClass(), Sargento.class);
+	}
 }

@@ -1,8 +1,5 @@
 package fiuba.algo3.modelo;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 public class Pista {
 	public final static String PISTA_POR_DEFECTO_LUGAR = "No se nada sobre ese sujeto.";
 	public final static String PISTA_POR_DEFECTO_LADRON = "";	

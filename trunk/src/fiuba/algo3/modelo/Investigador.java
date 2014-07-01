@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo;
 
 public class Investigador implements Rango {
+	public final static int CASOS_NECESARIOS_ASCENSO = 20;
     private int velocidad;
 
     public Investigador() {
@@ -18,4 +19,11 @@ public class Investigador implements Rango {
     public String pedirPista(Edificio edificio) {
         return edificio.getPista(this);
     }
+	
+	public Sargento determinarRangoSiguiente(int cantidadDeCasos) {
+		if (cantidadDeCasos == CASOS_NECESARIOS_ASCENSO) {
+			return new Sargento();
+		}
+		return null;
+	}
 }
