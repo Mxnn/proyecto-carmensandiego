@@ -147,4 +147,24 @@ public class LadronTest {
 		
 		Assert.assertEquals(ladron.generarUnaPistaSobreLaMarcaPersonal(), "Vi que llevaba un tatuaje");
 	}
+	
+	@Test
+	public void resetearUnLadronDejaAlLadronSinOrdenDeArresto() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+		ladron.recibirOrdenDeArresto();
+		
+		ladron.resetear();
+		
+		Assert.assertFalse(ladron.tieneOrdenDeArresto());
+	}
+	
+	@Test
+	public void resetearUnLadronDejaAlLadronSinArresto() {
+		Ladron ladron = new Ladron("Arturo", Ladron.Sexo.MASCULINO, Ladron.Pelo.MARRON, Ladron.Hobby.ALPINISMO, Ladron.Auto.MOTO, Ladron.MarcaPersonal.TATUAJE);
+		ladron.recibirArresto();
+		
+		ladron.resetear();
+		
+		Assert.assertFalse(ladron.estaArrestado());
+	}
 }

@@ -433,4 +433,36 @@ public class CiudadTest {
 		
 		Assert.assertNotSame(Ciudad.MENSAJE_ENCUENTRA_LADRON, londres.recibirVisitaEdificioTransporte(policia));
 	}
+	
+	@Test
+	public void resetearUnaCiudadDejaAUnaCiudadConLosValoresPorDefectoDeEdificios() {
+		Ciudad ciudad = new Ciudad("Londres", new Coordenada(1, 3));
+		Edificio cultural = new Edificio();
+		Edificio economia = new Edificio();
+		Edificio transporte = new Edificio();
+		
+		ciudad.setEdificioCultural(cultural);
+		ciudad.setEdificioEconomia(economia);
+		ciudad.setEdificioTransporte(transporte);
+		
+		ciudad.resetear();
+		
+		Assert.assertNotSame(ciudad.getEdificioCultural(), cultural);
+		Assert.assertNotSame(ciudad.getEdificioEconomia(), economia);
+		Assert.assertNotSame(ciudad.getEdificioTransporte(), transporte);
+	}
+	
+	@Test
+	public void resetearUnaCiudadDejaAUnaCiudadConLosValoresPorDefectoDeCiudadesConectadas() {
+		Ciudad ciudad = new Ciudad("Londres", new Coordenada(1, 3));
+		Ciudad buenosAires = new Ciudad("Buenos Aires", new Coordenada(1, 1));
+        Ciudad paris = new Ciudad("Paris", new Coordenada(5, 7));
+		
+		ciudad.conectarCiudad(buenosAires);
+		ciudad.conectarCiudad(paris);
+		
+		ciudad.resetear();
+		
+		Assert.assertTrue(ciudad.cantidadDeCiudadesConectadas() == 0);
+	}
 }	
