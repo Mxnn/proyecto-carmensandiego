@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 public class GeneradorDeCasos {
 	public final static String NOMBRE_ARCHIVO_INFO_CIUDADES = "archivosXML/PistasDeCiudades.xml";
 	public final static int CANTIDAD_DE_CIUDADES_POR_RECORRER = 6;
+	public final static int CANTIDAD_DE_CIUDADES_CONECTADAS = 4;
 	public final static String PISTA_ESTA_CERCA_EL_LADRON = "Algo muy raro esta pasando en la ciudad.";
 
 	private ArrayList<Ciudad> ciudades;
@@ -109,7 +110,7 @@ public class GeneradorDeCasos {
 	
 	private void conectarCiudadesRandom(Ciudad ciudadActual, ArrayList<Ciudad> ciudadesPorRecorrer) {
 		Random rand = new Random();
-		while (ciudadActual.cantidadDeCiudadesConectadas() < 4) {
+		while (ciudadActual.cantidadDeCiudadesConectadas() < CANTIDAD_DE_CIUDADES_CONECTADAS) {
 			int posicionRandom = rand.nextInt(this.ciudades.size());
 			Ciudad ciudadPorAgregar = this.ciudades.get(posicionRandom);
 			if (!ciudadesPorRecorrer.contains(ciudadPorAgregar)) {

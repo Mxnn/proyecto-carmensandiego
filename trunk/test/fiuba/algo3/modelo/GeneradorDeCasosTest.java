@@ -1,454 +1,228 @@
-// package fiuba.algo3.modelo;
+package fiuba.algo3.modelo;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
-// import org.junit.Test;
-// import junit.framework.Assert;
+import org.junit.Test;
+import junit.framework.Assert;
 
-// import javax.xml.parsers.ParserConfigurationException;
-// import javax.xml.transform.TransformerException;
-// import java.io.IOException;
-// import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
+import org.xml.sax.SAXException;
 
-// public class GeneradorDeCasosTest {
-	// @Test
-	// public void testEstoyLeyendoTodasLasCiudades()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+import fiuba.algo3.modelo.Ladron.Sexo;
+import fiuba.algo3.modelo.Ladron.Pelo;
+import fiuba.algo3.modelo.Ladron.Hobby;
+import fiuba.algo3.modelo.Ladron.Auto;
+import fiuba.algo3.modelo.Ladron.MarcaPersonal;
 
-		// Assert.assertTrue(generador.estoyLeyendoTodasLasCiudades() == 14);
-	// }
+public class GeneradorDeCasosTest {
+	@Test
+	public void testEstoyLeyendoTodasLasCiudades()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-	// @Test
-	// public void testEstoyLeyendoTodasLasPistasDeUnaCiudad()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertTrue(generador.estoyLeyendoTodasLasCiudades() == 14);
+	}
 
-		// Assert.assertTrue(generador.estoyLeyendoTodasLasPistasDeUnaCiudad() == 9);
-	// }
+	@Test
+	public void testEstoyLeyendoTodasLasPistasDeUnaCiudad()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-	// @Test
-	// public void testEstoyLeyendoElNombreDeLaPrimerCiudad()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertTrue(generador.estoyLeyendoTodasLasPistasDeUnaCiudad() == 9);
+	}
 
-		// Assert.assertEquals(generador.leoElNombreDeLaPrimerCiudad(), "Atenas");
-	// }
+	@Test
+	public void testEstoyLeyendoElNombreDeLaPrimerCiudad()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-	// @Test
-	// public void testEstoyLeyendoLaCoordenadaXDeLaPrimerCiudad()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(generador.leoElNombreDeLaPrimerCiudad(), "Atenas");
+	}
 
-		// Assert.assertEquals(generador.leoLaCoordenadaXDeLaPrimerCiudad(), "4500.0");
-	// }
+	@Test
+	public void testEstoyLeyendoLaCoordenadaXDeLaPrimerCiudad()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-	// @Test
-	// public void testEstoyLeyendoLaCoordenadaXDeLaPrimerCiudadComoDouble()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(generador.leoLaCoordenadaXDeLaPrimerCiudad(), "4500.0");
+	}
 
-		// Assert.assertEquals(generador.leoLaCoordenadaXDeLaPrimerCiudadYLaPasoADouble(), 4500.0);
-	// }
+	@Test
+	public void testEstoyLeyendoLaCoordenadaXDeLaPrimerCiudadComoDouble()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-	// @Test
-	// public void testEstoyLeyendoLaCoordenadaYDeLaPrimerCiudad()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(generador.leoLaCoordenadaXDeLaPrimerCiudadYLaPasoADouble(), 4500.0);
+	}
 
-		// Assert.assertEquals(generador.leoLaCoordenadaYDeLaPrimerCiudad(), "-3540.0");
-	// }
+	@Test
+	public void testEstoyLeyendoLaCoordenadaYDeLaPrimerCiudad()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-	// @Test
-	// public void testEstoyLeyendoLaCoordenadaYDeLaPrimerCiudadComoDouble()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(generador.leoLaCoordenadaYDeLaPrimerCiudad(), "-3540.0");
+	}
 
-		// Assert.assertEquals(generador.leoLaCoordenadaYDeLaPrimerCiudadYLaPasoADouble(), -3540.0);
-	// }
+	@Test
+	public void testEstoyLeyendoLaCoordenadaYDeLaPrimerCiudadComoDouble()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-	// @Test
-	// public void testPuedoInstanciarUnaCiudadConElNombre()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(generador.leoLaCoordenadaYDeLaPrimerCiudadYLaPasoADouble(), -3540.0);
+	}
 
-		// Ciudad ciudadGenerada = generador.puedoInstanciarUnaCiudadConElNombre();
+	@Test
+	public void testPuedoInstanciarUnaCiudadConElNombre()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, Exception	{
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// Assert.assertEquals(ciudadGenerada.getNombre(), "Atenas");
-	// }
+		Ciudad ciudadGenerada = generador.puedoInstanciarUnaCiudadConElNombre();
 
-	// @Test
-    // public void seLevantanTodasLasCiudadesDelXML()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(ciudadGenerada.getNombre(), "Atenas");
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void seLevantanTodasLasCiudadesDelXML()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<Ciudad> ciudades = generador.getCiudades();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// Assert.assertTrue(ciudades.size() == 14);
-	// }
+		ArrayList<Ciudad> ciudades = generador.getCiudades();
 
-	// @Test
-    // public void laPrimerCiudadLevantadGuardaElNombreCorrecto()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertTrue(ciudades.size() == 14);
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void laPrimerCiudadLevantadGuardaElNombreCorrecto()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<Ciudad> ciudades = generador.getCiudades();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// Assert.assertEquals(ciudades.get(0).getNombre(), "Atenas");
-	// }
+		ArrayList<Ciudad> ciudades = generador.getCiudades();
 
-	// @Test
-    // public void laSegundaCiudadLevantadGuardaElNombreCorrecto()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(ciudades.get(0).getNombre(), "Atenas");
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void laSegundaCiudadLevantadGuardaElNombreCorrecto()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<Ciudad> ciudades = generador.getCiudades();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// Assert.assertEquals(ciudades.get(13).getNombre(), "Paris");
-	// }
+		ArrayList<Ciudad> ciudades = generador.getCiudades();
 
-	// @Test
-    // public void seLevantanTodasLasPistasPorCiudadDelXML()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(ciudades.get(13).getNombre(), "Paris");
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void seLevantanTodasLasPistasPorCiudadDelXML()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// Assert.assertTrue(pistasDeLasCiudades.size() == 14);
-	// }
+		ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
 
-	// @Test
-    // public void seLevantanTodasLasPistasDeUnaCiudadDelXML()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertTrue(pistasDeLasCiudades.size() == 14);
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void seLevantanTodasLasPistasDeUnaCiudadDelXML()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(0);
+		ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
 
-		// Assert.assertTrue(pistasDeUnaCiudad.size() == 9);
-	// }
+		ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(0);
 
-	// @Test
-    // public void laPrimerPistaDeLaPrimerCiudadDelXMLCoincide()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertTrue(pistasDeUnaCiudad.size() == 9);
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void laPrimerPistaDeLaPrimerCiudadDelXMLCoincide()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(0);
+		ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
 
-		// Assert.assertEquals(pistasDeUnaCiudad.get(0).getPista(), "Cambio su dinero a drachmas.");
-	// }
+		ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(0);
 
-	// @Test
-    // public void laUltimaPistaDeLaPrimerCiudadDelXMLCoincide()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(pistasDeUnaCiudad.get(0).getPista(), "Cambio su dinero a drachmas.");
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void laUltimaPistaDeLaPrimerCiudadDelXMLCoincide()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(0);
+		ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
 
-		// Assert.assertEquals(pistasDeUnaCiudad.get(8).getPista(), "Me pregunto si tenia algun libro sobre restos arqueologicos");
-	// }
+		ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(0);
 
-	// @Test
-    // public void laPrimerPistaDeLaUltimaCiudadDelXMLCoincide()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(pistasDeUnaCiudad.get(8).getPista(), "Me pregunto si tenia algun libro sobre restos arqueologicos");
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void laPrimerPistaDeLaUltimaCiudadDelXMLCoincide()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(13);
+		ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
 
-		// Assert.assertEquals(pistasDeUnaCiudad.get(0).getPista(), "Cambio su dinero a Euros.");
-	// }
+		ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(13);
 
-	// @Test
-    // public void laUltimaPistaDeLaUltimaCiudadDelXMLCoincide()
-	// throws ParserConfigurationException, TransformerException, SAXException, IOException {
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Assert.assertEquals(pistasDeUnaCiudad.get(0).getPista(), "Cambio su dinero a Euros.");
+	}
 
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+	@Test
+    public void laUltimaPistaDeLaUltimaCiudadDelXMLCoincide()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		GeneradorDeCasos generador = new GeneradorDeCasos();
 
-		// ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
 
-		// ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(13);
+		ArrayList<ArrayList<Pista>> pistasDeLasCiudades = generador.getPistasPorCiudad();
 
-		// Assert.assertEquals(pistasDeUnaCiudad.get(8).getPista(), "Estaba llendo una biblografia de Luis XIV, el rey Sol.");
-	// }
+		ArrayList<Pista> pistasDeUnaCiudad = pistasDeLasCiudades.get(13);
+
+		Assert.assertEquals(pistasDeUnaCiudad.get(8).getPista(), "Estaba llendo una biblografia de Luis XIV, el rey Sol.");
+	}
 	
-	// @Test
-    // public void	generarUnCasoSeteaLaPrimerCiudadConLasPistasDeLaSiguienteParaUnNovato()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();
-
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadInicial= ciudadesPorRecorrer.get(0);
-		// Edificio edificioEconomico=ciudadInicial.getEdificioEconomia();
-		// Edificio edificioTransporte=ciudadInicial.getEdificioTransporte();
-		// Edificio edificioCultural=ciudadInicial.getEdificioCultural();
-		// Novato novato=new Novato();
-
-		// Ciudad ciudadSiguiente= ciudadesPorRecorrer.get(1);
-		// int indice= todaslasciudades.indexOf(ciudadSiguiente);
-		// ArrayList<Pista> pistasCiudadSiguiente = todaslaspistas.get(indice);
-
-		// Assert.assertFalse("No se nada sobre ese sujeto."==edificioEconomico.getPista(novato));
-		// Assert.assertFalse("Algo muy raro esta pasando en la ciudad."== edificioEconomico.getPista(novato));
-
-		// Assert.assertEquals(pistasCiudadSiguiente.get(0).getPista(), edificioEconomico.getPista(novato));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(3).getPista(), edificioTransporte.getPista(novato));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(6).getPista(), edificioCultural.getPista(novato));
-
-	// }
+	private Policia crearUnCasoParaTest() 
+	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+		Policia policia = new Policia("Juan");
+		Ladron buscado = new Ladron("Pepe", Sexo.MASCULINO, Pelo.RUBIO, Hobby.CROQUET, Auto.MOTO, MarcaPersonal.ANILLO);
+		
+		GeneradorDeCasos generador = new GeneradorDeCasos();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+		
+		generador.generarUnCaso(buscado, policia);
+		
+		return policia;
+	}
 	
-	// @Test
-    // public void	generarUnCasoSeteaUnaCiudadDelMedioConLasPistasDeLaSiguienteParaUnNovato()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
+	@Test
+    public void	generarUnCasoSeteaLaPrimerCiudadConLasCiudadesSiguientes()
+    throws ParserConfigurationException, TransformerException, SAXException, IOException {
 
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();
-
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadInicial= ciudadesPorRecorrer.get(2);
-		// Edificio edificioEconomico=ciudadInicial.getEdificioEconomia();
-		// Edificio edificioTransporte=ciudadInicial.getEdificioTransporte();
-		// Edificio edificioCultural=ciudadInicial.getEdificioCultural();
-		// Novato novato=new Novato();
-
-		// Ciudad ciudadSiguiente= ciudadesPorRecorrer.get(3);
-		// int indice= todaslasciudades.indexOf(ciudadSiguiente);
-		// ArrayList<Pista> pistasCiudadSiguiente = todaslaspistas.get(indice);
-
-		// Assert.assertFalse("No se nada sobre ese sujeto."==edificioEconomico.getPista(novato));
-		// Assert.assertFalse("Algo muy raro esta pasando en la ciudad."== edificioEconomico.getPista(novato));
-
-		// Assert.assertEquals(pistasCiudadSiguiente.get(0).getPista(), edificioEconomico.getPista(novato));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(3).getPista(), edificioTransporte.getPista(novato));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(6).getPista(), edificioCultural.getPista(novato));
-
-	// }
-
-	// @Test
-    // public void	generarUnCasoSeteaLaUltimaciudadConLasPistaDeQueELLadronEstaCercaParaCualquierPoliciaEnCualquierLugar()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();
-
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadInicial= ciudadesPorRecorrer.get(5);
-		// Edificio edificioEconomico=ciudadInicial.getEdificioEconomia();
-		// Edificio edificioTransporte=ciudadInicial.getEdificioTransporte();
-		// Edificio edificioCultural=ciudadInicial.getEdificioCultural();
-
-		// Novato novato=new Novato();
-		// Investigador investigador=new Investigador();
-		// Sargento sargento=new Sargento();
-		// Detective detective=new Detective();
-
-
-		// Assert.assertFalse("No se nada sobre ese sujeto."==edificioEconomico.getPista(novato));
-
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioEconomico.getPista(novato));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioTransporte.getPista(novato));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioCultural.getPista(novato));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioEconomico.getPista(investigador));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioTransporte.getPista(investigador));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioCultural.getPista(investigador));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioEconomico.getPista(sargento));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioTransporte.getPista(sargento));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioCultural.getPista(sargento));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioEconomico.getPista(detective));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioTransporte.getPista(detective));
-		// Assert.assertEquals("Algo muy raro esta pasando en la ciudad.", edificioCultural.getPista(detective));
-	// }
-	
-	// @Test
-    // public void	generarUnCasoSeteaUnaCiudadDelMedioConLasPistasDeLaSiguienteParaUnSargento()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();
-
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadInicial= ciudadesPorRecorrer.get(3);
-		// Edificio edificioEconomico=ciudadInicial.getEdificioEconomia();
-		// Edificio edificioTransporte=ciudadInicial.getEdificioTransporte();
-		// Edificio edificioCultural=ciudadInicial.getEdificioCultural();
-		// Sargento sargento=new Sargento();
-
-		// Ciudad ciudadSiguiente= ciudadesPorRecorrer.get(4);
-		// int indice= todaslasciudades.indexOf(ciudadSiguiente);
-		// ArrayList<Pista> pistasCiudadSiguiente = todaslaspistas.get(indice);
-
-		// Assert.assertFalse("No se nada sobre ese sujeto."==edificioEconomico.getPista(sargento));
-		// Assert.assertFalse("Algo muy raro esta pasando en la ciudad."== edificioEconomico.getPista(sargento));
-
-		// Assert.assertEquals(pistasCiudadSiguiente.get(2).getPista(), edificioEconomico.getPista(sargento));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(5).getPista(), edificioTransporte.getPista(sargento));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(8).getPista(), edificioCultural.getPista(sargento));
-
-	// }
-	
-	// @Test
-    // public void	generarUnCasoSeteaLaPrimerCiudadConLasPistasDeLaSiguienteParaUnDetective()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();
-
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadInicial= ciudadesPorRecorrer.get(0);
-		// Edificio edificioEconomico=ciudadInicial.getEdificioEconomia();
-		// Edificio edificioTransporte=ciudadInicial.getEdificioTransporte();
-		// Edificio edificioCultural=ciudadInicial.getEdificioCultural();
-		// Detective detective=new Detective();
-
-		// Ciudad ciudadSiguiente= ciudadesPorRecorrer.get(1);
-		// int indice= todaslasciudades.indexOf(ciudadSiguiente);
-		// ArrayList<Pista> pistasCiudadSiguiente = todaslaspistas.get(indice);
-
-		// Assert.assertFalse("No se nada sobre ese sujeto."==edificioEconomico.getPista(detective));
-		// Assert.assertFalse("Algo muy raro esta pasando en la ciudad."== edificioEconomico.getPista(detective));
-
-		// Assert.assertEquals(pistasCiudadSiguiente.get(1).getPista(), edificioEconomico.getPista(detective));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(4).getPista(), edificioTransporte.getPista(detective));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(7).getPista(), edificioCultural.getPista(detective));
-
-	// }
-	
-	// @Test
-    // public void	generarUnCasoSeteaUnaCiudadDelMedioConLasPistasDeLaSiguienteParaUnInvestigador()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();
-
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadInicial= ciudadesPorRecorrer.get(4);
-		// Edificio edificioEconomico=ciudadInicial.getEdificioEconomia();
-		// Edificio edificioTransporte=ciudadInicial.getEdificioTransporte();
-		// Edificio edificioCultural=ciudadInicial.getEdificioCultural();
-		// Investigador investigador= new Investigador();
-
-		// Ciudad ciudadSiguiente= ciudadesPorRecorrer.get(5);
-		// int indice= todaslasciudades.indexOf(ciudadSiguiente);
-		// ArrayList<Pista> pistasCiudadSiguiente = todaslaspistas.get(indice);
-
-		// Assert.assertFalse("No se nada sobre ese sujeto."==edificioEconomico.getPista(investigador));
-		// Assert.assertFalse("Algo muy raro esta pasando en la ciudad."== edificioEconomico.getPista(investigador));
-
-		// Assert.assertEquals(pistasCiudadSiguiente.get(1).getPista(), edificioEconomico.getPista(investigador));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(4).getPista(), edificioTransporte.getPista(investigador));
-		// Assert.assertEquals(pistasCiudadSiguiente.get(7).getPista(), edificioCultural.getPista(investigador));
-	// }
-	// @Test
-    // public void	laPrimeraCiudadDeSetearCiudadesContieneALaCiudadSiguienteDelRecorrido()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
+		Policia policiaCasoDePrueba = crearUnCasoParaTest();
 		
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadActual=ciudadesPorRecorrer.get(0);
-		// generador.setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
+		Ciudad ciudadInicial = policiaCasoDePrueba.getCiudadActual();
+		ArrayList<Ciudad> ciudadesSiguientes = ciudadInicial.getCiudadesConectadas();
 		
-		// Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(1)));
-		// Assert.assertEquals(ciudadActual.cantidadDeCiudadesConectadas(), 4);		
-	// }	
-	// @Test
-    // public void	UnaCiudadDelMedioDeSetearCiudadesContieneALaCiudadSiguienteYALaAnteriorDelRecorrido()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadActual=ciudadesPorRecorrer.get(3);
-		// generador.setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
-		
-		// Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(4)));
-		// Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(2)));
-		// Assert.assertEquals(ciudadActual.cantidadDeCiudadesConectadas(), 4);	
-	// }		
-	// @Test
-    // public void	UnaCiudadDelFinalDeSetearCiudadesContieneALaAnteriorDelRecorrido()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadActual=ciudadesPorRecorrer.get(5);
-		// generador.setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
-		
-		// Assert.assertTrue(ciudadActual.estaConectadaConEstaCiudad(ciudadesPorRecorrer.get(4)));
-		// Assert.assertEquals(ciudadActual.cantidadDeCiudadesConectadas(), 4);	
-	// }		
-	// @Test
-    // public void	GenerarCiudadesConectadasCreaUnaListaDeCiudadesDiferenteALaOrignialYNoRepetidas()
-    // throws ParserConfigurationException, TransformerException, SAXException, IOException{
-
-		// GeneradorDeCasos generador = new GeneradorDeCasos();
-		
-		// generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
-		// ArrayList<Ciudad> todaslasciudades =generador.getCiudades();
-		// ArrayList<ArrayList<Pista>> todaslaspistas =generador.getPistasPorCiudad();	
-		// ArrayList<Ciudad> ciudadesPorRecorrer=generador.generarUnCaso();
-		// Ciudad ciudadActual=ciudadesPorRecorrer.get(3);
-		// generador.setearCiudadesConectadasPorRecorrer(ciudadActual, ciudadesPorRecorrer);
-		
-		// ArrayList <Ciudad> ciudadesConectadas=ciudadActual.getCiudadesConectadas();
-		// Assert.assertNotSame(ciudadesConectadas.get(0), ciudadesConectadas.get(1));
-		// Assert.assertNotSame(ciudadesConectadas.get(1) , ciudadesConectadas.get(2));
-		// Assert.assertNotSame(ciudadesConectadas.get(2) , ciudadesConectadas.get(3));		
-		// Assert.assertNotSame(ciudadesConectadas.get(1) , ciudadesConectadas.get(3));
-		// Assert.assertNotSame(ciudadesConectadas.get(0) , ciudadesConectadas.get(3));				
-		// Assert.assertNotSame(ciudadesConectadas.get(0) , ciudadesConectadas.get(2));	
-		
-		// Assert.assertNotSame(ciudadesConectadas.get(0) , ciudadActual);
-		// Assert.assertNotSame(ciudadesConectadas.get(1) , ciudadActual);
-		// Assert.assertNotSame(ciudadesConectadas.get(2) , ciudadActual);		
-		// Assert.assertNotSame(ciudadesConectadas.get(3), ciudadActual);			
-		
-	// }
-// }
+		Assert.assertTrue(ciudadesSiguientes.size() == GeneradorDeCasos.CANTIDAD_DE_CIUDADES_CONECTADAS);
+	}
+}

@@ -147,4 +147,9 @@ public class Ladron {
 	public String generarUnaPistaSobreLaMarcaPersonal() {
 		return "Vi que llevaba " + this.marcaPersonal.toString();
 	}
+	
+	public void resetear() {
+		this.tieneOrdenDeArresto = false;
+		this.estaArrestado = false;
+	}
 }

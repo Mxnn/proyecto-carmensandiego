@@ -71,10 +71,18 @@ public class ElectorDeLadron {
 	}
 	
 	public Ladron generarUnLadronBuscado() {
+		limpiarLadrones();
+		
 		Random rand = new Random();
 		int posicion = rand.nextInt(this.listaDeLadrones.size());
 		Ladron buscado = listaDeLadrones.get(posicion);
 		return buscado;
+	}
+	
+	private void limpiarLadrones() {
+		for (Ladron ladron : this.listaDeLadrones) {
+			ladron.resetear();
+		}
 	}
 }
 		
