@@ -22,7 +22,6 @@ public class JuegoTest {
 		ciudades.add(new Ciudad("Buenos Aires", new Coordenada(5241.0, 8475.0)));
 		ciudades.add(new Ciudad("Madrid", new Coordenada(4781.0, 5379.0)));	
 		ciudades.get(0).conectarCiudad(ciudades.get(1));
-		ciudades.get(1).conectarCiudad(ciudades.get(0));
 		
 		ArrayList<Ladron> ladrones = new ArrayList<Ladron>();
 		ladrones.add(new Ladron("Juan", Sexo.MASCULINO, Pelo.ROJO, Hobby.TENNIS, Auto.LIMUSINA, MarcaPersonal.ANILLO));
@@ -61,7 +60,7 @@ public class JuegoTest {
 		Juego juego = crearUnJuegoParaTests();
 		
 		juego.viajar("Madrid");
-		juego.ingresarCaracteristicaDelLadron(Ladron.Pelo.ROJO);
+		juego.ingresarCaracteristicaDelLadron(Pelo.ROJO);
 		
 		Assert.assertEquals(juego.emitirOrdenDeArresto(), "Juan");
 	}
@@ -76,5 +75,61 @@ public class JuegoTest {
 		Juego juego = crearUnJuegoParaTests();
 		
 		Assert.assertEquals(juego.getCiudadActualDelPolicia(), "Buenos Aires");
+	}
+	
+	public void elLadronBuscadoFueArrestadoDevuelveFalseSiNoSeEmitioOrden()
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
+		Juego juego = new Juego("Gonzalo");
+		juego.crearPartida();
+		
+		Assert.assertFalse(juego.elLadronBuscadoFueArrestado());
+	}
+	
+	@Test
+	public void elLadronBuscadoFueArrestadoDevuelveFalseSiSeEmitioOrdenContraOtroLadron() 
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
+		Juego juego = crearUnJuegoParaTests();
+		
+		juego.viajar("Madrid");
+		juego.ingresarCaracteristicaDelLadron(Sexo.FEMENINO);
+		juego.emitirOrdenDeArresto();
+		
+		Assert.assertFalse(juego.elLadronBuscadoFueArrestado());
+	}
+	
+	@Test
+	public void elLadronBuscadoFueArrestadoDevuelveFalseSiSeEmitioOrdenContraCorrectaPeroNoSeArrestoAlLadron() 
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
+		Juego juego = crearUnJuegoParaTests();
+		
+		juego.viajar("Madrid");
+		juego.ingresarCaracteristicaDelLadron(Hobby.TENNIS);
+		juego.emitirOrdenDeArresto();
+		
+		Assert.assertFalse(juego.elLadronBuscadoFueArrestado());
+	}
+	
+	@Test
+	public void elLadronBuscadoFueArrestadoDevuelveFalseSiArrestoAlLadronPeroNoTeniaOrden() 
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
+		Juego juego = crearUnJuegoParaTests();
+		
+		juego.viajar("Madrid");
+		
+		Assert.assertEquals(juego.verPistaTransporte(), Ciudad.MENSAJE_ENCUENTRA_LADRON);
+		Assert.assertFalse(juego.elLadronBuscadoFueArrestado());
+	}
+	
+	@Test
+	public void elLadronBuscadoFueArrestadoDevuelveTrueSiArrestoAlLadronPeroYTeniaOrden() 
+	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
+		Juego juego = crearUnJuegoParaTests();
+		
+		juego.viajar("Madrid");
+		juego.ingresarCaracteristicaDelLadron(MarcaPersonal.ANILLO);
+		juego.emitirOrdenDeArresto();
+		
+		Assert.assertEquals(juego.verPistaTransporte(), Ciudad.MENSAJE_ENCUENTRA_LADRON);
+		Assert.assertTrue(juego.elLadronBuscadoFueArrestado());
 	}
 }
