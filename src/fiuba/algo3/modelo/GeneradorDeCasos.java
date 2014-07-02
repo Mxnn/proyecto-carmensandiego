@@ -113,6 +113,9 @@ public class GeneradorDeCasos {
 				conectarCiudadesRandom(ciudad, ciudadesPorRecorrer);
 			}
 		}
+		
+		esconderAlLadron(ciudadesPorRecorrer);
+		
 		return ciudadesPorRecorrer;
 	}
 
@@ -147,6 +150,11 @@ public class GeneradorDeCasos {
 		for (Ciudad ciudad : this.ciudades) {
 		ciudad.resetear();
 		}
+	}
+	
+	private void esconderAlLadron(ArrayList<Ciudad> ciudadesPorRecorrer) {
+		Ciudad ultima = ciudadesPorRecorrer.get(CANTIDAD_DE_CIUDADES_POR_RECORRER - 1);
+		ultima.esconderAlLadron();
 	}
 
 
