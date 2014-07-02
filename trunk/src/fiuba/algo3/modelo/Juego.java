@@ -48,7 +48,7 @@ public class Juego  {
 		this.buscado = this.elector.generarUnLadronBuscado();
 		this.computadora = new Computadora(this.elector.getListaDeLadrones());
 
-		this.generador.generarUnCaso(this.buscado, this.policia);
+		this.generador.generarUnCaso();
 	}
 	
 	public void cerrar() {
