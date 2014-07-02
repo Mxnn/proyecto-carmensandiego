@@ -22,7 +22,7 @@ public class Vista {
 	
 	private void mostrarTiempoYCiudad() {
 		System.out.println ("Ciudad Actual:" + this.juego.getCiudadActualDelPolicia());
-		System.out.format("Tiempo Disponible: %d", this.juego.getTiempoDisponible());
+		System.out.format("Tiempo Disponible: %d%n", this.juego.getTiempoDisponible());
 	}
 		
 	private void imprimirOpcionRegresar() {	
@@ -44,9 +44,9 @@ public class Vista {
 	}
 	
 	void mostrarPresentacionDelCaso() {
-		System.out.format("Se han robado un tesoro muy importante en un museo de %s.", this.juego.getCiudadActualDelPolicia());		
+		System.out.format("Se han robado un tesoro muy importante en un museo de %s.%n", this.juego.getCiudadActualDelPolicia());		
 		System.out.println("Es tu deber atrapar a este criminal antes que se acabe el tiempo");
-		System.out.format("Se ha visto a un sospechoso del sexo %s en la escena del crimen.", this.juego.getSexoLadronBuscado());
+		System.out.format("Se ha visto a un sospechoso del sexo %s en la escena del crimen.%n", this.juego.getSexoLadronBuscado());
 	}
 	
 	public void mostrarMenuPrincipal() {
@@ -74,7 +74,7 @@ public class Vista {
 	}
 
 	void mostrarOrdenDeArrestoEmitida(String nombreLadron) {
-		System.out.format("Se ha emitido una orden de arrestro contra %s.", nombreLadron);
+		System.out.format("Se ha emitido una orden de arrestro contra %s.%n", nombreLadron);
 	}
 	
 	void mostrarOrdenDeArrestoNoEmitida() {
@@ -130,7 +130,7 @@ public class Vista {
 		
 		ArrayList<String> nombresCiudades = this.juego.obtenerNombreDeLasCiudadesALasQuePuedoIr();
 		for (int i = 0; i < nombresCiudades.size(); i++) {
-			System.out.format("%d. %s.", i + 1, nombresCiudades.get(i));
+			System.out.format("%d. %s.%n", i + 1, nombresCiudades.get(i));
 		}
 		
 		imprimirOpcionRegresar();	
