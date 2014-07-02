@@ -23,6 +23,7 @@ public class GeneradorDeCasos {
 	public final static String NOMBRE_ARCHIVO_INFO_CIUDADES = "archivosXML/PistasDeCiudades.xml";
 	public final static int CANTIDAD_DE_CIUDADES_POR_RECORRER = 6;
 	public final static String PISTA_ESTA_CERCA_EL_LADRON = "Algo muy raro esta pasando en la ciudad.";
+	public final static int NUMERO_CIUDAD_HIERE_POLICIA = 3;
 
 	private ArrayList<Ciudad> ciudades;
 	private ArrayList<ArrayList<Pista>> pistasDeLasCiudades;
@@ -115,7 +116,7 @@ public class GeneradorDeCasos {
 		}
 		
 		esconderAlLadron(ciudadesPorRecorrer);
-		elegirCiudadDondeHiereAlLadron(ciudadesPorRecorrer);
+		elegirCiudadDondeHiereAlPolicia(ciudadesPorRecorrer);
 		
 		return ciudadesPorRecorrer;
 	}
@@ -158,8 +159,8 @@ public class GeneradorDeCasos {
 		ultima.esconderAlLadron();
 	}
 	
-	private void elegirCiudadDondeHiereAlLadron(ArrayList<Ciudad> ciudadesPorRecorrer) {
-		Ciudad ciudad = ciudadesPorRecorrer.get(CANTIDAD_DE_CIUDADES_POR_RECORRER-2);
+	private void elegirCiudadDondeHiereAlPolicia(ArrayList<Ciudad> ciudadesPorRecorrer) {
+		Ciudad ciudad = ciudadesPorRecorrer.get(NUMERO_CIUDAD_HIERE_POLICIA);
 		ciudad.setHierenAlPolicia();
 	}
 

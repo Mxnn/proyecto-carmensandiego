@@ -455,4 +455,28 @@ public class GeneradorDeCasosTest {
 		Assert.assertNotSame(ciudadesConectadas.get(3), ciudadActual);                  
                 
 	}
+	
+	@Test
+    public void elCasoGeneradoDeterminaUnaCiudadDondeSeHiereAlPolicia()
+    throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
+
+		GeneradorDeCasos generador = new GeneradorDeCasos();
+		generador.leerXMLDeCiudadesEInstanciarCadaCiudadYSusPistas();
+   
+		ArrayList<Ciudad> ciudadesPorRecorrer = generador.generarUnCaso();
+		
+		Ciudad ciudadDondeSeSuponeQueHierenAlPolicia = ciudadesPorRecorrer.get(GeneradorDeCasos.NUMERO_CIUDAD_HIERE_POLICIA);
+		
+		Policia policiaDePrueba = new Policia("Alberto");
+		
+		String pistaCultural = ciudadDondeSeSuponeQueHierenAlPolicia.recibirVisitaEdificioCultural(policiaDePrueba);
+		String pistaEconomia = ciudadDondeSeSuponeQueHierenAlPolicia.recibirVisitaEdificioEconomia(policiaDePrueba);
+		String pistaTransporte = ciudadDondeSeSuponeQueHierenAlPolicia.recibirVisitaEdificioTransporte(policiaDePrueba);
+		
+		boolean hirioEnCultural = pistaCultural == Ciudad.MENSAJE_RECIBE_HERIDA;
+		boolean hirioEnEconomia = pistaEconomia == Ciudad.MENSAJE_RECIBE_HERIDA;
+		boolean hirioEnTransporte = pistaTransporte == Ciudad.MENSAJE_RECIBE_HERIDA;
+		
+		Assert.assertTrue(hirioEnCultural || hirioEnEconomia || hirioEnTransporte);
+	}
 }
