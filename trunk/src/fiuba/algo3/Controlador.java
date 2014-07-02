@@ -2,10 +2,13 @@ package fiuba.algo3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
 import org.xml.sax.SAXException;
 
 import fiuba.algo3.modelo.Juego;
@@ -13,24 +16,24 @@ import fiuba.algo3.modelo.Ladron;
 import fiuba.algo3.modelo.ExcepcionTiempoAgotado;
 
 public class Controlador {
-	
+
 	private Scanner scan;
 	private Juego juego;
 	private Vista vista;
-	
+
 	Controlador (Juego juego) {
 		this.scan = new Scanner(System.in);
 		this.juego = juego;
 	}
-	
+
 	public int pedirOpcion() {
 		return this.scan.nextInt();
 	}
-	
+
 	public void setVista(Vista vista) {
 		this.vista = vista;
 	}
-	
+
 	/********************************************************************************/
 	/*                        ***       PRINCIPALES       ***                       */
 	/********************************************************************************/
@@ -39,22 +42,32 @@ public class Controlador {
 		boolean quiereJugar = preguntarSiJuega();
 		this.vista.mostrarPedidoDeNombre();
 		registrarNombreJugador();
-		
+
+
 		while (quiereJugar) {
+
 			this.vista.mostrarPresentacionDelCaso();
 			iniciarPartida();
 			this.vista.mostrarJugarDeNuevo();
 			quiereJugar = preguntarSiJuega();
 		}
-		
+
 		juego.cerrar();
 	}
-	
+
 	private void registrarNombreJugador() {
-		String nombreJugador = this.scan.nextLine();
-		juego.ingresarNombreJugador(nombreJugador);
+
+		String nombre = "";
+		try {
+			BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+			nombre = entrada.readLine();
+			}
+		catch (IOException e) {}
+
+		juego.ingresarNombreJugador(nombre);
+
 	}
-	
+
 	public void iniciarPartida() {
 		boolean tiempoAgotado = false;
 		while (!this.juego.encontreAlLadron() && !tiempoAgotado) {
@@ -70,10 +83,10 @@ public class Controlador {
 			resultadoDeArrestarAlLadron();
 		}
 	}
-	
+
 	private void pedirOpcionMenuPrincipal() throws ExcepcionTiempoAgotado {
 		int opcion = pedirOpcion();
-		
+
 		if (opcion == 1) {
 			this.vista.mostrarOpcionPista();
 			pedirOpcionPista();
@@ -90,11 +103,11 @@ public class Controlador {
 			this.juego.cerrar();
 		}
 	}
-	
+
 	private void resultadoDeArrestarAlLadron() {
 		if (!juego.ordenDeArrestoEmitida()) {
 			this.vista.mostrarErrorOrdenDeArrestoNoEmitida();
-		} 
+		}
 		else if (this.juego.elLadronBuscadoFueArrestado()) {
 			this.vista.mostrarResultadoAtrapoAlLadronCorrecto();
 			if (juego.elPoliciaRecibioAscenso()) {
@@ -102,12 +115,12 @@ public class Controlador {
 			}
 		}
 		else {
-			this.vista.mostrarResultadoAtrapoAlLadronIncorrecto();				
+			this.vista.mostrarResultadoAtrapoAlLadronIncorrecto();
 		}
 	}
-	
+
 	private boolean preguntarSiJuega() {
-		int opcion = pedirOpcion();	
+		int opcion = pedirOpcion();
 
 		if (opcion == 1) {
 			try {
@@ -123,7 +136,7 @@ public class Controlador {
 			return false;
 		}
 	}
-	
+
 	/********************************************************************************/
 	/*                ***       INTERACTUAR CON COMPUTADORA       ***               */
 	/********************************************************************************/
@@ -134,7 +147,7 @@ public class Controlador {
 			pedirOpcionFiltrar();
 		}
 		else if (opcion == 2) {
-			pedirOpcionOrdenDeArresto();		
+			pedirOpcionOrdenDeArresto();
 		}
 	}
 
@@ -147,10 +160,10 @@ public class Controlador {
 			this.vista.mostrarOrdenDeArrestoNoEmitida();
 		}
 	}
-	
+
 	public void pedirOpcionFiltrar() {
 		int opcion = pedirOpcion();
-			
+
 		if (opcion == 1) {
 			this.vista.mostrarOpcionFiltrarSexo();
 			pedirOpcionFiltrarSexo();
@@ -160,95 +173,95 @@ public class Controlador {
 			pedirOpcionFiltrarPelo();
 		}
 		else if (opcion == 3) {
-			this.vista.mostrarOpcionFiltrarHobby();	
+			this.vista.mostrarOpcionFiltrarHobby();
 			pedirOpcionFiltrarHobby();
-		}		
+		}
 		else if (opcion == 4) {
 			this.vista.mostrarOpcionFiltrarAuto();
 			pedirOpcionFiltrarAuto();
-		}	
+		}
 		else if (opcion == 5) {
-			this.vista.mostrarOpcionFiltrarMarcaPersonal();	
+			this.vista.mostrarOpcionFiltrarMarcaPersonal();
 			pedirOpcionFiltrarMarcaPersonal();
 		}
 	}
-	
+
 	private void pedirOpcionFiltrarMarcaPersonal() {
- 		int opcion = pedirOpcion();			
-		
+ 		int opcion = pedirOpcion();
+
  		if (opcion == 1) {
  			this.juego.ingresarCaracteristicaDelLadron(Ladron.MarcaPersonal.ANILLO);
  		}
  		else if (opcion == 2) {
- 			this.juego.ingresarCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);	
- 		}	
+ 			this.juego.ingresarCaracteristicaDelLadron(Ladron.MarcaPersonal.CICATRIZ);
+ 		}
  		else if (opcion == 3)  {
- 			this.juego.ingresarCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);		
- 		}		
+ 			this.juego.ingresarCaracteristicaDelLadron(Ladron.MarcaPersonal.TATUAJE);
+ 		}
 	}
-	
+
 	private void pedirOpcionFiltrarAuto() {
-		int opcion = pedirOpcion();			
-			
+		int opcion = pedirOpcion();
+
 		if (opcion == 1) {
 			this.juego.ingresarCaracteristicaDelLadron(Ladron.Auto.CONVERTIBLE);
 		}
 		else if (opcion == 2) {
-			this.juego.ingresarCaracteristicaDelLadron(Ladron.Auto.LIMUSINA);	
-		}	
+			this.juego.ingresarCaracteristicaDelLadron(Ladron.Auto.LIMUSINA);
+		}
 		else if (opcion == 3) {
-			this.juego.ingresarCaracteristicaDelLadron(Ladron.Auto.MOTO);		
-		}			
+			this.juego.ingresarCaracteristicaDelLadron(Ladron.Auto.MOTO);
+		}
 	}
 
 	private void pedirOpcionFiltrarHobby() {
-		int opcion = pedirOpcion();			
-	
+		int opcion = pedirOpcion();
+
 		if (opcion == 1) {
 			this.juego.ingresarCaracteristicaDelLadron(Ladron.Hobby.ALPINISMO);
 		}
 		else if (opcion == 2) {
-			this.juego.ingresarCaracteristicaDelLadron(Ladron.Hobby.CROQUET);	
-		}	
+			this.juego.ingresarCaracteristicaDelLadron(Ladron.Hobby.CROQUET);
+		}
 		else if (opcion == 3) {
-			this.juego.ingresarCaracteristicaDelLadron(Ladron.Hobby.TENNIS);		
-		}					
+			this.juego.ingresarCaracteristicaDelLadron(Ladron.Hobby.TENNIS);
+		}
 	}
 
 	private void pedirOpcionFiltrarPelo() {
 		int opcion = pedirOpcion();
-		
+
 		if (opcion == 1){
 			this.juego.ingresarCaracteristicaDelLadron(Ladron.Pelo.NEGRO);
 		}
 		else if (opcion == 2){
-			this.juego.ingresarCaracteristicaDelLadron(Ladron.Pelo.RUBIO);	
+			this.juego.ingresarCaracteristicaDelLadron(Ladron.Pelo.RUBIO);
 		}
 		else if (opcion == 3){
-			this.juego.ingresarCaracteristicaDelLadron(Ladron.Pelo.ROJO);		
-		}		
+			this.juego.ingresarCaracteristicaDelLadron(Ladron.Pelo.ROJO);
+		}
 		else if (opcion == 4){
-			this.juego.ingresarCaracteristicaDelLadron(Ladron.Pelo.MARRON);	
-		}		
+			this.juego.ingresarCaracteristicaDelLadron(Ladron.Pelo.MARRON);
+		}
 	}
 
 	private void pedirOpcionFiltrarSexo() {
-		int opcion = pedirOpcion();	
-		
+		int opcion = pedirOpcion();
+
 		if (opcion == 1) {
 			this.juego.ingresarCaracteristicaDelLadron(Ladron.Sexo.MASCULINO);
 		}
 		else if (opcion == 2) {
-			this.juego.ingresarCaracteristicaDelLadron(Ladron.Sexo.FEMENINO);	
-		}		
+			this.juego.ingresarCaracteristicaDelLadron(Ladron.Sexo.FEMENINO);
+		}
 	}
-	
+
 	/********************************************************************************/
 	/*                  ***       INTERACTUAR CON POLICIA       ***                 */
 	/********************************************************************************/
 	public void pedirOpcionPista() throws ExcepcionTiempoAgotado {
 		int opcion = pedirOpcion();
-		
+
 		if (opcion == 1) {
 			this.vista.imprimirPista(juego.verPistaEconomia());
 		}
@@ -262,7 +275,7 @@ public class Controlador {
 
 	public void pedirOpcionViajar() throws ExcepcionTiempoAgotado {
 		int opcion = pedirOpcion();
-		
+
 		ArrayList<String> nombreCiudades = this.juego.obtenerNombreDeLasCiudadesALasQuePuedoIr();
 		if (opcion != 0) {
 			this.juego.viajar(nombreCiudades.get(opcion-1));
