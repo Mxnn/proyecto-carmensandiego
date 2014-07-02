@@ -115,6 +115,7 @@ public class GeneradorDeCasos {
 		}
 		
 		esconderAlLadron(ciudadesPorRecorrer);
+		elegirCiudadDondeHiereAlLadron(ciudadesPorRecorrer);
 		
 		return ciudadesPorRecorrer;
 	}
@@ -158,10 +159,7 @@ public class GeneradorDeCasos {
 	}
 	
 	private void elegirCiudadDondeHiereAlLadron(ArrayList<Ciudad> ciudadesPorRecorrer) {
-		Random rand = new Random();
-		int posicionRandom = rand.nextInt(ciudades.size());
-		
-		Ciudad ciudad = ciudadesPorRecorrer.get(posicionRandom);
+		Ciudad ciudad = ciudadesPorRecorrer.get(CANTIDAD_DE_CIUDADES_POR_RECORRER-2);
 		ciudad.setHierenAlPolicia();
 	}
 
