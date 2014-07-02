@@ -48,7 +48,10 @@ public class Juego  {
 		this.buscado = this.elector.generarUnLadronBuscado();
 		this.computadora = new Computadora(this.elector.getListaDeLadrones());
 
-		this.generador.generarUnCaso();
+		ArrayList<Ciudad> ciudadesPorRecorrer = this.generador.generarUnCaso();
+		elector.setPistasDelLadronBuscado(this.buscado, ciudadesPorRecorrer);
+		
+		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));
 	}
 	
 	public void cerrar() {

@@ -35,7 +35,8 @@ public class JuegoTest {
 	@Test(expected = ExcepcionTiempoAgotado.class)
 	public void seLanzaLaExcepcionDeTiempoAgotadoSiSeLeAcabaElTiempoALPoliciaPorPedirPistas() 
 	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
-		Juego juego = crearUnJuegoParaTests();
+		Juego juego = new Juego("Gonzalo");
+		juego.crearPartida();
 		
 		for (int i = 0; i < 100; i++) {
 			juego.verPistaEconomia();
@@ -45,7 +46,8 @@ public class JuegoTest {
 	@Test(expected = ExcepcionTiempoAgotado.class)
 	public void seLanzaLaExcepcionDeTiempoAgotadoSiSeLeAcabaElTiempoALPoliciaPorViajar() 
 	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
-		Juego juego = crearUnJuegoParaTests();
+		Juego juego = new Juego("Gonzalo");
+		juego.crearPartida();
 		
 		for (int i = 0; i < 1006; i++) {
 			ArrayList<String> ciudadesPorRecorrer = juego.obtenerNombreDeLasCiudadesALasQuePuedoIr();

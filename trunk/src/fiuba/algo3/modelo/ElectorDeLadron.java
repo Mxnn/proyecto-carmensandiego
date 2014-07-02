@@ -79,6 +79,24 @@ public class ElectorDeLadron {
 		return buscado;
 	}
 	
+	public void setPistasDelLadronBuscado(Ladron buscado, ArrayList<Ciudad> ciudadesPorRecorrer) {
+		Ciudad ciudad = ciudadesPorRecorrer.get(0);
+		Edificio edificio = ciudad.getEdificioCultural();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElPelo());
+		
+		ciudad = ciudadesPorRecorrer.get(1);
+		edificio = ciudad.getEdificioTransporte();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElHobby());
+		
+		ciudad = ciudadesPorRecorrer.get(2);
+		edificio = ciudad.getEdificioTransporte();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreElAuto());
+		
+		ciudad = ciudadesPorRecorrer.get(4);
+		edificio = ciudad.getEdificioEconomia();
+		edificio.setPistaLadron(buscado.generarUnaPistaSobreLaMarcaPersonal());
+	}
+	
 	private void limpiarLadrones() {
 		for (Ladron ladron : this.listaDeLadrones) {
 			ladron.resetear();
