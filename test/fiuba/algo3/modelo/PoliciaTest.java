@@ -32,6 +32,17 @@ public class PoliciaTest {
 
         Assert.assertEquals(unPolicia.getTiempoDisponible(), Policia.TIEMPO_DISPONIBLE_INICIAL);
     }
+	
+	@Test
+    public void setNombreCambiaElNombreDelPolicia() {
+        Policia unPolicia = new Policia("Andrew");
+		
+		String nuevoNombre = "Martin";
+        unPolicia.setNombre(nuevoNombre);
+
+        Assert.assertEquals(unPolicia.getNombre(), nuevoNombre);
+    }
+	
 
     @Test
     public void setRangoCambiaElRangoDelPolicia() {
