@@ -151,7 +151,7 @@ public class JuegoTest {
 		Juego juego = crearUnJuegoParaTests();
 		
 		juego.viajar("Madrid");
-		juego.verPistaCultural();
+		juego.verPistaEconomia();
 		
 		Assert.assertFalse(juego.encontreAlLadron());
 	}
