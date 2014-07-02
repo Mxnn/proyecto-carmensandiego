@@ -6,11 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
-import org.xml.sax.SAXException;
-
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.Ladron;
 import fiuba.algo3.modelo.ExcepcionTiempoAgotado;
@@ -40,6 +35,7 @@ public class Controlador {
 	public void iniciar() {
 		this.vista.mostrarPantallaBienvenida();
 		boolean quiereJugar = preguntarSiJuega();
+		
 		this.vista.mostrarPedidoDeNombre();
 		registrarNombreJugador();
 
@@ -123,13 +119,7 @@ public class Controlador {
 		int opcion = pedirOpcion();
 
 		if (opcion == 1) {
-			try {
-				this.juego.crearPartida();
-			} catch (Exception e) {
-				this.vista.mostrarErrorAlAbrirArchivo();
-				juego.cerrar();
-				return false;
-			}
+			this.juego.crearPartida();
 			return true;
 		}
 		else {

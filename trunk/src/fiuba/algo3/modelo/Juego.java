@@ -40,8 +40,7 @@ public class Juego  {
 		ciudadesPorRecorrer.get(ciudadesPorRecorrer.size()-1).esconderAlLadron();
 	}
 	
-	public void crearPartida()
-	throws ParserConfigurationException, TransformerException, SAXException, IOException {
+	public void crearPartida() {
 		
 		this.ladronEncontrado = false;
 		this.policia.resetear();
