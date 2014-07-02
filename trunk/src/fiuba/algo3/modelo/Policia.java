@@ -35,6 +35,10 @@ public class Policia {
 	public void setCiudadActual(Ciudad ciudad) {
 		this.ciudadActual = ciudad;
 	}
+	
+	public void setNombre(String nombreNuevo) {
+		this.nombre = nombreNuevo;
+	}
 
 	//GETTERS:
 	public String getNombre() {

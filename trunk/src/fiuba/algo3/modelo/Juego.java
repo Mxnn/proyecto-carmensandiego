@@ -55,6 +55,10 @@ public class Juego  {
 		this.policia.setCiudadActual(ciudadesPorRecorrer.get(0));
 	}
 	
+	public void ingresarNombreJugador(String nombreJugador) {
+		this.policia.setNombre(nombreJugador);
+	}
+	
 	public void cerrar() {
 		System.exit(0);
 	}

@@ -36,14 +36,23 @@ public class Controlador {
 	/********************************************************************************/
 	public void iniciar() {
 		this.vista.mostrarPantallaBienvenida();
+		boolean quiereJugar = preguntarSiJuega();
+		this.vista.mostrarPedidoDeNombre();
+		registrarNombreJugador();
 		
-		while (preguntarJugarDeNuevo()) {
+		while (quiereJugar) {
 			this.vista.mostrarPresentacionDelCaso();
 			iniciarPartida();
 			this.vista.mostrarJugarDeNuevo();
+			quiereJugar = preguntarSiJuega();
 		}
 		
 		juego.cerrar();
+	}
+	
+	private void registrarNombreJugador() {
+		String nombreJugador = this.scan.nextLine();
+		juego.ingresarNombreJugador(nombreJugador);
 	}
 	
 	public void iniciarPartida() {
@@ -62,7 +71,7 @@ public class Controlador {
 		}
 	}
 	
-	void pedirOpcionMenuPrincipal() throws ExcepcionTiempoAgotado {
+	private void pedirOpcionMenuPrincipal() throws ExcepcionTiempoAgotado {
 		int opcion = pedirOpcion();
 		
 		if (opcion == 1) {
@@ -82,7 +91,7 @@ public class Controlador {
 		}
 	}
 	
-	public void resultadoDeArrestarAlLadron() {
+	private void resultadoDeArrestarAlLadron() {
 		if (!juego.ordenDeArrestoEmitida()) {
 			this.vista.mostrarErrorOrdenDeArrestoNoEmitida();
 		} 
@@ -97,25 +106,17 @@ public class Controlador {
 		}
 	}
 	
-	public boolean preguntarJugarDeNuevo() {
+	private boolean preguntarSiJuega() {
 		int opcion = pedirOpcion();	
 
 		if (opcion == 1) {
 			try {
 				this.juego.crearPartida();
-			} catch (ParserConfigurationException e) {
+			} catch (Exception e) {
 				this.vista.mostrarErrorAlAbrirArchivo();
 				juego.cerrar();
-			} catch (TransformerException e) {
-				this.vista.mostrarErrorAlAbrirArchivo();
-				juego.cerrar();
-			} catch (SAXException e) {
-				this.vista.mostrarErrorAlAbrirArchivo();
-				juego.cerrar();
-			} catch (IOException e) {
-				this.vista.mostrarErrorAlAbrirArchivo();
-				juego.cerrar();
-			}	
+				return false;
+			}
 			return true;
 		}
 		else {
@@ -172,7 +173,7 @@ public class Controlador {
 		}
 	}
 	
-	public void pedirOpcionFiltrarMarcaPersonal() {
+	private void pedirOpcionFiltrarMarcaPersonal() {
  		int opcion = pedirOpcion();			
 		
  		if (opcion == 1) {
@@ -186,7 +187,7 @@ public class Controlador {
  		}		
 	}
 	
-	public void pedirOpcionFiltrarAuto() {
+	private void pedirOpcionFiltrarAuto() {
 		int opcion = pedirOpcion();			
 			
 		if (opcion == 1) {
@@ -200,7 +201,7 @@ public class Controlador {
 		}			
 	}
 
-	public void pedirOpcionFiltrarHobby() {
+	private void pedirOpcionFiltrarHobby() {
 		int opcion = pedirOpcion();			
 	
 		if (opcion == 1) {
@@ -214,7 +215,7 @@ public class Controlador {
 		}					
 	}
 
-	public void pedirOpcionFiltrarPelo() {
+	private void pedirOpcionFiltrarPelo() {
 		int opcion = pedirOpcion();
 		
 		if (opcion == 1){
@@ -231,7 +232,7 @@ public class Controlador {
 		}		
 	}
 
-	public void pedirOpcionFiltrarSexo() {
+	private void pedirOpcionFiltrarSexo() {
 		int opcion = pedirOpcion();	
 		
 		if (opcion == 1) {
