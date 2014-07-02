@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -134,6 +135,7 @@ public class Juego  {
 		for (Ciudad ciudad : ciudadActual.getCiudadesConectadas()) {
 			nombreCiudades.add(ciudad.getNombre());
 		}
+		Collections.sort(nombreCiudades);
 		return nombreCiudades;
 	}
 
