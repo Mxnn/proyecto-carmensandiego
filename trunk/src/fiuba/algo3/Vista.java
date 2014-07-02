@@ -22,7 +22,7 @@ public class Vista {
 	
 	private void mostrarTiempoYCiudad() {
 		System.out.println ("Ciudad Actual:" + this.juego.getCiudadActualDelPolicia());
-		System.out.println ("Tiempo Disponible:" + this.juego.getTiempoDisponible());
+		System.out.format("Tiempo Disponible: %d", this.juego.getTiempoDisponible());
 	}
 		
 	private void imprimirOpcionRegresar() {	
