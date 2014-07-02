@@ -156,6 +156,14 @@ public class GeneradorDeCasos {
 		Ciudad ultima = ciudadesPorRecorrer.get(CANTIDAD_DE_CIUDADES_POR_RECORRER - 1);
 		ultima.esconderAlLadron();
 	}
+	
+	private void elegirCiudadDondeHiereAlLadron(ArrayList<Ciudad> ciudadesPorRecorrer) {
+		Random rand = new Random();
+		int posicionRandom = rand.nextInt(ciudades.size());
+		
+		Ciudad ciudad = ciudadesPorRecorrer.get(posicionRandom);
+		ciudad.setHierenAlPolicia();
+	}
 
 
 	/***********************************************************************************************/
