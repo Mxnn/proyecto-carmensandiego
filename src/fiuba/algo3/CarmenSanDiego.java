@@ -1,25 +1,25 @@
 package fiuba.algo3;
 
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import org.xml.sax.SAXException;
-
 import fiuba.algo3.modelo.Juego;
-import fiuba.algo3.modelo.ExcepcionTiempoAgotado;
 
 public class CarmenSanDiego {
 
-	public static void main(String[] args) 
-	throws ParserConfigurationException, TransformerException, SAXException, IOException, ExcepcionTiempoAgotado {
-
-		Juego juego = new Juego("Policia");
+	public static void main(String[] args) {
+		Juego juego = null;
+		try {
+			juego = new Juego("Policia");
+		} catch (Exception e) {
+			System.out.println("Hubo un error al cargar los datos del juego.");
+			System.exit(0);
+		}
 		
-		Controlador controlador = new Controlador(juego);
-		Vista vista = new Vista(juego);
+		if (juego != null) {
+			Controlador controlador = new Controlador(juego);
+			Vista vista = new Vista(juego);
 		
-		controlador.setVista(vista);
+			controlador.setVista(vista);
 		
-		controlador.iniciar();
+			controlador.iniciar();
+		}
 	}
 }
