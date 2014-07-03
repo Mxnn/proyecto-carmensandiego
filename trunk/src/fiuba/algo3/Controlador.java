@@ -35,10 +35,10 @@ public class Controlador {
 	public void iniciar() {
 		this.vista.mostrarPantallaBienvenida();
 		boolean quiereJugar = preguntarSiJuega();
-		
-		this.vista.mostrarPedidoDeNombre();
-		registrarNombreJugador();
-
+		if (quiereJugar) {
+			this.vista.mostrarPedidoDeNombre();
+			registrarNombreJugador();
+		}
 
 		while (quiereJugar) {
 
